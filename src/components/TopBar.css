@@ -1,0 +1,14 @@
+.TopBar {
+  border-bottom: 1px solid #d8d8d8;
+  display: flex;
+  height: 170px;
+}
+
+.TopBar-logoContainer {
+  border-right: 1px solid #d8d8d8;
+  width: 100px;
+}
+
+.TopBar-contentContainer {
+  flex: 1;
+}
