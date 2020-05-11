@@ -5,7 +5,10 @@
 }
 
 .TopBar-logoContainer {
+  align-items: center;
   border-right: 1px solid #d8d8d8;
+  display: flex;
+  justify-content: center;
   width: 100px;
 }
 
