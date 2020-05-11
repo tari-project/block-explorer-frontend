@@ -1,0 +1,21 @@
+.SideBar {
+  border-right: 1px solid #d8d8d8;
+  width: 100px;
+}
+
+.SideBar-navigationItem {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+}
+
+.SideBar-navigationItem > svg {
+  fill: #c2bfe7;
+  transition: fill 288ms;
+}
+
+.SideBar-navigationItem:hover > svg {
+  fill: #372786;
+}
