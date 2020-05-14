@@ -23,6 +23,8 @@ export default function SimpleBarGraph({
     .rangeRound([height, 0]);
   const barWidth = Math.floor(width / data.length);
 
+  const highestNum = Math.max(...data);
+
   return (
     <div className="graphWrapper">
       <div className="graphTitle">{title}</div>{" "}
@@ -33,12 +35,13 @@ export default function SimpleBarGraph({
             return (
               <line
                 width={width}
-                stroke="green"
+                stroke="#adadad"
+                strokeDasharray="3.3"
                 strokeWidth={1}
                 x1={0}
                 x2={width}
-                y1={(height / data.length) * i}
-                y2={(height / data.length) * i}
+                y1={(height / 6) * i}
+                y2={(height / 6) * i}
               />
             );
           })}
@@ -46,11 +49,12 @@ export default function SimpleBarGraph({
           {data.map((d, i) => {
             return (
               <rect
+                rx="3"
                 className="bar"
                 key={i}
                 x={i * barWidth}
                 y={yScale(d)}
-                width={barWidth - 1}
+                width={barWidth / 2}
                 height={height - yScale(d)}
               />
             );

@@ -6,6 +6,61 @@ import TopBar from "./components/TopBar";
 import SimpleBarGraph from "./components/Graphs/SimpleBarGraph";
 
 export default function App() {
+  const data = [
+    11,
+    12,
+    16,
+    10,
+    27,
+    14,
+    15,
+    13,
+    12,
+    33,
+    6,
+    10,
+    24,
+    15,
+    15,
+    12,
+    16,
+    10,
+    27,
+    14,
+    15,
+    13,
+    12,
+    33,
+    6,
+    10,
+    24,
+    15,
+    15,
+    10,
+    32,
+    3,
+    12,
+    16,
+    10,
+    27,
+    14,
+    15,
+    13,
+    12,
+    33,
+    6,
+    10,
+    24,
+    15,
+    15,
+    10,
+    32,
+    3,
+    10,
+    32,
+    3,
+    6,
+  ];
   return (
     <div className="App">
       <TopBar />
@@ -17,27 +72,7 @@ export default function App() {
             height={550}
             title="Circulating Tari"
             subTitle="Total number of mined Tari circulating on the network."
-            data={[
-              11,
-              12,
-              16,
-              10,
-              27,
-              14,
-              15,
-              13,
-              12,
-              33,
-              6,
-              10,
-              24,
-              15,
-              15,
-              10,
-              32,
-              3,
-              6,
-            ]}
+            data={data}
           />
         </div>
       </div>
