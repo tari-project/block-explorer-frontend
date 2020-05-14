@@ -1,0 +1,29 @@
+.bar {
+  fill: #5825cc;
+}
+
+.bar:hover {
+  fill: #352583;
+  transition: fill 0.2s;
+}
+
+.graphWrapper {
+  padding: 30px;
+  border-radius: 5px;
+}
+.simpleBars {
+  margin: 20px;
+}
+.graphTitle {
+  font-weight: bold;
+  font-family: Avenir, sans-serif;
+  font-size: 30px;
+}
+
+.graphSubtitle {
+  font-family: Avenir, sans-serif;
+  font-size: 16px;
+  color: #a5a5a5;
+}
+.graph {
+}

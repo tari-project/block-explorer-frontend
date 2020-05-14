@@ -12,7 +12,33 @@ export default function App() {
       <div className="App-content">
         <SideBar />
         <div className="App-content-mainArea">
-          <SimpleBarGraph width={1000} height={550} data={[1, 2, 3, 4, 5]} />
+          <SimpleBarGraph
+            width={1000}
+            height={550}
+            title="Circulating Tari"
+            subTitle="Total number of mined Tari circulating on the network."
+            data={[
+              11,
+              12,
+              16,
+              10,
+              27,
+              14,
+              15,
+              13,
+              12,
+              33,
+              6,
+              10,
+              24,
+              15,
+              15,
+              10,
+              32,
+              3,
+              6,
+            ]}
+          />
         </div>
       </div>
     </div>
