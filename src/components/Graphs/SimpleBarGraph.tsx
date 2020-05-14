@@ -9,12 +9,14 @@ interface Props {
   title: string;
   subTitle: string;
   height: number;
+  yAxisTicks: number;
 }
 
 export default function SimpleBarGraph({
   width,
   height,
   data,
+  yAxisTicks,
   title,
   subTitle,
 }: Props) {
@@ -25,26 +27,48 @@ export default function SimpleBarGraph({
 
   const highestNum = Math.max(...data);
 
+  function renderYAxis() {
+    let nums = [];
+    let ticks = yAxisTicks + 1;
+    for (let i = 0; i < yAxisTicks + 1; i++) {
+      ticks--;
+      console.log(ticks);
+      nums.push(
+        <g key={i}>
+          <text
+            style={{ fontFamily: "Avenir, sans-serif" }}
+            key={i}
+            fill="#adadad"
+            x={-60}
+            y={(height / 6) * i}
+          >
+            {(highestNum / yAxisTicks) * ticks}k
+          </text>
+
+          <line
+            key={i}
+            width={width}
+            stroke="#adadad"
+            strokeDasharray="3.3"
+            strokeWidth={1}
+            x1={0}
+            x2={width}
+            y1={(height / yAxisTicks) * i}
+            y2={(height / yAxisTicks) * i}
+          />
+        </g>
+      );
+    }
+    return nums;
+  }
+
   return (
     <div className="graphWrapper">
       <div className="graphTitle">{title}</div>{" "}
       <div className="graphSubtitle">{subTitle}</div>
       <div className="graph">
         <svg className="simpleBars" width={width} height={height}>
-          {data.map((d, i) => {
-            return (
-              <line
-                width={width}
-                stroke="#adadad"
-                strokeDasharray="3.3"
-                strokeWidth={1}
-                x1={0}
-                x2={width}
-                y1={(height / 6) * i}
-                y2={(height / 6) * i}
-              />
-            );
-          })}
+          <g>{renderYAxis()}</g>
 
           {data.map((d, i) => {
             return (

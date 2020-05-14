@@ -70,6 +70,7 @@ export default function App() {
           <SimpleBarGraph
             width={1000}
             height={550}
+            yAxisTicks={6}
             title="Circulating Tari"
             subTitle="Total number of mined Tari circulating on the network."
             data={data}

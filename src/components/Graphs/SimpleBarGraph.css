@@ -13,7 +13,8 @@
 }
 .simpleBars {
   margin: 20px;
-  padding: 30px;
+  padding: 60px;
+  overflow: overlay;
 }
 .graphTitle {
   font-weight: bold;
