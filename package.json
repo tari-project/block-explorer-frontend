@@ -11,7 +11,7 @@
   "devDependencies": {
     "@types/react": "16.9.34",
     "@types/react-dom": "16.9.7",
-    "prettier": "2.0.5",
+    "@types/webpack-env": "1.15.2",
     "react-scripts": "3.4.1",
     "typescript": "3.8.3"
   },
