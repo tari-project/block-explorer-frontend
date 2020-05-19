@@ -1,31 +1,29 @@
 .bar {
   fill: #5825cc;
 }
-
 .bar:hover {
   fill: #352583;
   transition: fill 0.2s;
 }
-
 .graphWrapper {
   padding: 30px;
   border-radius: 5px;
 }
 .simpleBars {
   margin: 20px;
-  padding: 60px;
+  padding: 60px 60px 0 60px;
   overflow: overlay;
 }
-.graphTitle {
-  font-weight: bold;
-  font-family: Avenir, sans-serif;
-  font-size: 30px;
-}
-
-.graphSubtitle {
-  font-family: Avenir, sans-serif;
-  font-size: 16px;
-  color: #a5a5a5;
-}
 .graph {
+  display: flex;
+  flex-direction: column;
+}
+.simpleGraphXTicks {
+  color: #bcbcbc;
+  display: flex;
+  font-family: Avenir, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  justify-content: space-between;
+  align-self: center;
 }

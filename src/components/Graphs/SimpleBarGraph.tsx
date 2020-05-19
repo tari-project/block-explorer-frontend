@@ -1,13 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "./SimpleBarGraph.css";
 import { scaleLinear } from "d3-scale";
-import * as d3 from "d3";
+import PlainGraphTitle from "../GraphTitles/PlainGraphTitle";
 
 interface Props {
   data: number[];
   width: number;
-  title: string;
-  subTitle: string;
   height: number;
   yAxisTicks: number;
 }
@@ -17,8 +15,6 @@ export default function SimpleBarGraph({
   height,
   data,
   yAxisTicks,
-  title,
-  subTitle,
 }: Props) {
   const yScale = scaleLinear()
     .domain([0, Math.max(...data)])
@@ -27,22 +23,28 @@ export default function SimpleBarGraph({
 
   const highestNum = Math.max(...data);
 
+  function round5({ num }: { num: any }) {
+    return Math.ceil(num / 5) * 5;
+  }
+
   function renderYAxis() {
     let nums = [];
     let ticks = yAxisTicks + 1;
+
     for (let i = 0; i < yAxisTicks + 1; i++) {
       ticks--;
-      console.log(ticks);
+
+      let displayNum = round5({ num: (highestNum / yAxisTicks) * ticks });
       nums.push(
         <g key={i}>
           <text
-            style={{ fontFamily: "Avenir, sans-serif" }}
+            style={{ fontFamily: "Avenir, sans-serif", fontSize: 14 }}
             key={i}
             fill="#adadad"
             x={-60}
             y={(height / 6) * i}
           >
-            {(highestNum / yAxisTicks) * ticks}k
+            {displayNum}k
           </text>
 
           <line
@@ -64,8 +66,10 @@ export default function SimpleBarGraph({
 
   return (
     <div className="graphWrapper">
-      <div className="graphTitle">{title}</div>{" "}
-      <div className="graphSubtitle">{subTitle}</div>
+      <PlainGraphTitle
+        title="Circulating Tari"
+        subTitle="Total number of mined Tari circulating on the network."
+      />
       <div className="graph">
         <svg className="simpleBars" width={width} height={height}>
           <g>{renderYAxis()}</g>
@@ -84,6 +88,14 @@ export default function SimpleBarGraph({
             );
           })}
         </svg>
+        <div style={{ width: width }} className="simpleGraphXTicks">
+          <div>Jan</div>
+          <div>Feb</div>
+          <div>March</div>
+          <div>April</div>
+          <div>May</div>
+          <div>June</div>
+        </div>
       </div>
     </div>
   );
