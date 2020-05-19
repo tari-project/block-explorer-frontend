@@ -15,3 +15,12 @@
 .TopBar-contentContainer {
   flex: 1;
 }
+
+.TopBar-searchContainer {
+  display: flex;
+  align-items: center;
+}
+
+.TopBar-searchContainer > * {
+  margin-left: 85px;
+}
