@@ -1,0 +1,11 @@
+.graphTitle {
+    font-weight: bold;
+    font-family: Avenir, sans-serif;
+    font-size: 30px;
+}
+
+.graphSubtitle {
+    font-family: Avenir, sans-serif;
+    font-size: 16px;
+    color: #a5a5a5;
+}
