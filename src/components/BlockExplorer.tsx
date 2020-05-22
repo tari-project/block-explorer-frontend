@@ -3,7 +3,7 @@ import BlockCard from './BlockCard';
 import './BlockExplorer.css';
 import SimpleBarGraph from './Graphs/SimpleBarGraph';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
-import PolygonGraph from "./Graphs/PolygonGraph";
+import PolygonGraph from './Graphs/PolygonGraph';
 
 const barGraphData = [
     2,
@@ -44,10 +44,7 @@ const barGraphData = [
     47
 ];
 
-const hashRateData = [
-
-]
-
+const hashRateData = [0, 220, 20, 90, 50, 80, 60, 90, 70, 150, 180, 120];
 
 export default function BlockExplorer() {
     return (
@@ -55,7 +52,7 @@ export default function BlockExplorer() {
             <PlainGraphTitle title="Latest Blocks" />
             <BlockCard />
             <div className="twoCol">
-                <PolygonGraph width={510} height={220} yAxisTicks={6} data={barGraphData} />
+                <PolygonGraph width={510} height={220} yAxisTicks={6} data={hashRateData} />
                 <SimpleBarGraph width={510} height={220} yAxisTicks={6} data={barGraphData} />
             </div>
         </div>

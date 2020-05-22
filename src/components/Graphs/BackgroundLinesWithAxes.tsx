@@ -27,7 +27,7 @@ export default function BackgroundLinesWithAxes({ width, height, data, yAxisTick
                 <g key={i}>
                     <text
                         style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14 }}
-                        key={i}
+                        key={`${i}-text`}
                         fill="#adadad"
                         x={-60}
                         y={(height / 6) * i}
@@ -36,7 +36,7 @@ export default function BackgroundLinesWithAxes({ width, height, data, yAxisTick
                     </text>
 
                     <line
-                        key={i}
+                        key={`${i}-line`}
                         width={width}
                         stroke="#adadad"
                         strokeDasharray="3.3"
