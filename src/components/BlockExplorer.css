@@ -1,17 +1,6 @@
-.BlockExplorer {
-    /*align-items: center;*/
-    /*display: flex;*/
-    /*height: 100%;*/
-    /*justify-content: center;*/
-    /*flex-direction: column;*/
-}
 .twoCol {
     display: flex;
-    /*justify-content: space-around;*/
+    justify-content: space-evenly;
     flex-direction: row;
     width: 100%;
 }
-/*.twoCol div {*/
-/*    width: 50%;*/
-/*    */
-/*}*/
