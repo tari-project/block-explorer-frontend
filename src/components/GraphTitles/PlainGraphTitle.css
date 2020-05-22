@@ -1,3 +1,6 @@
+.graphTitleWithSub {
+    width: 80%;
+}
 .graphTitle {
     font-weight: bold;
     font-family: Avenir, sans-serif;
