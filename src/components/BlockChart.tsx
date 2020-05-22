@@ -1,8 +1,8 @@
 import React from "react";
 
 const dimensions = {
-  width: 430,
-  height: 120,
+  width: 330,
+  height: 100,
   margin: 10,
   elementSize: 3,
 } as const;

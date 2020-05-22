@@ -11,4 +11,7 @@
 
 .App-content-mainArea {
   flex: 1;
+
+  overflow: hidden;
+  max-width: calc(100% - 100px);
 }

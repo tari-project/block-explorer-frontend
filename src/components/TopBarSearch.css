@@ -9,3 +9,14 @@
     border: none;
     background: #f8f8f8;
 }
+.TopBar-searchBar input:focus {
+    outline: none;
+}
+
+.searchBarIcon {
+    position: relative;
+    left: -28px;
+    top: 3px;
+    height: 15px;
+    width: 15px;
+}

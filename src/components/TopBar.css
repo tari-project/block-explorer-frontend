@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     width: 100px;
+    padding: 10px 0;
 }
 
 .TopBar-contentContainer {
@@ -20,14 +21,10 @@
 .TopBar-itemContainer {
     display: flex;
     align-items: center;
+    padding: 10px 0;
+
 }
 
 .TopBar-itemContainer > * {
     margin-left: 85px;
-}
-
-.searchBarIcon {
-    position: relative;
-    left: -27px;
-    top: 4;
 }
