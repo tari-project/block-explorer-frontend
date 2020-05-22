@@ -2,13 +2,14 @@ import React from 'react';
 
 interface Props {
     data: number[];
+    xAxisTicks?: any[];
     width: number;
     height: number;
     yAxisTicks: number;
     children: any;
 }
 
-export default function BackgroundLinesWithAxes({ width, height, data, yAxisTicks, children }: Props) {
+export default function BackgroundLinesWithAxes({ width, height, data, yAxisTicks, children, xAxisTicks }: Props) {
     const highestNum = Math.max(...data);
 
     function round5({ num }: { num: any }) {
@@ -59,12 +60,10 @@ export default function BackgroundLinesWithAxes({ width, height, data, yAxisTick
                 {children}
             </svg>
             <div style={{ width: width }} className="simpleGraphXTicks">
-                <div>Jan</div>
-                <div>Feb</div>
-                <div>March</div>
-                <div>April</div>
-                <div>May</div>
-                <div>June</div>
+                {xAxisTicks &&
+                    xAxisTicks.map((x, i) => {
+                        return <div key={i}>{x}</div>;
+                    })}
             </div>
         </div>
     );
