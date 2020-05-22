@@ -1,0 +1,11 @@
+.TopBar-searchBar {
+    margin-left: 50px;
+}
+
+.TopBar-searchBar input {
+    padding: 10px 20px;
+    width: 400px;
+    border-radius: 3px;
+    border: none;
+    background: #f8f8f8;
+}
