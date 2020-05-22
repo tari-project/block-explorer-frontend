@@ -45,7 +45,7 @@ const barGraphData = [
 ];
 
 const hashRateData = [
-    
+
 ]
 
 
@@ -56,7 +56,6 @@ export default function BlockExplorer() {
             <BlockCard />
             <div className="twoCol">
                 <PolygonGraph width={510} height={220} yAxisTicks={6} data={barGraphData} />
-
                 <SimpleBarGraph width={510} height={220} yAxisTicks={6} data={barGraphData} />
             </div>
         </div>
