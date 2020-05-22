@@ -1,70 +1,82 @@
 .BlockCard {
-  background-color: #ffffff;
-  box-shadow: 10px 10px 25px rgba(16, 11, 22, 0.05);
-  box-sizing: border-box;
-  border-radius: 6px;
-  padding: 30px;
-  width: 515px;
+    background-color: #ffffff;
+    box-shadow: 10px 10px 25px rgba(16, 11, 22, 0.05);
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 20px;
+    width: 415px;
 }
 
 .BlockCard-Header {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 36px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 36px;
 }
 
 .BlockCard-Header > h1 {
-  color: #37363a;
-  display: block;
-  font-family: Avenir, sans-serif;
-  font-size: 17px;
-  font-weight: 900;
+    color: #37363a;
+    display: block;
+    font-family: Avenir, sans-serif;
+    font-size: 17px;
+    font-weight: 900;
 }
 
 .BlockCard-Header > h2 {
-  color: #bcbcbc;
-  display: block;
-  font-family: Avenir, sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+    color: #bcbcbc;
+    display: block;
+    font-family: Avenir, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 .BlockCard-chart > svg {
-  display: block;
-  margin: auto;
+    display: block;
+    margin: auto;
 }
 
 .BlockCard-ticks {
-  color: #bcbcbc;
-  display: flex;
-  font-family: Avenir, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  justify-content: space-between;
-  margin: 16px 10px 20px;
+    color: #bcbcbc;
+    display: flex;
+    font-family: Avenir, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    justify-content: space-between;
+    margin: 15px 15px 15px 20px;
 }
 
 .BlockCard-stats {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .BlockCard-StatBox {
-  box-sizing: border-box;
-  border-radius: 6px;
-  font-family: Avenir, sans-serif;
-  font-weight: 700;
-  padding: 14px 0 14px 24px;
-  width: 145px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    font-family: Avenir, sans-serif;
+    font-weight: 700;
+    padding: 10px 0 10px 10px;
+    width: 150px;
+    margin-right: 10px;
 }
 
 .BlockCard-StatBox-value {
-  font-size: 26px;
-  line-height: 32px;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 .BlockCard-StatBox-label {
-  font-size: 13px;
-  line-height: 16px;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+}
+
+.latestBlocksContainer {
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+}
+
+.latestBlocksContainer .BlockCard {
+    margin-right: 30px;
 }
