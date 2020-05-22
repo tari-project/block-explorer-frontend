@@ -1,7 +1,7 @@
 .TopBar {
     border-bottom: 1px solid #d8d8d8;
     display: flex;
-    height: 170px;
+    height: 70px;
 }
 
 .TopBar-logoContainer {
