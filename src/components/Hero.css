@@ -1,0 +1,8 @@
+.hero {
+    background-color: #251962;
+    color: #fff;
+    display: flex;
+    padding: 80px 70px;
+    flex-direction: column;
+
+}
