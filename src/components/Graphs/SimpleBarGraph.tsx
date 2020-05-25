@@ -1,8 +1,6 @@
 import React from "react";
 import "./SimpleBarGraph.css";
 import { scaleLinear } from "d3-scale";
-import PlainGraphTitle from "../GraphTitles/PlainGraphTitle";
-import Dropdown from "../Dropdown";
 import GraphHeader from "../GraphHeader";
 import BackgroundLinesWithAxes from './BackgroundLinesWithAxes';
 
@@ -23,7 +21,10 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
 
     return (
         <div className="graphWrapper">
-            <GraphHeader/>
+            <GraphHeader
+             title="Circulating Tari"
+             subTitle="Total number of mined Tari circulating on the network."
+            />
 
             <BackgroundLinesWithAxes
                 height={height}

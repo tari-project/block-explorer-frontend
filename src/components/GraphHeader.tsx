@@ -3,12 +3,17 @@ import "./GraphHeader.css";
 import PlainGraphTitle from "./GraphTitles/PlainGraphTitle";
 import Dropdown from "./Dropdown";
 
-export default function GraphHeader() {
+interface Props {
+    title: string;
+    subTitle: string;
+}
+
+export default function GraphHeader({title, subTitle}: Props) {
     return (
         <div className="graphHeaderContainer">
         <PlainGraphTitle
-            title="Circulating Tari"
-            subTitle="Total number of mined Tari circulating on the network."
+            title={title}
+            subTitle={subTitle}
         />
         <Dropdown/>
         </div>
