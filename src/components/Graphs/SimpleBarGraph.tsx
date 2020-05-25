@@ -19,10 +19,19 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         .rangeRound([height, 0]);
     const barWidth = Math.floor(width / data.length);
 
+    const xAxisTicks: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June'];
+
     return (
         <div className="graphWrapper">
             <GraphHeader/>
-            <BackgroundLinesWithAxes height={height} width={width} yAxisTicks={yAxisTicks} data={data}>
+
+            <BackgroundLinesWithAxes
+                height={height}
+                width={width}
+                yAxisTicks={yAxisTicks}
+                xAxisTicks={xAxisTicks}
+                data={data}
+            >
                 {data.map((d, i) => {
                     return (
                         <rect
