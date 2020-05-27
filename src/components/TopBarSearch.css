@@ -1,22 +1,23 @@
 .TopBar-searchBar {
-    margin-left: 50px;
+    margin-left: 2em;
+    position: relative;
 }
 
 .TopBar-searchBar input {
     padding: 10px 20px;
-    width: 400px;
+    width: 24em;
     border-radius: 3px;
-    border: none;
-    background: #f8f8f8;
+    border: 1px solid #9330FF;
+    background: #ffffff;
 }
 .TopBar-searchBar input:focus {
     outline: none;
 }
 
 .searchBarIcon {
-    position: relative;
-    left: -28px;
-    top: 3px;
+    position: absolute;
+    right: 8px;
+    top: 10px;
     height: 15px;
     width: 15px;
 }
