@@ -17,13 +17,13 @@ export default function BackgroundLinesWithAxes({ width, height, data, yAxisTick
     }
 
     function renderYAxis() {
-        let nums = [];
+        const nums: Array<any> = [];
         let ticks = yAxisTicks + 1;
 
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            let displayNum = round5({ num: (highestNum / yAxisTicks) * ticks });
+            const displayNum = round5({ num: (highestNum / yAxisTicks) * ticks });
             nums.push(
                 <g key={i}>
                     <text
