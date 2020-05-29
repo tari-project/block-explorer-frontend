@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-    data: number[];
+    data: any[];
     xAxisTicks?: any[];
     width: number;
     height: number;

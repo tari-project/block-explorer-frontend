@@ -6,6 +6,7 @@ import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import PolygonGraph from './Graphs/PolygonGraph';
 import Hero from './Hero';
 import BackgroundLinesWithAxes from './Graphs/BackgroundLinesWithAxes';
+import HeroGraph from "./Graphs/HeroGraph";
 
 const barGraphData = [
     2,
@@ -91,9 +92,8 @@ export default function BlockExplorer() {
             <Hero>
                 <PlainGraphTitle title="Blocks Overview" />
                 <div className="blocksOverview">
-                    <BackgroundLinesWithAxes data={[100, 200, 30]} width={1000} height={300} yAxisTicks={6}>
-                        <div>Coming Soon</div>
-                    </BackgroundLinesWithAxes>
+                    <HeroGraph width={570} height={220} yAxisTicks={4} data={hashRateData} />
+
                 </div>
 
                 <PlainGraphTitle title="Latest Blocks" />
