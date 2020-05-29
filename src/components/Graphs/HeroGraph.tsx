@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './PolygonGraph.css';
-import BackgroundLinesWithAxes from './BackgroundLinesWithAxes';
 
 interface Props {
     data: number[];
@@ -25,7 +24,7 @@ const dimensions = {
 
 const dummyData = [
     {
-        inputs: 300,
+        inputs: 100,
         outputs: 100,
         kernels: 100
     },
@@ -38,16 +37,6 @@ const dummyData = [
         inputs: 50,
         outputs: 50,
         kernels: 50
-    },
-    {
-        inputs: 100,
-        outputs: 300,
-        kernels: 500
-    },
-    {
-        inputs: 150,
-        outputs: 250,
-        kernels: 500
     }
     // {
     //     inputs: 52,
@@ -422,34 +411,16 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
     const { width, height, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels, total } = heights;
-        const { inputs: maxInputs, outputs: maxOutputs, kernels: maxKernels, total: maxTotal } = maxHeights;
+        const { inputs, outputs, kernels } = heights;
+        const { total: maxTotal } = maxHeights;
 
-        // Output = 200
-        // Input = 100
-        // Kernel = 100
-        // Total = 400
-
-        // Output =100
-        // Input = 50
-        // Kernel = 50
-        // Total = 200
-
-        // New we need a whole number that represents the height relative to the max height
-        // Each bar element must be a relative percent of the max size of it's OWN type
-        const inputPercent = inputs / maxInputs; // X percent of maxInput (50/100) = 0.5 But 50 out of 400 is not 0.5 it is 0.125 or the total space
-        const wholeInputValue = inputPercent * maxInputs; // 0.125 * 100 = 12.5 so the maximum that the input field could be is the percent of the max
-
-        const outputPercent = outputs / maxOutputs;
-        const wholeOutputValue = outputPercent * maxOutputs;
-
-        const kernelsPercent = kernels / maxKernels;
-        const wholeKernelValue = kernelsPercent * maxKernels;
-
+        const inputPercent = inputs / maxTotal;
+        const outputPercent = outputs / maxTotal;
+        const kernelsPercent = kernels / maxTotal;
         return {
-            inputs: wholeInputValue,
-            outputs: wholeOutputValue,
-            kernels: wholeKernelValue,
+            inputs: inputPercent,
+            outputs: outputPercent,
+            kernels: kernelsPercent,
             total: 0
         };
     }
@@ -473,15 +444,19 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
         </g>
     );
 }
-function Bar({ kernels, outputs, inputs, offset, maxHeights }: GraphicalElementProps) {
+function Bar({
+    kernels: kernelsPercent,
+    outputs: outputsPercent,
+    inputs: inputsPercent,
+    offset,
+    maxHeights
+}: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
-    const kernelHeight = (kernels / maxHeights.total) * height;
-    const outputHeight = (outputs / maxHeights.total) * height;
-    const inputsHeight = (inputs / maxHeights.total) * height;
+    const kernelHeight = kernelsPercent * height;
+    const outputHeight = outputsPercent * height;
+    const inputsHeight = inputsPercent * height;
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
-
-    console.log(kernels, outputs, inputs);
 
     return (
         <g>
