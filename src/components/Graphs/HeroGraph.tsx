@@ -25,7 +25,7 @@ const dimensions = {
 
 const dummyData = [
     {
-        inputs: 100,
+        inputs: 300,
         outputs: 100,
         kernels: 100
     },
@@ -38,6 +38,16 @@ const dummyData = [
         inputs: 50,
         outputs: 50,
         kernels: 50
+    },
+    {
+        inputs: 100,
+        outputs: 300,
+        kernels: 500
+    },
+    {
+        inputs: 150,
+        outputs: 250,
+        kernels: 500
     }
     // {
     //     inputs: 52,
@@ -465,9 +475,9 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
 }
 function Bar({ kernels, outputs, inputs, offset, maxHeights }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
-    const kernelHeight = (kernels / maxHeights.kernels) * 100;
-    const outputHeight = (outputs / maxHeights.outputs) * 100;
-    const inputsHeight = (inputs / maxHeights.inputs) * 100;
+    const kernelHeight = (kernels / maxHeights.total) * height;
+    const outputHeight = (outputs / maxHeights.total) * height;
+    const inputsHeight = (inputs / maxHeights.total) * height;
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
 
