@@ -25,7 +25,7 @@ const dimensions = {
 } as const;
 
 let blocksData: any[] = [];
-export default function HeroGraph({ data, yAxisTicks }: Props) {
+export default function HeroGraph({ yAxisTicks }: Props) {
     const loadBlocksData = useCallback(async () => {
         const blockData = await fetchBlocksData();
         const { blocks } = blockData;
@@ -117,12 +117,38 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
         }
         return nums;
     }
-    return (
-        <svg className="simpleBars" height={height} width={width}>
-            <g>{renderYAxis(maxHeights)}</g>
 
-            <Chart values={values} maxHeights={maxHeights} />
-        </svg>
+    function getTimeTicks() {
+        const ticksAmount = 6;
+        let today = new Date();
+        let ticks: any[] = [];
+
+        for (let i = 0; i < ticksAmount; i++) {
+            let less = today.setMinutes(today.getMinutes() - 5);
+            let newt = new Date(less);
+            let time = newt.getHours() + ':' + newt.getMinutes();
+            ticks.push(time);
+        }
+
+        return ticks.reverse();
+    }
+    return (
+        <div>
+            <svg className="heroBars" height={height} width={width}>
+                <g>{renderYAxis(maxHeights)}</g>
+
+                <Chart values={values} maxHeights={maxHeights} />
+            </svg>
+            <div className="xAxisTimes" style={{ width: width }}>
+                {getTimeTicks().map((time, index) => {
+                    return (
+                        <div key={index} className="tick">
+                            {time}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
     );
 }
 

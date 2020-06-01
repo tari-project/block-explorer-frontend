@@ -1,0 +1,20 @@
+.xAxisTimes {
+    display: flex;
+    justify-items: center;
+    margin: 20px;
+    padding: 0 20px 20px 60px;
+    justify-content: space-between;
+}
+
+.xAxisTimes .tick {
+    font-family: Avenir, sans-serif;
+    font-size: 14px;
+    display: flex;
+    color: #adadad;
+}
+
+.heroBars {
+    margin: 20px;
+    padding: 10px 20px 0 60px;
+    overflow: overlay;
+}
