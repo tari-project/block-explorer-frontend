@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './HeroGraph.css';
+import { fetchBlocksData } from '../../api';
 
 interface Props {
     data: number[];
@@ -175,9 +176,30 @@ const dummyData = [
     }
 ];
 
+let blocksData: any[] = [];
 export default function HeroGraph({ data, yAxisTicks }: Props) {
+    const loadBlocksData = useCallback(async () => {
+        const blockData = await fetchBlocksData();
+        const { blocks } = blockData;
+
+        blocks.forEach((block, index) => {
+            const { body } = block.block;
+            console.log(body);
+
+            let valObj = {
+                inputs: body.inputs.length,
+                outputs: body.outputs.length,
+                kernels: body.kernels.length
+            };
+
+            blocksData.push(valObj);
+        });
+
+        console.log(blocksData);
+    }, []);
+
     function getData(): Array<HeightBar> {
-        return dummyData.map((data) => {
+        return blocksData.map((data) => {
             return {
                 ...data,
                 total: data.inputs + data.outputs + data.kernels
@@ -203,9 +225,11 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
 
     useEffect(
         () => {
-            const values = getData();
-            setValues(values);
-            setMaxHeights(getHighest(values));
+            loadBlocksData().then((res) => {
+                const values = getData();
+                setValues(values);
+                setMaxHeights(getHighest(values));
+            });
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [setValues]
