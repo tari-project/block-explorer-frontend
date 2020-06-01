@@ -201,11 +201,15 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
     const [maxHeights, setMaxHeights] = useState({ inputs: 0, outputs: 0, kernels: 0, total: 0 });
     const [values, setValues] = useState([] as HeightBar[]);
 
-    useEffect(() => {
-        const values = getData();
-        setValues(values);
-        setMaxHeights(getHighest(values));
-    }, [setValues]);
+    useEffect(
+        () => {
+            const values = getData();
+            setValues(values);
+            setMaxHeights(getHighest(values));
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [setValues]
+    );
 
     function round5({ num }: { num: any }) {
         return Math.ceil(num / 5) * 5;
@@ -305,8 +309,7 @@ function Bar({
     kernels: kernelsPercent,
     outputs: outputsPercent,
     inputs: inputsPercent,
-    offset,
-
+    offset
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
