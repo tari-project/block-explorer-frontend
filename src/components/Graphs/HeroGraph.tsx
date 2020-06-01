@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './PolygonGraph.css';
+import './HeroGraph.css';
 
 interface Props {
     data: number[];
@@ -25,8 +25,13 @@ const dimensions = {
 const dummyData = [
     {
         inputs: 100,
-        outputs: 100,
+        outputs: 200,
         kernels: 100
+    },
+    {
+        inputs: 300,
+        outputs: 100,
+        kernels: 200
     },
     {
         inputs: 200,
@@ -34,288 +39,141 @@ const dummyData = [
         kernels: 200
     },
     {
-        inputs: 50,
-        outputs: 50,
-        kernels: 50
+        inputs: 200,
+        outputs: 100,
+        kernels: 200
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 300
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 200,
+        outputs: 100,
+        kernels: 200
+    },
+    {
+        inputs: 300,
+        outputs: 500,
+        kernels: 200
+    },
+    {
+        inputs: 200,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 400,
+        outputs: 100,
+        kernels: 100
+    },
+    {
+        inputs: 200,
+        outputs: 100,
+        kernels: 200
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 300
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 200,
+        outputs: 100,
+        kernels: 200
+    },
+    {
+        inputs: 300,
+        outputs: 500,
+        kernels: 200
+    },
+    {
+        inputs: 200,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 400,
+        outputs: 100,
+        kernels: 100
+    },
+    {
+        inputs: 200,
+        outputs: 100,
+        kernels: 200
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 300
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 200,
+        outputs: 100,
+        kernels: 200
+    },
+    {
+        inputs: 300,
+        outputs: 500,
+        kernels: 200
+    },
+    {
+        inputs: 200,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 100,
+        outputs: 200,
+        kernels: 100
+    },
+    {
+        inputs: 400,
+        outputs: 100,
+        kernels: 100
     }
-    // {
-    //     inputs: 52,
-    //     outputs: 23,
-    //     kernels: 210
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 32,
-    //     kernels: 42
-    // },
-    // {
-    //     inputs: 15,
-    //     outputs: 13,
-    //     kernels: 24
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 31,
-    //     kernels: 2
-    // },
-    // {
-    //     inputs: 52,
-    //     outputs: 23,
-    //     kernels: 21
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 34,
-    //     kernels: 62
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 34,
-    //     kernels: 62
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 32,
-    //     kernels: 42
-    // },
-    // {
-    //     inputs: 15,
-    //     outputs: 13,
-    //     kernels: 24
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 31,
-    //     kernels: 17
-    // },
-    // {
-    //     inputs: 52,
-    //     outputs: 23,
-    //     kernels: 21
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    //
-    // {
-    //     inputs: 45,
-    //     outputs: 31,
-    //     kernels: 30
-    // },
-    // {
-    //     inputs: 52,
-    //     outputs: 23,
-    //     kernels: 21
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 34,
-    //     kernels: 62
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 34,
-    //     kernels: 62
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 31,
-    //     kernels: 2
-    // },
-    // {
-    //     inputs: 52,
-    //     outputs: 23,
-    //     kernels: 21
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 34,
-    //     kernels: 62
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 34,
-    //     kernels: 62
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 32,
-    //     kernels: 42
-    // },
-    // {
-    //     inputs: 15,
-    //     outputs: 13,
-    //     kernels: 24
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 31,
-    //     kernels: 14
-    // },
-    // {
-    //     inputs: 52,
-    //     outputs: 23,
-    //     kernels: 21
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 32,
-    //     kernels: 42
-    // },
-    // {
-    //     inputs: 15,
-    //     outputs: 13,
-    //     kernels: 24
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 31,
-    //     kernels: 70
-    // },
-    // {
-    //     inputs: 52,
-    //     outputs: 23,
-    //     kernels: 21
-    // },
-    // {
-    //     inputs: 25,
-    //     outputs: 33,
-    //     kernels: 22
-    // },
-    // {
-    //     inputs: 58,
-    //     outputs: 38,
-    //     kernels: 25
-    // },
-    // {
-    //     inputs: 45,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 40,
-    //     outputs: 35,
-    //     kernels: 23
-    // },
-    // {
-    //     inputs: 53,
-    //     outputs: 34,
-    //     kernels: 62
-    // }
 ];
-const heightTotals: number[] = [];
 
 export default function HeroGraph({ data, yAxisTicks }: Props) {
     function getData(): Array<HeightBar> {
@@ -347,7 +205,7 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
         const values = getData();
         setValues(values);
         setMaxHeights(getHighest(values));
-    }, []);
+    }, [setValues]);
 
     function round5({ num }: { num: any }) {
         return Math.ceil(num / 5) * 5;
@@ -361,7 +219,6 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
             ticks--;
 
             const displayNum = round5({ num: (maxHeights.total / yAxisTicks) * ticks });
-            console.log(maxHeights.total);
             const elem: any = (
                 <g key={i}>
                     <text
@@ -408,7 +265,7 @@ interface GraphicalElementProps {
     maxHeights: HeightBar;
 }
 function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: HeightBar }) {
-    const { width, height, margin } = dimensions;
+    const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
         const { inputs, outputs, kernels } = heights;
@@ -449,7 +306,7 @@ function Bar({
     outputs: outputsPercent,
     inputs: inputsPercent,
     offset,
-    maxHeights
+
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
