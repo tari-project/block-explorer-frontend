@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './HeroGraph.css';
 import { fetchBlocksData } from '../../api';
+import { ReactComponent as Bars } from '../../assets/bars.svg';
 
 interface Props {
     data: number[];
@@ -23,168 +24,14 @@ const dimensions = {
     elementSize: 6
 } as const;
 
-const dummyData = [
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 300,
-        outputs: 100,
-        kernels: 200
-    },
-    {
-        inputs: 200,
-        outputs: 400,
-        kernels: 200
-    },
-    {
-        inputs: 200,
-        outputs: 100,
-        kernels: 200
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 300
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 200,
-        outputs: 100,
-        kernels: 200
-    },
-    {
-        inputs: 300,
-        outputs: 500,
-        kernels: 200
-    },
-    {
-        inputs: 200,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 400,
-        outputs: 100,
-        kernels: 100
-    },
-    {
-        inputs: 200,
-        outputs: 100,
-        kernels: 200
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 300
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 200,
-        outputs: 100,
-        kernels: 200
-    },
-    {
-        inputs: 300,
-        outputs: 500,
-        kernels: 200
-    },
-    {
-        inputs: 200,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 400,
-        outputs: 100,
-        kernels: 100
-    },
-    {
-        inputs: 200,
-        outputs: 100,
-        kernels: 200
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 300
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 200,
-        outputs: 100,
-        kernels: 200
-    },
-    {
-        inputs: 300,
-        outputs: 500,
-        kernels: 200
-    },
-    {
-        inputs: 200,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 100,
-        outputs: 200,
-        kernels: 100
-    },
-    {
-        inputs: 400,
-        outputs: 100,
-        kernels: 100
-    }
-];
-
 let blocksData: any[] = [];
 export default function HeroGraph({ data, yAxisTicks }: Props) {
     const loadBlocksData = useCallback(async () => {
         const blockData = await fetchBlocksData();
         const { blocks } = blockData;
 
-        blocks.forEach((block, index) => {
-            const { body } = block.block;
-            console.log(body);
+        blocks.forEach((block) => {
+            const { body, header } = block.block;
 
             let valObj = {
                 inputs: body.inputs.length,
@@ -194,8 +41,6 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
 
             blocksData.push(valObj);
         });
-
-        console.log(blocksData);
     }, []);
 
     function getData(): Array<HeightBar> {
@@ -223,17 +68,13 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
     const [maxHeights, setMaxHeights] = useState({ inputs: 0, outputs: 0, kernels: 0, total: 0 });
     const [values, setValues] = useState([] as HeightBar[]);
 
-    useEffect(
-        () => {
-            loadBlocksData().then((res) => {
-                const values = getData();
-                setValues(values);
-                setMaxHeights(getHighest(values));
-            });
-        },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [setValues]
-    );
+    useEffect(() => {
+        loadBlocksData().then((res) => {
+            const values = getData();
+            setValues(values);
+            setMaxHeights(getHighest(values));
+        });
+    }, [setValues]);
 
     function round5({ num }: { num: any }) {
         return Math.ceil(num / 5) * 5;
@@ -247,6 +88,7 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
             ticks--;
 
             const displayNum = round5({ num: (maxHeights.total / yAxisTicks) * ticks });
+
             const elem: any = (
                 <g key={i}>
                     <text
@@ -275,7 +117,6 @@ export default function HeroGraph({ data, yAxisTicks }: Props) {
         }
         return nums;
     }
-
     return (
         <svg className="simpleBars" height={height} width={width}>
             <g>{renderYAxis(maxHeights)}</g>
@@ -299,15 +140,26 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
         const { inputs, outputs, kernels } = heights;
         const { total: maxTotal } = maxHeights;
 
-        const inputPercent = inputs / maxTotal;
-        const outputPercent = outputs / maxTotal;
-        const kernelsPercent = kernels / maxTotal;
+        let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
+        let outputPercent = maxTotal > 0 ? outputs / maxTotal : outputs;
+        let kernelsPercent = maxTotal > 0 ? kernels / maxTotal : kernels;
+
+        if (maxTotal > 0) {
+            inputPercent = inputs / maxTotal;
+            outputPercent = outputs / maxTotal;
+            kernelsPercent = kernels / maxTotal;
+        }
+
         return {
             inputs: inputPercent,
             outputs: outputPercent,
             kernels: kernelsPercent,
             total: 0
         };
+    }
+
+    if (blocksData.length < 1) {
+        return <Bars />;
     }
     return (
         <g transform={`translate(${margin}, 0)`}>
