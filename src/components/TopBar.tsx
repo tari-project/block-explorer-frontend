@@ -8,11 +8,14 @@ import TopBarSearch from './TopBarSearch';
 
 export default function TopBar() {
     const [blockHeight, setBlockHeight] = useState('...');
+    const [totalTransactions, setTotalTransactions] = useState('...');
 
     const loadMetadata = useCallback(async () => {
         const metadata = await fetchChainMetadata();
-        const formattedBlockHeight = numeral(metadata.blockHeight).format('0,0');
+        const formattedBlockHeight = numeral(metadata.blockHeight).format('0.0a');
         setBlockHeight(formattedBlockHeight);
+        const formattedTotalTransactions = numeral(metadata.totalTransactions).format('0.0a');
+        setTotalTransactions(formattedTotalTransactions);
     }, []);
 
     useEffect(() => {
@@ -27,7 +30,7 @@ export default function TopBar() {
             <div className="TopBar-searchContainer">
                 <TopBarSearch />
                 <div className="TopBar-itemContainer">
-                    <TopBarItem label="Total Txns" value="83.5K" />
+                    <TopBarItem label="Total Txns" value={totalTransactions} />
                     <TopBarItem label="Average Txns/second" value="124" />
                     <TopBarItem label="Hash Rate" value="3.5TH" />
                     <TopBarItem label="Average Fee" value="0.05" />
