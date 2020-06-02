@@ -4,8 +4,8 @@ import './BlockExplorer.css';
 import SimpleBarGraph from './Graphs/SimpleBarGraph';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import PolygonGraph from './Graphs/PolygonGraph';
-import HeroGraph from './Graphs/HeroGraph';
 import Hero from './Hero';
+import HeroGraph from './Graphs/HeroGraph';
 
 const barGraphData = [
     2,
@@ -104,9 +104,9 @@ export default function BlockExplorer() {
                 </div>
             </Hero>
             <div className="twoCol">
-                <PolygonGraph width={570} height={220} yAxisTicks={6} data={hashRateData} />
+                <PolygonGraph width={500} height={220} yAxisTicks={6} data={hashRateData} />
 
-                <SimpleBarGraph width={570} height={220} yAxisTicks={6} data={barGraphData} />
+                <SimpleBarGraph width={500} height={220} yAxisTicks={6} data={barGraphData} />
             </div>
         </div>
     );
