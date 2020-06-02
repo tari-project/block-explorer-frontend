@@ -1,7 +1,7 @@
-import React from 'react';
-import './SimpleBarGraph.css';
-import { scaleLinear } from 'd3-scale';
-import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
+import React from "react";
+import "./SimpleBarGraph.css";
+import { scaleLinear } from "d3-scale";
+import GraphHeader from "../GraphHeader";
 import BackgroundLinesWithAxes from './BackgroundLinesWithAxes';
 
 interface Props {
@@ -21,9 +21,9 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
 
     return (
         <div className="graphWrapper">
-            <PlainGraphTitle
-                title="Circulating Tari"
-                subTitle="Total number of mined Tari circulating on the network."
+            <GraphHeader
+             title="Circulating Tari"
+             subTitle="Total number of mined Tari circulating on the network."
             />
 
             <BackgroundLinesWithAxes

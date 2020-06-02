@@ -8,6 +8,8 @@
 .graphWrapper {
     padding: 30px;
     border-radius: 5px;
+    max-width: 500px;
+    overflow: hidden;
 }
 .simpleBars {
     margin: 20px;
@@ -26,4 +28,5 @@
     font-weight: 700;
     justify-content: space-between;
     align-self: center;
+    width: 100% !important;
 }
