@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import './SimpleBarGraph.css';
 import { scaleLinear } from 'd3-scale';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
-import { fetchTokensInCirculation } from '../../api';
+import { fetchTokensInCirculation } from '../../helpers/api';
 import numeral from 'numeral';
 
 interface Props {
@@ -17,8 +17,8 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
 
     const loadCirculationData = useCallback(async () => {
         const tokenData = await fetchTokensInCirculation();
-        let heightsArr: any[] = [];
-        let totalsArr: number[] = [];
+        const heightsArr: any[] = [];
+        const totalsArr: number[] = [];
 
         tokenData.map((token) => {
             const { height, totalTokensInCirculation } = token;

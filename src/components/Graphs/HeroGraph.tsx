@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import './HeroGraph.css';
-import { fetchBlocksData } from '../../api';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
 
 interface Props {
+    blocks: any[];
     data: number[];
     width: number;
     height: number;
@@ -24,62 +24,41 @@ const dimensions = {
     elementSize: 6
 } as const;
 
-let blocksData: any[] = [];
-export default function HeroGraph({ yAxisTicks }: Props) {
-    const loadBlocksData = useCallback(async () => {
-        const blockData = await fetchBlocksData();
-        const { blocks } = blockData;
-
-        blocks.forEach((block) => {
-            const { body, header } = block.block;
-
-            let valObj = {
-                inputs: body.inputs.length,
-                outputs: body.outputs.length,
-                kernels: body.kernels.length
-            };
-
-            blocksData.push(valObj);
+function getHighest(values: Array<HeightBar>): HeightBar {
+    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0 };
+    values.forEach((values: HeightBar) => {
+        const keys = ['inputs', 'outputs', 'kernels', 'total'];
+        keys.forEach((key) => {
+            if (values[key] > maxHeights[key]) {
+                maxHeights[key] = values[key];
+            }
         });
-    }, []);
+    });
+    return maxHeights;
+}
 
-    function getData(): Array<HeightBar> {
-        return blocksData.map((data) => {
-            return {
-                ...data,
-                total: data.inputs + data.outputs + data.kernels
-            };
-        });
-    }
+function round5({ num }: { num: any }) {
+    return Math.ceil(num / 5) * 5;
+}
 
-    function getHighest(values: Array<HeightBar>): HeightBar {
-        const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0 };
-        getData().forEach((values: HeightBar) => {
-            const keys = ['inputs', 'outputs', 'kernels', 'total'];
-            keys.forEach((key) => {
-                if (values[key] > maxHeights[key]) {
-                    maxHeights[key] = values[key];
-                }
-            });
-        });
-        return maxHeights;
-    }
+export default function HeroGraph({ yAxisTicks, blocks }: Props) {
     const { width, height } = dimensions;
-    const [maxHeights, setMaxHeights] = useState({ inputs: 0, outputs: 0, kernels: 0, total: 0 });
-    const [values, setValues] = useState([] as HeightBar[]);
 
-    useEffect(() => {
-        loadBlocksData().then((res) => {
-            const values = getData();
-            setValues(values);
-            setMaxHeights(getHighest(values));
-        });
-    }, [setValues]);
+    const blocksData: HeightBar[] = blocks.map((block) => {
+        const { body } = block.block;
 
-    function round5({ num }: { num: any }) {
-        return Math.ceil(num / 5) * 5;
-    }
+        const inputs = body.inputs.length;
+        const outputs = body.outputs.length;
+        const kernels = body.kernels.length;
+        return {
+            inputs: inputs,
+            outputs: outputs,
+            kernels: kernels,
+            total: inputs + outputs + kernels
+        };
+    });
 
+    const maxHeights = getHighest(blocksData);
     function renderYAxis(maxHeights: HeightBar) {
         const nums: any[] = [];
         let ticks = yAxisTicks + 1;
@@ -120,13 +99,15 @@ export default function HeroGraph({ yAxisTicks }: Props) {
 
     function getTimeTicks() {
         const ticksAmount = 6;
-        let today = new Date();
-        let ticks: any[] = [];
+        const today = new Date();
+        const ticks: any[] = [];
 
         for (let i = 0; i < ticksAmount; i++) {
-            let less = today.setMinutes(today.getMinutes() - 5);
-            let newt = new Date(less);
-            let time = newt.getHours() + ':' + newt.getMinutes();
+            const less = today.setMinutes(today.getMinutes() - 5);
+            const newt = new Date(less);
+            const minutes = newt.getMinutes() < 10 ? `0${newt.getMinutes()}` : newt.getMinutes();
+            const hours = newt.getHours() < 10 ? `0${newt.getHours()}` : newt.getHours();
+            const time = hours + ':' + minutes;
             ticks.push(time);
         }
 
@@ -137,7 +118,7 @@ export default function HeroGraph({ yAxisTicks }: Props) {
             <svg className="heroBars" height={height} width={width}>
                 <g>{renderYAxis(maxHeights)}</g>
 
-                <Chart values={values} maxHeights={maxHeights} />
+                <Chart values={blocksData} maxHeights={maxHeights} />
             </svg>
             <div className="xAxisTimes" style={{ width: width }}>
                 {getTimeTicks().map((time, index) => {
@@ -184,7 +165,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
         };
     }
 
-    if (blocksData.length < 1) {
+    if (values.length < 1) {
         return <Bars />;
     }
     return (

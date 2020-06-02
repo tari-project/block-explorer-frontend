@@ -85,22 +85,20 @@ const hashRateData = [
     120
 ];
 
-export default function BlockExplorer() {
+export default function BlockExplorer({ blocks }: { blocks: any[] }) {
     return (
         <div className="BlockExplorer">
             <Hero>
                 <PlainGraphTitle title="Blocks Overview" />
                 <div className="blocksOverview">
-                    <HeroGraph width={570} height={220} yAxisTicks={4} data={hashRateData} />
+                    <HeroGraph width={570} height={220} yAxisTicks={4} blocks={blocks} data={hashRateData} />
                 </div>
 
                 <PlainGraphTitle title="Latest Blocks" />
                 <div className="latestBlocksContainer">
-                    <BlockCard />
-                    <BlockCard />
-                    <BlockCard />
-                    <BlockCard />
-                    <BlockCard />
+                    {blocks.slice(0, 5).map((block, i) => (
+                        <BlockCard key={i} block={block} />
+                    ))}
                 </div>
             </Hero>
             <div className="twoCol">
