@@ -8,11 +8,33 @@ import TopBarSearch from './TopBarSearch';
 
 export default function TopBar() {
     const [blockHeight, setBlockHeight] = useState('...');
+    const [totalTransactions, setTotalTransactions] = useState('...');
+    const [averageTxPerSecond, setAverageTxPerSecond] = useState('...');
+    const [hashRate, setHashRate] = useState('...');
+    const [averageFee, setAverageFee] = useState('...');
+    const [averageBlockTime, setAverageBlockTime] = useState('...');
 
     const loadMetadata = useCallback(async () => {
         const metadata = await fetchChainMetadata();
-        const formattedBlockHeight = numeral(metadata.blockHeight).format('0,0');
+
+        const formattedBlockHeight = numeral(metadata.blockHeight).format('0');
         setBlockHeight(formattedBlockHeight);
+
+        const formattedTotalTransactions = numeral(metadata.totalTransactions).format('0');
+        setTotalTransactions(formattedTotalTransactions);
+
+        const calcAverageTxPerSecond = metadata.totalTransactions / metadata.avgBlockTimes;
+        const formattedCalcAverageTxPerSecond = numeral(calcAverageTxPerSecond).format('0.0');
+        setAverageTxPerSecond(formattedCalcAverageTxPerSecond);
+
+        const formattedHashRate = numeral(metadata.averageDifficulty.estimatedHashRate).format('0.0 a') + 'H';
+        setHashRate(formattedHashRate);
+
+        const formattedAverageFee = numeral(metadata.averageFee).format('0.00');
+        setAverageFee(formattedAverageFee);
+
+        const formattedAverageBlockTime = numeral(metadata.avgBlockTimes).format('0');
+        setAverageBlockTime(formattedAverageBlockTime);
     }, []);
 
     useEffect(() => {
@@ -27,11 +49,11 @@ export default function TopBar() {
             <div className="TopBar-searchContainer">
                 <TopBarSearch />
                 <div className="TopBar-itemContainer">
-                    <TopBarItem label="Total Txns" value="83.5K" />
-                    <TopBarItem label="Average Txns/second" value="124" />
-                    <TopBarItem label="Hash Rate" value="3.5TH" />
-                    <TopBarItem label="Average Fee" value="0.05" />
-                    <TopBarItem label="Average Block Time" value="2:01" />
+                    <TopBarItem label="Total Txns" value={totalTransactions} />
+                    <TopBarItem label="Average Txns/second" value={averageTxPerSecond} />
+                    <TopBarItem label="Hash Rate" value={hashRate} />
+                    <TopBarItem label="Average Fee" value={averageFee} />
+                    <TopBarItem label="Average Block Time (Seconds)" value={averageBlockTime} />
                     <TopBarItem label="Current Block Height" value={blockHeight} />
                 </div>
             </div>
