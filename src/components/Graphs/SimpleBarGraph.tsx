@@ -93,7 +93,6 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                 {renderYAxis()}
 
                 {totalTokens.map((total, i) => {
-                    console.log(yScale(total) * 100);
                     return (
                         <rect
                             rx="3"
