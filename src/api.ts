@@ -9,3 +9,13 @@ export async function fetchChainMetadata(): Promise<ChainMetadata> {
   const response = await fetch(`${apiURL}/chain-metadata`);
   return await response.json();
 }
+
+
+interface BlocksData {
+  blocks: any[];
+}
+
+export async function fetchBlocksData(): Promise<BlocksData> {
+  const response = await fetch(`${apiURL}/blocks`);
+  return await response.json();
+}

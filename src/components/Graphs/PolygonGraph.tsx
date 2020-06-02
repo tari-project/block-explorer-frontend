@@ -25,7 +25,7 @@ const areaGenerator: any = d3
     .y1(yAccessor);
 
 export default function PolygonGraph({ width, height, data, yAxisTicks }: Props) {
-    const xAxisTicks: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June'];
+    // const xAxisTicks: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June'];
 
     const xScale = d3
         .scaleLinear()
