@@ -3,6 +3,11 @@ const apiURL: string = process.env.REACT_APP_EXPLORER_API_URL || "";
 interface ChainMetadata {
   blockHeight: number;
   totalTransactions: number;
+  averageFee: number;
+  averageDifficulty: {
+    estimatedHashRate: number
+  };
+  avgBlockTimes: number;
 }
 
 export async function fetchChainMetadata(): Promise<ChainMetadata> {
