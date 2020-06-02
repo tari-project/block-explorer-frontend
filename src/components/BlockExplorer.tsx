@@ -46,52 +46,13 @@ const barGraphData = [
     47
 ];
 
-const hashRateData = [
-    50,
-    210,
-    20,
-    90,
-    50,
-    80,
-    60,
-    90,
-    70,
-    150,
-    180,
-    120,
-    50,
-    210,
-    20,
-    90,
-    50,
-    80,
-    60,
-    90,
-    70,
-    150,
-    180,
-    120,
-    50,
-    210,
-    20,
-    90,
-    50,
-    80,
-    60,
-    90,
-    70,
-    150,
-    180,
-    120
-];
-
 export default function BlockExplorer() {
     return (
         <div className="BlockExplorer">
             <Hero>
                 <PlainGraphTitle title="Blocks Overview" />
                 <div className="blocksOverview">
-                    <HeroGraph width={570} height={220} yAxisTicks={4} data={hashRateData} />
+                    <HeroGraph width={570} height={220} yAxisTicks={4} data={barGraphData} />
                 </div>
 
                 <PlainGraphTitle title="Latest Blocks" />
@@ -104,9 +65,9 @@ export default function BlockExplorer() {
                 </div>
             </Hero>
             <div className="twoCol">
-                <PolygonGraph width={500} height={220} yAxisTicks={6} data={hashRateData} />
+                <PolygonGraph width={500} height={220} yAxisTicks={6} />
 
-                <SimpleBarGraph width={500} height={220} yAxisTicks={6} data={barGraphData} />
+                <SimpleBarGraph width={500} height={220} yAxisTicks={6} />
             </div>
         </div>
     );

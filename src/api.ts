@@ -35,3 +35,14 @@ export async function fetchTokensInCirculation(): Promise<TokensInCirculation> {
     const response = await fetch(`${apiURL}/tokens-in-circulation?from_tip=21600&step=720`);
     return await response.json();
 }
+
+interface NetworkDifficultyEstimatedHash {
+  estimated_hash_rate: number;
+}
+
+interface NetworkDifficultyEstimatedHashes extends Array<NetworkDifficultyEstimatedHash>{}
+
+export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimatedHashes> {
+  const response = await fetch(`${apiURL}/network-difficulty`);
+  return await response.json();
+}

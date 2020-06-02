@@ -6,12 +6,11 @@ import { fetchTokensInCirculation } from '../../api';
 import numeral from 'numeral';
 
 interface Props {
-    data: number[];
     width: number;
     height: number;
     yAxisTicks: number;
 }
-export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Props) {
+export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
     const [blockHeights, setBlockHeights] = useState(([] as unknown) as any);
     const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
 
