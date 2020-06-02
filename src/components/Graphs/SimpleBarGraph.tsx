@@ -5,6 +5,8 @@ import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
 import { fetchTokensInCirculation } from '../../helpers/api';
 import numeral from 'numeral';
 
+// eslint-disable-next-line no-undef
+const TOKEN_NAME = process.env.REACT_APP_TOKEN_NAME;
 interface Props {
     data: number[];
     width: number;
@@ -82,11 +84,13 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         return nums;
     }
 
+    // eslint-disable-next-line no-undef
+    const title = `Circulating ${TOKEN_NAME}`;
     return (
         <div className="graphWrapper">
             <PlainGraphTitle
-                title="Circulating Tari"
-                subTitle="Total number of mined Tari circulating on the network."
+                title={title}
+                subTitle={`Total number of mined ${TOKEN_NAME} circulating on the network.`}
             />
 
             <svg className="circulateSimpleBars" height={height} width={width}>

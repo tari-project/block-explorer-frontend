@@ -3,7 +3,6 @@ import React from 'react';
 import './PolygonGraph.css';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
 import BackgroundLinesWithAxes from './BackgroundLinesWithAxes';
-
 const FAKE_HASH_RATE_DATA_MAX = 220;
 const xAccessor = (data: any) => data.x;
 const yAccessor = (data: any) => data.y;
@@ -43,7 +42,7 @@ export default function PolygonGraph({ width, height, data, yAxisTicks }: Props)
         <div className="graphWrapper">
             <PlainGraphTitle
                 title="Network Difficulty"
-                subTitle="How difficult it is to mine a new block for the Tari blockchain."
+                subTitle={`How difficult it is to mine a new block for the Tari blockchain.`}
             />
             <BackgroundLinesWithAxes height={height} width={width} yAxisTicks={yAxisTicks} data={data}>
                 <path style={{ fill: 'none', stroke: '#352583', strokeWidth: 2 }} d={lineGenerator(transformedData)} />
