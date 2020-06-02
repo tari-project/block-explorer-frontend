@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import './HeroGraph.css';
 import { fetchBlocksData } from '../../api';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
+import numeral from 'numeral';
 
 interface Props {
     data: number[];
@@ -156,6 +157,9 @@ interface GraphicalElementProps {
     inputs: number;
     outputs: number;
     kernels: number;
+    inputsVal: number;
+    outputsVal: number;
+    kernelsVal: number;
     offset: number;
     maxHeights: HeightBar;
 }
@@ -187,12 +191,14 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
     if (blocksData.length < 1) {
         return <Bars />;
     }
+    console.log(values);
     return (
         <g transform={`translate(${margin}, 0)`}>
             {values.map((heights, i) => {
                 const offset = i * spaceBetweenBars;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
 
+                console.log('h', heights);
                 return (
                     <Bar
                         key={i}
@@ -200,6 +206,9 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
                         inputs={inputs}
                         outputs={outputs}
                         kernels={kernels}
+                        inputsVal={heights.inputs}
+                        outputsVal={heights.outputs}
+                        kernelsVal={heights.kernels}
                         maxHeights={maxHeights}
                     />
                 );
@@ -211,7 +220,10 @@ function Bar({
     kernels: kernelsPercent,
     outputs: outputsPercent,
     inputs: inputsPercent,
-    offset
+    offset,
+    inputsVal,
+    outputsVal,
+    kernelsVal
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
@@ -221,14 +233,32 @@ function Bar({
     const barPos2 = barPos1 + inputsHeight;
 
     return (
-        <g>
-            <g>
+        <g className="overviewBars">
+            <g id="kernels">
+                <g className="tooltip" transform={`translate(${offset - 70},${height - kernelHeight - 50})`}>
+                    <rect rx="5" />
+                    <text x="5" y="16">
+                        {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
+                    </text>
+                </g>
                 <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
-            <g>
+            <g id="outputs">
+                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos1 - 50})`}>
+                    <rect rx="5" />
+                    <text x="5" y="16">
+                        {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
+                    </text>
+                </g>
                 <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
-            <g>
+            <g id="inputs">
+                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos2 - 5})`}>
+                    <rect rx="5" />
+                    <text x="5" y="16">
+                        {`${inputsVal} input${inputsVal > 1 ? 's' : ''}`}
+                    </text>
+                </g>
                 <rect fill="#FF7630" width={elementSize} height={inputsHeight} x={offset} y={height - barPos2} />
             </g>
         </g>
