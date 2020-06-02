@@ -17,10 +17,10 @@ export default function TopBar() {
     const loadMetadata = useCallback(async () => {
         const metadata = await fetchChainMetadata();
 
-        const formattedBlockHeight = numeral(metadata.blockHeight).format('0');
+        const formattedBlockHeight = numeral(metadata.blockHeight).format('0,0');
         setBlockHeight(formattedBlockHeight);
 
-        const formattedTotalTransactions = numeral(metadata.totalTransactions).format('0');
+        const formattedTotalTransactions = numeral(metadata.totalTransactions).format('0,0');
         setTotalTransactions(formattedTotalTransactions);
 
         const calcAverageTxPerSecond = metadata.totalTransactions / metadata.avgBlockTimes;
@@ -30,7 +30,7 @@ export default function TopBar() {
         const formattedHashRate = numeral(metadata.averageDifficulty.estimatedHashRate).format('0.0 a') + 'H';
         setHashRate(formattedHashRate);
 
-        const formattedAverageFee = numeral(metadata.averageFee).format('0.00');
+        const formattedAverageFee = numeral(metadata.averageFee).format('0,0');
         setAverageFee(formattedAverageFee);
 
         const formattedAverageBlockTime = numeral(metadata.avgBlockTimes).format('0');
@@ -50,11 +50,11 @@ export default function TopBar() {
                 <TopBarSearch />
                 <div className="TopBar-itemContainer">
                     <TopBarItem label="Total Txns" value={totalTransactions} />
-                    <TopBarItem label="Average Txns/second" value={averageTxPerSecond} />
+                    <TopBarItem label="Avg Txns / Sec" value={averageTxPerSecond} />
                     <TopBarItem label="Hash Rate" value={hashRate} />
-                    <TopBarItem label="Average Fee" value={averageFee} />
-                    <TopBarItem label="Average Block Time (Seconds)" value={averageBlockTime} />
-                    <TopBarItem label="Current Block Height" value={blockHeight} />
+                    <TopBarItem label="Avg Fee" value={averageFee} />
+                    <TopBarItem label="Avg Block Time (Sec)" value={averageBlockTime} />
+                    <TopBarItem label="Block Height" value={blockHeight} />
                 </div>
             </div>
         </div>
