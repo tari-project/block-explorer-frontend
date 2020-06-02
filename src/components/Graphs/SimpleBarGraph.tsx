@@ -94,15 +94,26 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
 
                 {totalTokens.map((total, i) => {
                     return (
-                        <rect
-                            rx="3"
-                            className="bar"
-                            key={i}
-                            x={i * barWidth}
-                            y={yScale(total)}
-                            width={barWidth / 2}
-                            height={height - yScale(total)}
-                        />
+                        <g key={i} className="barHolder">
+                            <g
+                                className="tooltip"
+                                transform={`translate(${i * barWidth - 30},${yScale(total) - 30})`}
+                                opacity="0.9"
+                            >
+                                <rect rx="5" width="35" height="22" />
+                                <text x="5" y="16">
+                                    {numeral(total).format('0a')}
+                                </text>
+                            </g>
+                            <rect
+                                rx="3"
+                                className="bar"
+                                x={i * barWidth}
+                                y={yScale(total)}
+                                width={barWidth / 2}
+                                height={height - yScale(total)}
+                            />
+                        </g>
                     );
                 })}
             </svg>
