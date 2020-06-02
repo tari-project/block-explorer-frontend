@@ -17,17 +17,17 @@ export default function TopBar() {
     const loadMetadata = useCallback(async () => {
         const metadata = await fetchChainMetadata();
 
-        const formattedBlockHeight = numeral(metadata.blockHeight).format('0.0a');
+        const formattedBlockHeight = numeral(metadata.blockHeight).format('0');
         setBlockHeight(formattedBlockHeight);
 
-        const formattedTotalTransactions = numeral(metadata.totalTransactions).format('0.0a');
+        const formattedTotalTransactions = numeral(metadata.totalTransactions).format('0');
         setTotalTransactions(formattedTotalTransactions);
 
         const calcAverageTxPerSecond = metadata.totalTransactions / metadata.avgBlockTimes;
         const formattedCalcAverageTxPerSecond = numeral(calcAverageTxPerSecond).format('0.0');
         setAverageTxPerSecond(formattedCalcAverageTxPerSecond);
 
-        const formattedHashRate = numeral(metadata.averageDifficulty.estimatedHashRate).format('0') + "TH";
+        const formattedHashRate = numeral(metadata.averageDifficulty.estimatedHashRate).format('0.0 a') + 'H';
         setHashRate(formattedHashRate);
 
         const formattedAverageFee = numeral(metadata.averageFee).format('0.00');
