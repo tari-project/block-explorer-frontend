@@ -28,7 +28,22 @@
     align-self: center;
 }
 .circulateSimpleBars {
-    /*margin: 20px;*/
-    padding: 20px 60px 0 100px;
+    padding: 20px 60px 0 50px;
     overflow: overlay;
+    margin: 20px;
+}
+
+.xAxisDate {
+    display: flex;
+    justify-items: center;
+    margin: 20px;
+    padding: 0 20px 20px 60px;
+    justify-content: space-between;
+}
+
+.xAxisDate .tick {
+    font-family: Avenir, sans-serif;
+    font-size: 14px;
+    display: flex;
+    color: #adadad;
 }

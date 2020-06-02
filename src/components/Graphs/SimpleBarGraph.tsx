@@ -3,7 +3,7 @@ import './SimpleBarGraph.css';
 import { scaleLinear } from 'd3-scale';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
 import { fetchTokensInCirculation } from '../../api';
-import BackgroundLinesWithAxes from './BackgroundLinesWithAxes';
+import numeral from 'numeral';
 
 interface Props {
     data: number[];
@@ -59,10 +59,10 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                         style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14 }}
                         key={`${i}-text`}
                         fill="#adadad"
-                        x={-100}
+                        x={-50}
                         y={(height / yAxisTicks) * i}
                     >
-                        {Math.round(displayNum / 1e6)}m
+                        {numeral(displayNum).format('0a')}
                     </text>
 
                     <line
@@ -100,13 +100,19 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                             className="bar"
                             key={i}
                             x={i * barWidth}
-                            y={yScale(total) * 100}
+                            y={yScale(total)}
                             width={barWidth / 2}
-                            height={height - yScale(total) * 100}
+                            height={height - yScale(total)}
                         />
                     );
                 })}
             </svg>
+            <div className="xAxisDate" style={{ width: width }}>
+                <div className="tick">4 weeks ago</div>
+                <div className="tick">3 weeks ago</div>
+                <div className="tick">2 weeks ago</div>
+                <div className="tick">a week ago</div>
+            </div>
         </div>
     );
 }
