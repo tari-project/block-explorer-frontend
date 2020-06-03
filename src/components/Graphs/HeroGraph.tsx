@@ -8,10 +8,12 @@ interface Props {
     width: number;
     height: number;
     yAxisTicks: number;
+    totalMiningTimes: number;
 }
 
 interface HeightBar {
     blockHeight: number;
+    miningTime: number;
     inputs: number;
     outputs: number;
     kernels: number;
@@ -19,16 +21,16 @@ interface HeightBar {
 }
 
 const dimensions = {
-    width: 1000,
+    width: 1500,
     height: 300,
     margin: 10,
     elementSize: 6
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
-    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0 };
+    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0, miningTime: 0 };
     values.forEach((values: HeightBar) => {
-        const keys = ['inputs', 'outputs', 'kernels', 'total'];
+        const keys = ['inputs', 'outputs', 'kernels', 'total', 'miningTime'];
         keys.forEach((key) => {
             if (values[key] > maxHeights[key]) {
                 maxHeights[key] = values[key];
@@ -43,11 +45,11 @@ function getHighest(values: Array<HeightBar>): HeightBar {
 //     return Math.ceil(num / 5) * 5;
 // }
 
-export default function HeroGraph({ yAxisTicks, blocks }: Props) {
+export default function HeroGraph({ yAxisTicks, blocks, totalMiningTimes }: Props) {
     const { width, height } = dimensions;
 
     const blocksData: HeightBar[] = blocks.map((block) => {
-        const { body, header } = block.block;
+        const { body, header, _miningTime } = block.block;
 
         const inputs = body.inputs.length;
         const outputs = body.outputs.length;
@@ -58,7 +60,8 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
             outputs: outputs,
             kernels: kernels,
             total: inputs + outputs + kernels,
-            blockHeight: heights
+            blockHeight: heights,
+            miningTime: _miningTime
         };
     });
 
@@ -121,7 +124,7 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
             <svg className="heroBars" height={height} width={width}>
                 <g>{renderYAxis(maxHeights)}</g>
 
-                <Chart values={blocksData} maxHeights={maxHeights} />
+                <Chart totalMiningTimes={totalMiningTimes} values={blocksData} maxHeights={maxHeights} />
             </svg>
             <div className="xAxisTimes" style={{ width: width }}>
                 {getTimeTicks().map((time, index) => {
@@ -146,12 +149,23 @@ interface GraphicalElementProps {
     offset: number;
     maxHeights: HeightBar;
     blockHeight: number;
+    totalMiningTimes: number;
 }
-function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: HeightBar }) {
+function Chart({
+    values,
+    maxHeights,
+    totalMiningTimes
+}: {
+    values: Array<HeightBar>;
+    maxHeights: HeightBar;
+    totalMiningTimes: number;
+}) {
     const { width, margin } = dimensions;
+
     const spaceBetweenBars = width / values.length;
+
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels, blockHeight } = heights;
+        const { inputs, outputs, kernels, blockHeight, miningTime } = heights;
         const { total: maxTotal } = maxHeights;
 
         let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
@@ -169,6 +183,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
             outputs: outputPercent,
             kernels: kernelsPercent,
             blockHeight: blockHeight,
+            miningTime: miningTime,
             total: 0
         };
     }
@@ -179,8 +194,14 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
     return (
         <g transform={`translate(${margin}, 0)`}>
             {values.map((heights, i) => {
-                const offset = i * spaceBetweenBars;
+                const { miningTime } = heights;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
+
+                const oneSecondSpace = width / totalMiningTimes * 100;
+
+                const offset = oneSecondSpace * miningTime;
+
+                console.log('onesec', oneSecondSpace);
 
                 return (
                     <Bar
@@ -194,6 +215,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
                         kernelsVal={heights.kernels}
                         maxHeights={maxHeights}
                         blockHeight={heights.blockHeight}
+                        totalMiningTimes={totalMiningTimes}
                     />
                 );
             })}
@@ -208,7 +230,8 @@ function Bar({
     inputsVal,
     outputsVal,
     kernelsVal,
-    blockHeight
+    blockHeight,
+    totalMiningTimes
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;

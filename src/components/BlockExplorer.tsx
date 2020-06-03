@@ -5,7 +5,7 @@ import SimpleBarGraph from './Graphs/SimpleBarGraph';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import PolygonGraph from './Graphs/PolygonGraph';
 import Hero from './Hero';
-import HeroGraph from "./Graphs/HeroGraph";
+import HeroGraph from './Graphs/HeroGraph';
 
 const barGraphData = [
     2,
@@ -85,13 +85,20 @@ const hashRateData = [
     120
 ];
 
-export default function BlockExplorer({ blocks }: { blocks: any[] }) {
+export default function BlockExplorer({ blocks, totalMiningTimes }: { blocks: any[]; totalMiningTimes: number }) {
     return (
         <div className="BlockExplorer">
             <Hero>
                 <PlainGraphTitle title="Blocks Overview" />
                 <div className="blocksOverview">
-                    <HeroGraph width={570} height={220} yAxisTicks={4} blocks={blocks} data={hashRateData} />
+                    <HeroGraph
+                        width={570}
+                        height={220}
+                        yAxisTicks={4}
+                        blocks={blocks}
+                        totalMiningTimes={totalMiningTimes}
+                        data={hashRateData}
+                    />
                 </div>
 
                 <PlainGraphTitle title="Latest Blocks" />

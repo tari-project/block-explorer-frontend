@@ -17,6 +17,7 @@ export async function fetchChainMetadata(): Promise<ChainMetadata> {
 
 interface BlocksData {
     blocks: any[];
+    totalMiningTimes: number;
 }
 
 export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Promise<BlocksData> {
@@ -25,6 +26,7 @@ export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Prom
     if (sort === 'desc') {
         blocks.blocks.sort((a, b) => b.block.header.height - a.block.header.height);
     }
+    let totalMiningTimes = 0;
     blocks.blocks.forEach((block, i) => {
         let nextTimestamp = block.block.header.timestamp.seconds;
         if (blocks.blocks.length > i + 1) {
@@ -32,8 +34,13 @@ export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Prom
             nextTimestamp = next.block.header.timestamp.seconds;
         }
         block.block._miningTime = block.block.header.timestamp.seconds - nextTimestamp;
+        totalMiningTimes = totalMiningTimes + block.block._miningTime;
     });
-    return blocks;
+    console.log(totalMiningTimes);
+    return {
+        ...blocks,
+        totalMiningTimes
+    };
 }
 
 interface TokensInCirculation {
