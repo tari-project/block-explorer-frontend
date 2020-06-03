@@ -21,10 +21,10 @@ interface HeightBar {
 }
 
 const dimensions = {
-    width: 1500,
+    width: 1200,
     height: 300,
     margin: 10,
-    elementSize: 6
+    elementSize: 5
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
@@ -108,8 +108,10 @@ export default function HeroGraph({ yAxisTicks, blocks, totalMiningTimes }: Prop
         const today = new Date();
         const ticks: any[] = [];
 
+        const minuteAmount = totalMiningTimes / 60 / ticksAmount; //dont know if this is fine yet
+
         for (let i = 0; i < ticksAmount; i++) {
-            const less = today.setMinutes(today.getMinutes() - 5);
+            const less = today.setMinutes(today.getMinutes() - minuteAmount);
             const newt = new Date(less);
             const minutes = newt.getMinutes() < 10 ? `0${newt.getMinutes()}` : newt.getMinutes();
             const hours = newt.getHours() < 10 ? `0${newt.getHours()}` : newt.getHours();
@@ -117,7 +119,7 @@ export default function HeroGraph({ yAxisTicks, blocks, totalMiningTimes }: Prop
             ticks.push(time);
         }
 
-        return ticks.reverse();
+        return ticks;
     }
     return (
         <div>
@@ -160,7 +162,8 @@ function Chart({
     maxHeights: HeightBar;
     totalMiningTimes: number;
 }) {
-    const { width, margin } = dimensions;
+    let valuesReversed = values.sort((a,b) => b.blockHeight - a.blockHeight);
+    const { width, margin, elementSize } = dimensions;
 
     const spaceBetweenBars = width / values.length;
 
@@ -193,15 +196,18 @@ function Chart({
     }
     return (
         <g transform={`translate(${margin}, 0)`}>
-            {values.map((heights, i) => {
+            {valuesReversed.map((heights, i) => {
                 const { miningTime } = heights;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
 
-                const oneSecondSpace = width / totalMiningTimes * 100;
+                const oneSecondSpace = (width / totalMiningTimes) * 100;
 
-                const offset = oneSecondSpace * miningTime;
+                const miningTimePer = (miningTime / width) * 100;
 
-                console.log('onesec', oneSecondSpace);
+                const offset = i * oneSecondSpace + miningTimePer;
+
+                console.log('mtp', miningTimePer);
+                console.log('offset', offset);
 
                 return (
                     <Bar
