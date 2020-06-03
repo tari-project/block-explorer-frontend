@@ -35,6 +35,7 @@
 
 .overviewBars .tooltip.total {
     visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
 }
 
 .overviewBars:hover .tooltip.total {
@@ -43,6 +44,7 @@
 
 #kernels .tooltip {
     visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
 }
 #kernels:hover .tooltip {
     visibility: visible;
@@ -57,6 +59,7 @@
 
 #inputs .tooltip {
     visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
 }
 #inputs:hover .tooltip {
     visibility: visible;
@@ -71,6 +74,7 @@
 
 #outputs .tooltip {
     visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
 }
 #outputs:hover .tooltip {
     visibility: visible;
