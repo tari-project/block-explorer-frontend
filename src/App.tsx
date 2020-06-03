@@ -3,7 +3,7 @@ import './App.css';
 import BlockExplorer from './components/BlockExplorer';
 import SideBar from './components/SideBar';
 import TopBar from './components/TopBar';
-import { fetchBlocksData } from './helpers/api';
+import { fetchBlocksData } from "./helpers/api";
 
 export default function App() {
     const [latestBlocks, setLatestBlocks] = useState([]);

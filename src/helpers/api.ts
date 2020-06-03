@@ -43,7 +43,8 @@ interface TokensInCirculation {
     map(param: (token) => void): void;
 }
 
-export async function fetchTokensInCirculation(): Promise<TokensInCirculation> {
-    const response = await fetch(`${apiURL}/tokens-in-circulation?from_tip=21600&step=720`);
-    return await response.json();
+export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Promise<TokensInCirculation> {
+    const response = await fetch(`${apiURL}/tokens-in-circulation?from_tip=${fromTip}&step=${step}`);
+    const tokens = await response.json();
+    return tokens;
 }

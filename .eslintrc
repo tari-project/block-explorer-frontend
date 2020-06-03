@@ -13,7 +13,8 @@
         "jest": true
     },
     "rules": {
-        "prettier/prettier": ["error", { "doubleQuote": true }]
+        "prettier/prettier": ["error", { "doubleQuote": true }],
+        "no-console": 1
     },
     "settings": {
         "react": {
