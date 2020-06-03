@@ -172,14 +172,12 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
     if (values.length < 1) {
         return <Bars />;
     }
-    console.log(values);
     return (
         <g transform={`translate(${margin}, 0)`}>
             {values.map((heights, i) => {
                 const offset = i * spaceBetweenBars;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
 
-                console.log('h', heights);
                 return (
                     <Bar
                         key={i}

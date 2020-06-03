@@ -23,9 +23,9 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         const totalsArr: number[] = [];
 
         tokenData.map((token) => {
-            const { height, totalTokensInCirculation } = token;
+            const { height, tokensInCirculation } = token;
             heightsArr.push(height);
-            totalsArr.push(totalTokensInCirculation);
+            totalsArr.push(tokensInCirculation);
         });
 
         setBlockHeights(heightsArr);
@@ -83,7 +83,6 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         }
         return nums;
     }
-
     // eslint-disable-next-line no-undef
     const title = `Circulating ${TOKEN_NAME}`;
     return (
