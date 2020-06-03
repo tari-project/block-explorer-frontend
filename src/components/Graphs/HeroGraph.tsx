@@ -16,6 +16,7 @@ interface HeightBar {
     outputs: number;
     kernels: number;
     total: number;
+    timestamp: number;
 }
 
 const dimensions = {
@@ -26,9 +27,9 @@ const dimensions = {
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
-    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0 };
+    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, timestamp: 0 };
     values.forEach((values: HeightBar) => {
-        const keys = ['inputs', 'outputs', 'kernels', 'total'];
+        const keys = ['inputs', 'outputs', 'kernels', 'total', 'timestamp'];
         keys.forEach((key) => {
             if (values[key] > maxHeights[key]) {
                 maxHeights[key] = values[key];
@@ -46,20 +47,23 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
     const { width, height } = dimensions;
 
     const blocksData: HeightBar[] = blocks.map((block) => {
-        const { body } = block.block;
+        const { body, header } = block.block;
 
         const inputs = body.inputs.length;
         const outputs = body.outputs.length;
         const kernels = body.kernels.length;
+        const timestamp = header.timestamp.seconds;
         return {
             inputs: inputs,
             outputs: outputs,
             kernels: kernels,
-            total: inputs + outputs + kernels
+            total: inputs + outputs + kernels,
+            timestamp: timestamp
         };
     });
 
     const maxHeights = getHighest(blocksData);
+
     function renderYAxis(maxHeights: HeightBar) {
         const nums: any[] = [];
         let ticks = yAxisTicks + 1;
@@ -146,9 +150,10 @@ interface GraphicalElementProps {
 }
 function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: HeightBar }) {
     const { width, margin } = dimensions;
-    const spaceBetweenBars = width / values.length;
+    const spaceBetweenBars = width / maxHeights.timestamp;
+    // const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels } = heights;
+        const { inputs, outputs, kernels, timestamp } = heights;
         const { total: maxTotal } = maxHeights;
 
         let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
@@ -165,6 +170,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
             inputs: inputPercent,
             outputs: outputPercent,
             kernels: kernelsPercent,
+            timestamp: timestamp,
             total: 0
         };
     }
@@ -172,18 +178,25 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
     if (values.length < 1) {
         return <Bars />;
     }
-    console.log(values);
     return (
         <g transform={`translate(${margin}, 0)`}>
             {values.map((heights, i) => {
                 const offset = i * spaceBetweenBars;
-                const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
+                const { inputs, outputs, kernels, timestamp } = relativeHeight(heights, maxHeights);
 
-                console.log('h', heights);
+                const now = Math.floor(Date.now() / 1000);
+                const diff = now - timestamp;
+                // const bla = timestamp - heights[i - 1].timestamp;
+                //
+                // console.log('dat', now));
+                // console.log('ts', timestamp);
+                const newOFF = Math.round(diff * spaceBetweenBars * 1000) * i;
+                console.log('betw', newOFF);
+                console.log('diff', diff);
                 return (
                     <Bar
                         key={i}
-                        offset={offset}
+                        offset={newOFF}
                         inputs={inputs}
                         outputs={outputs}
                         kernels={kernels}
