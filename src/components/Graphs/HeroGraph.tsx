@@ -108,7 +108,7 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
         const ticks: any[] = [];
 
         for (let i = 0; i < ticksAmount; i++) {
-            const less = today.setMinutes(today.getMinutes() - 5);
+            const less = today.setMinutes(today.getMinutes() - 10);
             const newt = new Date(less);
             const minutes = newt.getMinutes() < 10 ? `0${newt.getMinutes()}` : newt.getMinutes();
             const hours = newt.getHours() < 10 ? `0${newt.getHours()}` : newt.getHours();
@@ -186,17 +186,12 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
 
                 const now = Math.floor(Date.now() / 1000);
                 const diff = now - timestamp;
-                // const bla = timestamp - heights[i - 1].timestamp;
-                //
-                // console.log('dat', now));
-                // console.log('ts', timestamp);
-                const newOFF = Math.round(diff * spaceBetweenBars * 1000) * i;
-                console.log('betw', newOFF);
+                const sec = new Date(timestamp);
                 console.log('diff', diff);
                 return (
                     <Bar
                         key={i}
-                        offset={newOFF}
+                        offset={offset}
                         inputs={inputs}
                         outputs={outputs}
                         kernels={kernels}
