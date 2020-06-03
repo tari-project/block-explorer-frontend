@@ -1,7 +1,6 @@
 import React from 'react';
 import './HeroGraph.css';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
-import numeral from 'numeral';
 
 interface Props {
     blocks: any[];
@@ -12,6 +11,7 @@ interface Props {
 }
 
 interface HeightBar {
+    blockHeight: number;
     inputs: number;
     outputs: number;
     kernels: number;
@@ -26,7 +26,7 @@ const dimensions = {
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
-    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0 };
+    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0 };
     values.forEach((values: HeightBar) => {
         const keys = ['inputs', 'outputs', 'kernels', 'total'];
         keys.forEach((key) => {
@@ -37,25 +37,28 @@ function getHighest(values: Array<HeightBar>): HeightBar {
     });
     return maxHeights;
 }
-
-function round5({ num }: { num: any }) {
-    return Math.ceil(num / 5) * 5;
-}
+// can add this back in if the data changes & we need to round to 5
+// it is currently low so rounding to 5 looks inaccurate
+// function round5({ num }: { num: any }) {
+//     return Math.ceil(num / 5) * 5;
+// }
 
 export default function HeroGraph({ yAxisTicks, blocks }: Props) {
     const { width, height } = dimensions;
 
     const blocksData: HeightBar[] = blocks.map((block) => {
-        const { body } = block.block;
+        const { body, header } = block.block;
 
         const inputs = body.inputs.length;
         const outputs = body.outputs.length;
         const kernels = body.kernels.length;
+        const heights = header.height;
         return {
             inputs: inputs,
             outputs: outputs,
             kernels: kernels,
-            total: inputs + outputs + kernels
+            total: inputs + outputs + kernels,
+            blockHeight: heights
         };
     });
 
@@ -67,8 +70,7 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = round5({ num: (maxHeights.total / yAxisTicks) * ticks });
-
+            const displayNum = Math.round((maxHeights.total / yAxisTicks) * ticks);
             const elem: any = (
                 <g key={i}>
                     <text
@@ -143,12 +145,13 @@ interface GraphicalElementProps {
     kernelsVal: number;
     offset: number;
     maxHeights: HeightBar;
+    blockHeight: number;
 }
 function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: HeightBar }) {
     const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels } = heights;
+        const { inputs, outputs, kernels, blockHeight } = heights;
         const { total: maxTotal } = maxHeights;
 
         let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
@@ -165,6 +168,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
             inputs: inputPercent,
             outputs: outputPercent,
             kernels: kernelsPercent,
+            blockHeight: blockHeight,
             total: 0
         };
     }
@@ -172,14 +176,12 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
     if (values.length < 1) {
         return <Bars />;
     }
-    console.log(values);
     return (
         <g transform={`translate(${margin}, 0)`}>
             {values.map((heights, i) => {
                 const offset = i * spaceBetweenBars;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
 
-                console.log('h', heights);
                 return (
                     <Bar
                         key={i}
@@ -191,6 +193,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
                         outputsVal={heights.outputs}
                         kernelsVal={heights.kernels}
                         maxHeights={maxHeights}
+                        blockHeight={heights.blockHeight}
                     />
                 );
             })}
@@ -204,19 +207,30 @@ function Bar({
     offset,
     inputsVal,
     outputsVal,
-    kernelsVal
+    kernelsVal,
+    blockHeight
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
     const outputHeight = outputsPercent * height;
     const inputsHeight = inputsPercent * height;
+
+    const totalHeight = inputsHeight + kernelHeight + outputHeight;
+
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
 
     return (
         <g className="overviewBars">
+            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
+                <rect rx="5" />
+                <text x="5" y="16">
+                    {blockHeight}
+                </text>
+            </g>
+            <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             <g id="kernels">
-                <g className="tooltip" transform={`translate(${offset - 70},${height - kernelHeight - 50})`}>
+                <g className="tooltip" transform={`translate(${offset - 70},${height - kernelHeight - 25})`}>
                     <rect rx="5" />
                     <text x="5" y="16">
                         {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
@@ -225,7 +239,7 @@ function Bar({
                 <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
             <g id="outputs">
-                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos1 - 50})`}>
+                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos1 - 10})`}>
                     <rect rx="5" />
                     <text x="5" y="16">
                         {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}

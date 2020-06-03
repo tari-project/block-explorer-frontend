@@ -14,7 +14,6 @@ interface Props {
     yAxisTicks: number;
 }
 export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Props) {
-    const [blockHeights, setBlockHeights] = useState(([] as unknown) as any);
     const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
 
     const loadCirculationData = useCallback(async () => {
@@ -28,7 +27,6 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
             totalsArr.push(totalTokensInCirculation);
         });
 
-        setBlockHeights(heightsArr);
         setTotalTokens(totalsArr);
     }, []);
 

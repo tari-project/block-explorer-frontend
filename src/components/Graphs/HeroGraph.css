@@ -19,11 +19,26 @@
     overflow: overlay;
 }
 
+.overviewBars .tooltip.total rect {
+    fill: #ececec;
+    stroke: #ececec;
+    width: 45px;
+    height: 22px;
+}
+
 .overviewBars .tooltip rect {
     fill: #ececec;
     stroke: #ececec;
     width: 65px;
     height: 22px;
+}
+
+.overviewBars .tooltip.total {
+    visibility: hidden;
+}
+
+.overviewBars:hover .tooltip.total {
+    visibility: visible;
 }
 
 #kernels .tooltip {
