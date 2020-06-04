@@ -123,7 +123,7 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
     }
     return (
         <div>
-            <svg className="heroBars" height={height} width={width}>
+            <svg viewBox={`0 0 ${width} ${height}`} className="heroBars" height={height} width={width}>
                 <g>{renderYAxis(maxHeights)}</g>
 
                 <Chart values={blocksData} maxHeights={maxHeights} />
@@ -233,7 +233,6 @@ function Bar({
                     {blockHeight}
                 </text>
             </g>
-            <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             <g id="kernels">
                 <g className="tooltip" transform={`translate(${offset - 70},${height - kernelHeight - 25})`}>
                     <rect rx="5" />
@@ -259,7 +258,23 @@ function Bar({
                         {`${inputsVal} input${inputsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
-                <rect fill="#FF7630" width={elementSize} height={inputsHeight} x={offset} y={height - barPos2} />
+                <rect
+                    transform={`scale(1,-1) translate(0,-${inputsHeight})`}
+                    fill="#FF7630"
+                    width={elementSize}
+                    height={inputsHeight}
+                    x={offset}
+                    y={height - barPos2}
+                >
+                    <animate
+                        attributeName="height"
+                        attributeType="XML"
+                        type="rotate"
+                        values={`0;${inputsHeight};`}
+                        dur="2s"
+                        repeatCount="1"
+                    />
+                </rect>
             </g>
         </g>
     );
