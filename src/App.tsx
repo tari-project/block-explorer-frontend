@@ -3,10 +3,11 @@ import './App.css';
 import BlockExplorer from './components/BlockExplorer';
 import SideBar from './components/SideBar';
 import TopBar from './components/TopBar';
-import { fetchBlocksData } from "./helpers/api";
+import { fetchBlocksData, fetchConstants } from './helpers/api';
 
 export default function App() {
     const [latestBlocks, setLatestBlocks] = useState([]);
+    const [constants, setConstants] = useState({});
     useEffect(() => {
         try {
             fetchBlocksData(100).then((blockData) => {
@@ -16,13 +17,23 @@ export default function App() {
             console.error(e);
         }
     }, []);
+    useEffect(() => {
+        try {
+            fetchConstants().then((constants) => {
+                setConstants(constants);
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    }, []);
+
     return (
         <div className="App">
             <TopBar />
             <div className="App-content">
                 <SideBar />
                 <div className="App-content-mainArea">
-                    <BlockExplorer blocks={latestBlocks as any[]} />
+                    <BlockExplorer constants={constants} blocks={latestBlocks as any[]} />
                 </div>
             </div>
         </div>

@@ -2,10 +2,11 @@ import React from 'react';
 import './BlockCard.css';
 import BlockChart from './BlockChart';
 import numeral from 'numeral';
+import { Constants } from '../helpers/api';
 function fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
 }
-export default function BlockCard({ block }: { block: any }) {
+export default function BlockCard({ block, constants }: { block: any; constants: Constants }) {
     const {
         _miningTime,
         header: { height, timestamp },
@@ -13,7 +14,11 @@ export default function BlockCard({ block }: { block: any }) {
     } = block.block;
     const date = new Date(timestamp.seconds * 1000).toLocaleString();
     const heightStr = numeral(height).format('0,0');
-    const size = numeral(inputs.length * 4 + outputs.length * 13).format('0,0');
+    const size = numeral(
+        kernels.length * constants.block_weight_kernels +
+            inputs.length * constants.block_weight_inputs +
+            outputs.length * constants.block_weight_outputs
+    ).format('0,0');
     const miningTime = fmtMSS(_miningTime);
     return (
         <div className="BlockCard">

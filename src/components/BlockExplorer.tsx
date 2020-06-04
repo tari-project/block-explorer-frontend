@@ -5,7 +5,8 @@ import SimpleBarGraph from './Graphs/SimpleBarGraph';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import PolygonGraph from './Graphs/PolygonGraph';
 import Hero from './Hero';
-import HeroGraph from "./Graphs/HeroGraph";
+import HeroGraph from './Graphs/HeroGraph';
+import { Constants } from '../helpers/api';
 
 const barGraphData = [
     2,
@@ -85,7 +86,7 @@ const hashRateData = [
     120
 ];
 
-export default function BlockExplorer({ blocks }: { blocks: any[] }) {
+export default function BlockExplorer({ blocks, constants }: { blocks: any[]; constants: Constants }) {
     return (
         <div className="BlockExplorer">
             <Hero>

@@ -48,3 +48,26 @@ export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Pro
     const tokens = await response.json();
     return tokens;
 }
+
+export interface Constants {
+    coinbase_lock_height: number;
+    blockchain_version: number;
+    future_time_limit: number;
+    target_block_interval: number;
+    difficulty_block_window: number;
+    difficulty_max_block_interval: number;
+    max_block_transaction_weight: number;
+    pow_algo_count: number;
+    median_timestamp_count: number;
+    emission_initial: number;
+    emission_decay: number;
+    emission_tail: number;
+    min_blake_pow_difficulty: number;
+    block_weight_inputs: number;
+    block_weight_outputs: number;
+    block_weight_kernels: number;
+}
+export async function fetchConstants(): Promise<Constants> {
+    const response = await fetch(`${apiURL}/constants`);
+    return await response.json();
+}
