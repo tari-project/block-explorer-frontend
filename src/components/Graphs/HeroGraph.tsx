@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './HeroGraph.css';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
 
@@ -44,9 +44,15 @@ function getHighest(values: Array<HeightBar>): HeightBar {
 // }
 
 export default function HeroGraph({ yAxisTicks, blocks }: Props) {
+    const [latestBlocks, setLatestBlocks] = useState(blocks);
+    useEffect(() => {
+        setLatestBlocks(blocks);
+        // console.log('property changed', latestBlocks);
+    }, [blocks]);
+
     const { width, height } = dimensions;
 
-    const blocksData: HeightBar[] = blocks.map((block) => {
+    const blocksData: HeightBar[] = latestBlocks.map((block) => {
         const { body, header } = block.block;
 
         const inputs = body.inputs.length;
