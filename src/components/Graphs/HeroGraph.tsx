@@ -259,7 +259,7 @@ function Bar({
                     </text>
                 </g>
                 <rect
-                    transform={`scale(1,-1) translate(0,-${inputsHeight})`}
+                    transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
                     fill="#FF7630"
                     width={elementSize}
                     height={inputsHeight}
@@ -270,8 +270,8 @@ function Bar({
                         attributeName="height"
                         attributeType="XML"
                         type="rotate"
-                        values={`0;${inputsHeight};`}
-                        dur="2s"
+                        values={`0;${inputsHeight}`}
+                        dur="1.5s"
                         repeatCount="1"
                     />
                 </rect>
