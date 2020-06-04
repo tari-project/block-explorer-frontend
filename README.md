@@ -14,11 +14,15 @@ You'll need a running [blockchain-explorer-api](https://github.com/tari-project/
 ### Build
 
     npm run build
-    
+
+### Docker
+
+    docker build . -t block-explorer-frontend:latest
+        
 ### Deploy
 
     # Build the dist
     docker run -v "$PWD/dist":/app/dist --env-file=.env quay.io/tarilabs/block-explorer-frontend
     
     # Serve from the docker container
-    docker run -p 3000:3000 --env-file=.env quay.io/tarilabs/block-explorer-frontend
+    docker run -p 3000:3000 --env SERVE=1 --env-file=.env quay.io/tarilabs/block-explorer-frontend
