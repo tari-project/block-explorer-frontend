@@ -38,6 +38,7 @@ export async function fetchTokensInCirculation(): Promise<TokensInCirculation> {
 
 interface NetworkDifficultyEstimatedHash {
   estimated_hash_rate: number;
+  height: number;
 }
 
 interface NetworkDifficultyEstimatedHashes extends Array<NetworkDifficultyEstimatedHash>{}

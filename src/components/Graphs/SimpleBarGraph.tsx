@@ -2,30 +2,32 @@ import React, { useCallback, useEffect, useState } from 'react';
 import './SimpleBarGraph.css';
 import { scaleLinear } from 'd3-scale';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
-import { fetchTokensInCirculation } from '../../api';
+import { fetchTokensInCirculation } from '../../helpers/api';
 import numeral from 'numeral';
 
+// eslint-disable-next-line no-undef
+const TOKEN_NAME = process.env.REACT_APP_TOKEN_NAME;
 interface Props {
     width: number;
     height: number;
     yAxisTicks: number;
 }
+
 export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
-    const [blockHeights, setBlockHeights] = useState(([] as unknown) as any);
+
     const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
 
     const loadCirculationData = useCallback(async () => {
         const tokenData = await fetchTokensInCirculation();
-        let heightsArr: any[] = [];
-        let totalsArr: number[] = [];
+        const totalsArr: number[] = [];
+        const heightsArr: number[] = [];
 
         tokenData.map((token) => {
-            const { height, totalTokensInCirculation } = token;
+            const { height, tokensInCirculation } = token;
             heightsArr.push(height);
-            totalsArr.push(totalTokensInCirculation);
+            return totalsArr.push(tokensInCirculation);
         });
 
-        setBlockHeights(heightsArr);
         setTotalTokens(totalsArr);
     }, []);
 
@@ -80,12 +82,13 @@ export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
         }
         return nums;
     }
-
+    // eslint-disable-next-line no-undef
+    const title = `Circulating ${TOKEN_NAME}`;
     return (
         <div className="graphWrapper">
             <PlainGraphTitle
-                title="Circulating Tari"
-                subTitle="Total number of mined Tari circulating on the network."
+                title={title}
+                subTitle={`Total number of mined ${TOKEN_NAME} circulating on the network.`}
             />
 
             <svg className="circulateSimpleBars" height={height} width={width}>
@@ -93,15 +96,26 @@ export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
 
                 {totalTokens.map((total, i) => {
                     return (
-                        <rect
-                            rx="3"
-                            className="bar"
-                            key={i}
-                            x={i * barWidth}
-                            y={yScale(total)}
-                            width={barWidth / 2}
-                            height={height - yScale(total)}
-                        />
+                        <g key={i} className="barHolder">
+                            <g
+                                className="tooltip"
+                                transform={`translate(${i * barWidth - 30},${yScale(total) - 30})`}
+                                opacity="0.9"
+                            >
+                                <rect rx="5" width="35" height="22" />
+                                <text x="5" y="16">
+                                    {numeral(total).format('0a')}
+                                </text>
+                            </g>
+                            <rect
+                                rx="3"
+                                className="bar"
+                                x={i * barWidth}
+                                y={yScale(total)}
+                                width={barWidth / 2}
+                                height={height - yScale(total)}
+                            />
+                        </g>
                     );
                 })}
             </svg>

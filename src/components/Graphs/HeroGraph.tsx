@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import './HeroGraph.css';
-import { fetchBlocksData } from '../../api';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
 
 interface Props {
+    blocks: any[];
     data: number[];
     width: number;
     height: number;
@@ -11,6 +11,7 @@ interface Props {
 }
 
 interface HeightBar {
+    blockHeight: number;
     inputs: number;
     outputs: number;
     kernels: number;
@@ -24,62 +25,44 @@ const dimensions = {
     elementSize: 6
 } as const;
 
-let blocksData: any[] = [];
-export default function HeroGraph({ yAxisTicks }: Props) {
-    const loadBlocksData = useCallback(async () => {
-        const blockData = await fetchBlocksData();
-        const { blocks } = blockData;
-
-        blocks.forEach((block) => {
-            const { body, header } = block.block;
-
-            let valObj = {
-                inputs: body.inputs.length,
-                outputs: body.outputs.length,
-                kernels: body.kernels.length
-            };
-
-            blocksData.push(valObj);
+function getHighest(values: Array<HeightBar>): HeightBar {
+    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0 };
+    values.forEach((values: HeightBar) => {
+        const keys = ['inputs', 'outputs', 'kernels', 'total'];
+        keys.forEach((key) => {
+            if (values[key] > maxHeights[key]) {
+                maxHeights[key] = values[key];
+            }
         });
-    }, []);
+    });
+    return maxHeights;
+}
+// can add this back in if the data changes & we need to round to 5
+// it is currently low so rounding to 5 looks inaccurate
+// function round5({ num }: { num: any }) {
+//     return Math.ceil(num / 5) * 5;
+// }
 
-    function getData(): Array<HeightBar> {
-        return blocksData.map((data) => {
-            return {
-                ...data,
-                total: data.inputs + data.outputs + data.kernels
-            };
-        });
-    }
-
-    function getHighest(values: Array<HeightBar>): HeightBar {
-        const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0 };
-        getData().forEach((values: HeightBar) => {
-            const keys = ['inputs', 'outputs', 'kernels', 'total'];
-            keys.forEach((key) => {
-                if (values[key] > maxHeights[key]) {
-                    maxHeights[key] = values[key];
-                }
-            });
-        });
-        return maxHeights;
-    }
+export default function HeroGraph({ yAxisTicks, blocks }: Props) {
     const { width, height } = dimensions;
-    const [maxHeights, setMaxHeights] = useState({ inputs: 0, outputs: 0, kernels: 0, total: 0 });
-    const [values, setValues] = useState([] as HeightBar[]);
 
-    useEffect(() => {
-        loadBlocksData().then((res) => {
-            const values = getData();
-            setValues(values);
-            setMaxHeights(getHighest(values));
-        });
-    }, [setValues]);
+    const blocksData: HeightBar[] = blocks.map((block) => {
+        const { body, header } = block.block;
 
-    function round5({ num }: { num: any }) {
-        return Math.ceil(num / 5) * 5;
-    }
+        const inputs = body.inputs.length;
+        const outputs = body.outputs.length;
+        const kernels = body.kernels.length;
+        const heights = header.height;
+        return {
+            inputs: inputs,
+            outputs: outputs,
+            kernels: kernels,
+            total: inputs + outputs + kernels,
+            blockHeight: heights
+        };
+    });
 
+    const maxHeights = getHighest(blocksData);
     function renderYAxis(maxHeights: HeightBar) {
         const nums: any[] = [];
         let ticks = yAxisTicks + 1;
@@ -87,8 +70,7 @@ export default function HeroGraph({ yAxisTicks }: Props) {
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = round5({ num: (maxHeights.total / yAxisTicks) * ticks });
-
+            const displayNum = Math.round((maxHeights.total / yAxisTicks) * ticks);
             const elem: any = (
                 <g key={i}>
                     <text
@@ -120,13 +102,15 @@ export default function HeroGraph({ yAxisTicks }: Props) {
 
     function getTimeTicks() {
         const ticksAmount = 6;
-        let today = new Date();
-        let ticks: any[] = [];
+        const today = new Date();
+        const ticks: any[] = [];
 
         for (let i = 0; i < ticksAmount; i++) {
-            let less = today.setMinutes(today.getMinutes() - 5);
-            let newt = new Date(less);
-            let time = newt.getHours() + ':' + newt.getMinutes();
+            const less = today.setMinutes(today.getMinutes() - 5);
+            const newt = new Date(less);
+            const minutes = newt.getMinutes() < 10 ? `0${newt.getMinutes()}` : newt.getMinutes();
+            const hours = newt.getHours() < 10 ? `0${newt.getHours()}` : newt.getHours();
+            const time = hours + ':' + minutes;
             ticks.push(time);
         }
 
@@ -137,7 +121,7 @@ export default function HeroGraph({ yAxisTicks }: Props) {
             <svg className="heroBars" height={height} width={width}>
                 <g>{renderYAxis(maxHeights)}</g>
 
-                <Chart values={values} maxHeights={maxHeights} />
+                <Chart values={blocksData} maxHeights={maxHeights} />
             </svg>
             <div className="xAxisTimes" style={{ width: width }}>
                 {getTimeTicks().map((time, index) => {
@@ -156,14 +140,18 @@ interface GraphicalElementProps {
     inputs: number;
     outputs: number;
     kernels: number;
+    inputsVal: number;
+    outputsVal: number;
+    kernelsVal: number;
     offset: number;
     maxHeights: HeightBar;
+    blockHeight: number;
 }
 function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: HeightBar }) {
     const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels } = heights;
+        const { inputs, outputs, kernels, blockHeight } = heights;
         const { total: maxTotal } = maxHeights;
 
         let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
@@ -180,11 +168,12 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
             inputs: inputPercent,
             outputs: outputPercent,
             kernels: kernelsPercent,
+            blockHeight: blockHeight,
             total: 0
         };
     }
 
-    if (blocksData.length < 1) {
+    if (values.length < 1) {
         return <Bars />;
     }
     return (
@@ -200,7 +189,11 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
                         inputs={inputs}
                         outputs={outputs}
                         kernels={kernels}
+                        inputsVal={heights.inputs}
+                        outputsVal={heights.outputs}
+                        kernelsVal={heights.kernels}
                         maxHeights={maxHeights}
+                        blockHeight={heights.blockHeight}
                     />
                 );
             })}
@@ -211,24 +204,56 @@ function Bar({
     kernels: kernelsPercent,
     outputs: outputsPercent,
     inputs: inputsPercent,
-    offset
+    offset,
+    inputsVal,
+    outputsVal,
+    kernelsVal,
+    blockHeight
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
     const outputHeight = outputsPercent * height;
     const inputsHeight = inputsPercent * height;
+
+    const totalHeight = inputsHeight + kernelHeight + outputHeight;
+
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
 
     return (
-        <g>
-            <g>
+        <g className="overviewBars">
+            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
+                <rect rx="5" />
+                <text x="5" y="16">
+                    {blockHeight}
+                </text>
+            </g>
+            <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
+            <g id="kernels">
+                <g className="tooltip" transform={`translate(${offset - 70},${height - kernelHeight - 25})`}>
+                    <rect rx="5" />
+                    <text x="5" y="16">
+                        {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
+                    </text>
+                </g>
                 <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
-            <g>
+            <g id="outputs">
+                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos1 - 10})`}>
+                    <rect rx="5" />
+                    <text x="5" y="16">
+                        {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
+                    </text>
+                </g>
                 <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
-            <g>
+            <g id="inputs">
+                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos2 - 5})`}>
+                    <rect rx="5" />
+                    <text x="5" y="16">
+                        {`${inputsVal} input${inputsVal > 1 ? 's' : ''}`}
+                    </text>
+                </g>
                 <rect fill="#FF7630" width={elementSize} height={inputsHeight} x={offset} y={height - barPos2} />
             </g>
         </g>

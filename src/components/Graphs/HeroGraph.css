@@ -18,3 +18,71 @@
     padding: 10px 20px 0 60px;
     overflow: overlay;
 }
+
+.overviewBars .tooltip.total rect {
+    fill: #ececec;
+    stroke: #ececec;
+    width: 45px;
+    height: 22px;
+}
+
+.overviewBars .tooltip rect {
+    fill: #ececec;
+    stroke: #ececec;
+    width: 65px;
+    height: 22px;
+}
+
+.overviewBars .tooltip.total {
+    visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
+}
+
+.overviewBars:hover .tooltip.total {
+    visibility: visible;
+}
+
+#kernels .tooltip {
+    visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
+}
+#kernels:hover .tooltip {
+    visibility: visible;
+}
+
+#kernels .tooltip text {
+    fill: #9330ff;
+    font-size: 12px;
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
+}
+
+#inputs .tooltip {
+    visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
+}
+#inputs:hover .tooltip {
+    visibility: visible;
+}
+
+#inputs .tooltip text {
+    fill: #ff7630;
+    font-size: 12px;
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
+}
+
+#outputs .tooltip {
+    visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
+}
+#outputs:hover .tooltip {
+    visibility: visible;
+}
+
+#outputs .tooltip text {
+    fill: #b4c9f5;
+    font-size: 12px;
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
+}

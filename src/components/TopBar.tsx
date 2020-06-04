@@ -1,6 +1,6 @@
 import numeral from 'numeral';
 import React, { useCallback, useEffect, useState } from 'react';
-import { fetchChainMetadata } from '../api';
+import { fetchChainMetadata } from '../helpers/api';
 import { ReactComponent as Logo } from '../assets/logo.svg';
 import './TopBar.css';
 import TopBarItem from './TopBarItem';
