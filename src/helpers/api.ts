@@ -60,4 +60,3 @@ export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimat
     const response = await fetch(`${apiURL}/network-difficulty`);
     return await response.json();
 }
-

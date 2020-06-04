@@ -14,17 +14,14 @@ interface Props {
 }
 
 export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
-
     const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
 
     const loadCirculationData = useCallback(async () => {
         const tokenData = await fetchTokensInCirculation();
         const totalsArr: number[] = [];
-        const heightsArr: number[] = [];
 
         tokenData.map((token) => {
-            const { height, tokensInCirculation } = token;
-            heightsArr.push(height);
+            const { tokensInCirculation } = token;
             return totalsArr.push(tokensInCirculation);
         });
 
