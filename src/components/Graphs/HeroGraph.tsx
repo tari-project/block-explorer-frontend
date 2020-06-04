@@ -44,10 +44,9 @@ function getHighest(values: Array<HeightBar>): HeightBar {
 // }
 
 export default function HeroGraph({ yAxisTicks, blocks }: Props) {
-    const [latestBlocks, setLatestBlocks] = useState(blocks);
+    const [latestBlocks, setLatestBlocks] = useState([] as any);
     useEffect(() => {
         setLatestBlocks(blocks);
-        // console.log('property changed', latestBlocks);
     }, [blocks]);
 
     const { width, height } = dimensions;
