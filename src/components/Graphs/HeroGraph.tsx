@@ -228,8 +228,19 @@ function Bar({
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
 
+    const firstBarClass = isLatestBlock ? 'first' : '';
+
+    const aniDiv = document.getElementById('ani');
+
+    const [isUpdated, setIsUpdated] = useState(isLatestBlock);
+    useEffect(() => {
+        setIsUpdated(isLatestBlock);
+        aniDiv.beginElement(); // HERE ? 
+        console.log('update?', isUpdated);
+    }, [offset]);
+
     return (
-        <g className="overviewBars">
+        <g className={`overviewBars ${firstBarClass}`}>
             <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
                 <rect rx="5" />
                 <text x="5" y="16">
