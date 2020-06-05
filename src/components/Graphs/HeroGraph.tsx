@@ -151,6 +151,7 @@ interface GraphicalElementProps {
     offset: number;
     maxHeights: HeightBar;
     blockHeight: number;
+    isLatestBlock: boolean;
 }
 function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: HeightBar }) {
     const { width, margin } = dimensions;
@@ -199,6 +200,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
                         kernelsVal={heights.kernels}
                         maxHeights={maxHeights}
                         blockHeight={heights.blockHeight}
+                        isLatestBlock={i === 0}
                     />
                 );
             })}
@@ -213,7 +215,8 @@ function Bar({
     inputsVal,
     outputsVal,
     kernelsVal,
-    blockHeight
+    blockHeight,
+    isLatestBlock
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
@@ -240,7 +243,19 @@ function Bar({
                         {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
-                <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
+                <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight}>
+                    {isLatestBlock && (
+                        <animateTransform
+                            id="ani"
+                            attributeName="transform"
+                            attributeType="XML"
+                            type="rotate"
+                            values={`5;0`}
+                            dur="1.5s"
+                            repeatCount="1"
+                        />
+                    )}
+                </rect>
             </g>
             <g id="outputs">
                 <g className="tooltip" transform={`translate(${offset - 70},${height - barPos1 - 10})`}>
@@ -249,7 +264,19 @@ function Bar({
                         {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
-                <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
+                <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1}>
+                    {isLatestBlock && (
+                        <animateTransform
+                            className="ani"
+                            attributeName="transform"
+                            attributeType="XML"
+                            type="rotate"
+                            values={`5;0`}
+                            dur="1.5s"
+                            repeatCount="1"
+                        />
+                    )}
+                </rect>
             </g>
             <g id="inputs">
                 <g className="tooltip" transform={`translate(${offset - 70},${height - barPos2 - 5})`}>
@@ -274,6 +301,17 @@ function Bar({
                         dur="1.5s"
                         repeatCount="1"
                     />
+                    {isLatestBlock && (
+                        <animateTransform
+                            className="ani"
+                            attributeName="transform"
+                            attributeType="XML"
+                            type="rotate"
+                            values={`5;0`}
+                            dur="1.5s"
+                            repeatCount="1"
+                        />
+                    )}
                 </rect>
             </g>
         </g>

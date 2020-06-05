@@ -11,13 +11,13 @@ export default function App() {
     useEffect(() => {
         try {
             fetchBlocksData(100).then((blockData) => {
-                // setInterval(() => {
-                //     const block: any = blockData.blocks.pop();
-                //     const nextHeight = Math.max(...blockData.blocks.map((b) => +b.block.header.height)) + 1;
-                //     block.block.header.height = nextHeight;
-                //     blockData.blocks.unshift(block);
-                //     setLatestBlocks([...blockData.blocks] as any);
-                // }, 5000); // example of new blocks coming in
+                setInterval(() => {
+                    const block: any = blockData.blocks.pop();
+                    const nextHeight = Math.max(...blockData.blocks.map((b) => +b.block.header.height)) + 1;
+                    block.block.header.height = nextHeight;
+                    blockData.blocks.unshift(block);
+                    setLatestBlocks([...blockData.blocks] as any);
+                }, 5000); // example of new blocks coming in
                 setLatestBlocks(blockData.blocks as any);
             });
         } catch (e) {
