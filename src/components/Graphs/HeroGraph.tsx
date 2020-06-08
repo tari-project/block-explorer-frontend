@@ -193,7 +193,7 @@ function Chart({
         return <Bars />;
     }
     return (
-        <g id="chartParent" transform={`translate(${margin}, 0)`}>
+        <g transform={`translate(${margin}, 0)`}>
             {values.map((heights, i) => {
                 const offset = i * spaceBetweenBars;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
