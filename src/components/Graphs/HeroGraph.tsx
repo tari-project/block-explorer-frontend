@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './HeroGraph.css';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
+import { connect } from 'react-redux';
 
 interface Props {
     blocks: any[];
@@ -43,7 +44,7 @@ function getHighest(values: Array<HeightBar>): HeightBar {
 //     return Math.ceil(num / 5) * 5;
 // }
 
-export default function HeroGraph({ yAxisTicks, blocks }: Props) {
+function HeroGraph({ yAxisTicks, blocks }: Props) {
     const [latestBlocks, setLatestBlocks] = useState([] as any);
     let aniClass = '';
     useEffect(() => {
@@ -69,6 +70,7 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
         };
     });
 
+    // blocksData.sort((a, b) => b.blockHeight - a.blockHeight);
     const maxHeights = getHighest(blocksData);
     function renderYAxis(maxHeights: HeightBar) {
         const nums: any[] = [];
@@ -292,3 +294,8 @@ function Bar({
         </g>
     );
 }
+
+const mapStateToProps = (state) => ({
+    blocks: state.blocks
+});
+export default connect(mapStateToProps)(HeroGraph);
