@@ -6,7 +6,7 @@ import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import PolygonGraph from './Graphs/PolygonGraph';
 import Hero from './Hero';
 import HeroGraph from './Graphs/HeroGraph';
-
+import LatestBlocks from './LatestBlocks';
 const barGraphData = [
     2,
     4,
@@ -85,21 +85,17 @@ const hashRateData = [
     120
 ];
 
-export default function BlockExplorer({ blocks }: { blocks: any[] }) {
+export default function BlockExplorer() {
     return (
         <div className="BlockExplorer">
             <Hero>
                 <PlainGraphTitle title="Blocks Overview" />
                 <div className="blocksOverview">
-                    <HeroGraph width={570} height={220} yAxisTicks={4} blocks={blocks} data={hashRateData} />
+                    <HeroGraph width={570} height={220} yAxisTicks={4} data={hashRateData} />
                 </div>
 
                 <PlainGraphTitle title="Latest Blocks" />
-                <div className="latestBlocksContainer">
-                    {blocks.slice(0, 5).map((block, i) => (
-                        <BlockCard key={i} block={block} />
-                    ))}
-                </div>
+                <LatestBlocks />
             </Hero>
             <div className="twoCol">
                 <PolygonGraph width={500} height={220} yAxisTicks={6} data={hashRateData} />
