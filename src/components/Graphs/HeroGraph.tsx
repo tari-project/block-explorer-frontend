@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './HeroGraph.css';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
 
@@ -44,9 +44,16 @@ function getHighest(values: Array<HeightBar>): HeightBar {
 // }
 
 export default function HeroGraph({ yAxisTicks, blocks }: Props) {
+    const [latestBlocks, setLatestBlocks] = useState([] as any);
+    let aniClass = '';
+    useEffect(() => {
+        setLatestBlocks(blocks);
+        aniClass = 'animate';
+    }, [blocks]);
+
     const { width, height } = dimensions;
 
-    const blocksData: HeightBar[] = blocks.map((block) => {
+    const blocksData: HeightBar[] = latestBlocks.map((block) => {
         const { body, header } = block.block;
 
         const inputs = body.inputs.length;
@@ -118,10 +125,10 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
     }
     return (
         <div>
-            <svg className="heroBars" height={height} width={width}>
+            <svg viewBox={`0 0 ${width} ${height}`} className="heroBars" height={height} width={width}>
                 <g>{renderYAxis(maxHeights)}</g>
 
-                <Chart values={blocksData} maxHeights={maxHeights} />
+                <Chart values={blocksData} maxHeights={maxHeights} aniClass={aniClass} />
             </svg>
             <div className="xAxisTimes" style={{ width: width }}>
                 {getTimeTicks().map((time, index) => {
@@ -146,8 +153,17 @@ interface GraphicalElementProps {
     offset: number;
     maxHeights: HeightBar;
     blockHeight: number;
+    aniClass: string;
 }
-function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: HeightBar }) {
+function Chart({
+    values,
+    maxHeights,
+    aniClass
+}: {
+    values: Array<HeightBar>;
+    maxHeights: HeightBar;
+    aniClass: string;
+}) {
     const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
@@ -194,6 +210,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
                         kernelsVal={heights.kernels}
                         maxHeights={maxHeights}
                         blockHeight={heights.blockHeight}
+                        aniClass={aniClass}
                     />
                 );
             })}
@@ -208,7 +225,8 @@ function Bar({
     inputsVal,
     outputsVal,
     kernelsVal,
-    blockHeight
+    blockHeight,
+    aniClass
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
@@ -221,14 +239,13 @@ function Bar({
     const barPos2 = barPos1 + inputsHeight;
 
     return (
-        <g className="overviewBars">
+        <g className={`overviewBars ${aniClass}`}>
             <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
                 <rect rx="5" />
                 <text x="5" y="16">
                     {blockHeight}
                 </text>
             </g>
-            <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             <g id="kernels">
                 <g className="tooltip" transform={`translate(${offset - 70},${height - kernelHeight - 25})`}>
                     <rect rx="5" />
@@ -254,7 +271,23 @@ function Bar({
                         {`${inputsVal} input${inputsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
-                <rect fill="#FF7630" width={elementSize} height={inputsHeight} x={offset} y={height - barPos2} />
+                <rect
+                    transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
+                    fill="#FF7630"
+                    width={elementSize}
+                    height={inputsHeight}
+                    x={offset}
+                    y={height - barPos2}
+                >
+                    <animate
+                        attributeName="height"
+                        attributeType="XML"
+                        type="rotate"
+                        values={`0;${inputsHeight}`}
+                        dur="1.5s"
+                        repeatCount="1"
+                    />
+                </rect>
             </g>
         </g>
     );
