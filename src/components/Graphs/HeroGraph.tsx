@@ -45,10 +45,10 @@ function getHighest(values: Array<HeightBar>): HeightBar {
 
 export default function HeroGraph({ yAxisTicks, blocks }: Props) {
     const [latestBlocks, setLatestBlocks] = useState([] as any);
-    let aniClass = '';
+    const [firstChildClass, setFirstChildClass] = useState('');
     useEffect(() => {
         setLatestBlocks(blocks);
-        aniClass = 'animate';
+        setFirstChildClass('animate');
     }, [blocks]);
 
     const { width, height } = dimensions;
@@ -121,14 +121,14 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
             ticks.push(time);
         }
 
-        return ticks.reverse();
+        return ticks;
     }
     return (
         <div>
             <svg viewBox={`0 0 ${width} ${height}`} className="heroBars" height={height} width={width}>
                 <g>{renderYAxis(maxHeights)}</g>
 
-                <Chart values={blocksData} maxHeights={maxHeights} aniClass={aniClass} />
+                <Chart values={blocksData} maxHeights={maxHeights} aniClass={firstChildClass} />
             </svg>
             <div className="xAxisTimes" style={{ width: width }}>
                 {getTimeTicks().map((time, index) => {
@@ -192,6 +192,7 @@ function Chart({
     if (values.length < 1) {
         return <Bars />;
     }
+
     return (
         <g transform={`translate(${margin}, 0)`}>
             {values.map((heights, i) => {
@@ -237,9 +238,8 @@ function Bar({
 
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
-
     return (
-        <g className={`overviewBars ${aniClass}`}>
+        <g key={blockHeight} className={`overviewBars ${aniClass}`}>
             <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
                 <rect rx="5" />
                 <text x="5" y="16">

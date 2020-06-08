@@ -91,7 +91,7 @@
     font-weight: bold;
 }
 
-.overviewBars:first-child {
+.animate:first-child {
     animation: slide 1.5s linear;
 }
 
