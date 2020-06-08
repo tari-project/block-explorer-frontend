@@ -90,3 +90,16 @@
     font-family: Avenir, sans-serif;
     font-weight: bold;
 }
+
+.overviewBars:first-child {
+    animation: slide 1.5s linear;
+}
+
+@keyframes slide {
+    from {
+        transform: rotate(5deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}

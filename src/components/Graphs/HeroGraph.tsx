@@ -45,8 +45,10 @@ function getHighest(values: Array<HeightBar>): HeightBar {
 
 export default function HeroGraph({ yAxisTicks, blocks }: Props) {
     const [latestBlocks, setLatestBlocks] = useState([] as any);
+    let aniClass = '';
     useEffect(() => {
         setLatestBlocks(blocks);
+        aniClass = 'animate';
     }, [blocks]);
 
     const { width, height } = dimensions;
@@ -126,7 +128,7 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
             <svg viewBox={`0 0 ${width} ${height}`} className="heroBars" height={height} width={width}>
                 <g>{renderYAxis(maxHeights)}</g>
 
-                <Chart values={blocksData} maxHeights={maxHeights} />
+                <Chart values={blocksData} maxHeights={maxHeights} aniClass={aniClass} />
             </svg>
             <div className="xAxisTimes" style={{ width: width }}>
                 {getTimeTicks().map((time, index) => {
@@ -151,9 +153,17 @@ interface GraphicalElementProps {
     offset: number;
     maxHeights: HeightBar;
     blockHeight: number;
-    isLatestBlock: boolean;
+    aniClass: string;
 }
-function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: HeightBar }) {
+function Chart({
+    values,
+    maxHeights,
+    aniClass
+}: {
+    values: Array<HeightBar>;
+    maxHeights: HeightBar;
+    aniClass: string;
+}) {
     const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
@@ -183,7 +193,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
         return <Bars />;
     }
     return (
-        <g transform={`translate(${margin}, 0)`}>
+        <g id="chartParent" transform={`translate(${margin}, 0)`}>
             {values.map((heights, i) => {
                 const offset = i * spaceBetweenBars;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
@@ -200,7 +210,7 @@ function Chart({ values, maxHeights }: { values: Array<HeightBar>; maxHeights: H
                         kernelsVal={heights.kernels}
                         maxHeights={maxHeights}
                         blockHeight={heights.blockHeight}
-                        isLatestBlock={i === 0}
+                        aniClass={aniClass}
                     />
                 );
             })}
@@ -216,7 +226,7 @@ function Bar({
     outputsVal,
     kernelsVal,
     blockHeight,
-    isLatestBlock
+    aniClass
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
@@ -228,19 +238,8 @@ function Bar({
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
 
-    const firstBarClass = isLatestBlock ? 'first' : '';
-
-    const aniDiv = document.getElementById('ani');
-
-    const [isUpdated, setIsUpdated] = useState(isLatestBlock);
-    useEffect(() => {
-        setIsUpdated(isLatestBlock);
-        aniDiv.beginElement(); // HERE ? 
-        console.log('update?', isUpdated);
-    }, [offset]);
-
     return (
-        <g className={`overviewBars ${firstBarClass}`}>
+        <g className={`overviewBars ${aniClass}`}>
             <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
                 <rect rx="5" />
                 <text x="5" y="16">
@@ -254,19 +253,7 @@ function Bar({
                         {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
-                <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight}>
-                    {isLatestBlock && (
-                        <animateTransform
-                            id="ani"
-                            attributeName="transform"
-                            attributeType="XML"
-                            type="rotate"
-                            values={`5;0`}
-                            dur="1.5s"
-                            repeatCount="1"
-                        />
-                    )}
-                </rect>
+                <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
             <g id="outputs">
                 <g className="tooltip" transform={`translate(${offset - 70},${height - barPos1 - 10})`}>
@@ -275,19 +262,7 @@ function Bar({
                         {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
-                <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1}>
-                    {isLatestBlock && (
-                        <animateTransform
-                            className="ani"
-                            attributeName="transform"
-                            attributeType="XML"
-                            type="rotate"
-                            values={`5;0`}
-                            dur="1.5s"
-                            repeatCount="1"
-                        />
-                    )}
-                </rect>
+                <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
             <g id="inputs">
                 <g className="tooltip" transform={`translate(${offset - 70},${height - barPos2 - 5})`}>
@@ -312,17 +287,6 @@ function Bar({
                         dur="1.5s"
                         repeatCount="1"
                     />
-                    {isLatestBlock && (
-                        <animateTransform
-                            className="ani"
-                            attributeName="transform"
-                            attributeType="XML"
-                            type="rotate"
-                            values={`5;0`}
-                            dur="1.5s"
-                            repeatCount="1"
-                        />
-                    )}
                 </rect>
             </g>
         </g>
