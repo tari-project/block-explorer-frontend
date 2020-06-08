@@ -1,9 +1,8 @@
 /* eslint-disable no-undef */
-function _generateUrl(prefix, url) {
+const _generateUrl = (prefix, url) => {
     return (prefix.indexOf('://') === -1 ? `${prefix}://` : prefix) + url;
-}
-
-export default {
+};
+const config = {
     apiDomain: process.env.REACT_APP_EXPLORER_API_DOMAIN,
     apiUrl: _generateUrl(
         process.env.REACT_APP_EXPLORER_API_PREFIX || 'http',
@@ -16,3 +15,4 @@ export default {
     tokenName: process.env.REACT_APP_TOKEN_NAME || 'tXTR',
     initialBlockCount: +(process.env.REACT_APP_INITIAL_BLOCK_COUNT || 100)
 };
+export default config;

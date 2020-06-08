@@ -10,7 +10,7 @@ function LatestBlocks({ blocks }: { blocks: any[] }) {
 
     return (
         <div className="latestBlocksContainer">
-            {latestBlocks.slice(0, 5).map((block, i) => (
+            {latestBlocks.map((block, i) => (
                 <BlockCard key={i} block={block} />
             ))}
         </div>

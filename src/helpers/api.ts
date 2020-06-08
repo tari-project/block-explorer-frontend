@@ -27,14 +27,6 @@ export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Prom
     if (sort === 'desc') {
         blocks.blocks.sort((a, b) => b.block.header.height - a.block.header.height);
     }
-    blocks.blocks.forEach((block, i) => {
-        let nextTimestamp = block.block.header.timestamp.seconds;
-        if (blocks.blocks.length > i + 1) {
-            const next = blocks.blocks[i + 1];
-            nextTimestamp = next.block.header.timestamp.seconds;
-        }
-        block.block._miningTime = block.block.header.timestamp.seconds - nextTimestamp;
-    });
     return blocks;
 }
 
