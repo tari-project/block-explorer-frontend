@@ -48,3 +48,5 @@ export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Pro
     const tokens = await response.json();
     return tokens;
 }
+
+export function setupWebsockets(updateMap) {}

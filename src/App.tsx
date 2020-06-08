@@ -3,10 +3,13 @@ import './App.css';
 import BlockExplorer from './components/BlockExplorer';
 import SideBar from './components/SideBar';
 import TopBar from './components/TopBar';
-import { fetchBlocksData } from "./helpers/api";
+import { fetchBlocksData, setupWebsockets } from './helpers/api';
 
 export default function App() {
     const [latestBlocks, setLatestBlocks] = useState([]);
+    setupWebsockets({
+        newBlock: setLatestBlocks
+    });
     useEffect(() => {
         try {
             fetchBlocksData(100).then((blockData) => {
