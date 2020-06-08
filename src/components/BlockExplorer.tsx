@@ -5,7 +5,7 @@ import SimpleBarGraph from './Graphs/SimpleBarGraph';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import PolygonGraph from './Graphs/PolygonGraph';
 import Hero from './Hero';
-import HeroGraph from "./Graphs/HeroGraph";
+import HeroGraph from './Graphs/HeroGraph';
 
 const barGraphData = [
     2,
