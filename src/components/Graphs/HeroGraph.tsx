@@ -121,7 +121,7 @@ export default function HeroGraph({ yAxisTicks, blocks }: Props) {
             ticks.push(time);
         }
 
-        return ticks.reverse();
+        return ticks;
     }
     return (
         <div>
