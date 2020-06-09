@@ -110,7 +110,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
                         <g key={i} className="barHolder">
                             <circle cx={item.x} cy={item.y} r="10" fill="#352583" fillOpacity="0" />
                             <g className="tooltip" opacity="0.9">
-                                <rect x={item.x - 20} y={item.y - 20} width="35" height="22" />
+                                <rect rx={5} x={item.x - 20} y={item.y - 20} width="35" height="22" />
                                 <text x={item.x - 15} y={item.y - 5}>
                                     {numeral(data[i].y).format('0a')}
                                 </text>
