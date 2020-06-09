@@ -5,7 +5,7 @@ interface Props {
     data: any;
 }
 
-export default function BlockBody({ data }: Props) {
+export default function SingleBlockClusterGraph({ data }: Props) {
 
     const singleBlockDataArray: any[] = [];
 

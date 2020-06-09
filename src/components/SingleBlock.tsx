@@ -5,7 +5,8 @@ import {
 } from "react-router-dom";
 import {fetchBlocksData} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
-import BlockBody from "./BlockBody";
+import SingleBlockClusterGraph from "./SingleBlockClusterGraph";
+import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
 
 export default function SingleBlock() {
 
@@ -40,7 +41,8 @@ export default function SingleBlock() {
 
     return (
         <div className="SingleBlock">
-            <BlockBody data={singleBlockDataArray}/>
+            <SingleBlockViewHeader title="Block Data"/>
+            <SingleBlockClusterGraph data={singleBlockDataArray}/>
             <h1>Technical Details</h1>
             <StatRow label="Accumulated Monero Difficulty" value={accumulated_monero_difficulty} />
             <StatRow label="Accumulated Blake Difficulty" value={accumulated_blake_difficulty} />

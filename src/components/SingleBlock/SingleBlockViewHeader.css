@@ -1,0 +1,24 @@
+.singleBlockViewHeader {
+    display: flex;
+}
+
+.colorMapping {
+    display: flex;
+    width: 40%;
+    justify-content: space-evenly;
+}
+
+.colorMapping > div {
+    display: flex;
+    margin: 1.5em;
+}
+
+.singleBlockViewHeader h1 {
+    width: 60%;
+}
+
+.colorTitle {
+    font-family: Avenir, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
