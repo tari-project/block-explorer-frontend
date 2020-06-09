@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {fetchTokensInCirculation} from "../helpers/api";
 import SimpleBarGraph from "./Graphs/SimpleBarGraph";
 
-export default function CirculatingTariGraph() {
+export default function CirculatingTokenGraph() {
     const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
 
     const loadCirculationData = useCallback(async () => {
