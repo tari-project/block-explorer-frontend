@@ -52,7 +52,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = round5({ num: (highestNum / yAxisTicks) * ticks });
+            const displayNum = Math.trunc(round5({ num: (highestNum / yAxisTicks) * ticks })/ 1e6);
             nums.push(
                 <g key={i}>
                     <text
@@ -94,6 +94,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                 {renderYAxis()}
 
                 {totalTokens.map((total, i) => {
+                    let displayTotal = Math.trunc(total / 1e6)
                     return (
                         <g key={i} className="barHolder">
                             <g
@@ -103,7 +104,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                             >
                                 <rect rx="5" width="35" height="22" />
                                 <text x="5" y="16">
-                                    {numeral(total).format('0a')}
+                                    {numeral(displayTotal).format('0a')}
                                 </text>
                             </g>
                             <rect
