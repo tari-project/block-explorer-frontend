@@ -24,7 +24,6 @@ export function fetchBlocks(limit: number) {
 export function fetchMetadata() {
     return function (dispatch) {
         fetchChainMetadata().then((metadata) => {
-            console.log(metadata);
             dispatch(addMetadata(metadata));
         });
     };
