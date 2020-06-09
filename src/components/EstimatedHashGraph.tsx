@@ -13,7 +13,10 @@ function EstimatedHashGraph({ difficulties }: Props) {
         difficultyArray.push({ y: estimatedHashRate, x: x });
     });
 
-    return <PolygonGraph data={difficultyArray as any[]} width={500} height={220} yAxisTicks={6} />;
+    const yAxisLabel = 'difficulty';
+    const xAxisLabel = 'height from tip';
+
+    return (<PolygonGraph data={difficultyArray as any[]} width={500} height={220} yAxisTicks={6} yAxisLabel={yAxisLabel} xAxisLabel={xAxisLabel} />);
 }
 
 const mapStateToProps = (state) => ({

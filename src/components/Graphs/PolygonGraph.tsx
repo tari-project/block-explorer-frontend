@@ -9,9 +9,11 @@ interface Props {
     width: number;
     height: number;
     yAxisTicks: number;
+    yAxisLabel: string;
+    xAxisLabel: string;
 }
 
-export default function PolygonGraph({ width, height, yAxisTicks, data }: Props) {
+export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLabel, yAxisLabel }: Props) {
     const YHighestNum = Math.max(...data.map((o) => o.y));
     const XHighestNumber = Math.max(...data.map((o) => o.x));
 
@@ -92,6 +94,11 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
                 subTitle={`How difficult it is to mine a new block for the Tari blockchain.`}
             />
             <svg className="networkDifficultyPaths" height={height} width={width}>
+                <g className="yAxisLabel">
+                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 12 }} fill="#bababa" x={-130} y={-60}>
+                        {yAxisLabel}
+                    </text>
+                </g>
                 {renderYAxis()}
                 <path style={{ fill: 'none', stroke: '#352583', strokeWidth: 2 }} d={lineGenerator(transformedData)} />
                 <path style={{ fill: '#F0EFF6', opacity: 0.5, strokeWidth: 0 }} d={areaGenerator(transformedData)} />
@@ -112,6 +119,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
             <div className="xAxisDate" style={{ width: width - 50 }}>
                 {renderXAxis()}
             </div>
+            <div className="xAxisLabel">{xAxisLabel}</div>
         </div>
     );
 }
