@@ -1,43 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import './SimpleBarGraph.css';
 import { scaleLinear } from 'd3-scale';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
-import { fetchTokensInCirculation } from '../../helpers/api';
 import numeral from 'numeral';
 import config from '../../config';
 const { tokenName } = config;
 
 interface Props {
+    data: any[];
     width: number;
     height: number;
     yAxisTicks: number;
 }
 
-export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
-    const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
-
-    const loadCirculationData = useCallback(async () => {
-        const tokenData = await fetchTokensInCirculation();
-        const totalsArr: number[] = [];
-
-        tokenData.map((token) => {
-            const { tokensInCirculation } = token;
-            return totalsArr.push(tokensInCirculation);
-        });
-
-        setTotalTokens(totalsArr);
-    }, []);
-
-    useEffect(() => {
-        loadCirculationData().then((r) => {});
-    }, [loadCirculationData]);
-
+export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Props) {
+    const divisionAmount = 1e12;
     const yScale = scaleLinear()
-        .domain([0, Math.max(...totalTokens)])
+        .domain([0, Math.max(...data)])
         .range([height, 0]);
-    const barWidth = Math.floor(width / totalTokens.length);
+    const barWidth = Math.floor(width / data.length);
 
-    const highestNum = Math.max(...totalTokens);
+    const highestNum = Math.max(...data);
 
     function round5({ num }: { num: any }) {
         return Math.ceil(num / 5) * 5;
@@ -50,7 +33,7 @@ export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = round5({ num: (highestNum / yAxisTicks) * ticks });
+            const displayNum = Math.trunc(round5({ num: (highestNum / yAxisTicks) * ticks }) / divisionAmount);
             nums.push(
                 <g key={i}>
                     <text
@@ -79,8 +62,9 @@ export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
         }
         return nums;
     }
-    // eslint-disable-next-line no-undef
+
     const title = `Circulating ${tokenName}`;
+    const yAxisLabel = `million ${tokenName}`;
     return (
         <div className="graphWrapper">
             <PlainGraphTitle
@@ -88,10 +72,17 @@ export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
                 subTitle={`Total number of mined ${tokenName} circulating on the network.`}
             />
 
+            {/*<div className="yAxisLabel">{yAxisLabel}</div>*/}
             <svg className="circulateSimpleBars" height={height} width={width}>
-                {renderYAxis()}
+                <g className="yAxisLabel">
+                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 12 }} fill="#bababa" x={-130} y={-60}>
+                        {yAxisLabel}
+                    </text>
+                </g>
 
-                {totalTokens.map((total, i) => {
+                {renderYAxis()}
+                {data.map((total, i) => {
+                    let displayTotal = Math.trunc(total / divisionAmount);
                     return (
                         <g key={i} className="barHolder">
                             <g
@@ -101,7 +92,7 @@ export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
                             >
                                 <rect rx="5" width="35" height="22" />
                                 <text x="5" y="16">
-                                    {numeral(total).format('0a')}
+                                    {numeral(displayTotal).format('0a')}
                                 </text>
                             </g>
                             <rect

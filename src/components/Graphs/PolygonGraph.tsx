@@ -9,21 +9,13 @@ interface Props {
     width: number;
     height: number;
     yAxisTicks: number;
+    yAxisLabel: string;
+    xAxisLabel: string;
 }
 
-export default function PolygonGraph({ width, height, yAxisTicks, data }: Props) {
-    const YHighestNum = Math.max.apply(
-        Math,
-        data.map(function (o) {
-            return o.y;
-        })
-    );
-    const XHighestNumber = Math.max.apply(
-        Math,
-        data.map(function (o) {
-            return o.x;
-        })
-    );
+export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLabel, yAxisLabel }: Props) {
+    const YHighestNum = Math.max(...data.map((o) => o.y));
+    const XHighestNumber = Math.max(...data.map((o) => o.x));
 
     const xScale = d3.scaleLinear().domain([0, XHighestNumber]).range([0, width]);
     const yScale = d3.scaleLinear().domain([0, YHighestNum]).range([height, 0]);
@@ -102,6 +94,11 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
                 subTitle={`How difficult it is to mine a new block for the Tari blockchain.`}
             />
             <svg className="networkDifficultyPaths" height={height} width={width}>
+                <g className="yAxisLabel">
+                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 12 }} fill="#bababa" x={-130} y={-60}>
+                        {yAxisLabel}
+                    </text>
+                </g>
                 {renderYAxis()}
                 <path style={{ fill: 'none', stroke: '#352583', strokeWidth: 2 }} d={lineGenerator(transformedData)} />
                 <path style={{ fill: '#F0EFF6', opacity: 0.5, strokeWidth: 0 }} d={areaGenerator(transformedData)} />
@@ -122,6 +119,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
             <div className="xAxisDate" style={{ width: width - 50 }}>
                 {renderXAxis()}
             </div>
+            <div className="xAxisLabel">{xAxisLabel}</div>
         </div>
     );
 }
