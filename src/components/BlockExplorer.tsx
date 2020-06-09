@@ -1,5 +1,4 @@
 import React from 'react';
-import BlockCard from './BlockCard';
 import './BlockExplorer.css';
 import SimpleBarGraph from './Graphs/SimpleBarGraph';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';

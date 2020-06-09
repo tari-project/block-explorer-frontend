@@ -1,12 +1,13 @@
 import numeral from 'numeral';
-import React, { useCallback, useEffect, useState } from 'react';
-import { fetchChainMetadata } from '../helpers/api';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../assets/logo.svg';
+import { connect } from 'react-redux';
 import './TopBar.css';
 import TopBarItem from './TopBarItem';
 import TopBarSearch from './TopBarSearch';
+import { ChainMetadata } from '../helpers/api';
 
-export default function TopBar() {
+function TopBar({ metadata }: { metadata: ChainMetadata }) {
     const [blockHeight, setBlockHeight] = useState('...');
     const [totalTransactions, setTotalTransactions] = useState('...');
     const [averageTxPerSecond, setAverageTxPerSecond] = useState('...');
@@ -14,9 +15,7 @@ export default function TopBar() {
     const [averageFee, setAverageFee] = useState('...');
     const [averageBlockTime, setAverageBlockTime] = useState('...');
 
-    const loadMetadata = useCallback(async () => {
-        const metadata = await fetchChainMetadata();
-
+    useEffect(() => {
         const formattedBlockHeight = numeral(metadata.blockHeight).format('0,0');
         setBlockHeight(formattedBlockHeight);
 
@@ -27,7 +26,7 @@ export default function TopBar() {
         const formattedCalcAverageTxPerSecond = numeral(calcAverageTxPerSecond).format('0.0');
         setAverageTxPerSecond(formattedCalcAverageTxPerSecond);
 
-        const formattedHashRate = numeral(metadata.averageDifficulty.estimatedHashRate).format('0.0 a') + 'H';
+        const formattedHashRate = numeral(metadata.averageDifficulty?.estimatedHashRate).format('0.0 a') + 'H';
         setHashRate(formattedHashRate);
 
         const formattedAverageFee = numeral(metadata.averageFee).format('0,0');
@@ -35,11 +34,7 @@ export default function TopBar() {
 
         const formattedAverageBlockTime = numeral(metadata.avgBlockTimes).format('0');
         setAverageBlockTime(formattedAverageBlockTime);
-    }, []);
-
-    useEffect(() => {
-        loadMetadata();
-    }, [loadMetadata]);
+    }, [metadata]);
 
     return (
         <div className="TopBar">
@@ -60,3 +55,8 @@ export default function TopBar() {
         </div>
     );
 }
+
+const mapStateToProps = (state) => ({
+    metadata: state.metadata
+});
+export default connect(mapStateToProps)(TopBar);
