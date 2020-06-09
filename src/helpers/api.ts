@@ -9,7 +9,8 @@ export interface ChainMetadata {
     averageDifficulty: {
         estimatedHashRate: number;
     };
-    avgBlockTimes: number;
+    averageBlockTimes: number;
+    averageTxPerSecond: number;
 }
 
 export async function fetchChainMetadata(): Promise<ChainMetadata> {
