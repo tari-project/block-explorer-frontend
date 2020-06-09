@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import BlockExplorer from './components/BlockExplorer';
 import SideBar from './components/SideBar';
@@ -8,8 +8,7 @@ import store from './store';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 import SingleBlock from "./components/SingleBlock";
 

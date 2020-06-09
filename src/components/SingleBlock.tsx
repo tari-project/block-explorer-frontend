@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './SingleBlock.css';
-import ClusterGraph from "./Graphs/ClusterGraph";
 import {
     useParams
 } from "react-router-dom";
@@ -23,13 +22,13 @@ export default function SingleBlock() {
                     setblockHeader(data.block.header);
                     setblockPow(data.block.header.pow);
                     setblockBody(data.block.body);
-                    return;
+                    return data;
                 });
             });
         } catch (e) {
             console.error(e);
         }
-    }, []);
+    }, [id]);
 
     const singleBlockDataArray: any[] = [];
 

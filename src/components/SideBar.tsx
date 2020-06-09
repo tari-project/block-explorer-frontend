@@ -1,7 +1,4 @@
 import React from "react";
-import { ReactComponent as Blocks } from "../assets/blocks.svg";
-import { ReactComponent as Bubbles } from "../assets/bubbles.svg";
-import { ReactComponent as Cube } from "../assets/cube.svg";
 import "./SideBar.css";
 
 export default function SideBar() {

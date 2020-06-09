@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ClusterGraph from "./Graphs/ClusterGraph";
 
 interface Props {
