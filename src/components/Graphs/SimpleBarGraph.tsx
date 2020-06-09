@@ -53,7 +53,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = Math.trunc(round5({ num: (highestNum / yAxisTicks) * ticks })/ divisionAmount);
+            const displayNum = Math.trunc(round5({ num: (highestNum / yAxisTicks) * ticks }) / divisionAmount);
             nums.push(
                 <g key={i}>
                     <text
@@ -84,6 +84,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
     }
     // eslint-disable-next-line no-undef
     const title = `Circulating ${tokenName}`;
+    const yAxisLabel = `million ${tokenName}`;
     return (
         <div className="graphWrapper">
             <PlainGraphTitle
@@ -91,11 +92,18 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                 subTitle={`Total number of mined ${tokenName} circulating on the network.`}
             />
 
+            {/*<div className="yAxisLabel">{yAxisLabel}</div>*/}
             <svg className="circulateSimpleBars" height={height} width={width}>
+                <g className="yAxisLabel">
+                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 12 }} fill="#bababa" x={-130} y={-60}>
+                        {yAxisLabel}
+                    </text>
+                </g>
+
                 {renderYAxis()}
 
                 {totalTokens.map((total, i) => {
-                    let displayTotal = Math.trunc(total / divisionAmount)
+                    let displayTotal = Math.trunc(total / divisionAmount);
                     return (
                         <g key={i} className="barHolder">
                             <g
