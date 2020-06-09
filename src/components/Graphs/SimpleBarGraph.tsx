@@ -8,23 +8,21 @@ import config from '../../config';
 const { tokenName } = config;
 
 interface Props {
-    data: number[];
     width: number;
     height: number;
     yAxisTicks: number;
 }
-export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Props) {
+
+export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
     const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
 
     const loadCirculationData = useCallback(async () => {
         const tokenData = await fetchTokensInCirculation();
-        const heightsArr: any[] = [];
         const totalsArr: number[] = [];
 
         tokenData.map((token) => {
-            const { height, tokensInCirculation } = token;
-            heightsArr.push(height);
-            totalsArr.push(tokensInCirculation);
+            const { tokensInCirculation } = token;
+            return totalsArr.push(tokensInCirculation);
         });
 
         setTotalTokens(totalsArr);
