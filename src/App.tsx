@@ -11,7 +11,7 @@ export default function App() {
         const sockets = setupWebsockets(store);
         return function cleanup() {
             sockets.close();
-        }
+        };
     }, []);
 
     const [estimatedHashRate, setTotalDifficulty] = useState(([] as unknown) as any);
