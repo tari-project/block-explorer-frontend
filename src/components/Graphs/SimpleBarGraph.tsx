@@ -12,6 +12,7 @@ interface Props {
     height: number;
     yAxisTicks: number;
 }
+
 export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Props) {
     const yScale = scaleLinear()
         .domain([0, Math.max(...data)])

@@ -30,3 +30,9 @@
     align-self: center;
     width: 100% !important;
 }
+
+.networkDifficultyPaths {
+    padding: 20px 60px 0 50px;
+    overflow: overlay;
+    margin: 20px;
+}

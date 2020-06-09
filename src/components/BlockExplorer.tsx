@@ -1,7 +1,7 @@
 import React from 'react';
 import './BlockExplorer.css';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
-import PolygonGraph from './Graphs/PolygonGraph';
+import EstimatedHashGraph from './EstimatedHashGraph';
 import Hero from './Hero';
 import HeroGraph from './Graphs/HeroGraph';
 import LatestBlocks from './LatestBlocks';
@@ -46,7 +46,7 @@ const hashRateData = [
     120
 ];
 
-export default function BlockExplorer() {
+export default function BlockExplorer({ difficulty }: { difficulty: any[] }) {
     return (
         <div className="BlockExplorer">
             <Hero>
@@ -59,9 +59,8 @@ export default function BlockExplorer() {
                 <LatestBlocks />
             </Hero>
             <div className="twoCol">
-                <PolygonGraph width={500} height={220} yAxisTicks={6} data={hashRateData} />
-
                 <CirculatingTariGraph />
+                <EstimatedHashGraph data={difficulty} />
             </div>
         </div>
     );
