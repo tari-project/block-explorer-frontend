@@ -65,3 +65,9 @@
     display: flex;
     color: #adadad;
 }
+
+.yAxisLabel {
+    font-family: Avenir, sans-serif;
+    font-size: 14px;
+    transform: rotate(270deg);
+}

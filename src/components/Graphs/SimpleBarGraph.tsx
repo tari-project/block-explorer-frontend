@@ -14,6 +14,7 @@ interface Props {
 }
 
 export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Props) {
+    const divisionAmount = 1e12;
     const yScale = scaleLinear()
         .domain([0, Math.max(...data)])
         .range([height, 0]);
@@ -32,7 +33,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = round5({ num: (highestNum / yAxisTicks) * ticks });
+            const displayNum = Math.trunc(round5({ num: (highestNum / yAxisTicks) * ticks }) / divisionAmount);
             nums.push(
                 <g key={i}>
                     <text
@@ -63,6 +64,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
     }
 
     const title = `Circulating ${tokenName}`;
+    const yAxisLabel = `million ${tokenName}`;
     return (
         <div className="graphWrapper">
             <PlainGraphTitle
@@ -70,10 +72,17 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                 subTitle={`Total number of mined ${tokenName} circulating on the network.`}
             />
 
+            {/*<div className="yAxisLabel">{yAxisLabel}</div>*/}
             <svg className="circulateSimpleBars" height={height} width={width}>
-                {renderYAxis()}
+                <g className="yAxisLabel">
+                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 12 }} fill="#bababa" x={-130} y={-60}>
+                        {yAxisLabel}
+                    </text>
+                </g>
 
+                {renderYAxis()}
                 {data.map((total, i) => {
+                    let displayTotal = Math.trunc(total / divisionAmount);
                     return (
                         <g key={i} className="barHolder">
                             <g
@@ -83,7 +92,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                             >
                                 <rect rx="5" width="35" height="22" />
                                 <text x="5" y="16">
-                                    {numeral(total).format('0a')}
+                                    {numeral(displayTotal).format('0a')}
                                 </text>
                             </g>
                             <rect

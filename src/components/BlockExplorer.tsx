@@ -59,8 +59,8 @@ export default function BlockExplorer({ difficulty }: { difficulty: any[] }) {
                 <LatestBlocks />
             </Hero>
             <div className="twoCol">
-                <CirculatingTariGraph />
                 <EstimatedHashGraph data={difficulty} />
+                <CirculatingTariGraph />
             </div>
         </div>
     );
