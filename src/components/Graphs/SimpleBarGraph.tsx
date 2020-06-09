@@ -1,44 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import './SimpleBarGraph.css';
 import { scaleLinear } from 'd3-scale';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
-import { fetchTokensInCirculation } from '../../helpers/api';
 import numeral from 'numeral';
 import config from '../../config';
 const { tokenName } = config;
 
 interface Props {
+    data: any[];
     width: number;
     height: number;
     yAxisTicks: number;
 }
 
-export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
-    const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
+export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Props) {
     const divisionAmount = 1e12;
-
-    const loadCirculationData = useCallback(async () => {
-        const tokenData = await fetchTokensInCirculation();
-        const totalsArr: number[] = [];
-
-        tokenData.map((token) => {
-            const { tokensInCirculation } = token;
-            return totalsArr.push(tokensInCirculation);
-        });
-
-        setTotalTokens(totalsArr);
-    }, []);
-
-    useEffect(() => {
-        loadCirculationData().then((r) => {});
-    }, [loadCirculationData]);
-
     const yScale = scaleLinear()
-        .domain([0, Math.max(...totalTokens)])
+        .domain([0, Math.max(...data)])
         .range([height, 0]);
-    const barWidth = Math.floor(width / totalTokens.length);
+    const barWidth = Math.floor(width / data.length);
 
-    const highestNum = Math.max(...totalTokens);
+    const highestNum = Math.max(...data);
 
     function round5({ num }: { num: any }) {
         return Math.ceil(num / 5) * 5;
@@ -80,7 +62,7 @@ export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
         }
         return nums;
     }
-    // eslint-disable-next-line no-undef
+
     const title = `Circulating ${tokenName}`;
     const yAxisLabel = `million ${tokenName}`;
     return (
@@ -99,8 +81,7 @@ export default function SimpleBarGraph({ width, height, yAxisTicks }: Props) {
                 </g>
 
                 {renderYAxis()}
-
-                {totalTokens.map((total, i) => {
+                {data.map((total, i) => {
                     let displayTotal = Math.trunc(total / divisionAmount);
                     return (
                         <g key={i} className="barHolder">

@@ -1,11 +1,11 @@
 import React from 'react';
 import './BlockExplorer.css';
-import SimpleBarGraph from './Graphs/SimpleBarGraph';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import EstimatedHashGraph from './EstimatedHashGraph';
 import Hero from './Hero';
 import HeroGraph from './Graphs/HeroGraph';
 import LatestBlocks from './LatestBlocks';
+import CirculatingTokenGraph from "./CirculatingTokenGraph";
 
 const hashRateData = [
     50,
@@ -60,7 +60,7 @@ export default function BlockExplorer({ difficulty }: { difficulty: any[] }) {
             </Hero>
             <div className="twoCol">
                 <EstimatedHashGraph data={difficulty} />
-                <SimpleBarGraph width={500} height={220} yAxisTicks={6} />
+                <CirculatingTokenGraph />
             </div>
         </div>
     );
