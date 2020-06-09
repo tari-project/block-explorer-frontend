@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {fetchTokensInCirculation} from "../helpers/api";
-import SimpleBarGraph from "./Graphs/SimpleBarGraph";
+import React, { useCallback, useEffect, useState } from 'react';
+import { fetchTokensInCirculation } from '../helpers/api';
+import SimpleBarGraph from './Graphs/SimpleBarGraph';
 
 export default function CirculatingTokenGraph() {
     const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
@@ -18,11 +18,8 @@ export default function CirculatingTokenGraph() {
     }, []);
 
     useEffect(() => {
-        loadCirculationData().then((r) => {});
+        loadCirculationData();
     }, [loadCirculationData]);
 
-
-    return (
-        <SimpleBarGraph width={500} height={220} yAxisTicks={6} data={totalTokens} />
-    )
+    return <SimpleBarGraph width={500} height={220} yAxisTicks={6} data={totalTokens} />;
 }

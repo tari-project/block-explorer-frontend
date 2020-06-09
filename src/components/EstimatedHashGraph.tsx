@@ -8,13 +8,13 @@ interface Props {
 
 function EstimatedHashGraph({ difficulties }: Props) {
     const difficultyArray: any[] = [];
-    difficulties.forEach((item, x) => {
-        const { estimated_hash_rate: estimatedHashRate } = item;
-        difficultyArray.push({ y: estimatedHashRate, x: x });
+    difficulties.forEach((item) => {
+        const { estimated_hash_rate: estimatedHashRate, height } = item;
+        difficultyArray.push({ y: estimatedHashRate, x: +height });
     });
 
     const yAxisLabel = 'difficulty';
-    const xAxisLabel = 'height from tip';
+    const xAxisLabel = 'block height';
 
     return (
         <PolygonGraph

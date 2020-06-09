@@ -33,7 +33,8 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = Math.trunc(round5({ num: (highestNum / yAxisTicks) * ticks }) / divisionAmount);
+            const num = highestNum === Number.NEGATIVE_INFINITY ? 0 : (highestNum / yAxisTicks) * ticks;
+            const displayNum = Math.trunc(round5({ num }) / divisionAmount);
             nums.push(
                 <g key={i}>
                     <text
@@ -43,7 +44,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                         x={-50}
                         y={(height / yAxisTicks) * i}
                     >
-                        {numeral(displayNum).format('0a')}
+                        {numeral(displayNum || 0).format('0a')}
                     </text>
 
                     <line
@@ -82,7 +83,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
 
                 {renderYAxis()}
                 {data.map((total, i) => {
-                    let displayTotal = Math.trunc(total / divisionAmount);
+                    const displayTotal = Math.trunc(total / divisionAmount);
                     return (
                         <g key={i} className="barHolder">
                             <g
@@ -92,7 +93,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                             >
                                 <rect rx="5" width="35" height="22" />
                                 <text x="5" y="16">
-                                    {numeral(displayTotal).format('0a')}
+                                    {numeral(displayTotal || 0).format('0a')}
                                 </text>
                             </g>
                             <rect
