@@ -54,7 +54,7 @@
 .xAxisDate {
     display: flex;
     justify-items: center;
-    margin: 20px 20px 20px 70px;
+    margin: 20px 20px 8px 70px;
     justify-content: space-between;
     color: #adadad;
 }
@@ -70,4 +70,11 @@
     font-family: Avenir, sans-serif;
     font-size: 14px;
     transform: rotate(270deg);
+}
+
+.xAxisLabel {
+    font-family: Avenir, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: #bababa;
 }
