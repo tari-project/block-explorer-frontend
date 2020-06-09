@@ -16,8 +16,8 @@ interface Props {
 export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLabel, yAxisLabel }: Props) {
     const YHighestNum = Math.max(...data.map((o) => o.y));
     const XHighestNumber = Math.max(...data.map((o) => o.x));
-
-    const xScale = d3.scaleLinear().domain([0, XHighestNumber]).range([0, width]);
+    const XLowestNumber = Math.min(...data.map((o) => o.x));
+    const xScale = d3.scaleLinear().domain([XLowestNumber, XHighestNumber]).range([0, width]);
     const yScale = d3.scaleLinear().domain([0, YHighestNum]).range([height, 0]);
     const transformedData = data.map((d, i) => {
         return {
@@ -44,7 +44,8 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = round5({ num: (YHighestNum / yAxisTicks) * ticks });
+            const num = YHighestNum === Number.NEGATIVE_INFINITY ? 0 : (YHighestNum / yAxisTicks) * ticks;
+            const displayNum = round5({ num });
             nums.push(
                 <g key={i}>
                     <text
@@ -76,11 +77,10 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
 
     function renderXAxis() {
         const nums: Array<any> = [];
-
-        for (let i = 0; i < data.length + 1; i += 10) {
+        for (let i = 0; i < data.length; i += 10) {
             nums.push(
                 <div key={i} className="tick">
-                    {i}
+                    {data[i].x}
                 </div>
             );
         }
@@ -109,7 +109,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
                             <g className="tooltip" opacity="0.9">
                                 <rect x={item.x - 20} y={item.y - 20} width="35" height="22" />
                                 <text x={item.x - 15} y={item.y - 5}>
-                                    {numeral(data[i].y).format('0a')}
+                                    {numeral(data[i].y || 0).format('0a')}
                                 </text>
                             </g>
                         </g>
