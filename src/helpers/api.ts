@@ -1,8 +1,8 @@
 import config from '../config';
-import { addBlock } from '../store/actions';
+import { addBlock, addMetadata } from '../store/actions';
 
 const { apiUrl, wsUrl } = config;
-interface ChainMetadata {
+export interface ChainMetadata {
     blockHeight: number;
     totalTransactions: number;
     averageFee: number;
@@ -47,7 +47,14 @@ export function setupWebsockets(store) {
     const ws = new WebSocket(wsUrl);
     ws.onmessage = function (event) {
         const msg: any = JSON.parse(event.data);
-        store.dispatch(addBlock([msg.data] as any));
+        switch (msg.type) {
+            case 'newBlock':
+                store.dispatch(addBlock([msg.data] as any));
+                break;
+            case 'metadata':
+                store.dispatch(addMetadata(msg.data as any));
+                break;
+        }
     };
     ws.onclose = function (e) {
         setTimeout(() => {
