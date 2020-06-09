@@ -22,8 +22,7 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
         const formattedTotalTransactions = numeral(metadata.totalTransactions).format('0,0');
         setTotalTransactions(formattedTotalTransactions);
 
-        const calcAverageTxPerSecond = metadata.totalTransactions / metadata.avgBlockTimes;
-        const formattedCalcAverageTxPerSecond = numeral(calcAverageTxPerSecond).format('0.0');
+        const formattedCalcAverageTxPerSecond = numeral(metadata.averageTxPerSecond).format('0.0');
         setAverageTxPerSecond(formattedCalcAverageTxPerSecond);
 
         const formattedHashRate = numeral(metadata.averageDifficulty?.estimatedHashRate).format('0.0 a') + 'H';
@@ -32,7 +31,7 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
         const formattedAverageFee = numeral(metadata.averageFee).format('0,0');
         setAverageFee(formattedAverageFee);
 
-        const formattedAverageBlockTime = numeral(metadata.avgBlockTimes).format('0');
+        const formattedAverageBlockTime = numeral(metadata.averageBlockTimes).format('0');
         setAverageBlockTime(formattedAverageBlockTime);
     }, [metadata]);
 
