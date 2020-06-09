@@ -80,3 +80,34 @@
 .latestBlocksContainer .BlockCard {
     margin-right: 30px;
 }
+
+.slideIn:first-child {
+    animation: slideInBounce 1.25s ease-in-out;
+    position: relative;
+}
+
+.slideIn {
+    animation: slideOff 1s ease-in-out;
+    position: relative;
+}
+
+@keyframes slideInBounce {
+    0% {
+        top: -350px;
+    }
+    90% {
+        top: 10px;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+@keyframes slideOff {
+    0% {
+        left: -415px;
+    }
+    100% {
+        left: 0;
+    }
+}
