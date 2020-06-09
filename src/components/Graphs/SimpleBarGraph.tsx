@@ -102,7 +102,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                                 transform={`translate(${i * barWidth - 30},${yScale(total) - 30})`}
                                 opacity="0.9"
                             >
-                                <rect rx="5" width="35" height="22" />
+                                <rect rx="5" width="40" height="22" />
                                 <text x="5" y="16">
                                     {numeral(displayTotal).format('0a')}
                                 </text>
