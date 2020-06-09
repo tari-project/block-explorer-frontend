@@ -2,48 +2,10 @@ import React from 'react';
 import './BlockExplorer.css';
 import SimpleBarGraph from './Graphs/SimpleBarGraph';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
-import PolygonGraph from './Graphs/PolygonGraph';
+import EstimatedHashGraph from './EstimatedHashGraph';
 import Hero from './Hero';
 import HeroGraph from './Graphs/HeroGraph';
 import LatestBlocks from './LatestBlocks';
-const barGraphData = [
-    2,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    11,
-    14,
-    15,
-    16,
-    20,
-    20,
-    22,
-    23,
-    25,
-    27,
-    29,
-    30,
-    31,
-    32,
-    33,
-    33,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    40,
-    42,
-    44,
-    44,
-    46,
-    47
-];
 
 const hashRateData = [
     50,
@@ -97,8 +59,7 @@ export default function BlockExplorer({ difficulty }: { difficulty: any[] }) {
                 <LatestBlocks />
             </Hero>
             <div className="twoCol">
-                <PolygonGraph width={500} height={220} yAxisTicks={6} data={difficulty} />
-
+                <EstimatedHashGraph data={difficulty} />
                 <SimpleBarGraph width={500} height={220} yAxisTicks={6} />
             </div>
         </div>

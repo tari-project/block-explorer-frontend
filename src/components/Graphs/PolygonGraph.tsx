@@ -12,24 +12,25 @@ interface Props {
 }
 
 export default function PolygonGraph({ width, height, yAxisTicks, data }: Props) {
-    let difficultyArray: any[] = [];
-    data.map((item, i) => {
-        const { estimated_hash_rate } = item;
-        return difficultyArray.push({estimated_hash_rate, i});
-    });
+    const YHighestNum = Math.max.apply(
+        Math,
+        data.map(function (o) {
+            return o.y;
+        })
+    );
+    const XHighestNumber = Math.max.apply(
+        Math,
+        data.map(function (o) {
+            return o.x;
+        })
+    );
 
-    const estimateHashHighestNum = Math.max.apply(Math, difficultyArray.map(function(o) { return o.estimated_hash_rate; }));
-    const iHighestNumber = Math.max.apply(Math, difficultyArray.map(function(o) { return o.i; }));
-
-    const xScale = d3
-        .scaleLinear()
-        .domain([0, iHighestNumber])
-        .range([0, width]);
-    const yScale = d3.scaleLinear().domain([0, estimateHashHighestNum]).range([height, 0]);
-    const transformedData = difficultyArray.map((d, i) => {
+    const xScale = d3.scaleLinear().domain([0, XHighestNumber]).range([0, width]);
+    const yScale = d3.scaleLinear().domain([0, YHighestNum]).range([height, 0]);
+    const transformedData = data.map((d, i) => {
         return {
-            x: xScale(d.i),
-            y: yScale(d.estimated_hash_rate)
+            x: xScale(d.x),
+            y: yScale(d.y)
         };
     });
 
@@ -38,10 +39,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
 
     const lineGenerator: any = d3.line().x(xAccessor).y(yAccessor);
 
-    const areaGenerator: any = d3.area()
-        .x(xAccessor)
-        .y(yAccessor)
-        .y1(height);
+    const areaGenerator: any = d3.area().x(xAccessor).y(yAccessor).y1(height);
 
     function round5({ num }: { num: any }) {
         return Math.ceil(num / 5) * 5;
@@ -54,11 +52,11 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = round5({ num: (estimateHashHighestNum / yAxisTicks) * ticks });
+            const displayNum = round5({ num: (YHighestNum / yAxisTicks) * ticks });
             nums.push(
                 <g key={i}>
                     <text
-                        style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14, display: "block" }}
+                        style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14, display: 'block' }}
                         key={`${i}-text`}
                         fill="#adadad"
                         x={-50}
@@ -87,10 +85,10 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
     function renderXAxis() {
         const nums: Array<any> = [];
 
-        for (let i = 0; i < difficultyArray.length + 1; i+=10) {
+        for (let i = 0; i < data.length + 1; i += 10) {
             nums.push(
                 <div key={i} className="tick">
-                        {i}
+                    {i}
                 </div>
             );
         }
@@ -107,23 +105,14 @@ export default function PolygonGraph({ width, height, yAxisTicks, data }: Props)
                 {renderYAxis()}
                 <path style={{ fill: 'none', stroke: '#352583', strokeWidth: 2 }} d={lineGenerator(transformedData)} />
                 <path style={{ fill: '#F0EFF6', opacity: 0.5, strokeWidth: 0 }} d={areaGenerator(transformedData)} />
-                {transformedData.map((hash, i) => {
-                    return(
+                {transformedData.map((item, i) => {
+                    return (
                         <g key={i} className="barHolder">
-                            <circle
-                                cx={hash.x}
-                                cy={hash.y}
-                                r="10"
-                                fill="#352583"
-                                fillOpacity="0"
-                            />
-                            <g
-                                className="tooltip"
-                                opacity="0.9"
-                            >
-                                <rect x={hash.x - 20} y={hash.y - 20} width="35" height="22" />
-                                <text x={hash.x - 15} y={hash.y - 5}>
-                                    {numeral(difficultyArray[i].estimated_hash_rate).format('0a')}
+                            <circle cx={item.x} cy={item.y} r="10" fill="#352583" fillOpacity="0" />
+                            <g className="tooltip" opacity="0.9">
+                                <rect x={item.x - 20} y={item.y - 20} width="35" height="22" />
+                                <text x={item.x - 15} y={item.y - 5}>
+                                    {numeral(data[i].y).format('0a')}
                                 </text>
                             </g>
                         </g>
