@@ -42,6 +42,10 @@
     visibility: visible;
 }
 
+.overviewBars.first {
+    transition: all 3s ease-in-out;
+}
+
 #kernels .tooltip {
     visibility: hidden;
     transition: visibility 0.25s ease-in-out;
@@ -85,4 +89,17 @@
     font-size: 12px;
     font-family: Avenir, sans-serif;
     font-weight: bold;
+}
+
+.animate:first-child {
+    animation: slide 1.5s linear;
+}
+
+@keyframes slide {
+    from {
+        transform: rotate(5deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
 }

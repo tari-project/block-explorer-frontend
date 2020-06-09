@@ -1,6 +1,8 @@
-const apiURL: string = process.env.REACT_APP_EXPLORER_API_URL || '';
+import config from '../config';
+import { addBlock, addMetadata } from '../store/actions';
 
-interface ChainMetadata {
+const { apiUrl, wsUrl } = config;
+export interface ChainMetadata {
     blockHeight: number;
     totalTransactions: number;
     averageFee: number;
@@ -11,7 +13,7 @@ interface ChainMetadata {
 }
 
 export async function fetchChainMetadata(): Promise<ChainMetadata> {
-    const response = await fetch(`${apiURL}/chain-metadata`);
+    const response = await fetch(`${apiUrl}/chain-metadata`);
     return await response.json();
 }
 
@@ -20,19 +22,11 @@ interface BlocksData {
 }
 
 export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Promise<BlocksData> {
-    const response = await fetch(`${apiURL}/blocks?limit=${limit}&sort=${sort}&page=${page}`);
+    const response = await fetch(`${apiUrl}/blocks?limit=${limit}&sort=${sort}&page=${page}`);
     const blocks = await response.json();
     if (sort === 'desc') {
         blocks.blocks.sort((a, b) => b.block.header.height - a.block.header.height);
     }
-    blocks.blocks.forEach((block, i) => {
-        let nextTimestamp = block.block.header.timestamp.seconds;
-        if (blocks.blocks.length > i + 1) {
-            const next = blocks.blocks[i + 1];
-            nextTimestamp = next.block.header.timestamp.seconds;
-        }
-        block.block._miningTime = block.block.header.timestamp.seconds - nextTimestamp;
-    });
     return blocks;
 }
 
@@ -44,9 +38,33 @@ interface TokensInCirculation {
 }
 
 export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Promise<TokensInCirculation> {
-    const response = await fetch(`${apiURL}/tokens-in-circulation?from_tip=${fromTip}&step=${step}`);
+    const response = await fetch(`${apiUrl}/tokens-in-circulation?from_tip=${fromTip}&step=${step}`);
     const tokens = await response.json();
     return tokens;
+}
+
+export function setupWebsockets(store) {
+    const ws = new WebSocket(wsUrl);
+    ws.onmessage = function (event) {
+        const msg: any = JSON.parse(event.data);
+        switch (msg.type) {
+            case 'newBlock':
+                store.dispatch(addBlock([msg.data] as any));
+                break;
+            case 'metadata':
+                store.dispatch(addMetadata(msg.data as any));
+                break;
+        }
+    };
+    ws.onclose = function (e) {
+        setTimeout(() => {
+            setupWebsockets(store);
+        }, 5000);
+    };
+    ws.onerror = function (e) {
+        console.log('WebSocket error', e);
+    };
+    return ws;
 }
 
 interface NetworkDifficultyEstimatedHash {
@@ -57,6 +75,6 @@ interface NetworkDifficultyEstimatedHash {
 interface NetworkDifficultyEstimatedHashes extends Array<NetworkDifficultyEstimatedHash>{}
 
 export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimatedHashes> {
-    const response = await fetch(`${apiURL}/network-difficulty`);
+    const response = await fetch(`${apiUrl}/network-difficulty`);
     return await response.json();
 }
