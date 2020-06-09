@@ -15,6 +15,7 @@ interface Props {
 }
 export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Props) {
     const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
+    const divisionAmount = 1e12;
 
     const loadCirculationData = useCallback(async () => {
         const tokenData = await fetchTokensInCirculation();
@@ -52,7 +53,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
-            const displayNum = Math.trunc(round5({ num: (highestNum / yAxisTicks) * ticks })/ 1e6);
+            const displayNum = Math.trunc(round5({ num: (highestNum / yAxisTicks) * ticks })/ divisionAmount);
             nums.push(
                 <g key={i}>
                     <text
@@ -94,7 +95,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                 {renderYAxis()}
 
                 {totalTokens.map((total, i) => {
-                    let displayTotal = Math.trunc(total / 1e6)
+                    let displayTotal = Math.trunc(total / divisionAmount)
                     return (
                         <g key={i} className="barHolder">
                             <g
@@ -102,7 +103,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                                 transform={`translate(${i * barWidth - 30},${yScale(total) - 30})`}
                                 opacity="0.9"
                             >
-                                <rect rx="5" width="40" height="22" />
+                                <rect rx="5" width="35" height="22" />
                                 <text x="5" y="16">
                                     {numeral(displayTotal).format('0a')}
                                 </text>
