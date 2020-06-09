@@ -3,7 +3,7 @@ import './App.css';
 import BlockExplorer from './components/BlockExplorer';
 import SideBar from './components/SideBar';
 import TopBar from './components/TopBar';
-import { fetchNetworkDifficulty, setupWebsockets } from './helpers/api';
+import { setupWebsockets } from './helpers/api';
 import store from './store';
 
 export default function App() {
@@ -11,15 +11,7 @@ export default function App() {
         const sockets = setupWebsockets(store);
         return function cleanup() {
             sockets.close();
-        }
-    }, []);
-
-    const [estimatedHashRate, setTotalDifficulty] = useState(([] as unknown) as any);
-
-    useEffect(() => {
-        fetchNetworkDifficulty().then((data) => {
-            setTotalDifficulty(data);
-        });
+        };
     }, []);
 
     return (
@@ -28,7 +20,7 @@ export default function App() {
             <div className="App-content">
                 <SideBar />
                 <div className="App-content-mainArea">
-                    <BlockExplorer difficulty={estimatedHashRate as any[]} />
+                    <BlockExplorer />
                 </div>
             </div>
         </div>

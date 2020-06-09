@@ -12,18 +12,8 @@ interface Props {
 }
 
 export default function PolygonGraph({ width, height, yAxisTicks, data }: Props) {
-    const YHighestNum = Math.max.apply(
-        Math,
-        data.map(function (o) {
-            return o.y;
-        })
-    );
-    const XHighestNumber = Math.max.apply(
-        Math,
-        data.map(function (o) {
-            return o.x;
-        })
-    );
+    const YHighestNum = Math.max(...data.map((o) => o.y));
+    const XHighestNumber = Math.max(...data.map((o) => o.x));
 
     const xScale = d3.scaleLinear().domain([0, XHighestNumber]).range([0, width]);
     const yScale = d3.scaleLinear().domain([0, YHighestNum]).range([height, 0]);
