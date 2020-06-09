@@ -13,19 +13,9 @@ interface Props {
     xAxisLabel: string;
 }
 
-export default function PolygonGraph({ width, height, yAxisTicks, data, yAxisLabel, xAxisLabel }: Props) {
-    const YHighestNum = Math.max.apply(
-        Math,
-        data.map(function (o) {
-            return o.y;
-        })
-    );
-    const XHighestNumber = Math.max.apply(
-        Math,
-        data.map(function (o) {
-            return o.x;
-        })
-    );
+export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLabel, yAxisLabel }: Props) {
+    const YHighestNum = Math.max(...data.map((o) => o.y));
+    const XHighestNumber = Math.max(...data.map((o) => o.x));
 
     const xScale = d3.scaleLinear().domain([0, XHighestNumber]).range([0, width]);
     const yScale = d3.scaleLinear().domain([0, YHighestNum]).range([height, 0]);
@@ -129,9 +119,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, yAxisLab
             <div className="xAxisDate" style={{ width: width - 50 }}>
                 {renderXAxis()}
             </div>
-            <div className="xAxisLabel">
-                {xAxisLabel}
-            </div>
+            <div className="xAxisLabel">{xAxisLabel}</div>
         </div>
     );
 }

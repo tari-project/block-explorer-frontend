@@ -68,12 +68,12 @@ export function setupWebsockets(store) {
     return ws;
 }
 
-interface NetworkDifficultyEstimatedHash {
+export interface NetworkDifficultyEstimatedHash {
     estimated_hash_rate: number;
     height: number;
 }
 
-interface NetworkDifficultyEstimatedHashes extends Array<NetworkDifficultyEstimatedHash>{}
+export type NetworkDifficultyEstimatedHashes = Array<NetworkDifficultyEstimatedHash>;
 
 export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimatedHashes> {
     const response = await fetch(`${apiUrl}/network-difficulty`);
