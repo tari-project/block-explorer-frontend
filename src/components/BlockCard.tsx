@@ -16,7 +16,7 @@ export default function BlockCard({ block }: { block: any }) {
     const size = numeral(inputs.length * 4 + outputs.length * 13).format('0,0');
     const miningTime = fmtMSS(_miningTime);
     return (
-        <div className="BlockCard">
+        <div key={height} className="BlockCard slideIn">
             <Header blockHeight={heightStr} date={date} />
             <div className="BlockCard-chart">
                 <BlockChart />
