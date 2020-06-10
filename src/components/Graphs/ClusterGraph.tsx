@@ -9,12 +9,7 @@ interface Props {
 }
 
 export default function ClusterGraph({ width, height, data }: Props) {
-    const maxSize = Math.max.apply(
-        Math,
-        data.map(function (o) {
-            return o.size;
-        })
-    );
+    const maxSize = Math.max(...data.map((o) => o.size));
     let radiusScale = d3.scaleSqrt().domain([1, maxSize]).range([0, 10]);
 
     const forceX = d3
