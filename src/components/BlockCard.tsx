@@ -2,6 +2,8 @@ import React from 'react';
 import './BlockCard.css';
 import BlockChart from './BlockChart';
 import numeral from 'numeral';
+import * as timeago from 'timeago.js';
+
 function fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
 }
@@ -12,12 +14,13 @@ export default function BlockCard({ block }: { block: any }) {
         body: { kernels, inputs, outputs }
     } = block.block;
     const date = new Date(timestamp.seconds * 1000).toLocaleString();
+    const timeAgo = timeago.format(timestamp.seconds * 1000);
     const heightStr = numeral(height).format('0,0');
     const size = numeral(inputs.length * 4 + outputs.length * 13).format('0,0');
     const miningTime = fmtMSS(_miningTime);
     return (
         <div key={height} className="BlockCard slideIn">
-            <Header blockHeight={heightStr} date={date} />
+            <Header blockHeight={heightStr} date={date} timeAgo={timeAgo} />
             <div className="BlockCard-chart">
                 <BlockChart />
             </div>
@@ -40,13 +43,14 @@ export default function BlockCard({ block }: { block: any }) {
 interface HeaderProps {
     blockHeight: string;
     date: string;
+    timeAgo: string;
 }
 
-function Header({ blockHeight, date }: HeaderProps) {
+function Header({ blockHeight, date, timeAgo }: HeaderProps) {
     return (
         <div className="BlockCard-Header">
             <h1>Block {blockHeight}</h1>
-            <h2>{date}</h2>
+            <h2 title={date}>{timeAgo}</h2>
         </div>
     );
 }
