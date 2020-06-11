@@ -12,7 +12,7 @@ body {
         width: 100vw;
     }
     .hero {
-        padding: 20px 30px;
+        padding: 20px;
     }
 
     /*General Styles end*/
@@ -53,6 +53,14 @@ body {
     }
 
     /*TopBar End*/
+
+    /*Latest Blocks*/
+
+    .BlockCard {
+        width: 87vw;
+    }
+
+    /*Latest Blocks End*/
 
     /*Graphs*/
 

@@ -48,7 +48,7 @@ export default function BlockChart() {
             >
                 PLACEHOLDER GRAPH
             </h1>
-            <svg width={width} height={height}>
+            <svg className="BlockCard-ChartSVG" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet" width={width} height={height}>
                 <g transform={`translate(${margin}, 0)`}>
                     {range.map((i) => {
                         const { bar, circle } = generateDataPoint().next().value;
