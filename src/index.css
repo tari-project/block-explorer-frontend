@@ -1,3 +1,78 @@
 body {
-  margin: 0;
+    margin: 0;
+}
+
+/*Mobile*/
+@media (max-width: 768px) {
+    /*General Styles*/
+    .SideBar {
+        display: none;
+    }
+    .App-content-mainArea {
+        width: 100vw;
+    }
+    .hero {
+        padding: 20px 30px;
+    }
+
+    /*General Styles end*/
+
+    /*Top bar*/
+    .TopBar {
+        flex-direction: column;
+    }
+    .TopBar-logoContainer {
+        width: 100%;
+        border: none;
+    }
+    .TopBar-itemContainer {
+        margin: 1em 0 0 2em;
+        padding: 0 30px;
+    }
+    .TopBar-itemContainer div:first-child,
+    .TopBar-itemContainer div {
+        margin: 0;
+    }
+    .TopBar-searchContainer {
+        justify-content: center;
+    }
+    .TopBar-searchBar {
+        margin: 0;
+    }
+
+    .TopBarItem {
+        width: 33%;
+    }
+
+    .TopBarItem > h3 {
+        font-size: 18.5px;
+    }
+
+    .TopBarItem > h4 {
+        font-size: 11px;
+    }
+
+    /*TopBar End*/
+
+    /*Graphs*/
+
+    /*heroGraph*/
+    .HeroGraphContainer {
+        margin: 5px;
+    }
+    .heroYAxisText {
+        font-size: 1em;
+    }
+
+    .xAxisTimes .tick {
+        font-size: 10px;
+    }
+    /*Graphs end*/
+}
+
+/*Tablets*/
+@media (min-width: 992px) {
+    .App-content-mainArea {
+        width: calc(100% - 100px);
+    }
 }
