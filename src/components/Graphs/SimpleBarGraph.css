@@ -45,24 +45,14 @@
     justify-content: space-between;
     align-self: center;
 }
+.circulateSimpleBarsWrapper {
+    margin: 30px;
+}
 .circulateSimpleBars {
-    padding: 20px 60px 0 50px;
     overflow: overlay;
-    margin: 20px;
-}
-
-.xAxisDate {
-    display: flex;
-    justify-items: center;
-    margin: 20px 20px 20px 70px;
-    justify-content: space-between;
-}
-
-.xAxisDate .tick {
-    font-family: Avenir, sans-serif;
-    font-size: 14px;
-    display: flex;
-    color: #adadad;
+    margin: 30px;
+    width: 100%;
+    height: auto;
 }
 
 .yAxisLabel {

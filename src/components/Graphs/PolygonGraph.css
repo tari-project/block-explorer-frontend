@@ -42,7 +42,7 @@
     height: auto;
 }
 
-.networkDifficultyGraph .xAxisDate {
+.xAxisDate {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -50,7 +50,7 @@
     color: #adadad;
 }
 
-.networkDifficultyGraph .xAxisDate .tick {
+.xAxisDate .tick {
     font-family: Avenir, sans-serif;
     font-size: 14px;
     display: flex;

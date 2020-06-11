@@ -52,7 +52,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
                         style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14, display: 'block' }}
                         key={`${i}-text`}
                         fill="#adadad"
-                        x={-25}
+                        x={-30}
                         y={(height / yAxisTicks) * i}
                     >
                         {numeral(displayNum).format('0a')}
@@ -101,7 +101,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
                 width={width}
             >
                 <g className="yAxisLabel">
-                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 11 }} fill="#bababa" x={-120} y={-30}>
+                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 11 }} fill="#bababa" x={-120} y={-40}>
                         {yAxisLabel}
                     </text>
                 </g>
