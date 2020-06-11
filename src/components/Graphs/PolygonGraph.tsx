@@ -52,7 +52,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
                         style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14, display: 'block' }}
                         key={`${i}-text`}
                         fill="#adadad"
-                        x={-50}
+                        x={-25}
                         y={(height / yAxisTicks) * i}
                     >
                         {numeral(displayNum).format('0a')}
@@ -88,14 +88,20 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
     }
 
     return (
-        <div className="graphWrapper">
+        <div className="graphWrapper networkDifficultyGraph">
             <PlainGraphTitle
                 title="Network Difficulty"
                 subTitle={`How difficult it is to mine a new block for the Tari blockchain.`}
             />
-            <svg className="networkDifficultyPaths" height={height} width={width}>
+            <svg
+                viewBox={`0 0 ${width} ${height}`}
+                preserveAspectRatio="xMidYMid meet"
+                className="networkDifficultyPaths"
+                height={height}
+                width={width}
+            >
                 <g className="yAxisLabel">
-                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 12 }} fill="#bababa" x={-130} y={-60}>
+                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 11 }} fill="#bababa" x={-120} y={-30}>
                         {yAxisLabel}
                     </text>
                 </g>
@@ -116,9 +122,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
                     );
                 })}
             </svg>
-            <div className="xAxisDate" style={{ width: width - 50 }}>
-                {renderXAxis()}
-            </div>
+            <div className="xAxisDate">{renderXAxis()}</div>
             <div className="xAxisLabel">{xAxisLabel}</div>
         </div>
     );

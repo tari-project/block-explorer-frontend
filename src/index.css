@@ -67,6 +67,32 @@ body {
     .xAxisTimes .tick {
         font-size: 10px;
     }
+
+    /*heroGraph End*/
+
+    .graphWrapper {
+        max-width: 85vw;
+        padding: 0;
+    }
+
+    /*network difficulty*/
+    .networkDifficultyPaths {
+        padding: 0;
+    }
+
+    .networkDifficultyGraph .xAxisDate {
+        width: auto;
+        margin: 0 0 0 30px;
+    }
+
+    .networkDifficultyGraph .xAxisDate .tick {
+        font-size: 11px;
+    }
+
+    .xAxisLabel {
+        font-size: 9px;
+    }
+
     /*Graphs end*/
 }
 

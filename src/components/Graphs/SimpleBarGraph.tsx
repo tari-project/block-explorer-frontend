@@ -74,7 +74,13 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
             />
 
             {/*<div className="yAxisLabel">{yAxisLabel}</div>*/}
-            <svg className="circulateSimpleBars" height={height} width={width}>
+            <svg
+                viewBox={`0 0 ${width} ${height}`}
+                preserveAspectRatio="xMidYMid meet"
+                className="circulateSimpleBars"
+                height={height}
+                width={width}
+            >
                 <g className="yAxisLabel">
                     <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 12 }} fill="#bababa" x={-130} y={-60}>
                         {yAxisLabel}
