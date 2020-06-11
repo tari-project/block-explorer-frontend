@@ -26,11 +26,12 @@ body {
         border: none;
     }
     .TopBar-itemContainer {
-        margin-top: 1em;
+        margin: 1em 0 0 2em;
+        padding: 0 30px;
     }
-
+    .TopBar-itemContainer div:first-child,
     .TopBar-itemContainer div {
-        margin-left: 2em;
+        margin: 0;
     }
     .TopBar-searchContainer {
         justify-content: center;
@@ -40,7 +41,7 @@ body {
     }
 
     .TopBarItem {
-        width: 70px;
+        width: 33%;
     }
 
     .TopBarItem > h3 {
@@ -56,10 +57,6 @@ body {
     /*Graphs*/
 
     /*heroGraph*/
-    .heroBars {
-        /*margin: 5px;*/
-        /*padding: 5px 10px 0 30px;*/
-    }
     .HeroGraphContainer {
         margin: 5px;
     }
