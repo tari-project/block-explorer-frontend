@@ -8,12 +8,13 @@ function fmtMSS(s) {
 export default function BlockCard({ block }: { block: any }) {
     const {
         _miningTime,
+        _weight,
         header: { height, timestamp },
-        body: { kernels, inputs, outputs }
+        body: { kernels }
     } = block.block;
     const date = new Date(timestamp.seconds * 1000).toLocaleString();
     const heightStr = numeral(height).format('0,0');
-    const size = numeral(inputs.length * 4 + outputs.length * 13).format('0,0');
+    const size = numeral(_weight).format('0,0');
     const miningTime = fmtMSS(_miningTime);
     return (
         <div key={height} className="BlockCard slideIn">

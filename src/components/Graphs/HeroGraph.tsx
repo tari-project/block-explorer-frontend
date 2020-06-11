@@ -242,14 +242,14 @@ function Bar({
     const barPos2 = barPos1 + inputsHeight;
     return (
         <g key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
+            <g className="tooltip total" transform={`translate(${offset - 50},${height - totalHeight - 35})`}>
                 <rect rx="5" />
                 <text x="5" y="16">
                     {blockHeight}
                 </text>
             </g>
             <g id="kernels">
-                <g className="tooltip" transform={`translate(${offset - 70},${height - kernelHeight - 25})`}>
+                <g className="tooltip" transform={`translate(${offset - 90},${height - kernelHeight - 25})`}>
                     <rect rx="5" />
                     <text x="5" y="16">
                         {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
@@ -258,8 +258,8 @@ function Bar({
                 <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
             <g id="outputs">
-                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos1 - 10})`}>
-                    <rect rx="5" />
+                <g className="tooltip" transform={`translate(${offset - 90},${height - barPos1 - 10})`}>
+                    <rect rx="5"/>
                     <text x="5" y="16">
                         {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
                     </text>
@@ -267,9 +267,9 @@ function Bar({
                 <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
             <g id="inputs">
-                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos2 - 5})`}>
+                <g className="tooltip" transform={`translate(${offset - 90},${height - barPos2 - 5})`}>
                     <rect rx="5" />
-                    <text x="5" y="16">
+                    <text x="5" textAnchor="start" y="16">
                         {`${inputsVal} input${inputsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
