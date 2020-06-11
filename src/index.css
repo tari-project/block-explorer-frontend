@@ -4,6 +4,7 @@ body {
 
 /*Mobile*/
 @media (max-width: 768px) {
+    /*General Styles*/
     .SideBar {
         display: none;
     }
@@ -33,7 +34,21 @@ body {
     .TopBar-searchBar {
         margin: 0;
     }
-    
+
+    /*General Styles end*/
+
+    /*Graphs*/
+
+    /*heroGraph*/
+    .heroBars {
+        /*margin: 5px;*/
+        /*padding: 5px 10px 0 30px;*/
+    }
+
+    .heroYAxisText {
+        font-size: 14px;
+    }
+    /*Graphs end*/
 }
 
 /*Tablets*/

@@ -20,10 +20,10 @@ interface HeightBar {
 }
 
 const dimensions = {
-    width: 1000,
+    width: 800,
     height: 300,
     margin: 10,
-    elementSize: 6
+    elementSize: 3
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
@@ -83,10 +83,10 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
             const elem: any = (
                 <g key={i}>
                     <text
-                        style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14 }}
+                        className="heroYAxisText"
                         key={`${i}-text`}
                         fill="#adadad"
-                        x={-60}
+                        x={-20}
                         y={(height / yAxisTicks) * i}
                     >
                         {displayNum}
@@ -98,7 +98,7 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
                         stroke="#adadad"
                         strokeWidth={0.5}
                         x1={0}
-                        x2={width}
+                        x2={width + 10}
                         y1={(height / yAxisTicks) * i}
                         y2={(height / yAxisTicks) * i}
                     />
@@ -126,8 +126,14 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
         return ticks;
     }
     return (
-        <div>
-            <svg viewBox={`0 0 ${width} ${height}`} className="heroBars" height={height} width={width}>
+        <div className="HeroGraphContainer">
+            <svg
+                viewBox={`0 0 ${width} ${height}`}
+                preserveAspectRatio="xMidYMid meet"
+                className="heroBars"
+                height={height}
+                width={width}
+            >
                 <g>{renderYAxis(maxHeights)}</g>
 
                 <Chart values={blocksData} maxHeights={maxHeights} aniClass={firstChildClass} />
@@ -259,7 +265,7 @@ function Bar({
             </g>
             <g id="outputs">
                 <g className="tooltip" transform={`translate(${offset - 90},${height - barPos1 - 10})`}>
-                    <rect rx="5"/>
+                    <rect rx="5" />
                     <text x="5" y="16">
                         {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
                     </text>
