@@ -41,7 +41,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                         style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14 }}
                         key={`${i}-text`}
                         fill="#adadad"
-                        x={-50}
+                        x={-30}
                         y={(height / yAxisTicks) * i}
                     >
                         {numeral(displayNum || 0).format('0a')}
@@ -67,16 +67,22 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
     const title = `Circulating ${tokenName}`;
     const yAxisLabel = `million ${tokenName}`;
     return (
-        <div className="graphWrapper">
+        <div className="graphWrapper circulateSimpleBarsWrapper">
             <PlainGraphTitle
                 title={title}
                 subTitle={`Total number of mined ${tokenName} circulating on the network.`}
             />
 
             {/*<div className="yAxisLabel">{yAxisLabel}</div>*/}
-            <svg className="circulateSimpleBars" height={height} width={width}>
+            <svg
+                viewBox={`0 0 ${width} ${height}`}
+                preserveAspectRatio="xMidYMid meet"
+                className="circulateSimpleBars"
+                height={height}
+                width={width}
+            >
                 <g className="yAxisLabel">
-                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 12 }} fill="#bababa" x={-130} y={-60}>
+                    <text style={{ fontFamily: 'Avenir, sans-serif', fontSize: 11 }} fill="#bababa" x={-120} y={-40}>
                         {yAxisLabel}
                     </text>
                 </g>
@@ -108,7 +114,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                     );
                 })}
             </svg>
-            <div className="xAxisDate" style={{ width: width - 50 }}>
+            <div className="xAxisDate">
                 <div className="tick">4 weeks ago</div>
                 <div className="tick">3 weeks ago</div>
                 <div className="tick">2 weeks ago</div>
