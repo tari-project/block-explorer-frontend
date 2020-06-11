@@ -20,8 +20,8 @@ interface HeightBar {
 }
 
 const dimensions = {
-    width: 800,
-    height: 300,
+    width: 900,
+    height: 280,
     margin: 10,
     elementSize: 3
 } as const;
@@ -138,7 +138,7 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
 
                 <Chart values={blocksData} maxHeights={maxHeights} aniClass={firstChildClass} />
             </svg>
-            <div className="xAxisTimes" style={{ width: width }}>
+            <div className="xAxisTimes">
                 {getTimeTicks().map((time, index) => {
                     return (
                         <div key={index} className="tick">

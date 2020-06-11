@@ -14,6 +14,10 @@ body {
     .hero {
         padding: 20px 30px;
     }
+
+    /*General Styles end*/
+
+    /*Top bar*/
     .TopBar {
         flex-direction: column;
     }
@@ -35,7 +39,19 @@ body {
         margin: 0;
     }
 
-    /*General Styles end*/
+    .TopBarItem {
+        width: 70px;
+    }
+
+    .TopBarItem > h3 {
+        font-size: 18.5px;
+    }
+
+    .TopBarItem > h4 {
+        font-size: 11px;
+    }
+
+    /*TopBar End*/
 
     /*Graphs*/
 
@@ -44,9 +60,15 @@ body {
         /*margin: 5px;*/
         /*padding: 5px 10px 0 30px;*/
     }
-
+    .HeroGraphContainer {
+        margin: 5px;
+    }
     .heroYAxisText {
-        font-size: 14px;
+        font-size: 1em;
+    }
+
+    .xAxisTimes .tick {
+        font-size: 10px;
     }
     /*Graphs end*/
 }

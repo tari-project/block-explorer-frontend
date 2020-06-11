@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin: 30px;
 }
 .xAxisTimes {
     display: flex;
@@ -13,6 +14,9 @@
     justify-content: space-between;
 }
 
+.xAxisTimes {
+    width: 100%;
+}
 .xAxisTimes .tick {
     font-family: Avenir, sans-serif;
     font-size: 14px;
@@ -20,9 +24,9 @@
     color: #adadad;
 }
 
-.v {
+.heroYAxisText {
     font-family: Avenir, sans-serif;
-    font-size: 14px;
+    font-size: 0.6em;
 }
 
 .heroBars {
