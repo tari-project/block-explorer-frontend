@@ -249,15 +249,15 @@ function Bar({
     return (
         <g key={blockHeight} className={`overviewBars ${aniClass}`}>
             <g className="tooltip total" transform={`translate(${offset - 50},${height - totalHeight - 25})`}>
-                <rect rx="5" />
+                <rect rx="3" />
                 <text x="4" y="10">
                     {blockHeight}
                 </text>
             </g>
             <g id="kernels">
                 <g className="tooltip" transform={`translate(${offset - 90},${height - kernelHeight - 25})`}>
-                    <rect rx="5" />
-                    <text x="5" y="16">
+                    <rect rx="3" />
+                    <text x="5" y="11">
                         {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
@@ -265,8 +265,8 @@ function Bar({
             </g>
             <g id="outputs">
                 <g className="tooltip" transform={`translate(${offset - 90},${height - barPos1 - 10})`}>
-                    <rect rx="5" />
-                    <text x="5" y="16">
+                    <rect rx="3" />
+                    <text x="5" y="11">
                         {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
@@ -274,8 +274,8 @@ function Bar({
             </g>
             <g id="inputs">
                 <g className="tooltip" transform={`translate(${offset - 90},${height - barPos2 - 5})`}>
-                    <rect rx="5" />
-                    <text x="5" textAnchor="start" y="16">
+                    <rect rx="3" />
+                    <text x="5" textAnchor="start" y="11">
                         {`${inputsVal} input${inputsVal > 1 ? 's' : ''}`}
                     </text>
                 </g>
