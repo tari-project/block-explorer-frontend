@@ -12,15 +12,16 @@
 .barHolder:hover .tooltip {
     visibility: visible;
 }
-.tooltip text {
+.barHolder .tooltip text {
     fill: #9330ff;
-    font-size: 12px;
+    font-size: 10px;
     font-family: Avenir, sans-serif;
     font-weight: bold;
 }
 .tooltip rect {
     fill: #ececec;
     stroke: #ececec;
+    height: 18px;
 }
 
 .graphWrapper {

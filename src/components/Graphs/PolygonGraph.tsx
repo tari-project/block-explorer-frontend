@@ -17,12 +17,13 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
     const YHighestNum = Math.max(...data.map((o) => o.y));
     const XHighestNumber = Math.max(...data.map((o) => o.x));
     const XLowestNumber = Math.min(...data.map((o) => o.x));
-    const xScale = d3.scaleLinear().domain([XLowestNumber, XHighestNumber]).range([0, width]);
+    const xScale = d3.scaleLinear().domain([XHighestNumber, XLowestNumber]).range([0, width]);
     const yScale = d3.scaleLinear().domain([0, YHighestNum]).range([height, 0]);
     const transformedData = data.map((d, i) => {
         return {
             x: xScale(d.x),
-            y: yScale(d.y)
+            y: yScale(d.y),
+            blockHeight: d.x
         };
     });
 
@@ -84,7 +85,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
                 </div>
             );
         }
-        return nums.sort();
+        return nums;
     }
 
     return (
@@ -110,12 +111,18 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
                 <path style={{ fill: '#F0EFF6', opacity: 0.5, strokeWidth: 0 }} d={areaGenerator(transformedData)} />
                 {transformedData.map((item, i) => {
                     return (
-                        <g key={i} className="barHolder">
-                            <circle cx={item.x} cy={item.y} r="10" fill="#352583" fillOpacity="0" />
+                        <g key={i} className="shapeHolder">
+                            <circle cx={item.x} cy={item.y} r="15" fill="#352583" fillOpacity="0" />
                             <g className="tooltip" opacity="0.9">
-                                <rect rx={5} x={item.x - 20} y={item.y - 20} width="35" height="22" />
-                                <text x={item.x - 15} y={item.y - 5}>
+                                <rect rx={3} x={item.x - 20} y={item.y - 20} width="25" />
+                                <text x={item.x - 16} y={item.y - 7}>
                                     {numeral(data[i].y || 0).format('0a')}
+                                </text>
+                            </g>
+                            <g className="tooltip blockHeightTooltip" opacity="0.9">
+                                <rect rx={3} x={item.x - 35} y={item.y - 45} width="40" />
+                                <text x={item.x - 31} y={item.y - 32}>
+                                    {item.blockHeight}
                                 </text>
                             </g>
                         </g>
