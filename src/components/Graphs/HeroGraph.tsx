@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './HeroGraph.css';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
+import { leftPad } from '../../helpers/leftPad';
 
 interface Props {
     blocks: any[];
@@ -245,6 +246,17 @@ function Bar({
 
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
+
+    function getTooltipText(value, type) {
+        let text = '';
+        if (value > 1) {
+            text = `${value} ${type}s`;
+        } else {
+            text = `${value} ${type}`;
+        }
+        return leftPad(text, 13, ' ');
+    }
+
     return (
         <g key={blockHeight} className={`overviewBars ${aniClass}`}>
             <g className="tooltip total" transform={`translate(${offset - 30},${height - totalHeight - 25})`}>
@@ -256,8 +268,8 @@ function Bar({
             <g id="kernels">
                 <g className="tooltip" transform={`translate(${offset - 65},${height - kernelHeight - 25})`}>
                     <rect rx="3" />
-                    <text x="5" y="11">
-                        {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
+                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
+                        {getTooltipText(kernelsVal, 'kernel')}
                     </text>
                 </g>
                 <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
@@ -265,8 +277,8 @@ function Bar({
             <g id="outputs">
                 <g className="tooltip" transform={`translate(${offset - 65},${height - barPos1 - 10})`}>
                     <rect rx="3" />
-                    <text x="5" y="11">
-                        {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
+                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
+                        {getTooltipText(outputsVal, 'output')}
                     </text>
                 </g>
                 <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
@@ -274,8 +286,8 @@ function Bar({
             <g id="inputs">
                 <g className="tooltip" transform={`translate(${offset - 65},${height - barPos2 - 5})`}>
                     <rect rx="3" />
-                    <text x="5" textAnchor="start" y="11">
-                        {`${inputsVal} input${inputsVal > 1 ? 's' : ''}`}
+                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
+                        {getTooltipText(inputsVal, 'input')}
                     </text>
                 </g>
                 <rect
