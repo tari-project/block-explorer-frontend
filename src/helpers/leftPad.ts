@@ -1,6 +1,6 @@
 const cache = ['', ' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ', '         '];
 
-export function leftPad(str: any, len: any, ch: any): any {
+export function leftPad(str: string, len: number, ch: string): string {
     // convert `str` to a `string`
     str = str + '';
     // `len` is the `pad`'s length now
