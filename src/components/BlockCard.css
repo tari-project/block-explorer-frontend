@@ -11,7 +11,8 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 36px;
+    /*margin-bottom: 36px; Add this back when we have decided on the chart to go in*/
+    margin-bottom: 12px;
 }
 
 .BlockCard-Header > h1 {
