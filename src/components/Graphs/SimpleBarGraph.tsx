@@ -73,7 +73,6 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                 subTitle={`Total number of mined ${tokenName} circulating on the network.`}
             />
 
-            {/*<div className="yAxisLabel">{yAxisLabel}</div>*/}
             <svg
                 viewBox={`0 0 ${width} ${height}`}
                 preserveAspectRatio="xMidYMid meet"
@@ -97,8 +96,8 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                                 transform={`translate(${i * barWidth - 30},${yScale(total) - 30})`}
                                 opacity="0.9"
                             >
-                                <rect rx="5" width="35" height="22" />
-                                <text x="5" y="16">
+                                <rect rx="3" width="25" />
+                                <text x="3" y="13">
                                     {numeral(displayTotal || 0).format('0a')}
                                 </text>
                             </g>
