@@ -23,7 +23,7 @@ const dimensions = {
     width: 900,
     height: 280,
     margin: 10,
-    elementSize: 3
+    elementSize: 4
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
@@ -248,9 +248,9 @@ function Bar({
     const barPos2 = barPos1 + inputsHeight;
     return (
         <g key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 50},${height - totalHeight - 35})`}>
+            <g className="tooltip total" transform={`translate(${offset - 50},${height - totalHeight - 25})`}>
                 <rect rx="5" />
-                <text x="5" y="16">
+                <text x="4" y="10">
                     {blockHeight}
                 </text>
             </g>

@@ -31,7 +31,6 @@
 
 .heroBars {
     margin-bottom: 2rem;
-    /*padding: 10px 20px 0 60px;*/
     overflow: overlay;
     width: 100%;
     height: auto;
@@ -45,8 +44,8 @@
 .overviewBars .tooltip.total rect {
     fill: #ececec;
     stroke: #ececec;
-    width: 45px;
-    height: 22px;
+    width: 35px;
+    height: 13px;
 }
 
 .overviewBars .tooltip rect {
@@ -54,6 +53,13 @@
     stroke: #ececec;
     width: 83px;
     height: 22px;
+}
+
+.overviewBars .tooltip text {
+    fill: #9330ff;
+    font-size: 9px;
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
 }
 
 .overviewBars .tooltip.total {
