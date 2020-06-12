@@ -64,3 +64,27 @@
     text-align: center;
     margin: 5px 0 0 30px;
 }
+
+/*tooltips*/
+
+.shapeHolder .tooltip {
+    visibility: hidden;
+}
+.shapeHolder:hover .tooltip {
+    visibility: visible;
+}
+.shapeHolder .tooltip text {
+    fill: #9330ff;
+    font-size: 10px;
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
+}
+.shapeHolder .tooltip.blockHeightTooltip text {
+    fill: #ff7630;
+}
+.shapeHolder .tooltip rect {
+    fill: #ececec;
+    stroke: #ececec;
+    height: 18px;
+}
+/*tooltips end*/
