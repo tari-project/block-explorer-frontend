@@ -8,6 +8,7 @@ import StatRow from "./SingleBlock/StatRow";
 import SingleBlockClusterGraph from "./SingleBlockClusterGraph";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
 import { connect } from 'react-redux';
+import ProgressBar from "./SingleBlock/ProgressBar";
 
 interface Props {
     block?: any;
@@ -21,14 +22,17 @@ function SingleBlock({ block }: Props) {
     const [blockPow, setblockPow] = useState(([] as unknown) as any);
     const [blockBody, setblockBody] = useState(([] as unknown) as any);
     const [blockFound, setBlockFound] = useState(([] as unknown) as any);
+    const [blockWeight, setBlockWeight] = useState('...');
 
     useEffect(() => {
         try {
             id && fetchSingleBlock(id).then((block: SingleBlockData) => {
+                console.log(block);
                 if(block && block.block) {
                     setblockHeader(block.block.header);
                     setblockPow(block.block.header.pow);
                     setblockBody(block.block.body);
+                    setBlockWeight(block.block._miningTime)
                 } else {
                     setBlockFound(false);
                 }
@@ -52,6 +56,7 @@ function SingleBlock({ block }: Props) {
                 <div>
                     <SingleBlockViewHeader title="Block Data"/>
                     <SingleBlockClusterGraph data={singleBlockDataArray}/>
+                    <ProgressBar weight={blockWeight}/>
                     <h1>Technical Details</h1>
                     <StatRow label="Accumulated Monero Difficulty" value={accumulated_monero_difficulty} />
                     <StatRow label="Accumulated Blake Difficulty" value={accumulated_blake_difficulty} />
