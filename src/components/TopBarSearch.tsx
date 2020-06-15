@@ -22,7 +22,7 @@ export default function TopBarSearch() {
 
     return (
         <div className="TopBar-searchBar">
-            <input type="text" defaultValue={id ? id : ''} placeholder="Search for a specific block or transaction" onKeyUp={onChange}/>
+            <input type="text" defaultValue={id || ''} placeholder="Search for a specific block height or hash" onKeyUp={onChange}/>
             <Search className="searchBarIcon"/>
         </div>
     );
