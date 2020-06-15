@@ -3,15 +3,16 @@
     box-shadow: 10px 10px 25px rgba(16, 11, 22, 0.05);
     box-sizing: border-box;
     border-radius: 6px;
-    padding: 20px;
-    width: 415px;
+    padding: 15px;
+    width: 25vw;
 }
 
 .BlockCard-Header {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 36px;
+    /*margin-bottom: 36px; Add this back when we have decided on the chart to go in*/
+    margin-bottom: 12px;
 }
 
 .BlockCard-Header > h1 {
@@ -30,9 +31,11 @@
     font-weight: 500;
 }
 
-.BlockCard-chart > svg {
+.BlockCard-ChartSVG {
     display: block;
     margin: auto;
+    width: 100%;
+    height: auto;
 }
 
 .BlockCard-ticks {
@@ -105,7 +108,7 @@
 
 @keyframes slideOff {
     0% {
-        left: -415px;
+        left: -25vw;
     }
     100% {
         left: 0;

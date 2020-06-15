@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './HeroGraph.css';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
+import { leftPad } from '../../helpers/leftPad';
 
 interface Props {
     blocks: any[];
@@ -20,10 +21,10 @@ interface HeightBar {
 }
 
 const dimensions = {
-    width: 1000,
-    height: 300,
+    width: 900,
+    height: 280,
     margin: 10,
-    elementSize: 6
+    elementSize: 4
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
@@ -70,7 +71,6 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
         };
     });
 
-    // blocksData.sort((a, b) => b.blockHeight - a.blockHeight);
     const maxHeights = getHighest(blocksData);
     function renderYAxis(maxHeights: HeightBar) {
         const nums: any[] = [];
@@ -83,10 +83,10 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
             const elem: any = (
                 <g key={i}>
                     <text
-                        style={{ fontFamily: 'Avenir, sans-serif', fontSize: 14 }}
+                        className="heroYAxisText"
                         key={`${i}-text`}
                         fill="#adadad"
-                        x={-60}
+                        x={-20}
                         y={(height / yAxisTicks) * i}
                     >
                         {displayNum}
@@ -98,7 +98,7 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
                         stroke="#adadad"
                         strokeWidth={0.5}
                         x1={0}
-                        x2={width}
+                        x2={width + 10}
                         y1={(height / yAxisTicks) * i}
                         y2={(height / yAxisTicks) * i}
                     />
@@ -126,13 +126,19 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
         return ticks;
     }
     return (
-        <div>
-            <svg viewBox={`0 0 ${width} ${height}`} className="heroBars" height={height} width={width}>
+        <div className="HeroGraphContainer">
+            <svg
+                viewBox={`0 0 ${width} ${height}`}
+                preserveAspectRatio="xMidYMid meet"
+                className="heroBars"
+                height={height}
+                width={width}
+            >
                 <g>{renderYAxis(maxHeights)}</g>
 
                 <Chart values={blocksData} maxHeights={maxHeights} aniClass={firstChildClass} />
             </svg>
-            <div className="xAxisTimes" style={{ width: width }}>
+            <div className="xAxisTimes">
                 {getTimeTicks().map((time, index) => {
                     return (
                         <div key={index} className="tick">
@@ -240,37 +246,48 @@ function Bar({
 
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
+
+    function getTooltipText(value, type) {
+        let text = '';
+        if (value > 1) {
+            text = `${value} ${type}s`;
+        } else {
+            text = `${value} ${type}`;
+        }
+        return leftPad(text, 13, ' ');
+    }
+
     return (
         <g key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
-                <rect rx="5" />
-                <text x="5" y="16">
+            <g className="tooltip total" transform={`translate(${offset - 30},${height - totalHeight - 25})`}>
+                <rect rx="3" />
+                <text x="4" y="10">
                     {blockHeight}
                 </text>
             </g>
             <g id="kernels">
-                <g className="tooltip" transform={`translate(${offset - 70},${height - kernelHeight - 25})`}>
-                    <rect rx="5" />
-                    <text x="5" y="16">
-                        {`${kernelsVal} kernel${kernelsVal > 1 ? 's' : ''}`}
+                <g className="tooltip" transform={`translate(${offset - 65},${height - kernelHeight - 25})`}>
+                    <rect rx="3" />
+                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
+                        {getTooltipText(kernelsVal, 'kernel')}
                     </text>
                 </g>
                 <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
             <g id="outputs">
-                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos1 - 10})`}>
-                    <rect rx="5" />
-                    <text x="5" y="16">
-                        {`${outputsVal} output${outputsVal > 1 ? 's' : ''}`}
+                <g className="tooltip" transform={`translate(${offset - 65},${height - barPos1 - 10})`}>
+                    <rect rx="3" />
+                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
+                        {getTooltipText(outputsVal, 'output')}
                     </text>
                 </g>
                 <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
             <g id="inputs">
-                <g className="tooltip" transform={`translate(${offset - 70},${height - barPos2 - 5})`}>
-                    <rect rx="5" />
-                    <text x="5" y="16">
-                        {`${inputsVal} input${inputsVal > 1 ? 's' : ''}`}
+                <g className="tooltip" transform={`translate(${offset - 65},${height - barPos2 - 5})`}>
+                    <rect rx="3" />
+                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
+                        {getTooltipText(inputsVal, 'input')}
                     </text>
                 </g>
                 <rect

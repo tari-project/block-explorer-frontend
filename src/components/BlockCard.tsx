@@ -10,27 +10,18 @@ function fmtMSS(s) {
 export default function BlockCard({ block }: { block: any }) {
     const {
         _miningTime,
+        _weight,
         header: { height, timestamp },
-        body: { kernels, inputs, outputs }
+        body: { kernels }
     } = block.block;
     const date = new Date(timestamp.seconds * 1000).toLocaleString();
     const timeAgo = timeago.format(timestamp.seconds * 1000);
     const heightStr = numeral(height).format('0,0');
-    const size = numeral(inputs.length * 4 + outputs.length * 13).format('0,0');
+    const size = numeral(_weight).format('0,0');
     const miningTime = fmtMSS(_miningTime);
     return (
         <div key={height} className="BlockCard slideIn">
             <Header blockHeight={heightStr} date={date} timeAgo={timeAgo} />
-            <div className="BlockCard-chart">
-                <BlockChart />
-            </div>
-            <div className="BlockCard-ticks">
-                <div>0:00</div>
-                <div>0:30</div>
-                <div>1:00</div>
-                <div>1:30</div>
-                <div>1:48</div>
-            </div>
             <div className="BlockCard-stats">
                 <StatBox color="yellow" label="# of Transactions" value={kernels.length} />
                 <StatBox color="blue" label="Mining Time" value={miningTime} />

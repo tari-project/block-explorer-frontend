@@ -12,15 +12,16 @@
 .barHolder:hover .tooltip {
     visibility: visible;
 }
-.tooltip text {
+.barHolder .tooltip text {
     fill: #9330ff;
-    font-size: 12px;
+    font-size: 10px;
     font-family: Avenir, sans-serif;
     font-weight: bold;
 }
 .tooltip rect {
     fill: #ececec;
     stroke: #ececec;
+    height: 18px;
 }
 
 .graphWrapper {
@@ -45,36 +46,18 @@
     justify-content: space-between;
     align-self: center;
 }
+.circulateSimpleBarsWrapper {
+    margin: 30px;
+}
 .circulateSimpleBars {
-    padding: 20px 60px 0 50px;
     overflow: overlay;
-    margin: 20px;
-}
-
-.xAxisDate {
-    display: flex;
-    justify-items: center;
-    margin: 20px 20px 8px 70px;
-    justify-content: space-between;
-    color: #adadad;
-}
-
-.xAxisDate .tick {
-    font-family: Avenir, sans-serif;
-    font-size: 14px;
-    display: flex;
-    color: #adadad;
+    margin: 30px;
+    width: 100%;
+    height: auto;
 }
 
 .yAxisLabel {
     font-family: Avenir, sans-serif;
     font-size: 14px;
     transform: rotate(270deg);
-}
-
-.xAxisLabel {
-    font-family: Avenir, sans-serif;
-    font-size: 12px;
-    text-align: center;
-    color: #bababa;
 }
