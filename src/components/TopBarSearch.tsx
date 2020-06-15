@@ -3,7 +3,8 @@ import { ReactComponent as Search } from '../assets/search.svg';
 
 import './TopBarSearch.css';
 
-export default function TopBarSearch() {
+export default function TopBarSearch({ match }) {
+const { id } = match;
     let id, timer;
 
     function onChange(e) {
