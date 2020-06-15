@@ -1,11 +1,12 @@
 import BlockCard from './BlockCard';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-function LatestBlocks({ blocks }: { blocks: any[] }) {
-    const [latestBlocks, setLatestBlocks] = useState([] as any);
+import { BlocksEntity } from '../helpers/Blocks';
+function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
+    const [latestBlocks, setLatestBlocks] = useState([] as BlocksEntity[]);
     useEffect(() => {
         blocks.sort((a, b) => b.block.header.height - a.block.header.height);
-        setLatestBlocks(blocks);
+        setLatestBlocks(blocks as BlocksEntity[]);
     }, [blocks]);
 
     return (
