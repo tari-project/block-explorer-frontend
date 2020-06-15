@@ -7,3 +7,7 @@
     font-family: Avenir, sans-serif;
     font-size: 30px;
 }
+
+.SingleBlock a {
+    text-decoration: none;
+}

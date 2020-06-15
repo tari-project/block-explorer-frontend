@@ -3,13 +3,14 @@ import './SingleBlock.css';
 import {
     useParams
 } from "react-router-dom";
-import {Constants, fetchConstants, fetchSingleBlock} from "../helpers/api";
+import {Constants, fetchConstantsData, fetchSingleBlock} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
 import { connect } from 'react-redux';
 import ProgressBar from "./SingleBlock/ProgressBar";
 import ClusterGraph from "./Graphs/ClusterGraph";
 import {Block, BlocksEntity, Body, Header, Pow} from "../helpers/Blocks";
+import { Link } from "react-router-dom";
 
 interface Props {
     block: BlocksEntity[];
@@ -42,7 +43,7 @@ function SingleBlock({ block }: Props) {
 
     useEffect(() => {
         try {
-            id && fetchConstants().then((constants: Constants) => {
+            id && fetchConstantsData().then((constants: Constants) => {
                 setConstants(constants as Constants);
             });
         } catch (e) {
@@ -93,8 +94,12 @@ function SingleBlock({ block }: Props) {
                     <h1>Technical Details</h1>
                     <StatRow label="Accumulated Monero Difficulty" value={accumulated_monero_difficulty} />
                     <StatRow label="Accumulated Blake Difficulty" value={accumulated_blake_difficulty} />
-                    <StatRow label="Previous Hash" value={prev_hash} />
-                    <StatRow label="Hash" value={hash} />
+                    <Link to={`/block/${prev_hash}`}>
+                        <StatRow label="Previous Hash" value={prev_hash} />
+                    </Link>
+                    <Link to={`/block/${hash}`}>
+                        <StatRow label="Hash" value={hash} />
+                    </Link>
                     <StatRow label="Nonce" value={nonce} />
                     <StatRow label="Total Kernel Offset" value={total_kernel_offset} />
                     <StatRow label="Version" value={version} />

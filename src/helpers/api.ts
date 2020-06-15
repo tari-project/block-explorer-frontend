@@ -1,6 +1,6 @@
 import config from '../config';
 import { addBlock, addMetadata } from '../store/actions';
-import { Blocks, BlocksEntity } from './Blocks';
+import {Block, Blocks, BlocksEntity} from './Blocks';
 
 const { apiUrl, wsUrl } = config;
 export interface ChainMetadata {
@@ -78,10 +78,10 @@ export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimat
 }
 
 export interface SingleBlockData {
-    block: any;
+    block: Block;
 }
 
-export async function fetchSingleBlock(blockId: string|number): Promise<SingleBlockData> {
+export async function fetchSingleBlock(blockId: Block): Promise<SingleBlockData> {
     try {
         const response = await fetch(`${apiUrl}/block/${blockId}`);
         return await response.json()
@@ -109,7 +109,7 @@ export interface Constants {
   block_weight_kernels: number;
 }
 
-export async function fetchConstants(): Promise<Constants> {
+export async function fetchConstantsData(): Promise<Constants> {
     const response = await fetch(`${apiUrl}/constants`);
     return await response.json();
 }

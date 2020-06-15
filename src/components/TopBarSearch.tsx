@@ -19,7 +19,7 @@ function TopBarSearch({ history }) {
 
     return (
         <div className="TopBar-searchBar">
-            <input type="text" value={id || ''} placeholder="Search for a specific block or transaction" onKeyUp={onChange} />
+            <input type="text" defaultValue={id || ''} placeholder="Search for a specific block or transaction" onKeyUp={onChange} />
             <Search className="searchBarIcon" />
         </div>
     );

@@ -5,7 +5,7 @@ import {
     NetworkDifficultyEstimatedHashes,
     fetchSingleBlock,
     Constants,
-    fetchConstants
+    fetchConstantsData
 } from '../../helpers/api';
 import { Blocks, BlocksEntity } from '../../helpers/Blocks';
 
@@ -72,9 +72,9 @@ export function fetchBlock(blockId?) {
     };
 }
 
-export function fetchConstant() {
+export function fetchConstants() {
     return function (dispatch) {
-        fetchConstants().then((constant: Constants) => {
+        fetchConstantsData().then((constant: Constants) => {
             dispatch(addConstant(constant as Constants));
         });
     };
