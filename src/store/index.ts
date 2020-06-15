@@ -8,5 +8,4 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 store.dispatch(fetchBlocks(config.initialBlockCount));
 store.dispatch(fetchMetadata());
 store.dispatch(fetchDifficulties());
-store.dispatch(fetchBlock());
 export default store;
