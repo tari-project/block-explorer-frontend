@@ -28,12 +28,8 @@ export default function App() {
                     <SideBar />
                     <div className="App-content-mainArea">
                         <Switch>
-                            <Route exact path="/">
-                                <BlockExplorer />
-                            </Route>
-                            <Route path="/block/:id">
-                                <SingleBlock/>
-                            </Route>
+                            <Route exact path="/" component={BlockExplorer}/>
+                            <Route path="/block/:id" component={SingleBlock}/>
                         </Switch>
                     </div>
                 </div>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { ReactComponent as Search } from '../assets/search.svg';
-
 import './TopBarSearch.css';
+import { withRouter } from 'react-router-dom';
 
-export default function TopBarSearch({ match }) {
-const { id } = match;
-    let id, timer;
+function TopBarSearch({ history }) {
+    let timer;
+    const id = history.location.pathname.split('/').pop();
 
     function onChange(e) {
         const searchValue = e.target.value;
@@ -17,10 +17,6 @@ const { id } = match;
         }, 1000);
     }
 
-    if(document.URL.indexOf("block") >= 0){
-        id = window.location.pathname.split("/").pop();
-    }
-
     return (
         <div className="TopBar-searchBar">
             <input type="text" defaultValue={id || ''} placeholder="Search for a specific block height or hash" onKeyUp={onChange}/>
@@ -28,3 +24,5 @@ const { id } = match;
         </div>
     );
 }
+
+export default withRouter(TopBarSearch);

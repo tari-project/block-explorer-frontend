@@ -5,10 +5,10 @@ import {
 } from "react-router-dom";
 import {fetchSingleBlock, SingleBlockData} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
-import SingleBlockClusterGraph from "./SingleBlock/SingleBlockClusterGraph";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
 import { connect } from 'react-redux';
 import ProgressBar from "./SingleBlock/ProgressBar";
+import ClusterGraph from "./Graphs/ClusterGraph";
 
 interface Props {
     block?: any;
@@ -47,7 +47,26 @@ function SingleBlock({ block }: Props) {
     const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
     const { inputs, kernels, outputs } = blockBody;
 
-    singleBlockDataArray.push({inputs, kernels, outputs});
+    inputs && inputs.forEach(i => {
+        i.group = 'inputs';
+        i.color = '#F97C0C';
+        i.size = inputs.length;
+        singleBlockDataArray.push(i);
+    });
+
+    kernels && kernels.forEach(i => {
+        i.group = 'kernels';
+        i.color = '#FB576D';
+        i.size = kernels.length;
+        singleBlockDataArray.push(i);
+    });
+
+    outputs && outputs.forEach((i) => {
+        i.group = 'outputs';
+        i.color = '#2274AF';
+        i.size = outputs.length;
+        singleBlockDataArray.push(i);
+    });
 
     const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
 
@@ -56,7 +75,7 @@ function SingleBlock({ block }: Props) {
             {blockFound ? (
                 <div>
                     <SingleBlockViewHeader title="Block Data"/>
-                    <SingleBlockClusterGraph data={singleBlockDataArray}/>
+                    <ClusterGraph data={singleBlockDataArray} width={1000} height={400} />
                     <ProgressBar weight={blockWeight}/>
                     <h1>Mining Details</h1>
                     <StatRow label="Timestamp" value={date} />
