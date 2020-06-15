@@ -257,7 +257,7 @@ function Bar({
 
     return (
         <g key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 30},${height - totalHeight - 30})`}>
+            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 30})`}>
                 <rect rx="3" />
                 <text x="4" y="10" xmlSpace="preserve" textAnchor="start">
                     {leftPad(timeAgo, 14, ' ')}
