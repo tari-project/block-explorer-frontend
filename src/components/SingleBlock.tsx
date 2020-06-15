@@ -3,7 +3,7 @@ import './SingleBlock.css';
 import {
     useParams
 } from "react-router-dom";
-import {fetchSingleBlock, SingleBlockData} from "../helpers/api";
+import {Constants, fetchConstants, fetchSingleBlock, SingleBlockData} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
 import { connect } from 'react-redux';
@@ -23,6 +23,7 @@ function SingleBlock({ block }: Props) {
     const [blockBody, setblockBody] = useState(([] as unknown) as any);
     const [blockFound, setBlockFound] = useState(([] as unknown) as any);
     const [blockWeight, setBlockWeight] = useState('...');
+    const [maxBlockWeight, setMaxBlockWeight] = useState(([] as unknown) as any);
 
     useEffect(() => {
         try {
@@ -35,6 +36,16 @@ function SingleBlock({ block }: Props) {
                 } else {
                     setBlockFound(false);
                 }
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        try {
+            id && fetchConstants().then((constants: Constants) => {
+                setMaxBlockWeight(constants.max_block_transaction_weight);
             });
         } catch (e) {
             console.error(e);
@@ -76,7 +87,7 @@ function SingleBlock({ block }: Props) {
                 <div>
                     <SingleBlockViewHeader title="Block Data"/>
                     <ClusterGraph data={singleBlockDataArray} width={1000} height={400} />
-                    <ProgressBar weight={blockWeight}/>
+                    <ProgressBar weight={blockWeight} maxWeight={maxBlockWeight}/>
                     <h1>Mining Details</h1>
                     <StatRow label="Timestamp" value={date} />
                     <h1>Technical Details</h1>

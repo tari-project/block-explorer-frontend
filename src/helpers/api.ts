@@ -92,3 +92,13 @@ export async function fetchSingleBlock(blockId: string|number): Promise<SingleBl
         return e;
     }
 }
+
+export interface Constants {
+    max_block_transaction_weight: number;
+}
+
+export async function fetchConstants(): Promise<Constants> {
+    const response = await fetch(`${apiUrl}/constants`);
+    return await response.json();
+}
+

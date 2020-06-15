@@ -3,13 +3,14 @@ import './ProgressBar.css';
 
 interface Props {
     weight: any;
+    maxWeight: number;
 }
 
-export default function ProgressBar({ weight }: Props) {
+export default function ProgressBar({ weight, maxWeight }: Props) {
     return (
         <div className="ProgressBarContainer">
             <h3><strong>Weight: </strong> {weight}</h3>
-            <progress value={weight} max="19500" />
+            <progress value={weight} max={maxWeight} />
         </div>
     );
 }
