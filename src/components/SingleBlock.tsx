@@ -58,7 +58,7 @@ function SingleBlock({ block }: Props) {
     const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
     const { inputs, kernels, outputs } = blockBody;
 
-    inputs && inputs.forEach(i => {
+   inputs.forEach(i => {
         i.group = 'inputs';
         i.color = '#F97C0C';
         i.size = inputs.length;
