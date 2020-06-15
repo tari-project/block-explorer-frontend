@@ -3,6 +3,7 @@ import './HeroGraph.css';
 import { ReactComponent as Bars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
 import { leftPad } from '../../helpers/leftPad';
+import * as timeago from 'timeago.js';
 
 interface Props {
     blocks: any[];
@@ -18,6 +19,7 @@ interface HeightBar {
     outputs: number;
     kernels: number;
     total: number;
+    timestamp: number;
 }
 
 const dimensions = {
@@ -28,7 +30,7 @@ const dimensions = {
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
-    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0 };
+    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0, timestamp: 0 };
     values.forEach((values: HeightBar) => {
         const keys = ['inputs', 'outputs', 'kernels', 'total'];
         keys.forEach((key) => {
@@ -62,12 +64,14 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
         const outputs = body.outputs.length;
         const kernels = body.kernels.length;
         const heights = header.height;
+        const timestamp = header.timestamp.seconds;
         return {
             inputs: inputs,
             outputs: outputs,
             kernels: kernels,
             total: inputs + outputs + kernels,
-            blockHeight: heights
+            blockHeight: heights,
+            timestamp: timestamp
         };
     });
 
@@ -109,21 +113,16 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
         return nums;
     }
 
-    function getTimeTicks() {
-        const ticksAmount = 6;
-        const today = new Date();
-        const ticks: any[] = [];
-
-        for (let i = 0; i < ticksAmount; i++) {
-            const less = today.setMinutes(today.getMinutes() - 5);
-            const newt = new Date(less);
-            const minutes = newt.getMinutes() < 10 ? `0${newt.getMinutes()}` : newt.getMinutes();
-            const hours = newt.getHours() < 10 ? `0${newt.getHours()}` : newt.getHours();
-            const time = hours + ':' + minutes;
-            ticks.push(time);
+    function renderXAxis() {
+        const nums: Array<any> = [];
+        for (let i = 0; i < blocksData.length; i += 10) {
+            nums.push(
+                <div key={i} className="tick">
+                    {blocksData[i].blockHeight}
+                </div>
+            );
         }
-
-        return ticks;
+        return nums;
     }
     return (
         <div className="HeroGraphContainer">
@@ -138,15 +137,7 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
 
                 <Chart values={blocksData} maxHeights={maxHeights} aniClass={firstChildClass} />
             </svg>
-            <div className="xAxisTimes">
-                {getTimeTicks().map((time, index) => {
-                    return (
-                        <div key={index} className="tick">
-                            {time}
-                        </div>
-                    );
-                })}
-            </div>
+            <div className="xAxisTimes">{renderXAxis()}</div>
         </div>
     );
 }
@@ -161,8 +152,10 @@ interface GraphicalElementProps {
     offset: number;
     maxHeights: HeightBar;
     blockHeight: number;
+    timestamp: number;
     aniClass: string;
 }
+
 function Chart({
     values,
     maxHeights,
@@ -175,7 +168,7 @@ function Chart({
     const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels, blockHeight } = heights;
+        const { inputs, outputs, kernels, blockHeight, timestamp } = heights;
         const { total: maxTotal } = maxHeights;
 
         let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
@@ -193,6 +186,7 @@ function Chart({
             outputs: outputPercent,
             kernels: kernelsPercent,
             blockHeight: blockHeight,
+            timestamp: timestamp,
             total: 0
         };
     }
@@ -219,6 +213,7 @@ function Chart({
                         kernelsVal={heights.kernels}
                         maxHeights={maxHeights}
                         blockHeight={heights.blockHeight}
+                        timestamp={heights.timestamp}
                         aniClass={aniClass}
                     />
                 );
@@ -235,6 +230,7 @@ function Bar({
     outputsVal,
     kernelsVal,
     blockHeight,
+    timestamp,
     aniClass
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
@@ -257,16 +253,18 @@ function Bar({
         return leftPad(text, 13, ' ');
     }
 
+    const timeAgo = timeago.format(timestamp * 1000);
+
     return (
         <g key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 30},${height - totalHeight - 25})`}>
+            <g className="tooltip total" transform={`translate(${offset - 30},${height - totalHeight - 30})`}>
                 <rect rx="3" />
-                <text x="4" y="10">
-                    {blockHeight}
+                <text x="4" y="10" xmlSpace="preserve" textAnchor="start">
+                    {leftPad(timeAgo, 14, ' ')}
                 </text>
             </g>
             <g id="kernels">
-                <g className="tooltip" transform={`translate(${offset - 65},${height - kernelHeight - 25})`}>
+                <g className="tooltip" transform={`translate(${offset - 65},${height - kernelHeight - 20})`}>
                     <rect rx="3" />
                     <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
                         {getTooltipText(kernelsVal, 'kernel')}
