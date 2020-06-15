@@ -6,13 +6,14 @@ import {
     fetchSingleBlock,
     SingleBlockData
 } from '../../helpers/api';
+import { Blocks, BlocksEntity } from '../../helpers/Blocks';
 
 export const ADD_METADATA = 'ADD_METADATA';
 export const ADD_BLOCK = 'ADD_BLOCK';
 export const ADD_DIFFICULTY = 'ADD_DIFFICULTY';
 export const ADD_SINGLE_BLOCK = 'ADD_SINGLE_BLOCK';
 
-export const addBlock = (blocks = []) => ({
+export const addBlock = (blocks: BlocksEntity[] = []) => ({
     type: ADD_BLOCK,
     blocks
 });
@@ -34,8 +35,8 @@ export const addSingleBlock = (block: SingleBlockData) => ({
 
 export function fetchBlocks(limit: number) {
     return function (dispatch) {
-        fetchBlocksData(limit).then((blocks) => {
-            dispatch(addBlock(blocks.blocks as any));
+        fetchBlocksData(limit).then((blocks: Blocks) => {
+            dispatch(addBlock(blocks.blocks));
         });
     };
 }

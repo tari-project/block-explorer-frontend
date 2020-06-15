@@ -19,8 +19,8 @@ function TopBarSearch({ history }) {
 
     return (
         <div className="TopBar-searchBar">
-            <input type="text" defaultValue={id || ''} placeholder="Search for a specific block height or hash" onKeyUp={onChange}/>
-            <Search className="searchBarIcon"/>
+            <input type="text" placeholder="Search for a specific block or transaction" onKeyUp={onChange} />
+            <Search className="searchBarIcon" />
         </div>
     );
 }
