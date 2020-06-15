@@ -1,5 +1,6 @@
 import config from '../config';
 import { addBlock, addMetadata } from '../store/actions';
+import { Blocks, BlocksEntity } from './Blocks';
 
 const { apiUrl, wsUrl } = config;
 export interface ChainMetadata {
@@ -18,11 +19,7 @@ export async function fetchChainMetadata(): Promise<ChainMetadata> {
     return await response.json();
 }
 
-interface BlocksData {
-    blocks: any[];
-}
-
-export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Promise<BlocksData> {
+export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Promise<Blocks> {
     const response = await fetch(`${apiUrl}/blocks?limit=${limit}&sort=${sort}&page=${page}`);
     const blocks = await response.json();
     if (sort === 'desc') {
@@ -50,10 +47,10 @@ export function setupWebsockets(store) {
         const msg: any = JSON.parse(event.data);
         switch (msg.type) {
             case 'newBlock':
-                store.dispatch(addBlock([msg.data] as any));
+                store.dispatch(addBlock([msg.data] as BlocksEntity[]));
                 break;
             case 'metadata':
-                store.dispatch(addMetadata(msg.data as any));
+                store.dispatch(addMetadata(msg.data as ChainMetadata));
                 break;
         }
     };
