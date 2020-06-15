@@ -4,7 +4,8 @@ import {
     fetchNetworkDifficulty,
     NetworkDifficultyEstimatedHashes,
     fetchSingleBlock,
-    SingleBlockData
+    SingleBlockData, Constants,
+    fetchConstants
 } from '../../helpers/api';
 import { Blocks, BlocksEntity } from '../../helpers/Blocks';
 
@@ -12,6 +13,7 @@ export const ADD_METADATA = 'ADD_METADATA';
 export const ADD_BLOCK = 'ADD_BLOCK';
 export const ADD_DIFFICULTY = 'ADD_DIFFICULTY';
 export const ADD_SINGLE_BLOCK = 'ADD_SINGLE_BLOCK';
+export const ADD_CONSTANT = 'ADD_CONSTANT';
 
 export const addBlock = (blocks: BlocksEntity[] = []) => ({
     type: ADD_BLOCK,
@@ -31,6 +33,11 @@ export const addDifficulty = (difficulties: NetworkDifficultyEstimatedHashes = [
 export const addSingleBlock = (block: SingleBlockData) => ({
     type: ADD_SINGLE_BLOCK,
     block
+});
+
+export const addConstant = (constant: Constants) => ({
+    type: ADD_CONSTANT,
+    constant
 });
 
 export function fetchBlocks(limit: number) {
@@ -61,6 +68,14 @@ export function fetchBlock(blockId?) {
     return function (dispatch) {
         fetchSingleBlock(blockId).then((block) => {
             dispatch(addSingleBlock(block as any));
+        });
+    };
+}
+
+export function fetchConstant() {
+    return function (dispatch) {
+        fetchConstants().then((constant: Constants) => {
+            dispatch(addConstant(constant as Constants));
         });
     };
 }

@@ -3,38 +3,36 @@ import './SingleBlock.css';
 import {
     useParams
 } from "react-router-dom";
-import {Constants, fetchConstants, fetchSingleBlock, SingleBlockData} from "../helpers/api";
+import {Constants, fetchConstants, fetchSingleBlock} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
 import { connect } from 'react-redux';
 import ProgressBar from "./SingleBlock/ProgressBar";
 import ClusterGraph from "./Graphs/ClusterGraph";
+import {Block, BlocksEntity, Body, Header, Pow} from "../helpers/Blocks";
 
 interface Props {
-    block?: any;
+    block: BlocksEntity[];
 }
 
 function SingleBlock({ block }: Props) {
 
     const { id } = useParams();
 
-    const [blockHeader, setblockHeader] = useState(([] as unknown) as any);
-    const [blockPow, setblockPow] = useState(([] as unknown) as any);
-    const [blockBody, setblockBody] = useState(([] as unknown) as any);
-    const [blockFound, setBlockFound] = useState(([] as unknown) as any);
-    const [blockWeight, setBlockWeight] = useState('...');
-    const [maxBlockWeight, setMaxBlockWeight] = useState(([] as unknown) as any);
+    const [singleBlock, setSingleBlock] = useState({} as Block);
+    const [blockHeader, setblockHeader] = useState({} as Header);
+    const [blockPow, setblockPow] = useState({} as Pow);
+    const [blockBody, setblockBody] = useState({} as Body);
+    const [constants, setConstants] = useState({} as Constants);
 
     useEffect(() => {
         try {
-            id && fetchSingleBlock(id).then((block: SingleBlockData) => {
+            id && fetchSingleBlock(id).then((block) => {
                 if(block && block.block) {
-                    setblockHeader(block.block.header);
-                    setblockPow(block.block.header.pow);
-                    setblockBody(block.block.body);
-                    setBlockWeight(block.block._miningTime)
-                } else {
-                    setBlockFound(false);
+                    setSingleBlock(block.block);
+                    setblockHeader(block.block.header as Header);
+                    setblockPow(block.block.header.pow as Pow);
+                    setblockBody(block.block.body as Body);
                 }
             });
         } catch (e) {
@@ -45,7 +43,7 @@ function SingleBlock({ block }: Props) {
     useEffect(() => {
         try {
             id && fetchConstants().then((constants: Constants) => {
-                setMaxBlockWeight(constants.max_block_transaction_weight);
+                setConstants(constants as Constants);
             });
         } catch (e) {
             console.error(e);
@@ -56,7 +54,7 @@ function SingleBlock({ block }: Props) {
 
     const { hash, prev_hash, nonce, total_kernel_offset, version, timestamp } = blockHeader;
     const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
-    const { inputs, kernels, outputs } = blockBody;
+    const { inputs = [], kernels = [], outputs =[] } = blockBody;
 
    inputs.forEach(i => {
         i.group = 'inputs';
@@ -80,14 +78,16 @@ function SingleBlock({ block }: Props) {
     });
 
     const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
+    const { _weight } = singleBlock;
+    const { max_block_transaction_weight } = constants;
 
     return (
         <div className="SingleBlock">
-            {blockFound ? (
+            {blockBody ? (
                 <div>
                     <SingleBlockViewHeader title="Block Data"/>
                     <ClusterGraph data={singleBlockDataArray} width={1000} height={400} />
-                    <ProgressBar weight={blockWeight} maxWeight={maxBlockWeight}/>
+                    <ProgressBar weight={_weight} maxWeight={max_block_transaction_weight}/>
                     <h1>Mining Details</h1>
                     <StatRow label="Timestamp" value={date} />
                     <h1>Technical Details</h1>

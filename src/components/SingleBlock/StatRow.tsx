@@ -3,7 +3,7 @@ import './StatRow.css';
 
 interface StatProps {
     label: string;
-    value: string;
+    value: any;
 }
 
 export default function StatRow({ label, value }: StatProps) {
