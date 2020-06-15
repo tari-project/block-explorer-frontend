@@ -3,28 +3,35 @@ import './SingleBlock.css';
 import {
     useParams
 } from "react-router-dom";
-import {fetchBlocksData} from "../helpers/api";
+import {fetchSingleBlock} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
 import SingleBlockClusterGraph from "./SingleBlockClusterGraph";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
+import { connect } from 'react-redux';
 
-export default function SingleBlock() {
+interface Props {
+    block?: any;
+}
 
-    let { id } = useParams();
+function SingleBlock({ block }: Props) {
+
+    const { id } = useParams();
 
     const [blockHeader, setblockHeader] = useState(([] as unknown) as any);
     const [blockPow, setblockPow] = useState(([] as unknown) as any);
     const [blockBody, setblockBody] = useState(([] as unknown) as any);
+    const [blockFound, setBlockFound] = useState(([] as unknown) as any);
 
     useEffect(() => {
         try {
-            fetchBlocksData(1, "asc", Number(id)).then((blockData) => {
-                blockData.blocks.map((data) => {
-                    setblockHeader(data.block.header);
-                    setblockPow(data.block.header.pow);
-                    setblockBody(data.block.body);
-                    return data;
-                });
+            id && fetchSingleBlock(id).then((block: any) => {
+                if(block && block.block) {
+                    setblockHeader(block.block.header);
+                    setblockPow(block.block.header.pow);
+                    setblockBody(block.block.body);
+                } else {
+                    setBlockFound(false);
+                }
             });
         } catch (e) {
             console.error(e);
@@ -41,16 +48,27 @@ export default function SingleBlock() {
 
     return (
         <div className="SingleBlock">
-            <SingleBlockViewHeader title="Block Data"/>
-            <SingleBlockClusterGraph data={singleBlockDataArray}/>
-            <h1>Technical Details</h1>
-            <StatRow label="Accumulated Monero Difficulty" value={accumulated_monero_difficulty} />
-            <StatRow label="Accumulated Blake Difficulty" value={accumulated_blake_difficulty} />
-            <StatRow label="Previous Hash" value={prev_hash} />
-            <StatRow label="Hash" value={hash} />
-            <StatRow label="Nonce" value={nonce} />
-            <StatRow label="Total Kernel Offset" value={total_kernel_offset} />
-            <StatRow label="Version" value={version} />
+            {blockFound ? (
+                <div>
+                    <SingleBlockViewHeader title="Block Data"/>
+                    <SingleBlockClusterGraph data={singleBlockDataArray}/>
+                    <h1>Technical Details</h1>
+                    <StatRow label="Accumulated Monero Difficulty" value={accumulated_monero_difficulty} />
+                    <StatRow label="Accumulated Blake Difficulty" value={accumulated_blake_difficulty} />
+                    <StatRow label="Previous Hash" value={prev_hash} />
+                    <StatRow label="Hash" value={hash} />
+                    <StatRow label="Nonce" value={nonce} />
+                    <StatRow label="Total Kernel Offset" value={total_kernel_offset} />
+                    <StatRow label="Version" value={version} />
+                </div>
+            ) : (
+                <h1 className="noBlockFound">No block found.</h1>
+            )}
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    block: state.block
+});
+export default connect(mapStateToProps)(SingleBlock);
