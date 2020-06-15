@@ -26,7 +26,7 @@ export const addDifficulty = (difficulties: NetworkDifficultyEstimatedHashes = [
     difficulties
 });
 
-export const addSingleBlock = (block = []) => ({
+export const addSingleBlock = (block: SingleBlock = {}) => ({
     type: ADD_SINGLE_BLOCK,
     block
 });
