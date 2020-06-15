@@ -4,7 +4,7 @@ import {
     fetchNetworkDifficulty,
     NetworkDifficultyEstimatedHashes,
     fetchSingleBlock,
-    SingleBlockData, Constants,
+    Constants,
     fetchConstants
 } from '../../helpers/api';
 import { Blocks, BlocksEntity } from '../../helpers/Blocks';
@@ -30,7 +30,7 @@ export const addDifficulty = (difficulties: NetworkDifficultyEstimatedHashes = [
     difficulties
 });
 
-export const addSingleBlock = (block: SingleBlockData) => ({
+export const addSingleBlock = (block: BlocksEntity[]) => ({
     type: ADD_SINGLE_BLOCK,
     block
 });
