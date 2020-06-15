@@ -43,11 +43,13 @@ function SingleBlock({ block }: Props) {
 
     const singleBlockDataArray: any[] = [];
 
-    const { hash, prev_hash, nonce, total_kernel_offset, version } = blockHeader;
+    const { hash, prev_hash, nonce, total_kernel_offset, version, timestamp } = blockHeader;
     const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
     const { inputs, kernels, outputs } = blockBody;
 
     singleBlockDataArray.push({inputs, kernels, outputs});
+
+    const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
 
     return (
         <div className="SingleBlock">
@@ -56,6 +58,8 @@ function SingleBlock({ block }: Props) {
                     <SingleBlockViewHeader title="Block Data"/>
                     <SingleBlockClusterGraph data={singleBlockDataArray}/>
                     <ProgressBar weight={blockWeight}/>
+                    <h1>Mining Details</h1>
+                    <StatRow label="Timestamp" value={date} />
                     <h1>Technical Details</h1>
                     <StatRow label="Accumulated Monero Difficulty" value={accumulated_monero_difficulty} />
                     <StatRow label="Accumulated Blake Difficulty" value={accumulated_blake_difficulty} />
