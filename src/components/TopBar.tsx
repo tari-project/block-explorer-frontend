@@ -6,6 +6,7 @@ import './TopBar.css';
 import TopBarItem from './TopBarItem';
 import TopBarSearch from './TopBarSearch';
 import { ChainMetadata } from '../helpers/api';
+import {Link} from 'react-router-dom';
 
 function TopBar({ metadata }: { metadata: ChainMetadata }) {
     const [blockHeight, setBlockHeight] = useState('...');
@@ -38,7 +39,9 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
     return (
         <div className="TopBar">
             <div className="TopBar-logoContainer">
+                <Link to="/">
                 <Logo fill="#9330ff" />
+                </Link>
             </div>
             <div className="TopBar-searchContainer">
                 <TopBarSearch />
