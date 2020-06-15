@@ -65,7 +65,7 @@ function SingleBlock({ block }: Props) {
         singleBlockDataArray.push(i);
     });
 
-    kernels && kernels.forEach(i => {
+   kernels.forEach(i => {
         i.group = 'kernels';
         i.color = '#FB576D';
         i.size = kernels.length;
