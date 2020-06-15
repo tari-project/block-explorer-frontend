@@ -36,6 +36,6 @@ export default function SingleBlockClusterGraph({ data }: Props) {
     }
 
     return (
-        <ClusterGraph data={singleBlockDataArray} width={800} height={400} />
+        <ClusterGraph data={singleBlockDataArray} width={600} height={400} />
     )
 }

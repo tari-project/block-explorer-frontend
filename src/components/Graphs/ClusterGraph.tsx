@@ -1,6 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import './ClusterGraph.css';
+import numeral from "numeral";
 
 interface Props {
     data: any;
@@ -33,6 +34,7 @@ export default function ClusterGraph({ width, height, data }: Props) {
                 return radiusScale(d.size) * 4 + 1;
             })
         );
+
 
     function ready(dataPoints) {
         const svg = d3
@@ -74,5 +76,36 @@ export default function ClusterGraph({ width, height, data }: Props) {
 
     data && data.length > 0 && ready(data);
 
-    return <div id="chart"/>;
+    return (
+        <div className="cluster graphWrapper">
+            <svg
+                viewBox={`0 0 ${width} ${height}`}
+                preserveAspectRatio="xMidYMid meet"
+                className="clusterBubbleGraph"
+                height={height}
+                width={width}
+            >
+                {data.map((item, i) => {
+                    const xSpace = item.group === 'inputs' ? width/2 : item.group === 'kernels' ? width/2 + 80 : width/2 + 100;
+                    return (
+                        <g key={i} className="bubbleHolder">
+                            {/*<g className="tooltip shapeHolder" opacity="0.9">*/}
+                            {/*    <rect rx={3} x={xSpace} y={item.y + 50} width={radiusScale(item.size) * 10} />*/}
+                            {/*    <text x={xSpace} y={item.y + 60}>*/}
+                            {/*        {item.head.hash}*/}
+                            {/*    </text>*/}
+                            {/*</g>*/}
+                            <circle
+                             className="bubble"
+                             r={radiusScale(item.size) * 4}
+                             fill={item.color}
+                             cx={xSpace}
+                             cy={100}
+                            />
+                        </g>
+                    );
+                })}
+            </svg>
+        </div>
+    );
 }
