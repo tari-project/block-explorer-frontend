@@ -84,7 +84,7 @@ export interface SingleBlock {
     block: any|null|string;
 }
 
-export async function fetchSingleBlock(blockId: string|number): Promise<SingleBlock> {
+export async function fetchSingleBlock(blockId: string|number): SingleBlock {
     try {
         const response = await fetch(`${apiUrl}/block/${blockId}`);
         return await response.json()
