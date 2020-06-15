@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import {fetchSingleBlock, SingleBlockData} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
-import SingleBlockClusterGraph from "./SingleBlockClusterGraph";
+import SingleBlockClusterGraph from "./SingleBlock/SingleBlockClusterGraph";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
 import { connect } from 'react-redux';
 import ProgressBar from "./SingleBlock/ProgressBar";
