@@ -1,7 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3';
 import './ClusterGraph.css';
-import numeral from "numeral";
 
 interface Props {
     data: any;
