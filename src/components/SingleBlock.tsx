@@ -72,7 +72,7 @@ function SingleBlock({ block }: Props) {
         singleBlockDataArray.push(i);
     });
 
-    outputs && outputs.forEach((i) => {
+   outputs.forEach((i) => {
         i.group = 'outputs';
         i.color = '#2274AF';
         i.size = outputs.length;
