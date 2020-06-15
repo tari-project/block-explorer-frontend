@@ -13,7 +13,7 @@ if [[ -z "$SERVE" ]]; then
     DOCKER_VAL=$(echo $line | cut -d= -f2)
     # Replace the DOCKER_VAL with the supplied value in the ENV key set by ${!KEY}
     # ## ${!KEY} expands the value in $KEY and pulls the environment variable defined by the _value_ of $KEY
-    egrep -lRZ "${DOCKER_VAL}" /app/dist | xargs -0 sed -i -e "s/${DOCKER_VAL}/${!KEY}/g"
+    egrep -lRZ "${DOCKER_VAL}" /app/dist | xargs -0 sed -i -e "s~${DOCKER_VAL}~${!KEY}~g"
   done < .env
 
 else
