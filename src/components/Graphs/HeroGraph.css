@@ -9,11 +9,8 @@
     display: flex;
     justify-items: center;
     margin-bottom: 2rem;
-
-    /*padding: 0 20px 20px 60px;*/
     justify-content: space-between;
 }
-
 .xAxisTimes {
     width: 100%;
 }
@@ -23,96 +20,92 @@
     display: flex;
     color: #adadad;
 }
-
 .heroYAxisText {
     font-family: Avenir, sans-serif;
     font-size: 0.6em;
 }
-
 .heroBars {
     margin-bottom: 2rem;
-    /*padding: 10px 20px 0 60px;*/
     overflow: overlay;
     width: 100%;
     height: auto;
 }
+
+/*block height tooltip*/
+
+.overviewBars .tooltip.total rect {
+    fill: #ececec;
+    stroke: #ececec;
+    width: 35px;
+    height: 13px;
+}
+
+.overviewBars .tooltip text {
+    fill: #9330ff;
+    font-size: 9px;
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
+}
+.overviewBars .tooltip.total {
+    visibility: hidden;
+    transition: visibility 0.25s ease-in-out;
+}
+.overviewBars:hover .tooltip.total {
+    visibility: visible;
+}
+
+/*block height tooltip end*/
+
+/*bars tooltips*/
 
 .overviewBars .tooltip {
     display: flex;
     align-items: center;
 }
 
-.overviewBars .tooltip.total rect {
-    fill: #ececec;
-    stroke: #ececec;
-    width: 45px;
-    height: 22px;
-}
-
 .overviewBars .tooltip rect {
     fill: #ececec;
     stroke: #ececec;
-    width: 83px;
-    height: 22px;
+    width: 63px;
+    height: 15px;
 }
 
-.overviewBars .tooltip.total {
-    visibility: hidden;
-    transition: visibility 0.25s ease-in-out;
+#inputs .tooltip text,
+#outputs .tooltip text,
+#kernels .tooltip text {
+    font-size: 9px;
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
 }
 
-.overviewBars:hover .tooltip.total {
-    visibility: visible;
-}
-
-.overviewBars.first {
-    transition: all 3s ease-in-out;
-}
-
+#inputs .tooltip,
+#outputs .tooltip,
 #kernels .tooltip {
     visibility: hidden;
     transition: visibility 0.25s ease-in-out;
 }
+
+#inputs:hover .tooltip,
+#outputs:hover .tooltip,
 #kernels:hover .tooltip {
     visibility: visible;
 }
 
 #kernels .tooltip text {
     fill: #9330ff;
-    font-size: 12px;
-    font-family: Avenir, sans-serif;
-    font-weight: bold;
 }
-
-#inputs .tooltip {
-    visibility: hidden;
-
-    transition: visibility 0.25s ease-in-out;
-}
-#inputs:hover .tooltip {
-    visibility: visible;
-}
-
-#inputs .tooltip text {
-    fill: #ff7630;
-    font-size: 12px;
-    font-family: Avenir, sans-serif;
-    font-weight: bold;
-}
-
-#outputs .tooltip {
-    visibility: hidden;
-    transition: visibility 0.25s ease-in-out;
-}
-#outputs:hover .tooltip {
-    visibility: visible;
-}
-
 #outputs .tooltip text {
     fill: #b4c9f5;
-    font-size: 12px;
-    font-family: Avenir, sans-serif;
-    font-weight: bold;
+}
+#inputs .tooltip text {
+    fill: #ff7630;
+}
+/*bars tt end*/
+
+/*animation*/
+
+.overviewBars.first {
+    transition: all 3s ease-in-out;
 }
 
 .animate:first-child {
@@ -127,3 +120,5 @@
         transform: rotate(0deg);
     }
 }
+
+/*animation end*/
