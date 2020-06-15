@@ -3,7 +3,8 @@ import {
     fetchChainMetadata,
     fetchNetworkDifficulty,
     NetworkDifficultyEstimatedHashes,
-    fetchSingleBlock
+    fetchSingleBlock,
+    SingleBlockData
 } from '../../helpers/api';
 
 export const ADD_METADATA = 'ADD_METADATA';
@@ -26,7 +27,7 @@ export const addDifficulty = (difficulties: NetworkDifficultyEstimatedHashes = [
     difficulties
 });
 
-export const addSingleBlock = (block: SingleBlock = {}) => ({
+export const addSingleBlock = (block: SingleBlockData) => ({
     type: ADD_SINGLE_BLOCK,
     block
 });

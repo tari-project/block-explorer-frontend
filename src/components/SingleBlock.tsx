@@ -3,7 +3,7 @@ import './SingleBlock.css';
 import {
     useParams
 } from "react-router-dom";
-import {fetchSingleBlock} from "../helpers/api";
+import {fetchSingleBlock, SingleBlockData} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
 import SingleBlockClusterGraph from "./SingleBlockClusterGraph";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
@@ -24,7 +24,7 @@ function SingleBlock({ block }: Props) {
 
     useEffect(() => {
         try {
-            id && fetchSingleBlock(id).then((block: SingleBlock) => {
+            id && fetchSingleBlock(id).then((block: SingleBlockData) => {
                 if(block && block.block) {
                     setblockHeader(block.block.header);
                     setblockPow(block.block.header.pow);
