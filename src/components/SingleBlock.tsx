@@ -27,7 +27,6 @@ function SingleBlock({ block }: Props) {
     useEffect(() => {
         try {
             id && fetchSingleBlock(id).then((block: SingleBlockData) => {
-                console.log(block);
                 if(block && block.block) {
                     setblockHeader(block.block.header);
                     setblockPow(block.block.header.pow);
