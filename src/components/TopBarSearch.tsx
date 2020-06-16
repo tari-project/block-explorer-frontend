@@ -9,12 +9,14 @@ function TopBarSearch({ history }) {
     const [searching, setSearching] = useState(false);
     const id = history.location.pathname.split('/').pop();
 
-    function onSearch(e) {
+    function handleKeyPress(e) {
+        window.clearTimeout(timer);
+    }
+
+    function handleKeyUp(e) {
         const searchValue = e.target.value;
-        setSearching(true);
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            setSearching(false);
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => {
             redirect(searchValue);
         }, 2000);
     }
@@ -29,7 +31,8 @@ function TopBarSearch({ history }) {
                 type="text"
                 defaultValue={id || ''}
                 placeholder="Search for a specific block or transaction"
-                onKeyUp={onSearch}
+                onKeyPress={handleKeyPress}
+                onKeyUp={handleKeyUp}
             />
             {searching ? (
                 <img src={loader} className="searchBarLoader" alt="Searching for a specific block or transaction" />
