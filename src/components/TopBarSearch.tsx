@@ -23,8 +23,9 @@ function TopBarSearch({ history }) {
         }, 2000);
     }
 
-    function redirect(block) {
-        block && (window.location.href = '/block/' + block);
+    function redirect(idOrHash) {
+        idOrHash = idOrHash.trim()
+        idOrHash && (window.location.href = '/block/' + idOrHash);
     }
 
     return (
