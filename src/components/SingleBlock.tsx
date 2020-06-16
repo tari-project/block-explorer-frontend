@@ -50,7 +50,7 @@ function SingleBlock({ constants }: Props) {
     const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
     const { inputs = [], kernels = [], outputs = [] } = blockBody;
 
-    inputs.map((i: InputsEntity) => {
+    inputs.forEach((i: InputsEntity) => {
         const temp: Inputs = {
             group: 'inputs',
             size: inputs.length,
@@ -58,10 +58,9 @@ function SingleBlock({ constants }: Props) {
             ...i
         };
         singleBlockDataArray.push(temp);
-        return temp;
     });
 
-    kernels.map((i: KernelsEntity) => {
+    kernels.forEach((i: KernelsEntity) => {
         const temp: Kernels = {
             group: 'kernels',
             size: kernels.length,
@@ -69,10 +68,9 @@ function SingleBlock({ constants }: Props) {
             ...i
         };
         singleBlockDataArray.push(temp);
-        return temp;
     });
 
-    outputs.map((i: OutputsEntity) => {
+    outputs.forEach((i: OutputsEntity) => {
         const temp: Outputs = {
             group: 'outputs',
             size: outputs.length,
@@ -80,7 +78,6 @@ function SingleBlock({ constants }: Props) {
             ...i
         };
         singleBlockDataArray.push(temp);
-        return temp;
     });
 
     const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
