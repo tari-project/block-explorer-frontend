@@ -1,4 +1,3 @@
-﻿import {Inputs, Kernels, Outputs} from "./SingleBlock";
 
 export interface Blocks {
     blocks: BlocksEntity[];
