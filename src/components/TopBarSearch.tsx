@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as Search } from '../assets/search.svg';
 import loader from '../assets/searching-loader.gif';
 import './TopBarSearch.css';
@@ -14,13 +14,23 @@ function TopBarSearch({ history }) {
         setSearching(true);
         clearTimeout(timer);
         timer = setTimeout(() => {
-            window.location.href = '/block/' + searchValue;
+            setSearching(false);
+            redirect(searchValue);
         }, 2000);
+    }
+
+    function redirect(block) {
+        block && (window.location.href = '/block/' + block);
     }
 
     return (
         <div className="TopBar-searchBar">
-            <input type="text" defaultValue={id || ''} placeholder="Search for a specific block or transaction" onKeyUp={onSearch} />
+            <input
+                type="text"
+                defaultValue={id || ''}
+                placeholder="Search for a specific block or transaction"
+                onKeyUp={onSearch}
+            />
             {searching ? (
                 <img src={loader} className="searchBarLoader" alt="Searching for a specific block or transaction" />
             ) : (

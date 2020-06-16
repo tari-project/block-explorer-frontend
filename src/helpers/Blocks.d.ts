@@ -1,4 +1,3 @@
-
 export interface Blocks {
     blocks: BlocksEntity[];
     paging: Paging;

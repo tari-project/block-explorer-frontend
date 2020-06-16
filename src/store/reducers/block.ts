@@ -1,5 +1,5 @@
 import { ADD_SINGLE_BLOCK } from '../actions';
-import {BlocksEntity} from "../../helpers/Blocks";
+import { BlocksEntity } from '../../helpers/Blocks';
 
 export const block = (state: BlocksEntity[] = [], action) => {
     switch (action.type) {

@@ -1,23 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './SingleBlock.css';
-import {
-    useParams
-} from "react-router-dom";
-import {Constants, fetchSingleBlock} from "../helpers/api";
-import StatRow from "./SingleBlock/StatRow";
-import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
+import { useParams } from 'react-router-dom';
+import { Constants, fetchSingleBlock } from '../helpers/api';
+import StatRow from './SingleBlock/StatRow';
+import SingleBlockViewHeader from './SingleBlock/SingleBlockViewHeader';
 import { connect } from 'react-redux';
-import ProgressBar from "./SingleBlock/ProgressBar";
-import ClusterGraph from "./Graphs/ClusterGraph";
-import {Block, Body, Header, Pow} from "../helpers/Blocks";
-import { Link } from "react-router-dom";
+import ProgressBar from './SingleBlock/ProgressBar';
+import ClusterGraph from './Graphs/ClusterGraph';
+import { Block, Body, Header, Pow, InputsEntity, KernelsEntity, OutputsEntity } from '../helpers/Blocks';
+import { Inputs, Kernels, Outputs } from '../helpers/SingleBlock';
+import { Link } from 'react-router-dom';
 
 interface Props {
     constants: Constants;
 }
 
 function SingleBlock({ constants }: Props) {
-
     const { id } = useParams();
 
     const [singleBlock, setSingleBlock] = useState({} as Block);
@@ -27,14 +25,15 @@ function SingleBlock({ constants }: Props) {
 
     useEffect(() => {
         try {
-            id && fetchSingleBlock(id).then((block) => {
-                if(block && block.block) {
-                    setSingleBlock(block.block);
-                    setblockHeader(block.block.header as Header);
-                    setblockPow(block.block.header.pow as Pow);
-                    setblockBody(block.block.body as Body);
-                }
-            });
+            id &&
+                fetchSingleBlock(id).then((block) => {
+                    if (block && block.block) {
+                        setSingleBlock(block.block);
+                        setblockHeader(block.block.header as Header);
+                        setblockPow(block.block.header.pow as Pow);
+                        setblockBody(block.block.body as Body);
+                    }
+                });
         } catch (e) {
             console.error(e);
         }
@@ -49,27 +48,39 @@ function SingleBlock({ constants }: Props) {
 
     const { hash, prev_hash, nonce, total_kernel_offset, version, timestamp } = blockHeader;
     const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
-    const { inputs = [], kernels = [], outputs =[] } = blockBody;
+    const { inputs = [], kernels = [], outputs = [] } = blockBody;
 
-   inputs.forEach(i => {
-        i.group = 'inputs';
-        i.color = '#F97C0C';
-        i.size = inputs.length;
-        singleBlockDataArray.push(i);
+    inputs.map((i: InputsEntity) => {
+        const temp: Inputs = {
+            group: 'inputs',
+            size: inputs.length,
+            color: '#F97C0C',
+            ...i
+        };
+        singleBlockDataArray.push(temp);
+        return temp;
     });
 
-   kernels.forEach(i => {
-        i.group = 'kernels';
-        i.color = '#FB576D';
-        i.size = kernels.length;
-        singleBlockDataArray.push(i);
+    kernels.map((i: KernelsEntity) => {
+        const temp: Kernels = {
+            group: 'kernels',
+            size: kernels.length,
+            color: '#FB576D',
+            ...i
+        };
+        singleBlockDataArray.push(temp);
+        return temp;
     });
 
-   outputs.forEach((i) => {
-        i.group = 'outputs';
-        i.color = '#2274AF';
-        i.size = outputs.length;
-        singleBlockDataArray.push(i);
+    outputs.map((i: OutputsEntity) => {
+        const temp: Outputs = {
+            group: 'outputs',
+            size: outputs.length,
+            color: '#2274AF',
+            ...i
+        };
+        singleBlockDataArray.push(temp);
+        return temp;
     });
 
     const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
@@ -80,9 +91,9 @@ function SingleBlock({ constants }: Props) {
         <div className="SingleBlock">
             {hash ? (
                 <div>
-                    <SingleBlockViewHeader title="Block Data"/>
+                    <SingleBlockViewHeader title="Block Data" />
                     <ClusterGraph data={singleBlockDataArray} width={1000} height={400} />
-                    <ProgressBar weight={_weight} maxWeight={max_block_transaction_weight}/>
+                    <ProgressBar weight={_weight} maxWeight={max_block_transaction_weight} />
                     <h1>Mining Details</h1>
                     <StatRow label="Timestamp" value={date} />
                     <h1>Technical Details</h1>
@@ -102,7 +113,7 @@ function SingleBlock({ constants }: Props) {
                 <h1 className="noBlockFound">No block found.</h1>
             )}
         </div>
-    )
+    );
 }
 
 const mapStateToProps = (state) => ({

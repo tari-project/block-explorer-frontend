@@ -10,16 +10,16 @@ interface Props {
 
 export default function ClusterGraph({ width, height, data }: Props) {
     const maxSize = Math.max(...data.map((o) => o.size));
-    let radiusScale = d3.scaleSqrt().domain([1, maxSize]).range([0, 10]);
+    const radiusScale = d3.scaleSqrt().domain([1, maxSize]).range([0, 10]);
 
     const forceX = d3
         .forceX(function (d: any) {
             if (d.group === 'inputs') {
-                return width/2;
+                return width / 2;
             } else if (d.group === 'kernels') {
-                return  width/2 + 50;
+                return width / 2 + 50;
             } else {
-                return  width/2 + 130;
+                return width / 2 + 130;
             }
         })
         .strength(0.1);
@@ -34,18 +34,17 @@ export default function ClusterGraph({ width, height, data }: Props) {
             })
         );
 
-
     function ready(dataPoints) {
         const svg = d3
             .select('#chart')
             .append('svg')
-            .attr("width",  width )
-            .attr("height",  height )
-            .attr("preserveAspectRatio", "xMidYMid meet")
+            .attr('width', width)
+            .attr('height', height)
+            .attr('preserveAspectRatio', 'xMidYMid meet')
             .append('g')
             .attr('transform', 'translate(0, 0)');
 
-        let circles = svg
+        const circles = svg
             .selectAll('bubble')
             .data(dataPoints)
             .enter()
@@ -75,5 +74,5 @@ export default function ClusterGraph({ width, height, data }: Props) {
 
     data && data.length > 0 && ready(data);
 
-    return <div id="chart" />
+    return <div id="chart" />;
 }

@@ -15,5 +15,5 @@ export default function ColorMapItem({ title, color }: Props) {
             </svg>
             <div className="colorTitle">{title}</div>
         </div>
-    )
+    );
 }

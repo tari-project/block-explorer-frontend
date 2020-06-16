@@ -1,7 +1,7 @@
 import React from 'react';
 import './BlockCard.css';
 import numeral from 'numeral';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
 
 function fmtMSS(s) {
