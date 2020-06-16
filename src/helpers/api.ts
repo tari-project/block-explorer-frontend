@@ -1,5 +1,5 @@
 import config from '../config';
-import { addBlock, addMetadata } from '../store/actions';
+import {addBlock, addConstant, addMetadata} from '../store/actions';
 import {Block, Blocks, BlocksEntity} from './Blocks';
 
 const { apiUrl, wsUrl } = config;
@@ -52,6 +52,9 @@ export function setupWebsockets(store) {
             case 'metadata':
                 store.dispatch(addMetadata(msg.data as ChainMetadata));
                 break;
+            case 'constants':
+                store.dispatch(addConstant(msg.data as Constants));
+                break;
         }
     };
     ws.onclose = function (e) {
@@ -77,11 +80,7 @@ export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimat
     return await response.json();
 }
 
-export interface SingleBlockData {
-    block: Block;
-}
-
-export async function fetchSingleBlock(blockId: Block): Promise<SingleBlockData> {
+export async function fetchSingleBlock(blockId: Block): Promise<BlocksEntity> {
     try {
         const response = await fetch(`${apiUrl}/block/${blockId}`);
         return await response.json()

@@ -30,14 +30,14 @@ export const addDifficulty = (difficulties: NetworkDifficultyEstimatedHashes = [
     difficulties
 });
 
-export const addSingleBlock = (block: BlocksEntity[]) => ({
+export const addSingleBlock = (block: BlocksEntity) => ({
     type: ADD_SINGLE_BLOCK,
     block
 });
 
-export const addConstant = (constant: Constants) => ({
+export const addConstant = (constants: Constants) => ({
     type: ADD_CONSTANT,
-    constant
+    constants
 });
 
 export function fetchBlocks(limit: number) {
@@ -67,15 +67,15 @@ export function fetchDifficulties() {
 export function fetchBlock(blockId?) {
     return function (dispatch) {
         fetchSingleBlock(blockId).then((block) => {
-            dispatch(addSingleBlock(block as any));
+            dispatch(addSingleBlock(block as BlocksEntity));
         });
     };
 }
 
 export function fetchConstants() {
     return function (dispatch) {
-        fetchConstantsData().then((constant: Constants) => {
-            dispatch(addConstant(constant as Constants));
+        fetchConstantsData().then((constants) => {
+            dispatch(addConstant(constants as Constants));
         });
     };
 }

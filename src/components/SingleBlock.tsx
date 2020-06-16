@@ -3,20 +3,20 @@ import './SingleBlock.css';
 import {
     useParams
 } from "react-router-dom";
-import {Constants, fetchConstantsData, fetchSingleBlock} from "../helpers/api";
+import {Constants, fetchSingleBlock} from "../helpers/api";
 import StatRow from "./SingleBlock/StatRow";
 import SingleBlockViewHeader from "./SingleBlock/SingleBlockViewHeader";
 import { connect } from 'react-redux';
 import ProgressBar from "./SingleBlock/ProgressBar";
 import ClusterGraph from "./Graphs/ClusterGraph";
-import {Block, BlocksEntity, Body, Header, Pow} from "../helpers/Blocks";
+import {Block, Body, Header, Pow} from "../helpers/Blocks";
 import { Link } from "react-router-dom";
 
 interface Props {
-    block: BlocksEntity[];
+    constants: Constants;
 }
 
-function SingleBlock({ block }: Props) {
+function SingleBlock({ constants }: Props) {
 
     const { id } = useParams();
 
@@ -24,7 +24,6 @@ function SingleBlock({ block }: Props) {
     const [blockHeader, setblockHeader] = useState({} as Header);
     const [blockPow, setblockPow] = useState({} as Pow);
     const [blockBody, setblockBody] = useState({} as Body);
-    const [constants, setConstants] = useState({} as Constants);
 
     useEffect(() => {
         try {
@@ -41,15 +40,10 @@ function SingleBlock({ block }: Props) {
         }
     }, [id]);
 
+    const [constantsData, setConstantsData] = useState({} as Constants);
     useEffect(() => {
-        try {
-            id && fetchConstantsData().then((constants: Constants) => {
-                setConstants(constants as Constants);
-            });
-        } catch (e) {
-            console.error(e);
-        }
-    }, [id]);
+        setConstantsData(constants as Constants);
+    }, [constants]);
 
     const singleBlockDataArray: any[] = [];
 
@@ -80,11 +74,11 @@ function SingleBlock({ block }: Props) {
 
     const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
     const { _weight } = singleBlock;
-    const { max_block_transaction_weight } = constants;
+    const { max_block_transaction_weight } = constantsData;
 
     return (
         <div className="SingleBlock">
-            {blockBody ? (
+            {hash ? (
                 <div>
                     <SingleBlockViewHeader title="Block Data"/>
                     <ClusterGraph data={singleBlockDataArray} width={1000} height={400} />
@@ -112,6 +106,6 @@ function SingleBlock({ block }: Props) {
 }
 
 const mapStateToProps = (state) => ({
-    block: state.block
+    constants: state.constants
 });
 export default connect(mapStateToProps)(SingleBlock);

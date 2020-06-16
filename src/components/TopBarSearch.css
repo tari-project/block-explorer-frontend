@@ -21,3 +21,11 @@
     height: 15px;
     width: 15px;
 }
+
+.searchBarLoader {
+    position: absolute;
+    right: -69px;
+    top: -42px;
+    height: 120px;
+    width: 180px;
+}
