@@ -1,0 +1,19 @@
+.StatBox-Row {
+    color: #37363a;
+    display: flex;
+    font-family: Avenir, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 1px solid #eee;
+}
+
+.StatBox-Row > div {
+    width: 50%;
+    padding: 1em;
+    display: inline-block;
+}
+
+.StatBox-Row > div.Stat-value {
+    text-align: right;
+    font-size: 0.9em;
+}

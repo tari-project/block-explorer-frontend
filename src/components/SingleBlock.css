@@ -1,0 +1,13 @@
+.SingleBlock {
+    padding: 2em;
+}
+
+.SingleBlock h1 {
+    font-weight: bold;
+    font-family: Avenir, sans-serif;
+    font-size: 30px;
+}
+
+.SingleBlock a {
+    text-decoration: none;
+}

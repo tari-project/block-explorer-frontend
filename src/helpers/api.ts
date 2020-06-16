@@ -1,5 +1,5 @@
 import config from '../config';
-import { addBlock, addMetadata } from '../store/actions';
+import { addBlock, addConstant, addMetadata } from '../store/actions';
 import { Blocks, BlocksEntity } from './Blocks';
 
 const { apiUrl, wsUrl } = config;
@@ -52,6 +52,9 @@ export function setupWebsockets(store) {
             case 'metadata':
                 store.dispatch(addMetadata(msg.data as ChainMetadata));
                 break;
+            case 'constants':
+                store.dispatch(addConstant(msg.data as Constants));
+                break;
         }
     };
     ws.onclose = function (e) {
@@ -74,5 +77,38 @@ export type NetworkDifficultyEstimatedHashes = Array<NetworkDifficultyEstimatedH
 
 export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimatedHashes> {
     const response = await fetch(`${apiUrl}/network-difficulty`);
+    return await response.json();
+}
+
+export async function fetchSingleBlock(blockId: string | number): Promise<BlocksEntity> {
+    try {
+        const response = await fetch(`${apiUrl}/block/${blockId}`);
+        return await response.json();
+    } catch (e) {
+        return e;
+    }
+}
+
+export interface Constants {
+    coinbase_lock_height: number;
+    blockchain_version: number;
+    future_time_limit: number;
+    target_block_interval: number;
+    difficulty_block_window: number;
+    difficulty_max_block_interval: number;
+    max_block_transaction_weight: number;
+    pow_algo_count: number;
+    median_timestamp_count: number;
+    emission_initial: number;
+    emission_decay: number;
+    emission_tail: number;
+    min_blake_pow_difficulty: number;
+    block_weight_inputs: number;
+    block_weight_outputs: number;
+    block_weight_kernels: number;
+}
+
+export async function fetchConstantsData(): Promise<Constants> {
+    const response = await fetch(`${apiUrl}/constants`);
     return await response.json();
 }

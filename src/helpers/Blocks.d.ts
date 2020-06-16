@@ -1,4 +1,4 @@
-﻿export interface Blocks {
+export interface Blocks {
     blocks: BlocksEntity[];
     paging: Paging;
 }
@@ -28,7 +28,7 @@ export interface Header {
     pow: Pow;
 }
 export interface Timestamp {
-    seconds: string;
+    seconds: number;
     nanos: number;
 }
 export interface Pow {
@@ -54,6 +54,9 @@ export interface OutputsEntity {
     features: Features;
     commitment: string;
     range_proof: string;
+    group: string;
+    size: number;
+    color: string;
 }
 export interface KernelsEntity {
     features: number;
@@ -63,6 +66,9 @@ export interface KernelsEntity {
     linked_kernel: string;
     excess: string;
     excess_sig: ExcessSig;
+    group: string;
+    size: number;
+    color: string;
 }
 export interface ExcessSig {
     public_nonce: string;

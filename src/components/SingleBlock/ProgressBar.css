@@ -1,0 +1,24 @@
+.ProgressBarContainer h3{
+    font-weight: bold;
+    font-family: Avenir, sans-serif;
+    font-size: 0.7em;
+}
+
+progress {
+    display: block; /* default: inline-block */
+    width: 100%;
+    margin: 1em auto 2em auto;
+    padding: 0;
+    border: 0 none;
+    background: #E4E4E4;
+}
+progress::-moz-progress-bar {
+    background: #932FFF;
+}
+
+progress::-webkit-progress-bar {
+    background: transparent;
+}
+progress::-webkit-progress-value {
+    background: #932FFF;
+}

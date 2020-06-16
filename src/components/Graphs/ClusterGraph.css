@@ -1,0 +1,11 @@
+#chart svg {
+    display: none;
+}
+
+#chart svg:first-child {
+    display: inline-block;
+}
+
+.cluster.graphWrapper {
+    margin: 0 auto;
+}
