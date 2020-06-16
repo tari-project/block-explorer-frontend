@@ -11,12 +11,14 @@ function TopBarSearch({ history }) {
 
     function handleKeyPress(e) {
         window.clearTimeout(timer);
+        setSearching(true);
     }
 
     function handleKeyUp(e) {
         const searchValue = e.target.value;
         window.clearTimeout(timer);
         timer = window.setTimeout(() => {
+            setSearching(false);
             redirect(searchValue);
         }, 2000);
     }
