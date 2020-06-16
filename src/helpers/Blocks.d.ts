@@ -40,9 +40,9 @@ export interface Pow {
     pow_data: string;
 }
 export interface Body {
-    inputs: Inputs[];
-    outputs: Outputs[];
-    kernels: Kernels[];
+    inputs: InputsEntity[];
+    outputs: OutputsEntity[];
+    kernels: KernelsEntity[];
 }
 export interface InputsEntity {
     features: Features;
