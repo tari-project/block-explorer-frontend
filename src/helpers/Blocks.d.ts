@@ -1,4 +1,6 @@
-﻿export interface Blocks {
+﻿import {Inputs, Kernels, Outputs} from "./SingleBlock";
+
+export interface Blocks {
     blocks: BlocksEntity[];
     paging: Paging;
 }
@@ -38,16 +40,13 @@ export interface Pow {
     pow_data: string;
 }
 export interface Body {
-    inputs: InputsEntity[];
-    outputs: OutputsEntity[];
-    kernels: KernelsEntity[];
+    inputs: Inputs[];
+    outputs: Outputs[];
+    kernels: Kernels[];
 }
 export interface InputsEntity {
     features: Features;
     commitment: string;
-    group: string;
-    size: number;
-    color: string;
 }
 export interface Features {
     flags: number;
