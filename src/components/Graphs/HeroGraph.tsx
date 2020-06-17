@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './HeroGraph.css';
-import { ReactComponent as Bars } from '../../assets/bars.svg';
+import { ReactComponent as LoadingBars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
 import { leftPad } from '../../helpers/leftPad';
 import * as timeago from 'timeago.js';
@@ -192,7 +192,7 @@ function Chart({
     }
 
     if (values.length < 1) {
-        return <Bars />;
+        return <LoadingBars />;
     }
 
     return (
