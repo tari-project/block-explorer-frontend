@@ -12,7 +12,7 @@ function TopBarSearch({ history }) {
     useEffect(() => {
         const { pathname } = history.location;
         setId(pathname.split('/').pop());
-    }, [history]);
+    }, [history.location]);
 
     function handleKeyPress(e) {
         window.clearTimeout(timer);
