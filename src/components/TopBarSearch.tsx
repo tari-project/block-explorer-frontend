@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 function TopBarSearch({ history }) {
     let timer;
     const [searching, setSearching] = useState(false);
-    const [id, setId] = useState([]);
+    const [id, setId] = useState('');
 
     useEffect(() => {
         const { pathname } = history.location;
