@@ -32,7 +32,15 @@ const dimensions = {
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
-    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0, timestamp: 0, hash: '' };
+    const maxHeights: HeightBar = {
+        inputs: 0,
+        kernels: 0,
+        outputs: 0,
+        total: 0,
+        blockHeight: 0,
+        timestamp: 0,
+        hash: ''
+    };
     values.forEach((values: HeightBar) => {
         const keys = ['inputs', 'outputs', 'kernels', 'total'];
         keys.forEach((key) => {
@@ -159,6 +167,7 @@ interface GraphicalElementProps {
     blockHeight: number;
     timestamp: number;
     aniClass: string;
+    hash: string;
 }
 
 function Chart({
@@ -207,22 +216,21 @@ function Chart({
                 const offset = i * spaceBetweenBars;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
                 return (
-                    <Link to={`/block/${heights.hash}`}>
-                        <Bar
-                            key={i}
-                            offset={offset}
-                            inputs={inputs}
-                            outputs={outputs}
-                            kernels={kernels}
-                            inputsVal={heights.inputs}
-                            outputsVal={heights.outputs}
-                            kernelsVal={heights.kernels}
-                            maxHeights={maxHeights}
-                            blockHeight={heights.blockHeight}
-                            timestamp={heights.timestamp}
-                            aniClass={aniClass}
-                        />
-                    </Link>
+                    <Bar
+                        key={i}
+                        offset={offset}
+                        inputs={inputs}
+                        outputs={outputs}
+                        kernels={kernels}
+                        inputsVal={heights.inputs}
+                        outputsVal={heights.outputs}
+                        kernelsVal={heights.kernels}
+                        maxHeights={maxHeights}
+                        blockHeight={heights.blockHeight}
+                        timestamp={heights.timestamp}
+                        aniClass={aniClass}
+                        hash={heights.hash}
+                    />
                 );
             })}
         </g>
@@ -238,7 +246,8 @@ function Bar({
     kernelsVal,
     blockHeight,
     timestamp,
-    aniClass
+    aniClass,
+    hash
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
@@ -277,7 +286,15 @@ function Bar({
                         {getTooltipText(kernelsVal, 'kernel')}
                     </text>
                 </g>
-                <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
+                <Link to={`/block/${hash}`}>
+                    <rect
+                        fill="#9330FF"
+                        width={elementSize}
+                        height={kernelHeight}
+                        x={offset}
+                        y={height - kernelHeight}
+                    />
+                </Link>
             </g>
             <g id="outputs">
                 <g className="tooltip" transform={`translate(${offset - 65},${height - barPos1 - 10})`}>
@@ -286,7 +303,9 @@ function Bar({
                         {getTooltipText(outputsVal, 'output')}
                     </text>
                 </g>
-                <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
+                <Link to={`/block/${hash}`}>
+                    <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
+                </Link>
             </g>
             <g id="inputs">
                 <g className="tooltip" transform={`translate(${offset - 65},${height - barPos2 - 5})`}>
@@ -295,23 +314,25 @@ function Bar({
                         {getTooltipText(inputsVal, 'input')}
                     </text>
                 </g>
-                <rect
-                    transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
-                    fill="#FF7630"
-                    width={elementSize}
-                    height={inputsHeight}
-                    x={offset}
-                    y={height - barPos2}
-                >
-                    <animate
-                        attributeName="height"
-                        attributeType="XML"
-                        type="rotate"
-                        values={`0;${inputsHeight}`}
-                        dur="1.5s"
-                        repeatCount="1"
-                    />
-                </rect>
+                <Link to={`/block/${hash}`}>
+                    <rect
+                        transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
+                        fill="#FF7630"
+                        width={elementSize}
+                        height={inputsHeight}
+                        x={offset}
+                        y={height - barPos2}
+                    >
+                        <animate
+                            attributeName="height"
+                            attributeType="XML"
+                            type="rotate"
+                            values={`0;${inputsHeight}`}
+                            dur="1.5s"
+                            repeatCount="1"
+                        />
+                    </rect>
+                </Link>
             </g>
         </g>
     );
