@@ -4,7 +4,7 @@
     box-sizing: border-box;
     border-radius: 6px;
     padding: 15px;
-    width: 25vw;
+    width: 300px;
 }
 
 .BlockCard-Header {
@@ -112,9 +112,40 @@
 
 @keyframes slideOff {
     0% {
-        left: -25vw;
+        left: -300px;
     }
     100% {
         left: 0;
+    }
+}
+
+.latestBlocksAll {
+    position: relative;
+}
+.rightCaret {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: -70px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 3s linear infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
     }
 }

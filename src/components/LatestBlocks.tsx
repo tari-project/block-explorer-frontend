@@ -2,6 +2,9 @@ import BlockCard from './BlockCard';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { BlocksEntity } from '../types/Blocks';
+import { ReactComponent as RightCaret } from '../assets/right-caret.svg';
+import './BlockCard.css';
+
 function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
     const [latestBlocks, setLatestBlocks] = useState([] as BlocksEntity[]);
     useEffect(() => {
@@ -10,10 +13,13 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
     }, [blocks]);
 
     return (
-        <div className="latestBlocksContainer">
-            {latestBlocks.map((block, i) => (
-                <BlockCard key={i} block={block} />
-            ))}
+        <div className="latestBlocksAll">
+            <div className="latestBlocksContainer">
+                {latestBlocks.map((block, i) => (
+                    <BlockCard key={i} block={block} />
+                ))}
+            </div>
+            <RightCaret className="rightCaret" />
         </div>
     );
 }
