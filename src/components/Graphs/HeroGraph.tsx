@@ -261,49 +261,45 @@ function Bar({
 
     function getTooltipText(value, type) {
         let text = '';
-        if (value > 1) {
-            text = `${value} ${type}s`;
-        } else {
+        if (value === 1) {
             text = `${value} ${type}`;
+        } else {
+            text = `${value} ${type}s`;
         }
-        return leftPad(text, 13, ' ');
+        return leftPad(text, 14, ' ');
     }
 
     const timeAgo = timeago.format(timestamp * 1000);
 
     return (
         <Link to={`/block/${hash}`} key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 30})`}>
+            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
                 <rect rx="3" />
-                <text x="4" y="10" xmlSpace="preserve" textAnchor="start">
-                    {leftPad(timeAgo, 14, ' ')}
+                <text x="60" y="10" xmlSpace="preserve" textAnchor="end">
+                    <tspan className="timeAgo" x="60" dy="0">
+                        {leftPad(timeAgo, 14, ' ')}
+                    </tspan>
+                    <tspan className="blockHeight" x="60" dy="14">
+                        {leftPad(`${blockHeight}`, 14, ' ')}
+                    </tspan>
+                    <tspan className="inputs" x="60" dy="12">
+                        {getTooltipText(inputsVal, 'input')}
+                    </tspan>
+                    <tspan className="outputs" x="60" dy="10">
+                        {getTooltipText(outputsVal, 'output')}
+                    </tspan>
+                    <tspan className="kernels" x="60" dy="10">
+                        {getTooltipText(kernelsVal, 'kernel')}
+                    </tspan>
                 </text>
             </g>
             <g id="kernels">
-                <g className="tooltip" transform={`translate(${offset - 65},${height - kernelHeight - 20})`}>
-                    <rect rx="3" />
-                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
-                        {getTooltipText(kernelsVal, 'kernel')}
-                    </text>
-                </g>
                 <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
             <g id="outputs">
-                <g className="tooltip" transform={`translate(${offset - 65},${height - barPos1 - 10})`}>
-                    <rect rx="3" />
-                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
-                        {getTooltipText(outputsVal, 'output')}
-                    </text>
-                </g>
                 <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
             <g id="inputs">
-                <g className="tooltip" transform={`translate(${offset - 65},${height - barPos2 - 5})`}>
-                    <rect rx="3" />
-                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
-                        {getTooltipText(inputsVal, 'input')}
-                    </text>
-                </g>
                 <rect
                     transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
                     fill="#FF7630"
