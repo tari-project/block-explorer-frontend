@@ -20,6 +20,7 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
                 ))}
             </div>
             <RightCaret className="rightCaret" />
+            <RightCaret className="rightCaret small" />
         </div>
     );
 }
