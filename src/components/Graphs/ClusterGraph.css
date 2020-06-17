@@ -14,8 +14,12 @@
     margin: 0 auto;
 }
 
+.bubble {
+    stroke-width: 0;
+}
 .bubble:hover {
-    stroke: black;
+    stroke-width: 2;
+    stroke: #d5d5d5;
 }
 
 .tooltip {
@@ -23,4 +27,6 @@
     z-index: 1070;
     display: block;
     margin: 0;
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
 }
