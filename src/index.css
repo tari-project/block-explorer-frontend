@@ -57,9 +57,15 @@ body {
 
     /*Latest Blocks*/
 
-    /*.BlockCard {*/
-    /*    width: 87vw;*/
-    /*}*/
+    .rightCaret {
+        width: 30px;
+        height: 30px;
+        right: -45px;
+    }
+
+    .rightCaret.small {
+        right: -38px;
+    }
 
     /*Latest Blocks End*/
 
