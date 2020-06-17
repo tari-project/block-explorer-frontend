@@ -1,7 +1,7 @@
 import BlockCard from './BlockCard';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { BlocksEntity } from '../helpers/Blocks';
+import { BlocksEntity } from '../types/Blocks';
 function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
     const [latestBlocks, setLatestBlocks] = useState([] as BlocksEntity[]);
     useEffect(() => {

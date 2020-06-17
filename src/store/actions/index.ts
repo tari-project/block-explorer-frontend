@@ -7,7 +7,7 @@ import {
     Constants,
     fetchConstantsData
 } from '../../helpers/api';
-import { Blocks, BlocksEntity } from '../../helpers/Blocks';
+import { Blocks, BlocksEntity } from '../../types/Blocks';
 
 export const ADD_METADATA = 'ADD_METADATA';
 export const ADD_BLOCK = 'ADD_BLOCK';

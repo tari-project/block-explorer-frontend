@@ -1,3 +1,7 @@
+#chart {
+    position: relative;
+}
+
 #chart svg {
     display: none;
 }
@@ -8,4 +12,15 @@
 
 .cluster.graphWrapper {
     margin: 0 auto;
+}
+
+.bubble:hover {
+    stroke: black;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    margin: 0;
 }

@@ -1,6 +1,6 @@
 import config from '../config';
 import { addBlock, addConstant, addMetadata } from '../store/actions';
-import { Blocks, BlocksEntity } from './Blocks';
+import { Blocks, BlocksEntity } from '../types/Blocks';
 
 const { apiUrl, wsUrl } = config;
 export interface ChainMetadata {
