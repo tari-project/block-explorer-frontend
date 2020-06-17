@@ -56,6 +56,12 @@
     height: auto;
 }
 
+@-moz-document url-prefix() {
+    .circulateSimpleBars {
+        overflow: visible;
+    }
+}
+
 .yAxisLabel {
     font-family: Avenir, sans-serif;
     font-size: 14px;

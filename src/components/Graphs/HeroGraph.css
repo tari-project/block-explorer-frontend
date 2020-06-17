@@ -31,6 +31,12 @@
     height: auto;
 }
 
+@-moz-document url-prefix() {
+    .heroBars {
+        overflow: visible;
+    }
+}
+
 /*block height tooltip*/
 
 .overviewBars .tooltip.total rect {
