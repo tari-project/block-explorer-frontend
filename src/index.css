@@ -110,6 +110,30 @@ body {
     }
 
     /*Graphs end*/
+
+    /*single block*/
+
+    .singleBlockViewHeader {
+        flex-direction: column;
+    }
+
+    .StatBox-Row {
+        flex-direction: column;
+    }
+
+    .StatBox-Row > div {
+        width: 100%;
+        padding: 0.5em;
+        display: inline-block;
+    }
+
+    .StatBox-Row > div.Stat-value {
+        text-align: left;
+        color: #d5d5d5;
+        overflow-wrap: break-word;
+    }
+
+    /*single block end*/
 }
 
 /*Tablets*/

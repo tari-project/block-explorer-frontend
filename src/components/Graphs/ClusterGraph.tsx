@@ -43,9 +43,11 @@ export default function ClusterGraph({ width, height, data }: Props) {
             const svg = d3
                 .select('#chart')
                 .append('svg')
+                .attr('class', 'clusterGraph')
                 .attr('width', width)
                 .attr('height', height)
                 .attr('preserveAspectRatio', 'xMidYMid meet')
+                .attr('viewBox', `0 0 ${width} ${height}`)
                 .append('g')
                 .attr('transform', 'translate(0, 0)');
 
