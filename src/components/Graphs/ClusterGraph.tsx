@@ -33,10 +33,11 @@ export default function ClusterGraph({ width, height, data }: Props) {
                 'collide',
                 d3
                     .forceCollide(function (d: any) {
-                        return radiusScale(d.size) * 4 + 1;
+                        return maxSize >= 500 ? radiusScale(d.size) / 2 + 1 : radiusScale(d.size) * 2 + 1;
                     })
                     .iterations(1)
-            );
+            )
+            .alphaDecay(0.1);
 
         function ready(dataPoints) {
             const svg = d3
@@ -81,7 +82,7 @@ export default function ClusterGraph({ width, height, data }: Props) {
                 .append('circle')
                 .attr('class', 'bubble')
                 .attr('r', function (d: any) {
-                    return radiusScale(d.size) * 4;
+                    return maxSize >= 500 ? radiusScale(d.size) / 2 : radiusScale(d.size) * 4;
                 })
                 .attr('fill', function (d: any) {
                     return d.color;

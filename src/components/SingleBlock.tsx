@@ -113,7 +113,7 @@ function SingleBlock({ constants }: Props) {
             {clusterData.length && status.status === 'complete' ? (
                 <div>
                     <SingleBlockViewHeader title="Block Data" />
-                    <ClusterGraph data={clusterData} width={1000} height={400} />
+                    <ClusterGraph data={clusterData} width={1280} height={500} />
                     <ProgressBar weight={_weight} maxWeight={max_block_transaction_weight} />
                     <h1>Mining Details</h1>
                     <StatRow label="Timestamp" value={date} />
