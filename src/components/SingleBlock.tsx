@@ -101,7 +101,7 @@ function SingleBlock({ constants }: Props) {
         setConstantsData(constants as Constants);
     }, [constants]);
 
-    const { hash, prev_hash, nonce, total_kernel_offset, version, timestamp } = blockHeader;
+    const { hash, prev_hash, nonce, total_kernel_offset, version, timestamp, height } = blockHeader;
     const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
 
     const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
@@ -118,6 +118,7 @@ function SingleBlock({ constants }: Props) {
                     <h1>Mining Details</h1>
                     <StatRow label="Timestamp" value={date} />
                     <h1>Technical Details</h1>
+                    <StatRow label="Block Height" value={height} />
                     <StatRow label="Accumulated Monero Difficulty" value={accumulated_monero_difficulty} />
                     <StatRow label="Accumulated Blake Difficulty" value={accumulated_blake_difficulty} />
                     <Link to={`/block/${prev_hash}`}>
