@@ -3,10 +3,8 @@ import './BlockCard.css';
 import numeral from 'numeral';
 import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
+import { fmtMSS } from '../helpers/fmtMSS';
 
-function fmtMSS(s) {
-    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
-}
 export default function BlockCard({ block }: { block: any }) {
     const {
         _miningTime,

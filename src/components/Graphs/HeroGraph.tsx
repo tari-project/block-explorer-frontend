@@ -3,6 +3,7 @@ import './HeroGraph.css';
 import { ReactComponent as LoadingBars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
 import { leftPad } from '../../helpers/leftPad';
+import { fmtMSS } from '../../helpers/fmtMSS';
 import * as timeago from 'timeago.js';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ interface HeightBar {
     kernels: number;
     total: number;
     timestamp: number;
+    miningTime: number;
     hash: string;
 }
 
@@ -39,6 +41,7 @@ function getHighest(values: Array<HeightBar>): HeightBar {
         total: 0,
         blockHeight: 0,
         timestamp: 0,
+        miningTime: 0,
         hash: ''
     };
     values.forEach((values: HeightBar) => {
@@ -68,13 +71,14 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
     const { width, height } = dimensions;
 
     const blocksData: HeightBar[] = latestBlocks.map((block) => {
-        const { body, header } = block.block;
+        const { body, header, _miningTime } = block.block;
 
         const inputs = body.inputs.length;
         const outputs = body.outputs.length;
         const kernels = body.kernels.length;
         const heights = header.height;
         const timestamp = header.timestamp.seconds;
+        const miningTime = _miningTime;
         const hash = header.hash;
 
         return {
@@ -84,6 +88,7 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
             total: inputs + outputs + kernels,
             blockHeight: heights,
             timestamp: timestamp,
+            miningTime: miningTime,
             hash: hash
         };
     });
@@ -166,6 +171,7 @@ interface GraphicalElementProps {
     maxHeights: HeightBar;
     blockHeight: number;
     timestamp: number;
+    miningTime: number;
     aniClass: string;
     hash: string;
 }
@@ -182,7 +188,7 @@ function Chart({
     const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels, blockHeight, timestamp, hash } = heights;
+        const { inputs, outputs, kernels, blockHeight, timestamp, hash, miningTime } = heights;
         const { total: maxTotal } = maxHeights;
 
         let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
@@ -201,6 +207,7 @@ function Chart({
             kernels: kernelsPercent,
             blockHeight: blockHeight,
             timestamp: timestamp,
+            miningTime: miningTime,
             total: 0,
             hash: hash
         };
@@ -228,6 +235,7 @@ function Chart({
                         maxHeights={maxHeights}
                         blockHeight={heights.blockHeight}
                         timestamp={heights.timestamp}
+                        miningTime={heights.miningTime}
                         aniClass={aniClass}
                         hash={heights.hash}
                     />
@@ -245,6 +253,7 @@ function Bar({
     outputsVal,
     kernelsVal,
     blockHeight,
+    miningTime,
     timestamp,
     aniClass,
     hash
@@ -273,7 +282,7 @@ function Bar({
 
     return (
         <Link to={`/block/${hash}`} key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 35})`}>
+            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 50})`}>
                 <rect rx="3" />
                 <text x="60" y="10" xmlSpace="preserve" textAnchor="end">
                     <tspan className="timeAgo" x="60" dy="0">
@@ -290,6 +299,9 @@ function Bar({
                     </tspan>
                     <tspan className="kernels" x="60" dy="10">
                         {getTooltipText(kernelsVal, 'kernel')}
+                    </tspan>
+                    <tspan className="timeAgo" x="60" dy="10">
+                        {leftPad(fmtMSS(miningTime), 14, ' ')}
                     </tspan>
                 </text>
             </g>
