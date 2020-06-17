@@ -53,17 +53,19 @@ export default function ClusterGraph({ width, height, data }: Props) {
                 .append('div')
                 .style('opacity', 0)
                 .attr('class', 'tooltip')
-                .style('background-color', 'black')
+                .style('background-color', '#ececec')
                 .style('border-radius', '5px')
-                .style('padding', '10px')
-                .style('color', 'white');
+                .style('padding', '8px');
+
             const showTooltip = function (this: any, d) {
                 tooltip.transition().duration(200);
                 tooltip
-                    .style('opacity', 1)
+                    .style('opacity', 0.8)
                     .html(d.tooltip)
                     .style('left', d3.mouse(this)[0] + 30 + 'px')
-                    .style('top', d3.mouse(this)[1] + 30 + 'px');
+
+                    .style('top', d3.mouse(this)[1] + 30 + 'px')
+                    .style('color', d.color);
             };
             const moveTooltip = function (this: any, d) {
                 tooltip.style('left', d3.mouse(this)[0] + 30 + 'px').style('top', d3.mouse(this)[1] + 30 + 'px');
@@ -82,6 +84,9 @@ export default function ClusterGraph({ width, height, data }: Props) {
                     return radiusScale(d.size) * 4;
                 })
                 .attr('fill', function (d: any) {
+                    return d.color;
+                })
+                .attr('stroke', function (d: any) {
                     return d.color;
                 })
                 .attr('cx', 100)

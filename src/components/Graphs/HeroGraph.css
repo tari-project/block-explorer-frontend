@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin: 30px;
-    max-height: 360px;
+    /*max-height: 360px; will revisit*/
 }
 .xAxisTimes {
     display: flex;
