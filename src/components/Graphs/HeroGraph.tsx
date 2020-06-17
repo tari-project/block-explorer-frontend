@@ -24,7 +24,7 @@ interface HeightBar {
 
 const dimensions = {
     width: 900,
-    height: 280,
+    height: 180,
     margin: 10,
     elementSize: 4
 } as const;
