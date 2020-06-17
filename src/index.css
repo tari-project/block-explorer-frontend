@@ -33,7 +33,6 @@ body {
     .TopBar-itemContainer div {
         margin: 0;
         align-items: flex-start;
-
     }
     .TopBar-searchContainer {
         justify-content: center;
@@ -75,7 +74,14 @@ body {
     }
 
     .xAxisTimes .tick {
-        font-size: 10px;
+        font-size: 8px;
+    }
+    .xAxisTimes {
+        margin: -2.5em 0 1em 0;
+    }
+
+    .heroBars {
+        margin-bottom: 0;
     }
 
     /*heroGraph End*/

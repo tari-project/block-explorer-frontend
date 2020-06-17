@@ -3,9 +3,9 @@ import './HeroGraph.css';
 import { ReactComponent as LoadingBars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
 import { leftPad } from '../../helpers/leftPad';
-import { fmtMSS } from '../../helpers/fmtMSS';
 import * as timeago from 'timeago.js';
 import { Link } from 'react-router-dom';
+import { fmtMSS } from '../../helpers/fmtMSS';
 
 interface Props {
     blocks: any[];
