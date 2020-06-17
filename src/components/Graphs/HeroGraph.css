@@ -26,7 +26,7 @@
 }
 .heroBars {
     margin-bottom: 2rem;
-    overflow: overlay;
+    overflow: visible;
     width: 100%;
     height: auto;
 }
