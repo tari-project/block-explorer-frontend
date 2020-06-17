@@ -62,6 +62,14 @@
     }
 }
 
+@media not all and (min-resolution:.001dpcm) {
+    @media {
+        .circulateSimpleBars {
+            overflow: visible;
+        }
+    }
+}
+
 .yAxisLabel {
     font-family: Avenir, sans-serif;
     font-size: 14px;

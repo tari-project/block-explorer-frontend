@@ -48,6 +48,14 @@
     }
 }
 
+@media not all and (min-resolution:.001dpcm) {
+    @media {
+        .networkDifficultyPaths {
+            overflow: visible;
+        }
+    }
+}
+
 .xAxisDate {
     display: flex;
     width: 100%;

@@ -37,6 +37,14 @@
     }
 }
 
+@media not all and (min-resolution:.001dpcm) {
+    @media {
+        .heroBars {
+            overflow: visible;
+        }
+    }
+}
+
 /*block height tooltip*/
 
 .overviewBars .tooltip.total rect {
