@@ -32,6 +32,8 @@ body {
     .TopBar-itemContainer div:first-child,
     .TopBar-itemContainer div {
         margin: 0;
+        align-items: flex-start;
+
     }
     .TopBar-searchContainer {
         justify-content: center;
