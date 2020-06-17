@@ -4,6 +4,7 @@ import { ReactComponent as LoadingBars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
 import { leftPad } from '../../helpers/leftPad';
 import * as timeago from 'timeago.js';
+import { Link } from 'react-router-dom';
 
 interface Props {
     blocks: any[];
@@ -20,6 +21,7 @@ interface HeightBar {
     kernels: number;
     total: number;
     timestamp: number;
+    hash: string;
 }
 
 const dimensions = {
@@ -30,7 +32,15 @@ const dimensions = {
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
-    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0, timestamp: 0 };
+    const maxHeights: HeightBar = {
+        inputs: 0,
+        kernels: 0,
+        outputs: 0,
+        total: 0,
+        blockHeight: 0,
+        timestamp: 0,
+        hash: ''
+    };
     values.forEach((values: HeightBar) => {
         const keys = ['inputs', 'outputs', 'kernels', 'total'];
         keys.forEach((key) => {
@@ -65,13 +75,16 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
         const kernels = body.kernels.length;
         const heights = header.height;
         const timestamp = header.timestamp.seconds;
+        const hash = header.hash;
+
         return {
             inputs: inputs,
             outputs: outputs,
             kernels: kernels,
             total: inputs + outputs + kernels,
             blockHeight: heights,
-            timestamp: timestamp
+            timestamp: timestamp,
+            hash: hash
         };
     });
 
@@ -154,6 +167,7 @@ interface GraphicalElementProps {
     blockHeight: number;
     timestamp: number;
     aniClass: string;
+    hash: string;
 }
 
 function Chart({
@@ -168,7 +182,7 @@ function Chart({
     const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels, blockHeight, timestamp } = heights;
+        const { inputs, outputs, kernels, blockHeight, timestamp, hash } = heights;
         const { total: maxTotal } = maxHeights;
 
         let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
@@ -187,7 +201,8 @@ function Chart({
             kernels: kernelsPercent,
             blockHeight: blockHeight,
             timestamp: timestamp,
-            total: 0
+            total: 0,
+            hash: hash
         };
     }
 
@@ -200,7 +215,6 @@ function Chart({
             {values.map((heights, i) => {
                 const offset = i * spaceBetweenBars;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
-
                 return (
                     <Bar
                         key={i}
@@ -215,6 +229,7 @@ function Chart({
                         blockHeight={heights.blockHeight}
                         timestamp={heights.timestamp}
                         aniClass={aniClass}
+                        hash={heights.hash}
                     />
                 );
             })}
@@ -231,7 +246,8 @@ function Bar({
     kernelsVal,
     blockHeight,
     timestamp,
-    aniClass
+    aniClass,
+    hash
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
@@ -256,7 +272,7 @@ function Bar({
     const timeAgo = timeago.format(timestamp * 1000);
 
     return (
-        <g key={blockHeight} className={`overviewBars ${aniClass}`}>
+        <Link to={`/block/${hash}`} key={blockHeight} className={`overviewBars ${aniClass}`}>
             <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 30})`}>
                 <rect rx="3" />
                 <text x="4" y="10" xmlSpace="preserve" textAnchor="start">
@@ -306,7 +322,7 @@ function Bar({
                     />
                 </rect>
             </g>
-        </g>
+        </Link>
     );
 }
 
