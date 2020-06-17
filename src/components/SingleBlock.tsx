@@ -7,9 +7,9 @@ import SingleBlockViewHeader from './SingleBlock/SingleBlockViewHeader';
 import { connect } from 'react-redux';
 import ProgressBar from './SingleBlock/ProgressBar';
 import ClusterGraph from './Graphs/ClusterGraph';
-import { Block, Body, Header, Pow, InputsEntity, KernelsEntity, OutputsEntity } from '../helpers/Blocks';
-import { Inputs, Kernels, Outputs } from '../helpers/SingleBlock';
+import { Block, Body, Header, Pow } from '../types/Blocks';
 import { Link } from 'react-router-dom';
+import { ClusterPoint } from '../types/SingleBlockGraph';
 
 interface Props {
     constants: Constants;
@@ -44,41 +44,37 @@ function SingleBlock({ constants }: Props) {
         setConstantsData(constants as Constants);
     }, [constants]);
 
-    const singleBlockDataArray: any[] = [];
-
     const { hash, prev_hash, nonce, total_kernel_offset, version, timestamp } = blockHeader;
     const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
     const { inputs = [], kernels = [], outputs = [] } = blockBody;
 
-    inputs.forEach((i: InputsEntity) => {
-        const temp: Inputs = {
+    let singleBlockDataArray: ClusterPoint[] = [];
+    singleBlockDataArray = singleBlockDataArray.concat(
+        inputs.map((i) => ({
             group: 'inputs',
             size: inputs.length,
             color: '#F97C0C',
-            ...i
-        };
-        singleBlockDataArray.push(temp);
-    });
+            tooltip: `Input<br/>${i.commitment.slice(0, 10)}`
+        }))
+    );
 
-    kernels.forEach((i: KernelsEntity) => {
-        const temp: Kernels = {
+    singleBlockDataArray = singleBlockDataArray.concat(
+        kernels.map((i) => ({
             group: 'kernels',
             size: kernels.length,
             color: '#FB576D',
-            ...i
-        };
-        singleBlockDataArray.push(temp);
-    });
+            tooltip: `Kernel<br/>${i.excess.slice(0, 10)}`
+        }))
+    );
 
-    outputs.forEach((i: OutputsEntity) => {
-        const temp: Outputs = {
+    singleBlockDataArray = singleBlockDataArray.concat(
+        outputs.map((i) => ({
             group: 'outputs',
             size: outputs.length,
             color: '#2274AF',
-            ...i
-        };
-        singleBlockDataArray.push(temp);
-    });
+            tooltip: `Output<br/>${i.commitment.slice(0, 10)}`
+        }))
+    );
 
     const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
     const { _weight } = singleBlock;

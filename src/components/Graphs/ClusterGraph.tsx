@@ -1,9 +1,10 @@
 import React from 'react';
 import * as d3 from 'd3';
 import './ClusterGraph.css';
+import { ClusterPoint } from '../../types/SingleBlockGraph';
 
 interface Props {
-    data: any;
+    data: ClusterPoint[];
     width: number;
     height: number;
 }
@@ -44,6 +45,30 @@ export default function ClusterGraph({ width, height, data }: Props) {
             .append('g')
             .attr('transform', 'translate(0, 0)');
 
+        const tooltip = d3
+            .select('#chart')
+            .append('div')
+            .style('opacity', 0.5)
+            .attr('class', 'tooltip')
+            .style('background-color', 'black')
+            .style('border-radius', '5px')
+            .style('padding', '10px')
+            .style('color', 'white');
+        const showTooltip = function (this: any, d) {
+            tooltip.transition().duration(200);
+            tooltip
+                .style('opacity', 1)
+                .html(d.tooltip)
+                .style('left', d3.mouse(this)[0] + 30 + 'px')
+                .style('top', d3.mouse(this)[1] + 30 + 'px');
+        };
+        const moveTooltip = function (this: any, d) {
+            tooltip.style('left', d3.mouse(this)[0] + 30 + 'px').style('top', d3.mouse(this)[1] + 30 + 'px');
+        };
+        const hideTooltip = function (d) {
+            tooltip.transition().duration(200).style('opacity', 0);
+        };
+
         const circles = svg
             .selectAll('bubble')
             .data(dataPoints)
@@ -57,9 +82,10 @@ export default function ClusterGraph({ width, height, data }: Props) {
                 return d.color;
             })
             .attr('cx', 100)
-            .attr('cy', 100);
-
-        simulation.nodes(dataPoints).on('tick', ticked);
+            .attr('cy', 100)
+            .on('mouseover', showTooltip)
+            .on('mousemove', moveTooltip)
+            .on('mouseleave', hideTooltip);
 
         function ticked() {
             circles
@@ -70,6 +96,7 @@ export default function ClusterGraph({ width, height, data }: Props) {
                     return d.y;
                 });
         }
+        simulation.nodes(dataPoints).on('tick', ticked);
     }
 
     data && data.length > 0 && ready(data);
