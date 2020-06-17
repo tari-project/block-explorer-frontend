@@ -272,7 +272,7 @@ function Bar({
     const timeAgo = timeago.format(timestamp * 1000);
 
     return (
-        <g key={blockHeight} className={`overviewBars ${aniClass}`}>
+        <Link to={`/block/${hash}`} key={blockHeight} className={`overviewBars ${aniClass}`}>
             <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 30})`}>
                 <rect rx="3" />
                 <text x="4" y="10" xmlSpace="preserve" textAnchor="start">
@@ -286,15 +286,7 @@ function Bar({
                         {getTooltipText(kernelsVal, 'kernel')}
                     </text>
                 </g>
-                <Link to={`/block/${hash}`}>
-                    <rect
-                        fill="#9330FF"
-                        width={elementSize}
-                        height={kernelHeight}
-                        x={offset}
-                        y={height - kernelHeight}
-                    />
-                </Link>
+                <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
             <g id="outputs">
                 <g className="tooltip" transform={`translate(${offset - 65},${height - barPos1 - 10})`}>
@@ -303,9 +295,7 @@ function Bar({
                         {getTooltipText(outputsVal, 'output')}
                     </text>
                 </g>
-                <Link to={`/block/${hash}`}>
-                    <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
-                </Link>
+                <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
             <g id="inputs">
                 <g className="tooltip" transform={`translate(${offset - 65},${height - barPos2 - 5})`}>
@@ -314,27 +304,25 @@ function Bar({
                         {getTooltipText(inputsVal, 'input')}
                     </text>
                 </g>
-                <Link to={`/block/${hash}`}>
-                    <rect
-                        transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
-                        fill="#FF7630"
-                        width={elementSize}
-                        height={inputsHeight}
-                        x={offset}
-                        y={height - barPos2}
-                    >
-                        <animate
-                            attributeName="height"
-                            attributeType="XML"
-                            type="rotate"
-                            values={`0;${inputsHeight}`}
-                            dur="1.5s"
-                            repeatCount="1"
-                        />
-                    </rect>
-                </Link>
+                <rect
+                    transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
+                    fill="#FF7630"
+                    width={elementSize}
+                    height={inputsHeight}
+                    x={offset}
+                    y={height - barPos2}
+                >
+                    <animate
+                        attributeName="height"
+                        attributeType="XML"
+                        type="rotate"
+                        values={`0;${inputsHeight}`}
+                        dur="1.5s"
+                        repeatCount="1"
+                    />
+                </rect>
             </g>
-        </g>
+        </Link>
     );
 }
 
