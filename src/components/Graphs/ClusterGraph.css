@@ -8,6 +8,9 @@
 
 #chart svg:first-child {
     display: inline-block;
+    overflow: visible;
+    width: 100%;
+    height: auto;
 }
 
 .cluster.graphWrapper {
