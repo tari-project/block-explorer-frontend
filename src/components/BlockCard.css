@@ -126,10 +126,16 @@
     width: 40px;
     height: 40px;
     position: absolute;
-    right: -70px;
+    right: -80px;
     top: 50%;
     transform: translate(-50%, -50%);
     animation: pulse 3s linear infinite;
+}
+
+.rightCaret.small {
+    right: -70px;
+    animation: pulse 3.5s linear infinite;
+    animation-delay: 0.75s;
 }
 
 @keyframes pulse {
