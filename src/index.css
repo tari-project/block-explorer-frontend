@@ -139,6 +139,10 @@ body {
         overflow-wrap: break-word;
     }
 
+    .colorMapping {
+        width: 100%;
+    }
+
     /*single block end*/
 }
 
