@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as Search } from '../assets/search.svg';
 import loader from '../assets/searching-loader.gif';
 import './TopBarSearch.css';
@@ -7,7 +7,12 @@ import { withRouter } from 'react-router-dom';
 function TopBarSearch({ history }) {
     let timer;
     const [searching, setSearching] = useState(false);
-    const id = history.location.pathname.split('/').pop();
+    const [id, setId] = useState('');
+
+    useEffect(() => {
+        const { pathname } = history.location;
+        setId(pathname.split('/').pop());
+    }, [history.location]);
 
     function handleKeyPress(e) {
         window.clearTimeout(timer);
