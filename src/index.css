@@ -53,6 +53,11 @@ body {
         font-size: 11px;
     }
 
+    .TopBar .simpleBtn {
+        top: 10px;
+        right: 10px;
+        transform: none;
+    }
     /*TopBar End*/
 
     /*Latest Blocks*/

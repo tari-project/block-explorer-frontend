@@ -2,6 +2,7 @@
     border-bottom: 1px solid #d8d8d8;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .TopBar-logoContainer {
@@ -40,4 +41,36 @@
 
 .TopBar-itemContainer div:first-child {
     margin-left: 2em;
+}
+
+.simpleBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #932fff;
+    color: #fff;
+    text-decoration: none;
+    height: 35px;
+    width: 110px;
+    border-radius: 3px;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #932fff;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in;
+}
+.simpleBtn:active,
+.simpleBtn:hover {
+    background-color: white;
+    color: #932fff;
+}
+
+.simpleBtn p {
+    font-family: Avenir, sans-serif;
+    font-size: 12px;
+    margin: 0;
+    display: flex;
+    font-weight: 500;
+    user-select: none;
 }

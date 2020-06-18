@@ -43,6 +43,7 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
                     <Logo fill="#9330ff" />
                 </Link>
             </div>
+
             <div className="TopBar-searchContainer">
                 <TopBarSearch />
                 <div className="TopBar-itemContainer">
@@ -54,6 +55,9 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
                     <TopBarItem label="Block Height" value={blockHeight} />
                 </div>
             </div>
+            <a href="https://tari.com" target="_blank" rel="noreferrer" className="simpleBtn">
+                <p>Visit Tari.com</p>
+            </a>
         </div>
     );
 }
