@@ -5,6 +5,7 @@
     font-size: 14px;
     font-weight: 700;
     border-bottom: 1px solid #eee;
+    flex-direction: row;
 }
 
 .StatBox-Row > div {

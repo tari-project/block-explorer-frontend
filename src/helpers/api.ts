@@ -82,7 +82,7 @@ export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimat
 
 export async function fetchSingleBlock(blockId: string | number): Promise<BlocksEntity> {
     try {
-        const response = await fetch(`${apiUrl}/block/${blockId}`);
+        const response = await fetch(`${apiUrl}/blocks/${blockId}`);
         return await response.json();
     } catch (e) {
         return e;

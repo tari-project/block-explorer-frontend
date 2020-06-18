@@ -1,5 +1,6 @@
 .SingleBlock {
     padding: 2em;
+    min-height: 800px;
 }
 
 .SingleBlock h1 {

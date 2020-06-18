@@ -29,7 +29,7 @@ function TopBarSearch({ history }) {
     }
 
     function redirect(idOrHash) {
-        idOrHash = idOrHash.trim()
+        idOrHash = idOrHash.trim();
         idOrHash && (window.location.href = '/block/' + idOrHash);
     }
 

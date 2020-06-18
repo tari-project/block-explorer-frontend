@@ -3,10 +3,8 @@ import './BlockCard.css';
 import numeral from 'numeral';
 import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
+import { fmtMSS } from '../helpers/fmtMSS';
 
-function fmtMSS(s) {
-    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
-}
 export default function BlockCard({ block }: { block: any }) {
     const {
         _miningTime,
@@ -20,14 +18,12 @@ export default function BlockCard({ block }: { block: any }) {
     const size = numeral(_weight).format('0,0');
     const miningTime = fmtMSS(_miningTime);
     return (
-        <Link to={`/block/${hash}`}>
-            <div key={height} className="BlockCard slideIn">
-                <Header blockHeight={heightStr} date={date} timeAgo={timeAgo} />
-                <div className="BlockCard-stats">
-                    <StatBox color="yellow" label="# of Transactions" value={kernels.length} />
-                    <StatBox color="blue" label="Mining Time" value={miningTime} />
-                    <StatBox color="purple" label="Block Size" value={size} />
-                </div>
+        <Link to={`/block/${hash}`} key={height} className="BlockCard slideIn">
+            <Header blockHeight={heightStr} date={date} timeAgo={timeAgo} />
+            <div className="BlockCard-stats">
+                <StatBox color="yellow" label="# of Transactions" value={kernels.length} />
+                <StatBox color="blue" label="Mining Time" value={miningTime} />
+                <StatBox color="purple" label="Block Size" value={size} />
             </div>
         </Link>
     );

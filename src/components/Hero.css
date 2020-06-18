@@ -4,4 +4,5 @@
     display: flex;
     padding: 50px 70px;
     flex-direction: column;
+    /*max-height: 700px; will revisit*/
 }

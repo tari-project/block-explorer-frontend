@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin: 30px;
+    /*max-height: 360px; will revisit*/
 }
 .xAxisTimes {
     display: flex;
@@ -26,7 +27,7 @@
 }
 .heroBars {
     margin-bottom: 2rem;
-    overflow: overlay;
+    overflow: visible;
     width: 100%;
     height: auto;
 }
@@ -37,7 +38,7 @@
     }
 }
 
-@media not all and (min-resolution:.001dpcm) {
+@media not all and (min-resolution: 0.001dpcm) {
     @media {
         .heroBars {
             overflow: visible;
@@ -48,10 +49,13 @@
 /*block height tooltip*/
 
 .overviewBars .tooltip.total rect {
-    fill: #ececec;
-    stroke: #ececec;
-    width: 75px;
-    height: 13px;
+    fill: #191145;
+    /*fill: #ececec;*/
+    stroke: #a5a5a5;
+    stroke-width: 0.5;
+    width: 65px;
+    height: 70px;
+    opacity: 0.8;
 }
 
 .overviewBars .tooltip text {
@@ -62,10 +66,30 @@
 }
 .overviewBars .tooltip.total {
     visibility: hidden;
+
     transition: visibility 0.25s ease-in-out;
 }
 .overviewBars:hover .tooltip.total {
     visibility: visible;
+}
+
+.overviewBars .tooltip.total text tspan.timeAgo {
+    fill: #a5a5a5;
+    font-size: 7px;
+}
+.overviewBars .tooltip.total text tspan.blockHeight {
+    fill: #90aab4;
+    font-size: 11px;
+}
+
+.overviewBars .tooltip.total text tspan.kernels {
+    fill: #9330ff;
+}
+.overviewBars .tooltip.total text tspan.outputs {
+    fill: #b4c9f5;
+}
+.overviewBars .tooltip.total text tspan.inputs {
+    fill: #ff7630;
 }
 
 /*block height tooltip end*/
@@ -82,27 +106,6 @@
     stroke: #ececec;
     width: 63px;
     height: 15px;
-}
-
-#inputs .tooltip text,
-#outputs .tooltip text,
-#kernels .tooltip text {
-    font-size: 9px;
-    font-family: Avenir, sans-serif;
-    font-weight: bold;
-}
-
-#inputs .tooltip,
-#outputs .tooltip,
-#kernels .tooltip {
-    visibility: hidden;
-    transition: visibility 0.25s ease-in-out;
-}
-
-#inputs:hover .tooltip,
-#outputs:hover .tooltip,
-#kernels:hover .tooltip {
-    visibility: visible;
 }
 
 #kernels .tooltip text {

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './HeroGraph.css';
-import { ReactComponent as Bars } from '../../assets/bars.svg';
+import { ReactComponent as LoadingBars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
 import { leftPad } from '../../helpers/leftPad';
 import * as timeago from 'timeago.js';
+import { Link } from 'react-router-dom';
+import { fmtMSS } from '../../helpers/fmtMSS';
 
 interface Props {
     blocks: any[];
@@ -20,17 +22,28 @@ interface HeightBar {
     kernels: number;
     total: number;
     timestamp: number;
+    miningTime: number;
+    hash: string;
 }
 
 const dimensions = {
     width: 900,
-    height: 280,
+    height: 180,
     margin: 10,
     elementSize: 4
 } as const;
 
 function getHighest(values: Array<HeightBar>): HeightBar {
-    const maxHeights: HeightBar = { inputs: 0, kernels: 0, outputs: 0, total: 0, blockHeight: 0, timestamp: 0 };
+    const maxHeights: HeightBar = {
+        inputs: 0,
+        kernels: 0,
+        outputs: 0,
+        total: 0,
+        blockHeight: 0,
+        timestamp: 0,
+        miningTime: 0,
+        hash: ''
+    };
     values.forEach((values: HeightBar) => {
         const keys = ['inputs', 'outputs', 'kernels', 'total'];
         keys.forEach((key) => {
@@ -58,20 +71,25 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
     const { width, height } = dimensions;
 
     const blocksData: HeightBar[] = latestBlocks.map((block) => {
-        const { body, header } = block.block;
+        const { body, header, _miningTime } = block.block;
 
         const inputs = body.inputs.length;
         const outputs = body.outputs.length;
         const kernels = body.kernels.length;
         const heights = header.height;
         const timestamp = header.timestamp.seconds;
+        const miningTime = _miningTime;
+        const hash = header.hash;
+
         return {
             inputs: inputs,
             outputs: outputs,
             kernels: kernels,
             total: inputs + outputs + kernels,
             blockHeight: heights,
-            timestamp: timestamp
+            timestamp: timestamp,
+            miningTime: miningTime,
+            hash: hash
         };
     });
 
@@ -153,7 +171,9 @@ interface GraphicalElementProps {
     maxHeights: HeightBar;
     blockHeight: number;
     timestamp: number;
+    miningTime: number;
     aniClass: string;
+    hash: string;
 }
 
 function Chart({
@@ -168,7 +188,7 @@ function Chart({
     const { width, margin } = dimensions;
     const spaceBetweenBars = width / values.length;
     function relativeHeight(heights: HeightBar, maxHeights: HeightBar): HeightBar {
-        const { inputs, outputs, kernels, blockHeight, timestamp } = heights;
+        const { inputs, outputs, kernels, blockHeight, timestamp, hash, miningTime } = heights;
         const { total: maxTotal } = maxHeights;
 
         let inputPercent = maxTotal > 0 ? inputs / maxTotal : inputs;
@@ -187,12 +207,14 @@ function Chart({
             kernels: kernelsPercent,
             blockHeight: blockHeight,
             timestamp: timestamp,
-            total: 0
+            miningTime: miningTime,
+            total: 0,
+            hash: hash
         };
     }
 
     if (values.length < 1) {
-        return <Bars />;
+        return <LoadingBars />;
     }
 
     return (
@@ -200,7 +222,6 @@ function Chart({
             {values.map((heights, i) => {
                 const offset = i * spaceBetweenBars;
                 const { inputs, outputs, kernels } = relativeHeight(heights, maxHeights);
-
                 return (
                     <Bar
                         key={i}
@@ -214,7 +235,9 @@ function Chart({
                         maxHeights={maxHeights}
                         blockHeight={heights.blockHeight}
                         timestamp={heights.timestamp}
+                        miningTime={heights.miningTime}
                         aniClass={aniClass}
+                        hash={heights.hash}
                     />
                 );
             })}
@@ -230,8 +253,10 @@ function Bar({
     outputsVal,
     kernelsVal,
     blockHeight,
+    miningTime,
     timestamp,
-    aniClass
+    aniClass,
+    hash
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     const kernelHeight = kernelsPercent * height;
@@ -245,49 +270,48 @@ function Bar({
 
     function getTooltipText(value, type) {
         let text = '';
-        if (value > 1) {
-            text = `${value} ${type}s`;
-        } else {
+        if (value === 1) {
             text = `${value} ${type}`;
+        } else {
+            text = `${value} ${type}s`;
         }
-        return leftPad(text, 13, ' ');
+        return leftPad(text, 14, ' ');
     }
 
     const timeAgo = timeago.format(timestamp * 1000);
 
     return (
-        <g key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 30})`}>
+        <Link to={`/block/${hash}`} key={blockHeight} className={`overviewBars ${aniClass}`}>
+            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 50})`}>
                 <rect rx="3" />
-                <text x="4" y="10" xmlSpace="preserve" textAnchor="start">
-                    {leftPad(timeAgo, 14, ' ')}
+                <text x="60" y="10" xmlSpace="preserve" textAnchor="end">
+                    <tspan className="timeAgo" x="60" dy="0">
+                        {leftPad(timeAgo, 14, ' ')}
+                    </tspan>
+                    <tspan className="blockHeight" x="60" dy="14">
+                        {leftPad(`${blockHeight}`, 14, ' ')}
+                    </tspan>
+                    <tspan className="inputs" x="60" dy="12">
+                        {getTooltipText(inputsVal, 'input')}
+                    </tspan>
+                    <tspan className="outputs" x="60" dy="10">
+                        {getTooltipText(outputsVal, 'output')}
+                    </tspan>
+                    <tspan className="kernels" x="60" dy="10">
+                        {getTooltipText(kernelsVal, 'kernel')}
+                    </tspan>
+                    <tspan className="timeAgo" x="60" dy="10">
+                        {leftPad(fmtMSS(miningTime), 14, ' ')}
+                    </tspan>
                 </text>
             </g>
             <g id="kernels">
-                <g className="tooltip" transform={`translate(${offset - 65},${height - kernelHeight - 20})`}>
-                    <rect rx="3" />
-                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
-                        {getTooltipText(kernelsVal, 'kernel')}
-                    </text>
-                </g>
                 <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
             <g id="outputs">
-                <g className="tooltip" transform={`translate(${offset - 65},${height - barPos1 - 10})`}>
-                    <rect rx="3" />
-                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
-                        {getTooltipText(outputsVal, 'output')}
-                    </text>
-                </g>
                 <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
             <g id="inputs">
-                <g className="tooltip" transform={`translate(${offset - 65},${height - barPos2 - 5})`}>
-                    <rect rx="3" />
-                    <text x="0" xmlSpace="preserve" textAnchor="start" y="11">
-                        {getTooltipText(inputsVal, 'input')}
-                    </text>
-                </g>
                 <rect
                     transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
                     fill="#FF7630"
@@ -306,7 +330,7 @@ function Bar({
                     />
                 </rect>
             </g>
-        </g>
+        </Link>
     );
 }
 
