@@ -3,7 +3,7 @@ name: Lint
 on: pull_request
 
 jobs:
-  run-linters:
+  eslint:
     name: Run linters
     runs-on: ubuntu-latest
 
