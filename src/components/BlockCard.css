@@ -74,12 +74,27 @@
     font-weight: 400;
 }
 
-.latestBlocksContainer {
-    display: flex;
-    flex-direction: row;
-    overflow: scroll;
+.latestBlocksAll {
+    position: relative;
+    /* hide scrollbar firefox*/
+    scrollbar-width: none;
+}
+/* hide scrollbar  Chrome, Safari and Opera */
+.latestBlocksContainer::-webkit-scrollbar {
+    display: none;
 }
 
+.latestBlocksContainer {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: row;
+    /* hide scrollbar firefox*/
+    scrollbar-width: none;
+    /* hide scrollbar ie & edge*/
+    -ms-overflow-style: none;
+}
 .latestBlocksContainer .BlockCard {
     margin-right: 30px;
 }
@@ -119,9 +134,6 @@
     }
 }
 
-.latestBlocksAll {
-    position: relative;
-}
 .rightCaret {
     width: 40px;
     height: 40px;
