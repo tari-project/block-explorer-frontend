@@ -18,12 +18,10 @@ jobs:
 
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
-        run: npm install
+        run:  npm ci --no-audit --prefer-offline
 
       - name: Run linters
-        uses: samuelmeuli/lint-action@v1
+        uses: tinovyatkin/action-eslint@v1
         with:
-          github_token: ${{ secrets.github_token }}
-          # Enable linters
-          eslint: true
-          prettier: true
+          repo-token: ${{ secrets.github_token }}
+          check-name: eslint
