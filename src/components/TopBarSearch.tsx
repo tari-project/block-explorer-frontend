@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as Search } from '../assets/search.svg';
 import loader from '../assets/searching-loader.gif';
 import './TopBarSearch.css';
