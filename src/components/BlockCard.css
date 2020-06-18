@@ -75,25 +75,26 @@
 }
 
 .latestBlocksAll {
-    overflow: hidden;
     position: relative;
+    /* hide scrollbar firefox*/
+    scrollbar-width: none;
 }
-/*  Chrome, Safari and Opera */
+/* hide scrollbar  Chrome, Safari and Opera */
 .latestBlocksContainer::-webkit-scrollbar {
     display: none;
 }
-.latestBlocksContainer {
-    /*ie & edge*/
-    -ms-overflow-style: none;
 
+.latestBlocksContainer {
     overflow-y: hidden;
     overflow-x: scroll;
-    padding-right: 2em;
     box-sizing: content-box;
     display: flex;
     flex-direction: row;
+    /* hide scrollbar firefox*/
+    scrollbar-width: none;
+    /* hide scrollbar ie & edge*/
+    -ms-overflow-style: none;
 }
-
 .latestBlocksContainer .BlockCard {
     margin-right: 30px;
 }
