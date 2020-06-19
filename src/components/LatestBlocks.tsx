@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { BlocksEntity } from '../types/Blocks';
 import { ReactComponent as RightCaret } from '../assets/right-caret.svg';
 import './BlockCard.css';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
     const [latestBlocks, setLatestBlocks] = useState([] as BlocksEntity[]);
@@ -14,11 +15,11 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
 
     return (
         <div className="latestBlocksAll">
-            <div className="latestBlocksContainer">
+            <ScrollContainer className="latestBlocksContainer" hideScrollbars={false} vertical={false}>
                 {latestBlocks.map((block, i) => (
                     <BlockCard key={i} block={block} />
                 ))}
-            </div>
+            </ScrollContainer>
             <RightCaret className="rightCaret" />
             <RightCaret className="rightCaret small" />
         </div>
