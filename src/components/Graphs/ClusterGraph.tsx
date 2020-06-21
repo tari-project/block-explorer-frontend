@@ -110,10 +110,10 @@ export default function ClusterGraph({ width, height, data }: Props) {
             const strength = 0.2;
 
             function force(alpha) {
-                const centroids: any = d3Array.rollup(nodes, centroid, (d: any) => d.group);
+                const centroids: any = d3Array.rollup(nodes, centroid, (d: any) => d.data.group);
                 const l = alpha * strength;
                 for (const d of nodes) {
-                    const { x: cx, y: cy } = centroids.get(d.group);
+                    const { x: cx, y: cy } = centroids.get(d.data.group);
                     d.vx -= (d.x - cx) * l;
                     d.vy -= (d.y - cy) * l;
                 }
