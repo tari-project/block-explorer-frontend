@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import * as d3 from 'd3';
 import * as d3Array from 'd3-array';
 import './ClusterGraph.css';
-import { ClusterPoint } from '../../types/SingleBlockGraph';
+import {ClusterPoint} from '../../types/SingleBlockGraph';
 
 interface Props {
     data: ClusterPoint[];
@@ -153,11 +153,7 @@ export default function ClusterGraph({ width, height, data }: Props) {
                                         l = Math.hypot(x, y);
                                     if (l < r) {
                                         l = ((l - r) / l) * alpha;
-                                        return (d.x -= x *= l), (d.y -= y *= l);
-                                    }
-                                    if (l < r) {
-                                        l = ((l - r) / l) * alpha;
-                                        return (q.data.x += x), (q.data.y += y);
+                                        return ((d.x -= x *= l), (d.y -= y *= l), (q.data.x += x), (q.data.y += y));
                                     }
                                 }
                             } while ((q = q.next));
