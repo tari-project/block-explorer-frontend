@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import * as d3 from 'd3';
 import * as d3Array from 'd3-array';
 import './ClusterGraph.css';
-import {ClusterPoint} from '../../types/SingleBlockGraph';
+import {ClusterPoint, Children} from '../../types/SingleBlockGraph';
 
 interface Props {
     data: ClusterPoint[];
@@ -13,8 +13,8 @@ interface Props {
 export default function ClusterGraph({ width, height, data }: Props) {
     useEffect(() => {
         const groups = {},
-            childGroups: any = {};
-        childGroups.children = [];
+            childGroups: Children = { children: [] };
+
         data.forEach(function (item) {
             const list = groups[item.group];
             if (list) {
@@ -23,6 +23,7 @@ export default function ClusterGraph({ width, height, data }: Props) {
                 groups[item.group] = [item];
             }
         });
+        
         for (const property in groups) {
             if (groups.hasOwnProperty(property)) {
                 const children = {
