@@ -42,7 +42,7 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
                 <Link to="/">
                     <Logo fill="#9330ff" />
                 </Link>
-                <a href="https://tari.com" target="_blank" rel="noreferrer" className="simpleBtn mobile">
+                <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn mobile">
                     <p>Visit Tari.com</p>
                 </a>
             </div>
@@ -58,7 +58,7 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
                         <TopBarItem label="Avg Block Time (Sec)" value={averageBlockTime} />
                         <TopBarItem label="Block Height" value={blockHeight} />
                     </div>
-                    <a href="https://tari.com" target="_blank" rel="noreferrer" className="simpleBtn desktop">
+                    <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn desktop">
                         <p>Visit Tari.com</p>
                     </a>
                 </div>
