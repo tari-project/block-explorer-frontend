@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import * as d3 from 'd3';
 import * as d3Array from 'd3-array';
 import './ClusterGraph.css';
-import {ClusterPoint, Children} from '../../types/SingleBlockGraph';
+import { ClusterPoint, Children } from '../../types/SingleBlockGraph';
 
 interface Props {
     data: ClusterPoint[];

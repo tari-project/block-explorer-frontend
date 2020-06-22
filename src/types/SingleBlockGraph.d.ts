@@ -7,7 +7,7 @@ export interface ClusterPoint {
 
 export interface Child {
     children: {
-        ClusterPoint
+        ClusterPoint;
     };
 }
 
