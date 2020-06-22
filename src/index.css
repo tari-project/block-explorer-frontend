@@ -22,13 +22,15 @@ body {
         flex-direction: column;
     }
     .TopBar-logoContainer {
-        width: 100%;
+        width: 100vw;
         border: none;
         position: relative;
     }
     .TopBar-searchContainer {
         flex-direction: column;
-        width: 100%;
+        width: 100vw;
+        padding: 0;
+        margin: 0 0 1em 0;
     }
     .TopBar-itemContainer {
         margin: 1em 0 0 2em;
@@ -167,11 +169,7 @@ body {
 }
 
 /*Tablets*/
-@media (min-width: 769px) and (max-width: 1024px) {
-    .App-content-mainArea {
-        width: calc(100% - 100px);
-    }
-
+@media (min-width: 992px) and (max-width: 1024px) {
     .TopBar-searchBar {
         justify-content: flex-end;
         display: flex;
