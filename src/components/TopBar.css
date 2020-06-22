@@ -22,6 +22,18 @@
     flex: 1;
 }
 
+.TopBar-rightContainer {
+    width: calc(100% - 24em);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.TopBar-searchContainer {
+    width: calc(100% - 90px);
+}
+
 .TopBar-searchContainer,
 .TopBar-itemContainer {
     display: flex;
@@ -32,7 +44,7 @@
 }
 
 .TopBar-itemContainer > * {
-    margin-left: 3em;
+    margin-left: 1em;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -53,10 +65,6 @@
     height: 35px;
     width: 110px;
     border-radius: 3px;
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translate(-50%, -50%);
     border: 2px solid #932fff;
     transition: background-color 0.2s ease-in, color 0.2s ease-in;
 }
@@ -73,4 +81,12 @@
     display: flex;
     font-weight: 500;
     user-select: none;
+}
+
+.TopBar .simpleBtn.mobile {
+    display: none;
+}
+
+.TopBar .simpleBtn.desktop {
+    display: flex;
 }

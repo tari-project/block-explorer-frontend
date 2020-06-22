@@ -24,6 +24,12 @@ body {
     .TopBar-logoContainer {
         width: 100%;
         border: none;
+        position: relative;
+    }
+    .TopBar-searchContainer,
+    .TopBar-rightContainer {
+        flex-direction: column;
+        width: 100%;
     }
     .TopBar-itemContainer {
         margin: 1em 0 0 2em;
@@ -53,10 +59,19 @@ body {
         font-size: 11px;
     }
 
-    .TopBar .simpleBtn {
-        top: 10px;
-        right: 10px;
-        transform: none;
+    .TopBar .simpleBtn.mobile {
+        display: flex;
+        position: absolute;
+        right: 1em;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    .TopBar .simpleBtn.desktop {
+        display: none;
+    }
+    .TopBar-logoContainer svg {
+        align-self: center;
     }
     /*TopBar End*/
 

@@ -42,22 +42,27 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
                 <Link to="/">
                     <Logo fill="#9330ff" />
                 </Link>
+                <a href="https://tari.com" target="_blank" rel="noreferrer" className="simpleBtn mobile">
+                    <p>Visit Tari.com</p>
+                </a>
             </div>
 
             <div className="TopBar-searchContainer">
                 <TopBarSearch />
-                <div className="TopBar-itemContainer">
-                    <TopBarItem label="Total Txns" value={totalTransactions} />
-                    <TopBarItem label="Avg Txns / Sec" value={averageTxPerSecond} />
-                    <TopBarItem label="Hash Rate" value={hashRate} />
-                    <TopBarItem label="Avg Fee" value={averageFee} />
-                    <TopBarItem label="Avg Block Time (Sec)" value={averageBlockTime} />
-                    <TopBarItem label="Block Height" value={blockHeight} />
+                <div className="TopBar-rightContainer">
+                    <div className="TopBar-itemContainer">
+                        <TopBarItem label="Total Txns" value={totalTransactions} />
+                        <TopBarItem label="Avg Txns / Sec" value={averageTxPerSecond} />
+                        <TopBarItem label="Hash Rate" value={hashRate} />
+                        <TopBarItem label="Avg Fee" value={averageFee} />
+                        <TopBarItem label="Avg Block Time (Sec)" value={averageBlockTime} />
+                        <TopBarItem label="Block Height" value={blockHeight} />
+                    </div>
+                    <a href="https://tari.com" target="_blank" rel="noreferrer" className="simpleBtn desktop">
+                        <p>Visit Tari.com</p>
+                    </a>
                 </div>
             </div>
-            <a href="https://tari.com" target="_blank" rel="noreferrer" className="simpleBtn">
-                <p>Visit Tari.com</p>
-            </a>
         </div>
     );
 }
