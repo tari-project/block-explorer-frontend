@@ -26,14 +26,14 @@ body {
         border: none;
         position: relative;
     }
-    .TopBar-searchContainer,
-    .TopBar-rightContainer {
+    .TopBar-searchContainer {
         flex-direction: column;
         width: 100%;
     }
     .TopBar-itemContainer {
         margin: 1em 0 0 2em;
         padding: 0 30px;
+        flex-wrap: wrap;
     }
     .TopBar-itemContainer div:first-child,
     .TopBar-itemContainer div {
@@ -167,8 +167,15 @@ body {
 }
 
 /*Tablets*/
-@media (min-width: 992px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     .App-content-mainArea {
         width: calc(100% - 100px);
+    }
+
+    .TopBar-searchBar {
+        justify-content: flex-end;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 2;
     }
 }

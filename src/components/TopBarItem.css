@@ -18,3 +18,7 @@
     letter-spacing: -0.21px;
     margin: 0;
 }
+
+.TopBarItem > h3.lowerCase {
+    text-transform: lowercase;
+}

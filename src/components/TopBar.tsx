@@ -32,7 +32,7 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
         const formattedAverageFee = numeral(metadata.averageFee).format('0,0');
         setAverageFee(formattedAverageFee);
 
-        const formattedAverageBlockTime = numeral(metadata.averageBlockTimes).format('0');
+        const formattedAverageBlockTime = numeral(metadata.averageBlockTimes).format('0') + 's';
         setAverageBlockTime(formattedAverageBlockTime);
     }, [metadata]);
 
@@ -49,19 +49,17 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
 
             <div className="TopBar-searchContainer">
                 <TopBarSearch />
-                <div className="TopBar-rightContainer">
-                    <div className="TopBar-itemContainer">
-                        <TopBarItem label="Total Txns" value={totalTransactions} />
-                        <TopBarItem label="Avg Txns / Sec" value={averageTxPerSecond} />
-                        <TopBarItem label="Hash Rate" value={hashRate} />
-                        <TopBarItem label="Avg Fee" value={averageFee} />
-                        <TopBarItem label="Avg Block Time (Sec)" value={averageBlockTime} />
-                        <TopBarItem label="Block Height" value={blockHeight} />
-                    </div>
-                    <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn desktop">
-                        <p>Visit Tari.com</p>
-                    </a>
+                <div className="TopBar-itemContainer">
+                    <TopBarItem label="Total Txns" value={totalTransactions} />
+                    <TopBarItem label="Avg Txns / Sec" value={averageTxPerSecond} />
+                    <TopBarItem label="Hash Rate" value={hashRate} />
+                    <TopBarItem label="Avg Fee" value={averageFee} />
+                    <TopBarItem lowerCase={true} label="Avg Block Time" value={averageBlockTime} />
+                    <TopBarItem label="Block Height" value={blockHeight} />
                 </div>
+                <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn desktop">
+                    <p>Visit Tari.com</p>
+                </a>
             </div>
         </div>
     );

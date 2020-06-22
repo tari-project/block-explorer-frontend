@@ -21,38 +21,35 @@
 .TopBar-contentContainer {
     flex: 1;
 }
-
-.TopBar-rightContainer {
-    width: calc(100% - 24em);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
 .TopBar-searchContainer {
     width: calc(100% - 90px);
+    justify-content: space-between;
 }
 
-.TopBar-searchContainer,
+.TopBar-searchContainer {
+    padding: 10px 2em;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 .TopBar-itemContainer {
+    width: auto;
+    justify-items: flex-start;
     display: flex;
     align-items: center;
     padding: 10px 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex-grow: 6;
     flex-direction: row;
 }
 
 .TopBar-itemContainer > * {
-    margin-left: 1em;
+    margin-left: 2em;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
-}
-
-.TopBar-itemContainer div:first-child {
-    margin-left: 2em;
 }
 
 .simpleBtn {
@@ -87,6 +84,7 @@
     display: none;
 }
 
-.TopBar .simpleBtn.desktop {
+.simpleBtn.desktop {
     display: flex;
+    flex-grow: 0;
 }
