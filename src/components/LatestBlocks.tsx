@@ -13,25 +13,57 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
         setLatestBlocks(blocks as BlocksEntity[]);
     }, [blocks]);
 
-    const [leftVal, setLeftVal] = useState(1000);
+    const [leftVal, setLeftVal] = useState(0);
+    const [showLeft, setShowLeft] = useState(false);
+    const [showRight, setShowRight] = useState(true);
 
     const latestBlocksContainer: any = useRef(null);
 
     useEffect(() => {
         latestBlocksContainer.current.getElement();
-        console.log(latestBlocksContainer);
+        setLeftVal(latestBlocksContainer.current.getElement().clientWidth);
     }, []);
 
     function clickScroll(direction) {
+        const element = latestBlocksContainer.current.getElement();
         if (latestBlocksContainer.current && direction === 'right') {
-            setLeftVal(leftVal + latestBlocksContainer.current.getElement().clientWidth);
-            latestBlocksContainer.current.getElement().scrollTo({ top: 0, left: leftVal, behavior: 'smooth' });
-            console.log(leftVal);
+            //get left val for scroll to
+            setLeftVal(leftVal + element.clientWidth);
+            //scroll
+            element.scrollTo({ top: 0, left: leftVal, behavior: 'smooth' });
+        } else if (latestBlocksContainer.current && direction === 'left') {
+            //get back!
+            setLeftVal(leftVal - element.clientWidth);
+            //scroll
+            element.scrollTo({ top: 0, left: -leftVal, behavior: 'smooth' });
+        }
+
+        if (element.clientWidth === leftVal) {
+            setShowLeft(true);
+        } else {
+            setShowLeft(false);
+        }
+
+        if (leftVal === element.scrollWidth) {
+            setShowRight(false);
+        } else {
+            setShowRight(true);
         }
     }
 
     return (
         <div className="latestBlocksAll">
+            {showLeft && (
+                <div
+                    className="clickScrollLeft"
+                    onClick={() => {
+                        clickScroll('left');
+                    }}
+                >
+                    <RightCaret className="rightCaret" />
+                    <RightCaret className="rightCaret small" />
+                </div>
+            )}
             <ScrollContainer
                 className="latestBlocksContainer"
                 hideScrollbars={false}
@@ -42,15 +74,17 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
                     <BlockCard key={i} block={block} />
                 ))}
             </ScrollContainer>
-            <div
-                className="clickScroll"
-                onClick={() => {
-                    clickScroll('right');
-                }}
-            >
-                <RightCaret className="rightCaret" />
-                <RightCaret className="rightCaret small" />
-            </div>
+            {showRight && (
+                <div
+                    className="clickScroll"
+                    onClick={() => {
+                        clickScroll('right');
+                    }}
+                >
+                    <RightCaret className="rightCaret" />
+                    <RightCaret className="rightCaret small" />
+                </div>
+            )}
         </div>
     );
 }

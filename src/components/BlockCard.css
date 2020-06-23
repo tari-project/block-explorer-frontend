@@ -167,3 +167,11 @@
         opacity: 0;
     }
 }
+
+.clickScrollLeft {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform-origin: left;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
