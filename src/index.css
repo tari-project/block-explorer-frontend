@@ -22,12 +22,20 @@ body {
         flex-direction: column;
     }
     .TopBar-logoContainer {
-        width: 100%;
+        width: 100vw;
         border: none;
+        position: relative;
+    }
+    .TopBar-searchContainer {
+        flex-direction: column;
+        width: 100vw;
+        padding: 0;
+        margin: 0 0 1em 0;
     }
     .TopBar-itemContainer {
         margin: 1em 0 0 2em;
         padding: 0 30px;
+        flex-wrap: wrap;
     }
     .TopBar-itemContainer div:first-child,
     .TopBar-itemContainer div {
@@ -53,10 +61,19 @@ body {
         font-size: 11px;
     }
 
-    .TopBar .simpleBtn {
-        top: 10px;
-        right: 10px;
-        transform: none;
+    .TopBar .simpleBtn.mobile {
+        display: flex;
+        position: absolute;
+        right: 1em;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    .TopBar .simpleBtn.desktop {
+        display: none;
+    }
+    .TopBar-logoContainer svg {
+        align-self: center;
     }
     /*TopBar End*/
 
@@ -152,8 +169,13 @@ body {
 }
 
 /*Tablets*/
-@media (min-width: 992px) {
-    .App-content-mainArea {
-        width: calc(100% - 100px);
+@media (min-width: 992px) and (max-width: 1024px) {
+    .TopBar-searchBar {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .TopBar-itemContainer div:first-child {
+        margin-left: 0;
     }
 }

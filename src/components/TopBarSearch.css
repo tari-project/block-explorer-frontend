@@ -1,15 +1,17 @@
 .TopBar-searchBar {
-    margin-left: 2em;
     position: relative;
+    display: flex;
+    flex-grow: 0;
 }
 
 .TopBar-searchBar input {
     padding: 10px 20px;
-    width: 24em;
+    width: 22em;
     border-radius: 3px;
-    border: 1px solid #9330FF;
+    border: 1px solid #9330ff;
     background: #ffffff;
 }
+
 .TopBar-searchBar input:focus {
     outline: none;
 }
