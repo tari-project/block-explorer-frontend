@@ -32,7 +32,7 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
         const formattedAverageFee = numeral(metadata.averageFee).format('0,0');
         setAverageFee(formattedAverageFee);
 
-        const formattedAverageBlockTime = numeral(metadata.averageBlockTimes).format('0');
+        const formattedAverageBlockTime = numeral(metadata.averageBlockTimes).format('0') + 's';
         setAverageBlockTime(formattedAverageBlockTime);
     }, [metadata]);
 
@@ -42,6 +42,9 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
                 <Link to="/">
                     <Logo fill="#9330ff" />
                 </Link>
+                <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn mobile">
+                    <p>Visit Tari.com</p>
+                </a>
             </div>
 
             <div className="TopBar-searchContainer">
@@ -51,13 +54,13 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
                     <TopBarItem label="Avg Txns / Sec" value={averageTxPerSecond} />
                     <TopBarItem label="Hash Rate" value={hashRate} />
                     <TopBarItem label="Avg Fee" value={averageFee} />
-                    <TopBarItem label="Avg Block Time (Sec)" value={averageBlockTime} />
+                    <TopBarItem lowerCase={true} label="Avg Block Time" value={averageBlockTime} />
                     <TopBarItem label="Block Height" value={blockHeight} />
                 </div>
+                <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn desktop">
+                    <p>Visit Tari.com</p>
+                </a>
             </div>
-            <a href="https://tari.com" target="_blank" rel="noreferrer" className="simpleBtn">
-                <p>Visit Tari.com</p>
-            </a>
         </div>
     );
 }
