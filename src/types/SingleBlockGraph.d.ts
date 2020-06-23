@@ -4,3 +4,13 @@ export interface ClusterPoint {
     color: string;
     tooltip: string;
 }
+
+export interface Child {
+    children: {
+        ClusterPoint;
+    };
+}
+
+export interface Children {
+    children: Child[];
+}
