@@ -168,7 +168,11 @@
     }
 }
 
-.clickScrollLeft {
+.clickScroll {
+    cursor: pointer;
+}
+
+.clickScroll.left {
     position: absolute;
     left: 0;
     top: 50%;

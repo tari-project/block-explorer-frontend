@@ -21,30 +21,35 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
 
     useEffect(() => {
         latestBlocksContainer.current.getElement();
-        setLeftVal(latestBlocksContainer.current.getElement().clientWidth);
     }, []);
 
-    function clickScroll(direction) {
-        const element = latestBlocksContainer.current.getElement();
-        if (latestBlocksContainer.current && direction === 'right') {
-            //get left val for scroll to
-            setLeftVal(leftVal + element.clientWidth);
-            //scroll
-            element.scrollTo({ top: 0, left: leftVal, behavior: 'smooth' });
-        } else if (latestBlocksContainer.current && direction === 'left') {
-            //get back!
-            setLeftVal(leftVal - element.clientWidth);
-            //scroll
-            element.scrollTo({ top: 0, left: -leftVal, behavior: 'smooth' });
-        }
-
-        if (element.clientWidth === leftVal) {
+    useEffect(() => {
+        if (leftVal > 0) {
             setShowLeft(true);
         } else {
             setShowLeft(false);
         }
+    }, [leftVal]);
 
-        if (leftVal === element.scrollWidth) {
+    function clickScroll(direction) {
+        const element = latestBlocksContainer.current.getElement();
+        let leftOffset = leftVal;
+
+        if (latestBlocksContainer.current && direction === 'right') {
+            //get left val for scroll to
+            leftOffset += element.clientWidth;
+            //scroll
+            element.scrollTo({ top: 0, left: leftOffset, behavior: 'smooth' });
+        } else if (latestBlocksContainer.current && direction === 'left') {
+            //get back!
+            leftOffset -= element.clientWidth;
+            //scroll
+            element.scrollTo({ top: 0, left: -leftOffset, behavior: 'smooth' });
+        }
+
+        setLeftVal(leftOffset);
+
+        if (element.scrollWidth - element.scrollLeft <= element.clientWidth) {
             setShowRight(false);
         } else {
             setShowRight(true);
@@ -55,7 +60,7 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
         <div className="latestBlocksAll">
             {showLeft && (
                 <div
-                    className="clickScrollLeft"
+                    className="clickScroll left"
                     onClick={() => {
                         clickScroll('left');
                     }}
