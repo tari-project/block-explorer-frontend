@@ -70,6 +70,9 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
 
     const { width, height } = dimensions;
 
+    //Remove last block
+    latestBlocks.splice(-1,1);
+
     const blocksData: HeightBar[] = latestBlocks.map((block) => {
         const { body, header, _miningTime } = block.block;
 
