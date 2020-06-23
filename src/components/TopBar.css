@@ -44,11 +44,15 @@
     flex-direction: row;
 }
 
+.TopBar-itemContainer div:first-child {
+    margin-left: 3em;
+}
+
 .TopBar-itemContainer > * {
-    margin-left: 2em;
+    margin-right: 2em;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: center;
 }
 

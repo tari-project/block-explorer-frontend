@@ -171,9 +171,11 @@ body {
 /*Tablets*/
 @media (min-width: 992px) and (max-width: 1024px) {
     .TopBar-searchBar {
-        justify-content: flex-end;
         display: flex;
         flex-direction: row;
-        flex-grow: 2;
+    }
+
+    .TopBar-itemContainer div:first-child {
+        margin-left: 0;
     }
 }
