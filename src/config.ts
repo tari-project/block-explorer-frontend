@@ -13,6 +13,7 @@ const config = {
         process.env.REACT_APP_EXPLORER_API_DOMAIN + '/ws'
     ),
     tokenName: process.env.REACT_APP_TOKEN_NAME || 'tXTR',
-    initialBlockCount: +(process.env.REACT_APP_INITIAL_BLOCK_COUNT || 100)
+    initialBlockCount: +(process.env.REACT_APP_INITIAL_BLOCK_COUNT || 100),
+    maxBlocks: +(process.env.REACT_APP_MAX_BLOCKS || 100)
 };
 export default config;

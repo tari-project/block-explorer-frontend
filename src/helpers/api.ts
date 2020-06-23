@@ -25,6 +25,11 @@ export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Prom
     if (sort === 'desc') {
         blocks.blocks.sort((a, b) => b.block.header.height - a.block.header.height);
     }
+
+    if(blocks.blocks.length > config.maxBlocks) {
+        blocks.blocks.splice(-1,1);
+    }
+
     return blocks;
 }
 
