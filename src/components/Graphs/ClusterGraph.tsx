@@ -23,7 +23,7 @@ export default function ClusterGraph({ width, height, data }: Props) {
                 groups[item.group] = [item];
             }
         });
-        
+
         for (const property in groups) {
             if (groups.hasOwnProperty(property)) {
                 const children = {
@@ -55,30 +55,28 @@ export default function ClusterGraph({ width, height, data }: Props) {
             .append('g')
             .attr('transform', 'translate(0, 0)');
 
-        const tooltip = d3.select("body")
-            .append("div")
-            .style("position", "absolute")
-            .style("z-index", "10")
-            .style("visibility", "hidden")
-            .style("color", "white")
-            .style("padding", "8px")
-            .style("background-color", "#ececec")
-            .style("border-radius", "6px")
-            .style("font", "12px sans-serif")
-            .text("tooltip");
+        const tooltip = d3
+            .select('body')
+            .append('div')
+            .style('position', 'absolute')
+            .style('z-index', '10')
+            .style('visibility', 'hidden')
+            .style('color', 'white')
+            .style('padding', '8px')
+            .style('background-color', '#ececec')
+            .style('border-radius', '6px')
+            .style('font', '12px sans-serif')
+            .text('tooltip');
 
         const showTooltip = function (d) {
             tooltip.transition().duration(200);
-            tooltip
-                .style("visibility", "visible")
-                .html(d.data.tooltip)
-                .style('color', d.data.color);
+            tooltip.style('visibility', 'visible').html(d.data.tooltip).style('color', d.data.color);
         };
         const moveTooltip = function () {
-            tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+            tooltip.style('top', d3.event.pageY - 10 + 'px').style('left', d3.event.pageX + 10 + 'px');
         };
         const hideTooltip = function (d) {
-            tooltip.style("visibility", "hidden");
+            tooltip.style('visibility', 'hidden');
         };
 
         const node = svg
