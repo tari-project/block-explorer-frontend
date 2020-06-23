@@ -55,30 +55,30 @@ export default function ClusterGraph({ width, height, data }: Props) {
             .append('g')
             .attr('transform', 'translate(0, 0)');
 
-        const tooltip = d3
-            .select('#chart')
-            .append('div')
-            .style('opacity', 0)
-            .attr('class', 'tooltip')
-            .style('background-color', '#ececec')
-            .style('border-radius', '5px')
-            .style('padding', '8px');
+        const tooltip = d3.select("body")
+            .append("div")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .style("color", "white")
+            .style("padding", "8px")
+            .style("background-color", "#ececec")
+            .style("border-radius", "6px")
+            .style("font", "12px sans-serif")
+            .text("tooltip");
 
-        const showTooltip = function (this: any, d) {
+        const showTooltip = function (d) {
             tooltip.transition().duration(200);
             tooltip
-                .style('opacity', 0.8)
+                .style("visibility", "visible")
                 .html(d.data.tooltip)
-                .style('left', d3.mouse(this)[0] + 30 + 'px')
-
-                .style('top', d3.mouse(this)[1] + 30 + 'px')
                 .style('color', d.data.color);
         };
-        const moveTooltip = function (this: any, d) {
-            tooltip.style('left', d3.mouse(this)[0] + 30 + 'px').style('top', d3.mouse(this)[1] + 30 + 'px');
+        const moveTooltip = function () {
+            tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
         };
         const hideTooltip = function (d) {
-            tooltip.transition().duration(200).style('opacity', 0);
+            tooltip.style("visibility", "hidden");
         };
 
         const node = svg
