@@ -56,6 +56,27 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
         }
     }
 
+    function onStartScroll() {
+        const element = latestBlocksContainer.current.getElement();
+
+        if (element.scrollLeft > 0) {
+            setShowLeft(true);
+        }
+    }
+    function onEndScroll() {
+        const element = latestBlocksContainer.current.getElement();
+
+        if (element.scrollLeft === 0) {
+            setShowLeft(false);
+        }
+
+        if (element.scrollWidth - element.scrollLeft <= element.clientWidth) {
+            setShowRight(false);
+        } else {
+            setShowRight(true);
+        }
+    }
+
     return (
         <div className="latestBlocksAll">
             {showLeft && (
@@ -74,6 +95,8 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
                 hideScrollbars={false}
                 vertical={false}
                 ref={latestBlocksContainer}
+                onStartScroll={onStartScroll}
+                onEndScroll={onEndScroll}
             >
                 {latestBlocks.map((block, i) => (
                     <BlockCard key={i} block={block} />
