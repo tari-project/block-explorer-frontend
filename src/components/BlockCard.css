@@ -167,3 +167,15 @@
         opacity: 0;
     }
 }
+
+.clickScroll {
+    cursor: pointer;
+}
+
+.clickScroll.left {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform-origin: left;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
