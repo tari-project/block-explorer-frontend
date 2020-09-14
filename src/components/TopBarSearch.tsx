@@ -38,7 +38,7 @@ function TopBarSearch({ history }) {
             <input
                 type="text"
                 defaultValue={id || ''}
-                placeholder="Search for a specific block or transaction"
+                placeholder="Search for a specific block"
                 onKeyPress={handleKeyPress}
                 onKeyUp={handleKeyUp}
             />
