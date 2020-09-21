@@ -7,6 +7,7 @@ import { setupWebsockets } from './helpers/api';
 import store from './store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SingleBlock from './components/SingleBlock';
+import SearchKernel from './components/SearchKernel';
 
 export default function App() {
     useEffect(() => {
@@ -26,6 +27,7 @@ export default function App() {
                         <Switch>
                             <Route exact path="/" component={BlockExplorer} />
                             <Route path="/block/:id" component={SingleBlock} />
+                            <Route path="/kernel/:nonce/:signature" component={SearchKernel} />
                         </Switch>
                     </div>
                 </div>

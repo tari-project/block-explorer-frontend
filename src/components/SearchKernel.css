@@ -1,0 +1,20 @@
+.SearchKernel {
+    padding: 2em;
+    min-height: 800px;
+}
+
+.SearchKernel h1 {
+    font-weight: bold;
+    font-family: Avenir, sans-serif;
+    font-size: 30px;
+}
+
+.SearchKernel h2 {
+    font-weight: bold;
+    font-family: Avenir, sans-serif;
+    font-size: 20px;
+}
+
+.SearchKernel a {
+    text-decoration: none;
+}

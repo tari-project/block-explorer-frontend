@@ -89,6 +89,15 @@ export async function fetchSingleBlock(blockId: string | number): Promise<Blocks
     }
 }
 
+export async function searchKernel(publicNonce: string, signature: string): Promise<Blocks> {
+    try {
+        const response = await fetch(`${apiUrl}/kernel/${publicNonce}/${signature}`);
+        return await response.json();
+    } catch (e) {
+        return e;
+    }
+}
+
 export interface Constants {
     coinbase_lock_height: number;
     blockchain_version: number;
