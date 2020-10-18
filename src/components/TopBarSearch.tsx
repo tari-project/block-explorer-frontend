@@ -4,7 +4,7 @@ import loader from '../assets/searching-loader.gif';
 import './TopBarSearch.css';
 import { withRouter } from 'react-router-dom';
 
-function TopBarSearch({ history }) {
+function TopBarSearch({ history }: { history: any }) {
     let timer;
     const [searching, setSearching] = useState(false);
     const [id, setId] = useState('');
@@ -19,6 +19,11 @@ function TopBarSearch({ history }) {
         setSearching(true);
     }
 
+    function redirect(idOrHash) {
+        idOrHash = idOrHash.trim();
+        idOrHash && (window.location.href = '/block/' + idOrHash);
+    }
+
     function handleKeyUp(e) {
         const searchValue = e.target.value;
         window.clearTimeout(timer);
@@ -28,22 +33,17 @@ function TopBarSearch({ history }) {
         }, 2000);
     }
 
-    function redirect(idOrHash) {
-        idOrHash = idOrHash.trim();
-        idOrHash && (window.location.href = '/block/' + idOrHash);
-    }
-
     return (
         <div className="TopBar-searchBar">
             <input
                 type="text"
                 defaultValue={id || ''}
-                placeholder="Search for a specific block or transaction"
+                placeholder="Search for a block by height or hash"
                 onKeyPress={handleKeyPress}
                 onKeyUp={handleKeyUp}
             />
             {searching ? (
-                <img src={loader} className="searchBarLoader" alt="Searching for a specific block or transaction" />
+                <img src={loader} className="searchBarLoader" alt="Searching for a block by height or hash" />
             ) : (
                 <Search className="searchBarIcon" />
             )}
