@@ -69,7 +69,10 @@ function forceCollide(nodes) {
                                 l = Math.hypot(x, y);
                             if (l < r) {
                                 l = ((l - r) / l) * alpha;
-                                return (d.x -= x *= l), (d.y -= y *= l), (q.data.x += x), (q.data.y += y);
+                                d.x -= x *= l;
+                                d.y -= y *= l;
+                                q.data.x += x;
+                                q.data.y += y;
                             }
                         }
                     } while ((q = q.next));

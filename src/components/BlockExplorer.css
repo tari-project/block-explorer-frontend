@@ -4,3 +4,9 @@
     width: 100%;
     flex-wrap: wrap;
 }
+
+@media (min-width: 1451px) {
+    .twoCol {
+        justify-content: space-evenly;
+    }
+}
