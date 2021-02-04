@@ -33,8 +33,6 @@ export interface Timestamp {
 }
 export interface Pow {
     pow_algo: string;
-    accumulated_monero_difficulty: string;
-    accumulated_blake_difficulty: string;
     pow_data: string;
 }
 export interface Body {

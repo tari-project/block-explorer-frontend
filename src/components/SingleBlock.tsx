@@ -21,6 +21,19 @@ interface Status {
     message: string;
 }
 
+function BlockType(param) {
+    switch(param) {
+        case '0':
+          return "Monero"
+        case '1':
+          return "Blake"
+        case '2':
+          return "Sha3"
+        default:
+          return "Undefined"
+      }
+  }
+
 function SingleBlock({ constants }: Props) {
     const { id } = useParams();
     const [singleBlock, setSingleBlock] = useState({} as Block);
@@ -102,7 +115,7 @@ function SingleBlock({ constants }: Props) {
     }, [constants]);
 
     const { hash, prev_hash, nonce, total_kernel_offset, version, timestamp, height } = blockHeader;
-    const { accumulated_monero_difficulty, accumulated_blake_difficulty } = blockPow;
+    const { pow_algo } = blockPow;
 
     const date = timestamp && new Date(timestamp.seconds * 1000).toLocaleString();
     const { _weight } = singleBlock;
@@ -119,8 +132,7 @@ function SingleBlock({ constants }: Props) {
                     <StatRow label="Timestamp" value={date} />
                     <h1>Technical Details</h1>
                     <StatRow label="Block Height" value={height} />
-                    <StatRow label="Accumulated Monero Difficulty" value={accumulated_monero_difficulty} />
-                    <StatRow label="Accumulated Blake Difficulty" value={accumulated_blake_difficulty} />
+                    <StatRow label="Block Algorithm" value={BlockType(pow_algo)} />
                     <Link to={`/block/${prev_hash}`}>
                         <StatRow label="Previous Hash" value={prev_hash} />
                     </Link>

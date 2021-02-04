@@ -89,10 +89,10 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
     }
 
     return (
-        <div className="graphWrapper networkDifficultyGraph">
+        <div className="graphWrapper networkHashrateGraph">
             <PlainGraphTitle
-                title="Network Difficulty"
-                subTitle={`How difficult it is to mine a new block for the Tari blockchain.`}
+                title="Historical Hash Rate"
+                subTitle={`The estimated hashrate for the network per block.`}
             />
             <svg
                 viewBox={`0 0 ${width} ${height}`}
