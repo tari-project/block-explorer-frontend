@@ -124,12 +124,12 @@ body {
         padding: 0;
     }
 
-    .networkDifficultyGraph .xAxisDate {
+    .networkHashrateGraph .xAxisDate {
         width: auto;
         margin: 0 0 0 30px;
     }
 
-    .networkDifficultyGraph .xAxisDate .tick {
+    .networkHashrateGraph .xAxisDate .tick {
         font-size: 11px;
     }
 
