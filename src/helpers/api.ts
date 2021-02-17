@@ -69,8 +69,11 @@ export function setupWebsockets(store) {
 }
 
 export interface NetworkDifficultyEstimatedHash {
+    difficulty: number;
     estimated_hash_rate: number;
     height: number;
+    timestamp: number;
+    pow_algo: number;
 }
 
 export type NetworkDifficultyEstimatedHashes = Array<NetworkDifficultyEstimatedHash>;

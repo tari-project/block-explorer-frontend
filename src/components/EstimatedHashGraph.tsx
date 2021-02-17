@@ -8,12 +8,15 @@ interface Props {
 
 function EstimatedHashGraph({ difficulties }: Props) {
     const difficultyArray: any[] = [];
-    difficulties.forEach((item) => {
+    difficulties.forEach( function(item, index, array) {
+        // exclude latest block since estimated hash rate will be zero
+        if (index !== 0){
         const { estimated_hash_rate: estimatedHashRate, height } = item;
         difficultyArray.push({ y: estimatedHashRate, x: +height });
+        }
     });
 
-    const yAxisLabel = 'difficulty';
+    const yAxisLabel = 'estimated hash rate';
     const xAxisLabel = 'block height';
 
     return (
