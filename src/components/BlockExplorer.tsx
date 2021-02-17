@@ -2,6 +2,7 @@ import React from 'react';
 import './BlockExplorer.css';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import EstimatedHashGraph from './EstimatedHashGraph';
+import TargetDifficultyGraph from './TargetDifficultyGraph';
 import Hero from './Hero';
 import HeroGraph from './Graphs/HeroGraph';
 import LatestBlocks from './LatestBlocks';
@@ -22,6 +23,9 @@ export default function BlockExplorer() {
             <div className="twoCol">
                 <EstimatedHashGraph />
                 <CirculatingTokenGraph />
+            </div>
+            <div className="twoCol">
+                <TargetDifficultyGraph />
             </div>
         </div>
     );
