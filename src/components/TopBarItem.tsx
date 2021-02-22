@@ -1,5 +1,5 @@
 import React from 'react';
-import './TopBarItem.css';
+import './TopBarItem.scss';
 
 interface Props {
     label: string;

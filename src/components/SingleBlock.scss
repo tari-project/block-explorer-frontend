@@ -1,3 +1,6 @@
+@import '../scss/lib/functions';
+@import '../scss/lib/vars';
+
 .SingleBlock {
     padding: 2em;
     min-height: 800px;
@@ -5,7 +8,7 @@
 
 .SingleBlock h1 {
     font-weight: bold;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 30px;
 }
 

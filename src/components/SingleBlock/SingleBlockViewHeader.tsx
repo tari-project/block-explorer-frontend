@@ -1,5 +1,5 @@
 import React from 'react';
-import './SingleBlockViewHeader.css';
+import './SingleBlockViewHeader.scss';
 import ColorMapItem from './ColorMapItem';
 
 interface Props {
@@ -11,9 +11,9 @@ export default function SingleBlockViewHeader({ title }: Props) {
         <div className="singleBlockViewHeader">
             <h1>{title}</h1>
             <div className="colorMapping">
-                <ColorMapItem title="Inputs" color="#F97C0D" />
-                <ColorMapItem title="Outputs" color="#2274AF" />
-                <ColorMapItem title="Kernels" color="#FB576D" />
+                <ColorMapItem title="Inputs" className="inputs" />
+                <ColorMapItem title="Outputs" className="outputs" />
+                <ColorMapItem title="Kernels" className="kernels" />
             </div>
         </div>
     );

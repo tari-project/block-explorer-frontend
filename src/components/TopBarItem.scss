@@ -1,7 +1,10 @@
+@import '../scss/lib/functions';
+@import '../scss/lib/vars';
+
 .TopBarItem > h3 {
     color: #190f1f;
     display: block;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 24.5px;
     font-weight: 900;
     letter-spacing: -0.64px;
@@ -12,7 +15,7 @@
 .TopBarItem > h4 {
     color: #969aba;
     display: block;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 11.6px;
     font-weight: 400;
     letter-spacing: -0.21px;

@@ -1,5 +1,8 @@
+@import '../scss/lib/functions';
+@import '../scss/lib/vars';
+
 .SideBar {
-    border-right: 1px solid #d8d8d8;
+    border-right: 1px solid _color(border-primary);
     width: 90px;
 }
 
@@ -12,7 +15,7 @@
 }
 
 .SideBar-navigationItem > svg {
-    fill: #c2bfe7;
+    fill: _color(sidebar-fill);
     transition: fill 288ms;
 }
 

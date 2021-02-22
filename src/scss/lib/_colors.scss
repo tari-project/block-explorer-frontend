@@ -1,0 +1,28 @@
+.color-primary {
+  color: _color(primary);
+}
+.fill-color-primary {
+  fill: _color(primary);
+}
+
+.color-secondary {
+  color: _color(secondary);
+}
+.fill-color-secondary {
+  fill: _color(secondary);
+}
+
+.color-tertiary {
+  color: _color(tertiary);
+}
+.fill-color-tertiary {
+  fill: _color(tertiary);
+}
+
+.fill-color-highlight {
+  fill: rgba(255,255,255,1); // TODO won't work with color variable - must be svg order of rendering
+}
+
+.fill-color-lowlight {
+  fill: rgba(0,0,0,1); // TODO won't work with color variable - must be svg order of rendering
+}

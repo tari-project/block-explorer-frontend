@@ -1,3 +1,6 @@
+@import '../../scss/lib/functions';
+@import '../../scss/lib/vars';
+
 #chart {
     position: relative;
 }
@@ -20,9 +23,10 @@
 .bubble {
     stroke-width: 0;
 }
+
 .bubble:hover {
     stroke-width: 2;
-    stroke: #d5d5d5;
+    stroke: _color(stroke-bubble);
 }
 
 .tooltip {
@@ -30,6 +34,6 @@
     z-index: 1070;
     display: block;
     margin: 0;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-weight: bold;
 }

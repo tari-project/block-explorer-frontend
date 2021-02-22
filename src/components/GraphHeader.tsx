@@ -1,5 +1,5 @@
 import React from 'react';
-import './GraphHeader.css';
+import './GraphHeader.scss';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import Dropdown from './Dropdown';
 

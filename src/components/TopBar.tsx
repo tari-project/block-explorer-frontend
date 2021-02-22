@@ -2,7 +2,7 @@ import numeral from 'numeral';
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../assets/logo.svg';
 import { connect } from 'react-redux';
-import './TopBar.css';
+import './TopBar.scss';
 import TopBarItem from './TopBarItem';
 import TopBarSearch from './TopBarSearch';
 import { ChainMetadata } from '../helpers/api';
@@ -40,7 +40,7 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
         <div className="TopBar">
             <div className="TopBar-logoContainer">
                 <Link to="/">
-                    <Logo fill="#9330ff" />
+                    <Logo />
                 </Link>
                 <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn mobile">
                     <p>Visit Tari.com</p>

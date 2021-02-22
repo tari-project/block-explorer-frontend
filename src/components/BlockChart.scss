@@ -1,0 +1,11 @@
+@import '../scss/lib/functions';
+@import '../scss/lib/vars';
+
+circle {
+  fill: _color(circle-fill);
+  stroke: _color(white);
+}
+
+rect {
+  fill: _color(rect-fill);
+}

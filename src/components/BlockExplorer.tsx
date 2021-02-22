@@ -1,5 +1,5 @@
 import React from 'react';
-import './BlockExplorer.css';
+import './BlockExplorer.scss';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import EstimatedHashGraph from './EstimatedHashGraph';
 import TargetDifficultyGraph from './TargetDifficultyGraph';

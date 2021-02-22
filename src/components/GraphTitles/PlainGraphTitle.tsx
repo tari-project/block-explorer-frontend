@@ -1,5 +1,5 @@
 import React from 'react';
-import './PlainGraphTitle.css';
+import './PlainGraphTitle.scss';
 
 interface Props {
     title: string;

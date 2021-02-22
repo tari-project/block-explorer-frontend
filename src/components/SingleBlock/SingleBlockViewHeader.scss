@@ -1,3 +1,7 @@
+@import '../../scss/lib/colors';
+@import '../../scss/lib/functions';
+@import '../../scss/lib/vars';
+
 .singleBlockViewHeader {
     display: flex;
     flex-direction: row;
@@ -19,7 +23,19 @@
 }
 
 .colorTitle {
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 14px;
     font-weight: 500;
+}
+
+.inputs {
+    fill: _color(inputs);
+}
+
+.outputs {
+    fill: _color(outputs);
+}
+
+.kernels {
+    fill: _color(kernels);
 }

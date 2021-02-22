@@ -1,6 +1,9 @@
+@import '../../scss/lib/functions';
+@import '../../scss/lib/vars';
+
 .ProgressBarContainer h3{
     font-weight: bold;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 0.7em;
 }
 
@@ -13,12 +16,12 @@ progress {
     background: #E4E4E4;
 }
 progress::-moz-progress-bar {
-    background: #932FFF;
+    background: _color(primary);
 }
 
 progress::-webkit-progress-bar {
     background: transparent;
 }
 progress::-webkit-progress-value {
-    background: #932FFF;
+    background: _color(primary);
 }

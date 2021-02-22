@@ -1,5 +1,5 @@
 import React from 'react';
-import './Dropdown.css';
+import './Dropdown.scss';
 
 export default function Dropdown() {
     return (

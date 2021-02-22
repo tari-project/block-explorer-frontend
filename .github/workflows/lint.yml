@@ -21,7 +21,7 @@ jobs:
         run:  npm ci --no-audit --prefer-offline
 
       - name: Run linters
-        uses: tinovyatkin/action-eslint@a62d4ab
+        uses: tinovyatkin/action-eslint@a62d4ab3ea77b401bd40d1dfbd1ff053b3aa9307
         with:
           repo-token: ${{ secrets.github_token }}
           check-name: eslint

@@ -81,18 +81,11 @@ interface GraphicalElementProps {
 function Bar({ offset, value }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
     return (
-        <rect
-            fill="#9d7396"
-            width={elementSize}
-            height={value}
-            rx={halfSize}
-            x={offset - halfSize}
-            y={height - value}
-        />
+        <rect width={elementSize} height={value} rx={halfSize} x={offset - halfSize} y={height - value} />
     );
 }
 
 function Circle({ offset, value }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
-    return <circle fill="#f7944f" stroke="#ffffff" r={elementSize} cx={offset} cy={height - value} />;
+    return <circle r={elementSize} cx={offset} cy={height - value} />;
 }

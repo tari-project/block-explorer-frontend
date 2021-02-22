@@ -1,0 +1,172 @@
+@import '../../scss/lib/colors';
+@import '../../scss/lib/functions';
+@import '../../scss/lib/vars';
+
+.HeroGraphContainer {
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 30px;
+  /*max-height: 360px; will revisit*/
+}
+
+.xAxisTimes {
+  display: flex;
+  justify-items: center;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+}
+
+.xAxisTimes {
+  width: 100%;
+}
+
+.xAxisTimes .tick {
+  font-family: _font(family-regular);
+  font-size: 14px;
+  display: flex;
+  color: _color(graph-ticks-secondary);
+}
+
+.heroYAxisText {
+  font-family: _font(family-regular);
+  font-size: 0.6em;
+}
+
+.heroBars {
+  margin-bottom: 2rem;
+  overflow: visible;
+  width: 100%;
+  height: auto;
+}
+
+@-moz-document url-prefix() {
+  .heroBars {
+    overflow: visible;
+  }
+}
+
+@media not all and (min-resolution: 0.001dpcm) {
+  .heroBars {
+    overflow: visible;
+  }
+}
+
+/*block height tooltip*/
+
+.overviewBars .tooltip.total rect {
+  fill: _color(tooltip-fill);
+  stroke: _color(tooltip-hero);
+  stroke-width: 0.5;
+  width: 65px;
+  height: 70px;
+  opacity: 0.8;
+}
+
+.overviewBars .tooltip text {
+  fill: _color(primary);
+  font-size: 9px;
+  font-family: _font(family-regular);
+  font-weight: bold;
+}
+
+.overviewBars .tooltip.total {
+  visibility: hidden;
+  transition: visibility 0.25s ease-in-out;
+}
+
+.overviewBars:hover .tooltip.total {
+  visibility: visible;
+}
+
+.overviewBars .tooltip.total text tspan.timeAgo {
+  fill: _color(tooltip-hero);
+  font-size: 7px;
+}
+
+.overviewBars .tooltip.total text tspan.blockHeight {
+  fill: #90aab4;
+  font-size: 11px;
+}
+
+.overviewBars .tooltip.total text tspan.kernels {
+  fill: _color(primary);
+}
+
+.overviewBars .tooltip.total text tspan.outputs {
+  fill: _color(secondary);
+}
+
+.overviewBars .tooltip.total text tspan.inputs {
+  fill: _color(inputs);
+}
+
+/*block height tooltip end*/
+
+/*bars tooltips*/
+
+.overviewBars .tooltip {
+  display: flex;
+  align-items: center;
+}
+
+.overviewBars .tooltip rect {
+  fill: _color(tooltip-secondary);
+  stroke: #ececec;
+  width: 63px;
+  height: 15px;
+}
+
+#kernels .tooltip text {
+  fill: _color(kernels);
+}
+
+#outputs .tooltip text {
+  fill: _color(outputs);
+}
+
+#inputs .tooltip text {
+  fill: _color(inputs);
+}
+
+/*bars tt end*/
+
+/*animation*/
+
+.overviewBars.first {
+  transition: all 3s ease-in-out;
+}
+
+.animate:first-child {
+  animation: slide 1.5s linear;
+}
+
+@keyframes slide {
+  from {
+    transform: rotate(5deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/*animation end*/
+
+rect {
+  &.hero-kernels {
+    fill: _color(primary);
+  }
+  &.hero-outputs {
+    fill: _color(secondary);
+  }
+  &.hero-inputs {
+    fill: _color(tertiary);
+  }
+}
+
+//LoadingBars {
+//  svg {
+//    fill: white;
+//  }
+//}
