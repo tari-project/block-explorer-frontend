@@ -1,5 +1,5 @@
 import React from 'react';
-import './BlockCard.css';
+import './BlockCard.scss';
 import numeral from 'numeral';
 import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
@@ -21,9 +21,9 @@ export default function BlockCard({ block }: { block: any }) {
         <Link to={`/block/${hash}`} key={height} className="BlockCard slideIn">
             <Header blockHeight={heightStr} date={date} timeAgo={timeAgo} />
             <div className="BlockCard-stats">
-                <StatBox color="yellow" label="# of Transactions" value={kernels.length} />
-                <StatBox color="blue" label="Mining Time" value={miningTime} />
-                <StatBox color="purple" label="Block Size" value={size} />
+                <StatBox statBoxClass="transactions" label="# of Transactions" value={kernels.length} />
+                <StatBox statBoxClass="mining" label="Mining Time" value={miningTime} />
+                <StatBox statBoxClass="block" label="Block Size" value={size} />
             </div>
         </Link>
     );
@@ -44,37 +44,19 @@ function Header({ blockHeight, date, timeAgo }: HeaderProps) {
     );
 }
 
-type StatBoxColor = 'yellow' | 'blue' | 'purple';
-
-const statBoxColors: {
-    [color in StatBoxColor]: {
-        backgroundColor: string;
-        color: string;
-    };
-} = {
-    yellow: {
-        backgroundColor: '#fceee4',
-        color: '#bc9b84'
-    },
-    blue: {
-        backgroundColor: '#e4f5fc',
-        color: '#90aab4'
-    },
-    purple: {
-        backgroundColor: '#fce4f6',
-        color: '#b490ae'
-    }
-};
 
 interface StatBoxProps {
-    color: StatBoxColor;
-    label: string;
+    statBoxClass: string;
     value: string;
+    label: string;
 }
 
-function StatBox({ color, label, value }: StatBoxProps) {
+function StatBox({ statBoxClass, label, value }: StatBoxProps) {
+
+    let themeClass: string = "BlockCard-StatBox " + statBoxClass;
+
     return (
-        <div style={statBoxColors[color]} className="BlockCard-StatBox">
+        <div className={themeClass}>
             <div className="BlockCard-StatBox-value">{value}</div>
             <div className="BlockCard-StatBox-label">{label}</div>
         </div>

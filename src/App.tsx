@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import BlockExplorer from './components/BlockExplorer';
 import SideBar from './components/SideBar';
 import TopBar from './components/TopBar';

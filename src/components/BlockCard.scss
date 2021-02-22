@@ -1,5 +1,8 @@
+@import '../scss/lib/functions';
+@import '../scss/lib/vars';
+
 .BlockCard {
-    background-color: #ffffff;
+    background-color: _color(white);
     box-shadow: 10px 10px 25px rgba(16, 11, 22, 0.05);
     box-sizing: border-box;
     border-radius: 6px;
@@ -16,17 +19,17 @@
 }
 
 .BlockCard-Header > h1 {
-    color: #37363a;
+    color: _color(h1-block-card);
     display: block;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 17px;
     font-weight: 900;
 }
 
 .BlockCard-Header > h2 {
-    color: #bcbcbc;
+    color: _color(h2-block-card);
     display: block;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 13px;
     font-weight: 500;
 }
@@ -39,9 +42,9 @@
 }
 
 .BlockCard-ticks {
-    color: #bcbcbc;
+    color: _color(graph-ticks);
     display: flex;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 10px;
     font-weight: 700;
     justify-content: space-between;
@@ -56,7 +59,7 @@
 .BlockCard-StatBox {
     box-sizing: border-box;
     border-radius: 6px;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-weight: 700;
     padding: 10px 0 10px 10px;
     width: 150px;
@@ -178,4 +181,17 @@
     top: 50%;
     transform-origin: left;
     transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.transactions {
+    background-color: _color(bg-transactions);
+    color: _color(text-transactions);
+}
+.mining {
+    background-color: _color(bg-mining);
+    color: _color(text-mining);
+}
+.block {
+    background-color: _color(bg-block);
+    color: _color(text-block);
 }

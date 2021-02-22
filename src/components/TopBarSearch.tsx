@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Search } from '../assets/search.svg';
 import loader from '../assets/searching-loader.gif';
-import './TopBarSearch.css';
+import './TopBarSearch.scss';
 import { withRouter } from 'react-router-dom';
 
 function TopBarSearch({ history }: { history: any }) {

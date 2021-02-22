@@ -1,0 +1,18 @@
+@import '../../scss/lib/functions';
+@import '../../scss/lib/vars';
+
+.graphTitleWithSub {
+    margin-bottom: 20px;
+}
+
+.graphTitle {
+    font-weight: bold;
+    font-family: _font(family-regular);
+    font-size: 30px;
+}
+
+.graphSubtitle {
+    font-family: _font(family-regular);
+    font-size: 16px;
+    color: _color(text-secondary);
+}

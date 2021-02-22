@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './HeroGraph.css';
+import './HeroGraph.scss';
 import { ReactComponent as LoadingBars } from '../../assets/bars.svg';
 import { connect } from 'react-redux';
 import { leftPad } from '../../helpers/leftPad';
@@ -214,7 +214,7 @@ function Chart({
     }
 
     if (values.length < 1) {
-        return <LoadingBars />;
+        return <LoadingBars className="fill-color-highlight" />;
     }
 
     return (
@@ -306,15 +306,14 @@ function Bar({
                 </text>
             </g>
             <g id="kernels">
-                <rect fill="#9330FF" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
+                <rect className="hero-kernels" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
             </g>
             <g id="outputs">
-                <rect fill="#B4C9F5" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
+                <rect className="hero-outputs" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
             </g>
             <g id="inputs">
-                <rect
+                <rect className="hero-inputs"
                     transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
-                    fill="#FF7630"
                     width={elementSize}
                     height={inputsHeight}
                     x={offset}

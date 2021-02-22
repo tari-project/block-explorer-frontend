@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { BlocksEntity } from '../types/Blocks';
 import { ReactComponent as RightCaret } from '../assets/right-caret.svg';
-import './BlockCard.css';
+import './BlockCard.scss';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
 function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {

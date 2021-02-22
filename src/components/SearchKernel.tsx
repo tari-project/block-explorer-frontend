@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { useEffect, useState } from 'react';
-import './SearchKernel.css';
+import './SearchKernel.scss';
 import { useParams, Link, Redirect } from 'react-router-dom';
 import { searchKernel } from '../helpers/api';
 import { ReactComponent as LoadingBars } from '../assets/bars.svg';
@@ -18,7 +18,7 @@ const renderStatus = (status: Status) => {
         case 'complete':
             return (
                 <div>
-                    <LoadingBars fill={'#000'} />
+                    <LoadingBars className="fill-color-lowlight" />
                     <h1>{status.message}</h1>
                     <h2>Redirecting...</h2>
                 </div>
@@ -26,7 +26,7 @@ const renderStatus = (status: Status) => {
         case 'loading':
             return (
                 <div>
-                    <LoadingBars fill={'#000'} />
+                    <LoadingBars className="fill-color-lowlight" />
                     <h1>{status.message}</h1>
                 </div>
             );

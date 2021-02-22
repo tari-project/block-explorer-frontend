@@ -1,5 +1,12 @@
+@import './scss/lib/functions';
+@import './scss/lib/vars';
+
 body {
     margin: 0;
+}
+
+.favicon {
+    fill: _color(primary);
 }
 
 /*Mobile*/
@@ -157,7 +164,7 @@ body {
 
     .StatBox-Row > div.Stat-value {
         text-align: left;
-        color: #d5d5d5;
+        color: _color(stat-value);
         overflow-wrap: break-word;
     }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import './StatRow.css';
+import './StatRow.scss';
 
 interface StatProps {
     label: string;

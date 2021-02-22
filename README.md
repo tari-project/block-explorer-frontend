@@ -26,3 +26,12 @@ You'll need a running [blockchain-explorer-api](https://github.com/tari-project/
     
     # Serve from the docker container
     docker run -p 3000:3000 --env SERVE=1 --env-file=.env quay.io/tarilabs/block-explorer-frontend
+
+### To run locally without the setting up the back-end
+
+    # Change your env file
+    
+    REACT_APP_EXPLORER_API_DOMAIN=explore.tari.com/api
+    REACT_APP_EXPLORER_API_PREFIX=https
+    REACT_APP_EXPLORER_WS_PREFIX=ws
+    REACT_APP_TOKEN_NAME=tXTR

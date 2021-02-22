@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import React from 'react';
-import './PolygonGraph.css';
+import './PolygonGraph.scss';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
 import numeral from 'numeral';
 

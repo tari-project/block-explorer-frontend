@@ -1,0 +1,83 @@
+$breakpoint: (
+        step-min:              320px,
+        step-one:              400px,
+        step-two:              768px,
+        step-three:            992px,
+        step-four:             1024px,
+        step-five:             1451px,
+);
+
+$font: (
+        family-regular:	       (Avenir, sans-serif),
+        size-small:            .6rem,
+        size-regular:          .75rem,
+        size-default:          1rem,
+        size-large:            1.25rem,
+);
+
+$color: (
+
+        primary:               #932fff,
+        secondary:             #B4C9F5,
+        tertiary:              #FF7630,
+
+        sidebar-fill:          #c2bfe7,
+        sidebar-fill-hover:    #372786,
+
+        circle-fill:           #f7944f,
+        rect-fill:             #9d7396,
+
+        inputs:                #F97C0D,
+        outputs:               #2274AF,
+        kernels:               #FB576D,
+
+        hero:                  #251962,
+        graph-text:            #9330ff,
+        graph-bar:             #5825cc,
+        graph-bar-hover:       #352583,
+
+        border-primary:        #d8d8d8,
+        border-secondary:      #eee,
+        border-disabled:       #aaa,
+        border-dropdown:       #E4E3EE,
+
+        bg:                    #fceee4,
+        white:                 #ffffff,
+        white-100:             #ffffff,
+
+        tooltip-fill:          #191145,
+        tooltip-hero:          #a5a5a5,
+        tooltip-secondary:     #ececec,
+
+        stat-value:            #d5d5d5,
+        stroke-bubble:         #d5d5d5,
+
+        block-card-primary:    #bc9b84,
+        block-card-secondary:  #bc9b84,
+
+        h1-block-card:         #37363a,
+        h2-block-card:         #bcbcbc,
+        h3-top-bar:            #190f1f,
+        h4-top-bar:            #969aba,
+
+        text-primary:          #37363a,
+        text-secondary:        #a5a5a5,
+        text-select:           #262B45,
+        text-select-focus:     #222,
+        text-disabled:         graytext,
+        text-reverse:          #ffffff,
+        text-blockheight:      #90aab4,
+
+        graph-ticks:           #bcbcbc,
+        graph-ticks-secondary: #adadad,
+        axis-label:            #bababa,
+
+        bg-transactions:       #fceee4,
+        text-transactions:     #bc9b84,
+
+        bg-mining:             #e4f5fc,
+        text-mining:           #90aab4,
+
+        bg-block:              #fce4f6,
+        text-block:            #b490ae,
+);

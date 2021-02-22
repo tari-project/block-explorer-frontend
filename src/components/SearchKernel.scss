@@ -1,3 +1,7 @@
+@import '../scss/lib/colors';
+@import '../scss/lib/functions';
+@import '../scss/lib/vars';
+
 .SearchKernel {
     padding: 2em;
     min-height: 800px;
@@ -5,13 +9,13 @@
 
 .SearchKernel h1 {
     font-weight: bold;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 30px;
 }
 
 .SearchKernel h2 {
     font-weight: bold;
-    font-family: Avenir, sans-serif;
+    font-family: _font(family-regular);
     font-size: 20px;
 }
 

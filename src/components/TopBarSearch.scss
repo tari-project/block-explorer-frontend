@@ -1,3 +1,7 @@
+@import '../scss/lib/colors';
+@import '../scss/lib/functions';
+@import '../scss/lib/vars';
+
 .TopBar-searchBar {
     position: relative;
     display: flex;
@@ -8,8 +12,8 @@
     padding: 10px 20px;
     width: 22em;
     border-radius: 3px;
-    border: 1px solid #9330ff;
-    background: #ffffff;
+    border: 1px solid _color(primary);
+    background: _color(white);
 }
 
 .TopBar-searchBar input:focus {
@@ -22,6 +26,7 @@
     top: 10px;
     height: 15px;
     width: 15px;
+    fill: _color(primary);
 }
 
 .searchBarLoader {

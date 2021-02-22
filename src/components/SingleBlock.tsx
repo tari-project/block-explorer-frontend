@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { useEffect, useState } from 'react';
-import './SingleBlock.css';
+import './SingleBlock.scss';
 import { useParams } from 'react-router-dom';
 import { Constants, fetchSingleBlock } from '../helpers/api';
 import StatRow from './SingleBlock/StatRow';
@@ -144,7 +144,7 @@ function SingleBlock({ constants }: Props) {
                     <StatRow label="Version" value={version} />
                 </div>
             ) : status.status === 'loading' ? (
-                <LoadingBars fill={'#000'} />
+                <LoadingBars className="fill-color-lowlight" />
             ) : (
                 <h1 className="noBlockFound">
                     {status.message} <Link to={'/'}>Go Back</Link>

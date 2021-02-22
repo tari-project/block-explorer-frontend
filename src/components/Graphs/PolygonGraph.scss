@@ -1,0 +1,115 @@
+@import '../../scss/lib/functions';
+@import '../../scss/lib/vars';
+
+.bar {
+  fill: _color(graph-bar);
+}
+
+.bar:hover {
+  fill: _color(graph-bar-hover);
+  transition: fill 0.2s;
+}
+
+.graphWrapper {
+  margin: 30px;
+  border-radius: 5px;
+  max-width: 40vw;
+  overflow: hidden;
+}
+
+.simpleBars {
+  margin: 20px;
+  padding: 10px 20px 20px 60px;
+  overflow: overlay;
+}
+
+.graph {
+  display: flex;
+  flex-direction: column;
+}
+
+.simpleGraphXTicks {
+  color: _color(graph-ticks);
+  display: flex;
+  font-family: _font(family-regular);
+  font-size: 14px;
+  font-weight: 700;
+  justify-content: space-between;
+  align-self: center;
+  width: 100% !important;
+}
+
+.networkHashrateGraph {
+  margin: 30px;
+}
+
+.networkDifficultyPaths {
+  overflow: overlay;
+  margin: 30px;
+  width: 100%;
+  height: auto;
+}
+
+@-moz-document url-prefix() {
+  .networkDifficultyPaths {
+    overflow: visible;
+  }
+}
+
+@media not all and (min-resolution: .001dpcm) {
+  .networkDifficultyPaths {
+    overflow: visible;
+  }
+}
+
+.xAxisDate {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0 30px;
+  color: _color(graph-ticks-secondary);
+}
+
+.xAxisDate .tick {
+  font-family: _font(family-regular);
+  font-size: 14px;
+  display: flex;
+  color: _color(graph-ticks-secondary);
+}
+
+.xAxisLabel {
+  font-family: _font(family-regular);
+  font-size: 12px;
+  color: _color(axis-label);
+  text-align: center;
+  margin: 5px 0 0 30px;
+}
+
+/*tooltips*/
+
+.shapeHolder .tooltip {
+  visibility: hidden;
+}
+
+.shapeHolder:hover .tooltip {
+  visibility: visible;
+}
+
+.shapeHolder .tooltip text {
+  fill: _color(primary);
+  font-size: 10px;
+  font-family: _font(family-regular);
+  font-weight: bold;
+}
+
+.shapeHolder .tooltip.blockHeightTooltip text {
+  fill: _color(tertiary);
+}
+
+.shapeHolder .tooltip rect {
+  fill: _color(tooltip-secondary);
+  stroke: _color(tooltip-secondary);
+  height: 18px;
+}
+
+/*tooltips end*/

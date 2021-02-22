@@ -1,5 +1,5 @@
 import React from 'react';
-import './SimpleBarGraph.css';
+import './SimpleBarGraph.scss';
 import { scaleLinear } from 'd3-scale';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
 import numeral from 'numeral';
