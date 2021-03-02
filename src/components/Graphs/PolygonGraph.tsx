@@ -17,7 +17,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
     const YHighestNum = Math.max(...data.map((o) => o.y));
     const XHighestNumber = Math.max(...data.map((o) => o.x));
     const XLowestNumber = Math.min(...data.map((o) => o.x));
-    const xScale = d3.scaleLinear().domain([XHighestNumber, XLowestNumber]).range([0, width]);
+    const xScale = d3.scaleLinear().domain([XLowestNumber, XHighestNumber]).range([0, width]);
     const yScale = d3.scaleLinear().domain([0, YHighestNum]).range([height, 0]);
     const transformedData = data.map((d, i) => {
         return {
@@ -78,7 +78,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
 
     function renderXAxis() {
         const nums: Array<any> = [];
-        for (let i = 0; i < data.length; i += 10) {
+        for (let i = data.length - 1; i >= 0; i -= 4) {
             nums.push(
                 <div key={i} className="tick">
                     {data[i].x}
