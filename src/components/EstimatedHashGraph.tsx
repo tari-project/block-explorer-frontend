@@ -8,11 +8,11 @@ interface Props {
 
 function EstimatedHashGraph({ difficulties }: Props) {
     const difficultyArray: any[] = [];
-    difficulties.forEach( function(item, index, array) {
+    difficulties.forEach(function (item, index, array) {
         // exclude latest block since estimated hash rate will be zero
-        if (index !== 0){
-        const { estimated_hash_rate: estimatedHashRate, height } = item;
-        difficultyArray.push({ y: estimatedHashRate, x: +height });
+        if (index !== 0) {
+            const { estimated_hash_rate: estimatedHashRate, height } = item;
+            difficultyArray.push({ y: estimatedHashRate, x: +height });
         }
     });
 

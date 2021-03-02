@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { useEffect, useState } from 'react';
 import './SearchKernel.scss';
 import { useParams, Link, Redirect } from 'react-router-dom';

@@ -2,10 +2,10 @@
 @import '../scss/lib/vars';
 
 circle {
-  fill: _color(circle-fill);
-  stroke: _color(white);
+    fill: _color(circle-fill);
+    stroke: _color(white);
 }
 
 rect {
-  fill: _color(rect-fill);
+    fill: _color(rect-fill);
 }

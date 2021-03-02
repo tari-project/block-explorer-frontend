@@ -1,18 +1,18 @@
 @function _breakpoint($keys...) {
-  @return val($breakpoint, $keys...);
+    @return val($breakpoint, $keys...);
 }
 
 @function _color($keys...) {
-  @return val($color, $keys...);
+    @return val($color, $keys...);
 }
 
 @function _font($keys...) {
-  @return val($font, $keys...);
+    @return val($font, $keys...);
 }
 
 @function val($map, $keys...) {
-  @each $key in $keys {
-    $map: map-get($map, $key);
-  }
-  @return $map;
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
 }

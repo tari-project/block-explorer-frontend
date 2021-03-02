@@ -22,16 +22,12 @@ export default function MultiLinePlot({ width, height, yAxisTicks, data, xAxisLa
 
     //Todo: Data needs to be padded (last known value per algo copied where there are gaps) to prevent only line segments being rendered.
 
-    var Sha3Difficulties = data.filter(function(item) {
-        return item.group === "2";
+    const Sha3Difficulties = data.filter(function (item) {
+        return item.group === '2';
     });
-    var MoneroDifficulties = data.filter(function(item) {
-        return item.group === "0";
+    const MoneroDifficulties = data.filter(function (item) {
+        return item.group === '0';
     });
-
-    ///console.log(MoneroDifficulties);
-    ///console.log("...");
-    ///console.log(Sha3Difficulties);
 
     const transformedMoneroData = MoneroDifficulties.map((d, i) => {
         return {
@@ -113,10 +109,7 @@ export default function MultiLinePlot({ width, height, yAxisTicks, data, xAxisLa
 
     return (
         <div className="graphWrapper networkHashrateGraph">
-            <PlainGraphTitle
-                title="Network Difficulty"
-                subTitle={`How hard it is to mine a block on the network.`}
-            />
+            <PlainGraphTitle title="Network Difficulty" subTitle={`How hard it is to mine a block on the network.`} />
             <svg
                 viewBox={`0 0 ${width} ${height}`}
                 preserveAspectRatio="xMidYMid meet"
@@ -130,7 +123,10 @@ export default function MultiLinePlot({ width, height, yAxisTicks, data, xAxisLa
                     </text>
                 </g>
                 {renderYAxis()}
-                <path style={{ fill: 'none', stroke: '#ff6600', strokeWidth: 2 }} d={lineGeneratorMonero(transformedMoneroData)} />
+                <path
+                    style={{ fill: 'none', stroke: '#ff6600', strokeWidth: 2 }}
+                    d={lineGeneratorMonero(transformedMoneroData)}
+                />
                 {transformedMoneroData.map((item, i) => {
                     return (
                         <g key={i} className="shapeHolder">
@@ -150,8 +146,11 @@ export default function MultiLinePlot({ width, height, yAxisTicks, data, xAxisLa
                         </g>
                     );
                 })}
-                
-                <path style={{ fill: 'none', stroke: '#352583', strokeWidth: 2 }} d={lineGeneratorSha3(transformedSha3Data)} />
+
+                <path
+                    style={{ fill: 'none', stroke: '#352583', strokeWidth: 2 }}
+                    d={lineGeneratorSha3(transformedSha3Data)}
+                />
                 {transformedSha3Data.map((item, i) => {
                     return (
                         <g key={i} className="shapeHolder">
