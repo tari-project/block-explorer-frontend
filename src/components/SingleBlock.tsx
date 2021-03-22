@@ -55,57 +55,59 @@ function SingleBlock({ constants }: Props) {
         });
         fetchSingleBlock(id)
             .then((block) => {
-                if (block && block.block) {
-                    setSingleBlock(block.block);
-                    setblockHeader(block.block.header as Header);
-                    setblockPow(block.block.header.pow as Pow);
-                    const blockBody = block.block.body as Body;
-                    const { inputs = [], kernels = [], outputs = [] } = blockBody;
-                    let singleBlockDataArray: ClusterPoint[] = [];
-                    singleBlockDataArray = singleBlockDataArray.concat(
-                        inputs.map((i) => ({
-                            group: 'inputs',
-                            size: inputs.length,
-                            color: '#F97C0C',
-                            tooltip: `Input<br/>${i.commitment.slice(0, 10)}`
-                        }))
-                    );
-
-                    singleBlockDataArray = singleBlockDataArray.concat(
-                        kernels.map((i) => ({
-                            group: 'kernels',
-                            size: kernels.length,
-                            color: '#FB576D',
-                            tooltip: `Kernel<br/>${i.excess.slice(0, 10)}`
-                        }))
-                    );
-
-                    singleBlockDataArray = singleBlockDataArray.concat(
-                        outputs.map((i) => ({
-                            group: 'outputs',
-                            size: outputs.length,
-                            color: '#2274AF',
-                            tooltip: `Output<br/>${i.commitment.slice(0, 10)}`
-                        }))
-                    );
-                    setClusterData(singleBlockDataArray);
-                    setStatus({
-                        status: 'complete',
-                        message: ''
-                    });
-                } else {
+                if (!block || !block.block) {
                     setStatus({
                         status: 'error',
-                        message: 'There was an error fetching the block'
+                        message: 'Block not found'
                     });
+                    return;
                 }
+
+                setSingleBlock(block.block);
+                setblockHeader(block.block.header as Header);
+                setblockPow(block.block.header.pow as Pow);
+                const blockBody = block.block.body as Body;
+                const { inputs = [], kernels = [], outputs = [] } = blockBody;
+                let singleBlockDataArray: ClusterPoint[] = [];
+                singleBlockDataArray = singleBlockDataArray.concat(
+                    inputs.map((i) => ({
+                        group: 'inputs',
+                        size: inputs.length,
+                        color: '#F97C0C',
+                        tooltip: `Input<br/>${i.commitment.slice(0, 10)}`
+                    }))
+                );
+
+                singleBlockDataArray = singleBlockDataArray.concat(
+                    kernels.map((i) => ({
+                        group: 'kernels',
+                        size: kernels.length,
+                        color: '#FB576D',
+                        tooltip: `Kernel<br/>${i.excess.slice(0, 10)}`
+                    }))
+                );
+
+                singleBlockDataArray = singleBlockDataArray.concat(
+                    outputs.map((i) => ({
+                        group: 'outputs',
+                        size: outputs.length,
+                        color: '#2274AF',
+                        tooltip: `Output<br/>${i.commitment.slice(0, 10)}`
+                    }))
+                );
+                setClusterData(singleBlockDataArray);
+                setStatus({
+                    status: 'complete',
+                    message: ''
+                });
             })
             .catch((e) => {
                 console.error(e);
                 setStatus({
                     status: 'error',
-                    message: 'Block not found'
+                    message: e.error?.message || 'There was an error fetching the block'
                 });
+
             });
     }, [id]);
 
@@ -147,7 +149,7 @@ function SingleBlock({ constants }: Props) {
                 <LoadingBars className="fill-color-lowlight" />
             ) : (
                 <h1 className="noBlockFound">
-                    {status.message} <Link to={'/'}>Go Back</Link>
+                    {status.message}<br /><br /><Link to={'/'}>Go Back</Link>
                 </h1>
             )}
         </div>
