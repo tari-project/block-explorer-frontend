@@ -14,14 +14,21 @@ export interface ChainMetadata {
     averageTxPerSecond: number;
 }
 
+async function fetchApi<T>(uri: String): Promise<T> {
+    const response = await fetch(`${apiUrl}${uri}`);
+    const json = await response.json();
+    if (!response.ok) {
+        throw json;
+    }
+    return json;
+}
+
 export async function fetchChainMetadata(): Promise<ChainMetadata> {
-    const response = await fetch(`${apiUrl}/chain-metadata`);
-    return await response.json();
+    return await fetchApi(`/chain-metadata`);
 }
 
 export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Promise<Blocks> {
-    const response = await fetch(`${apiUrl}/blocks?limit=${limit}&sort=${sort}&page=${page}`);
-    const blocks = await response.json();
+    let blocks = await fetchApi<Blocks>(`/blocks?limit=${limit}&sort=${sort}&page=${page}`);
     if (sort === 'desc') {
         blocks.blocks.sort((a, b) => b.block.header.height - a.block.header.height);
     }
@@ -36,9 +43,7 @@ interface TokensInCirculation {
 }
 
 export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Promise<TokensInCirculation> {
-    const response = await fetch(`${apiUrl}/tokens-in-circulation?from_tip=${fromTip}&step=${step}`);
-    const tokens = await response.json();
-    return tokens;
+    return await fetchApi(`/tokens-in-circulation?from_tip=${fromTip}&step=${step}`);
 }
 
 export function setupWebsockets(store) {
@@ -79,26 +84,15 @@ export interface NetworkDifficultyEstimatedHash {
 export type NetworkDifficultyEstimatedHashes = Array<NetworkDifficultyEstimatedHash>;
 
 export async function fetchNetworkDifficulty(): Promise<NetworkDifficultyEstimatedHashes> {
-    const response = await fetch(`${apiUrl}/network-difficulty`);
-    return await response.json();
+    return await fetchApi(`/network-difficulty`);
 }
 
 export async function fetchSingleBlock(blockId: string | number): Promise<BlocksEntity> {
-    try {
-        const response = await fetch(`${apiUrl}/blocks/${blockId}`);
-        return await response.json();
-    } catch (e) {
-        return e;
-    }
+    return await fetchApi(`/blocks/${blockId}`);
 }
 
 export async function searchKernel(publicNonce: string, signature: string): Promise<Blocks> {
-    try {
-        const response = await fetch(`${apiUrl}/kernel/${publicNonce}/${signature}`);
-        return await response.json();
-    } catch (e) {
-        return e;
-    }
+    return await fetchApi(`/kernel/${publicNonce}/${signature}`);
 }
 
 export interface Constants {
@@ -121,6 +115,5 @@ export interface Constants {
 }
 
 export async function fetchConstantsData(): Promise<Constants> {
-    const response = await fetch(`${apiUrl}/constants`);
-    return await response.json();
+    return await fetchApi(`/constants`);
 }
