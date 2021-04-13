@@ -22,6 +22,7 @@ render(App);
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
     module.hot.accept('./App', () => {
+        /* eslint-disable @typescript-eslint/no-var-requires */
         const NextApp = require('./App').default;
         render(NextApp);
     });

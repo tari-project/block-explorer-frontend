@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { useEffect, useState } from 'react';
 import './SingleBlock.scss';
 import { useParams } from 'react-router-dom';
@@ -22,17 +21,17 @@ interface Status {
 }
 
 function BlockType(param) {
-    switch(param) {
+    switch (param) {
         case '0':
-          return "Monero"
+            return 'Monero';
         case '1':
-          return "Blake"
+            return 'Blake';
         case '2':
-          return "Sha3"
+            return 'Sha3';
         default:
-          return "Undefined"
-      }
-  }
+            return 'Undefined';
+    }
+}
 
 function SingleBlock({ constants }: Props) {
     const { id } = useParams();

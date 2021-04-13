@@ -306,13 +306,26 @@ function Bar({
                 </text>
             </g>
             <g id="kernels">
-                <rect className="hero-kernels" width={elementSize} height={kernelHeight} x={offset} y={height - kernelHeight} />
+                <rect
+                    className="hero-kernels"
+                    width={elementSize}
+                    height={kernelHeight}
+                    x={offset}
+                    y={height - kernelHeight}
+                />
             </g>
             <g id="outputs">
-                <rect className="hero-outputs" width={elementSize} height={outputHeight} x={offset} y={height - barPos1} />
+                <rect
+                    className="hero-outputs"
+                    width={elementSize}
+                    height={outputHeight}
+                    x={offset}
+                    y={height - barPos1}
+                />
             </g>
             <g id="inputs">
-                <rect className="hero-inputs"
+                <rect
+                    className="hero-inputs"
                     transform={`rotate(180 ${offset + elementSize / 2} ${height - barPos2 + inputsHeight / 2})`}
                     width={elementSize}
                     height={inputsHeight}

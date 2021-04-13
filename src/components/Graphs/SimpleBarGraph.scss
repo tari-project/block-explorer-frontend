@@ -2,86 +2,86 @@
 @import '../../scss/lib/vars';
 
 .bar {
-  fill: _color(graph-bar);
+    fill: _color(graph-bar);
 }
 
 .bar:hover {
-  fill: _color(graph-bar-hover);
-  transition: fill 0.2s;
+    fill: _color(graph-bar-hover);
+    transition: fill 0.2s;
 }
 
 .barHolder .tooltip {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .barHolder:hover .tooltip {
-  visibility: visible;
+    visibility: visible;
 }
 
 .barHolder .tooltip text {
-  fill: _color(graph-text);
-  font-size: 10px;
-  font-family: _font(family-regular);
-  font-weight: bold;
+    fill: _color(graph-text);
+    font-size: 10px;
+    font-family: _font(family-regular);
+    font-weight: bold;
 }
 
 .tooltip rect {
-  fill: _color(tooltip-secondary);
-  stroke: _color(tooltip-secondary);
-  height: 18px;
+    fill: _color(tooltip-secondary);
+    stroke: _color(tooltip-secondary);
+    height: 18px;
 }
 
 .graphWrapper {
-  padding: 30px;
-  border-radius: 5px;
+    padding: 30px;
+    border-radius: 5px;
 }
 
 .simpleBars {
-  margin: 20px;
-  padding: 20px 60px 0 60px;
-  overflow: overlay; // TODO check this
+    margin: 20px;
+    padding: 20px 60px 0 60px;
+    overflow: overlay; // TODO check this
 }
 
 .graph {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .simpleGraphXTicks {
-  color: _color(graph-ticks);
-  display: flex;
-  font-family: _font(family-regular);
-  font-size: 14px;
-  font-weight: 700;
-  justify-content: space-between;
-  align-self: center;
+    color: _color(graph-ticks);
+    display: flex;
+    font-family: _font(family-regular);
+    font-size: 14px;
+    font-weight: 700;
+    justify-content: space-between;
+    align-self: center;
 }
 
 .circulateSimpleBarsWrapper {
-  margin: 30px;
+    margin: 30px;
 }
 
 .circulateSimpleBars {
-  overflow: overlay;
-  margin: 30px;
-  width: 100%;
-  height: auto;
+    overflow: overlay;
+    margin: 30px;
+    width: 100%;
+    height: auto;
 }
 
 @-moz-document url-prefix() {
-  .circulateSimpleBars {
-    overflow: visible;
-  }
+    .circulateSimpleBars {
+        overflow: visible;
+    }
 }
 
-@media not all and (min-resolution: .001dpcm) {
-  .circulateSimpleBars {
-    overflow: visible;
-  }
+@media not all and (min-resolution: 0.001dpcm) {
+    .circulateSimpleBars {
+        overflow: visible;
+    }
 }
 
 .yAxisLabel {
-  font-family: _font(family-regular);
-  font-size: 14px;
-  transform: rotate(270deg);
+    font-family: _font(family-regular);
+    font-size: 14px;
+    transform: rotate(270deg);
 }

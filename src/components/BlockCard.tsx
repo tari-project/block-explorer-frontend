@@ -44,7 +44,6 @@ function Header({ blockHeight, date, timeAgo }: HeaderProps) {
     );
 }
 
-
 interface StatBoxProps {
     statBoxClass: string;
     value: string;
@@ -52,8 +51,7 @@ interface StatBoxProps {
 }
 
 function StatBox({ statBoxClass, label, value }: StatBoxProps) {
-
-    let themeClass: string = "BlockCard-StatBox " + statBoxClass;
+    const themeClass: string = 'BlockCard-StatBox ' + statBoxClass;
 
     return (
         <div className={themeClass}>

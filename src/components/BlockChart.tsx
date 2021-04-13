@@ -80,9 +80,7 @@ interface GraphicalElementProps {
 
 function Bar({ offset, value }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
-    return (
-        <rect width={elementSize} height={value} rx={halfSize} x={offset - halfSize} y={height - value} />
-    );
+    return <rect width={elementSize} height={value} rx={halfSize} x={offset - halfSize} y={height - value} />;
 }
 
 function Circle({ offset, value }: GraphicalElementProps) {

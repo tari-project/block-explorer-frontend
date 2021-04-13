@@ -1,7 +1,7 @@
 @import '../../scss/lib/functions';
 @import '../../scss/lib/vars';
 
-.ProgressBarContainer h3{
+.ProgressBarContainer h3 {
     font-weight: bold;
     font-family: _font(family-regular);
     font-size: 0.7em;
@@ -13,7 +13,7 @@ progress {
     margin: 1em auto 2em auto;
     padding: 0;
     border: 0 none;
-    background: #E4E4E4;
+    background: #e4e4e4;
 }
 progress::-moz-progress-bar {
     background: _color(primary);
