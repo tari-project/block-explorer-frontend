@@ -10,23 +10,19 @@ import CirculatingTokenGraph from './CirculatingTokenGraph';
 
 export default function BlockExplorer() {
     return (
-        <div className="BlockExplorer">
+        <section className="BlockExplorer">
             <Hero>
                 <PlainGraphTitle title="Blocks Overview" />
-                <div className="blocksOverview">
-                    <HeroGraph width={570} height={220} yAxisTicks={4} />
-                </div>
-
+                <HeroGraph width={570} height={220} yAxisTicks={4} />
                 <PlainGraphTitle title="Latest Blocks" />
                 <LatestBlocks />
             </Hero>
-            <div className="twoCol">
+
+            <article className="flex-group">
                 <EstimatedHashGraph />
                 <CirculatingTokenGraph />
-            </div>
-            <div className="twoCol">
                 <TargetDifficultyGraph />
-            </div>
-        </div>
+            </article>
+        </section>
     );
 }
