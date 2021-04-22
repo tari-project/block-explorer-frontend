@@ -1,5 +1,8 @@
 @import './scss/lib/functions';
 @import './scss/lib/vars';
+@import './scss/flex';
+@import './scss/padding';
+@import 'scss/graph';
 
 body {
     margin: 0;
@@ -11,6 +14,7 @@ body {
 
 /*Mobile*/
 @media (max-width: 768px) {
+
     /*General Styles*/
     .SideBar {
         display: none;
@@ -119,14 +123,6 @@ body {
         margin-bottom: 0;
     }
 
-    /*heroGraph End*/
-
-    .graphWrapper {
-        max-width: 85vw;
-        padding: 0;
-    }
-
-    /*network difficulty*/
     .networkDifficultyPaths {
         padding: 0;
     }
