@@ -7,7 +7,7 @@ import config from '../../config';
 const { tokenName } = config;
 
 interface Props {
-    data: any[];
+    data: number[];
     width: number;
     height: number;
     yAxisTicks: number;
@@ -22,7 +22,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
 
     const highestNum = Math.max(...data);
 
-    function round5({ num }: { num: any }) {
+    function round5({ num }: { num: number }) {
         return Math.ceil(num / 5) * 5;
     }
 
@@ -93,7 +93,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                         <g key={i} className="barHolder">
                             <g
                                 className="tooltip"
-                                transform={`translate(${i * barWidth - 30},${yScale(total) - 30})`}
+                                transform={`translate(${i * barWidth - 30},${yScale(total)! - 30})`}
                                 opacity="0.9"
                             >
                                 <rect rx="3" width="25" />
@@ -107,7 +107,7 @@ export default function SimpleBarGraph({ width, height, data, yAxisTicks }: Prop
                                 x={i * barWidth}
                                 y={yScale(total)}
                                 width={barWidth / 2}
-                                height={height - yScale(total)}
+                                height={height - yScale(total)!}
                             />
                         </g>
                     );

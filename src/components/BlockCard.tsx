@@ -4,8 +4,9 @@ import numeral from 'numeral';
 import { Link } from 'react-router-dom';
 import * as timeago from 'timeago.js';
 import { fmtMSS } from '../helpers/fmtMSS';
+import { BlocksEntity } from '../types/Blocks';
 
-export default function BlockCard({ block }: { block: any }) {
+export default function BlockCard({ block }: { block: BlocksEntity }) {
     const {
         _miningTime,
         _weight,
@@ -21,7 +22,7 @@ export default function BlockCard({ block }: { block: any }) {
         <Link to={`/block/${hash}`} key={height} className="BlockCard slideIn">
             <Header blockHeight={heightStr} date={date} timeAgo={timeAgo} />
             <div className="BlockCard-stats">
-                <StatBox statBoxClass="transactions" label="# of Transactions" value={kernels.length} />
+                <StatBox statBoxClass="transactions" label="# of Transactions" value={kernels.length.toString()} />
                 <StatBox statBoxClass="mining" label="Mining Time" value={miningTime} />
                 <StatBox statBoxClass="block" label="Block Size" value={size} />
             </div>
