@@ -1,20 +1,20 @@
 .graphWrapper {
-  max-width: 85vw;
-  padding: 2rem;
+    max-width: 85vw;
+    padding: 2rem;
 }
 
 .networkDifficultyPaths,
 .circulateSimpleBars {
-  overflow: overlay;
-  margin: 2rem;
-  width: calc(100% - 2rem);
-  height: auto;
+    overflow: overlay;
+    margin: 2rem;
+    width: calc(100% - 2rem);
+    height: auto;
 }
 
 .xAxisDate {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 2rem;
-  width: calc(100% - 2rem);
-  color: _color(graph-ticks-secondary);
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2rem;
+    width: calc(100% - 2rem);
+    color: _color(graph-ticks-secondary);
 }

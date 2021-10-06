@@ -6,10 +6,11 @@ import { leftPad } from '../../helpers/leftPad';
 import * as timeago from 'timeago.js';
 import { Link } from 'react-router-dom';
 import { fmtMSS } from '../../helpers/fmtMSS';
+import { BlocksEntity } from '../../types/Blocks';
 
 interface Props {
-    blocks: any[];
-    data: number[];
+    blocks: BlocksEntity[];
+    data?: number[];
     width: number;
     height: number;
     yAxisTicks: number;
@@ -61,7 +62,7 @@ function getHighest(values: Array<HeightBar>): HeightBar {
 // }
 
 function HeroGraph({ yAxisTicks, blocks }: Props) {
-    const [latestBlocks, setLatestBlocks] = useState([] as any);
+    const [latestBlocks, setLatestBlocks] = useState<BlocksEntity[]>([]);
     const [firstChildClass, setFirstChildClass] = useState('');
     useEffect(() => {
         setLatestBlocks(blocks);
@@ -95,14 +96,14 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
 
     const maxHeights = getHighest(blocksData);
     function renderYAxis(maxHeights: HeightBar) {
-        const nums: any[] = [];
+        const nums: React.SVGProps<SVGGElement>[] = [];
         let ticks = yAxisTicks + 1;
 
         for (let i = 0; i < yAxisTicks + 1; i++) {
             ticks--;
 
             const displayNum = Math.round((maxHeights.total / yAxisTicks) * ticks);
-            const elem: any = (
+            const elem: React.SVGProps<SVGGElement> = (
                 <g key={i}>
                     <text
                         className="heroYAxisText"
@@ -125,7 +126,7 @@ function HeroGraph({ yAxisTicks, blocks }: Props) {
                         y2={(height / yAxisTicks) * i}
                     />
                 </g>
-            ) as any;
+            ) as React.SVGProps<SVGGElement>;
             nums.push(elem);
         }
         return nums;

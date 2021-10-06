@@ -3,9 +3,10 @@ import React from 'react';
 import './PolygonGraph.scss';
 import PlainGraphTitle from '../GraphTitles/PlainGraphTitle';
 import numeral from 'numeral';
+import { MainData } from '../../types/Data';
 
 interface Props {
-    data: any[];
+    data: MainData[];
     width: number;
     height: number;
     yAxisTicks: number;
@@ -19,7 +20,7 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
     const XLowestNumber = Math.min(...data.map((o) => o.x));
     const xScale = d3.scaleLinear().domain([XLowestNumber, XHighestNumber]).range([0, width]);
     const yScale = d3.scaleLinear().domain([0, YHighestNum]).range([height, 0]);
-    const transformedData = data.map((d, i) => {
+    const transformedData = data.map((d) => {
         return {
             x: xScale(d.x),
             y: yScale(d.y),
@@ -29,7 +30,6 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
 
     const xAccessor = (transformedData: any) => transformedData.x;
     const yAccessor = (transformedData: any) => transformedData.y;
-
     const lineGenerator: any = d3.line().x(xAccessor).y(yAccessor);
 
     const areaGenerator: any = d3.area().x(xAccessor).y(yAccessor).y1(height);
@@ -114,14 +114,14 @@ export default function PolygonGraph({ width, height, yAxisTicks, data, xAxisLab
                         <g key={i} className="shapeHolder">
                             <circle cx={item.x} cy={item.y} r="15" fill="#352583" fillOpacity="0" />
                             <g className="tooltip" opacity="0.9">
-                                <rect rx={3} x={item.x - 20} y={item.y - 20} width="25" />
-                                <text x={item.x - 16} y={item.y - 7}>
+                                <rect rx={3} x={item.x! - 20} y={item.y! - 20} width="25" />
+                                <text x={item.x! - 16} y={item.y! - 7}>
                                     {numeral(data[i].y || 0).format('0a')}
                                 </text>
                             </g>
                             <g className="tooltip blockHeightTooltip" opacity="0.9">
-                                <rect rx={3} x={item.x - 35} y={item.y - 45} width="40" />
-                                <text x={item.x - 31} y={item.y - 32}>
+                                <rect rx={3} x={item.x! - 35} y={item.y! - 45} width="40" />
+                                <text x={item.x! - 31} y={item.y! - 32}>
                                     {item.blockHeight}
                                 </text>
                             </g>

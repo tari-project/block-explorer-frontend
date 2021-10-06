@@ -31,7 +31,7 @@ function LatestBlocks({ blocks }: { blocks: BlocksEntity[] }) {
         }
     }, [leftVal]);
 
-    function clickScroll(direction) {
+    function clickScroll(direction: 'left' | 'right') {
         const element = latestBlocksContainer.current.getElement();
         let leftOffset = leftVal;
 

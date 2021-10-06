@@ -29,7 +29,7 @@ export default function MultiLinePlot({ width, height, yAxisTicks, data, xAxisLa
         return item.group === '0';
     });
 
-    const transformedMoneroData = MoneroDifficulties.map((d, i) => {
+    const transformedMoneroData: any = MoneroDifficulties.map((d, i) => {
         return {
             x: xScale(d.x),
             y: yScale(d.y),
@@ -37,7 +37,7 @@ export default function MultiLinePlot({ width, height, yAxisTicks, data, xAxisLa
         };
     });
 
-    const transformedSha3Data = Sha3Difficulties.map((d, i) => {
+    const transformedSha3Data: any = Sha3Difficulties.map((d, i) => {
         return {
             x: xScale(d.x),
             y: yScale(d.y),

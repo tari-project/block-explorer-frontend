@@ -106,7 +106,6 @@ function SingleBlock({ constants }: Props) {
                     status: 'error',
                     message: e.error?.message || 'There was an error fetching the block'
                 });
-
             });
     }, [id]);
 
@@ -148,7 +147,10 @@ function SingleBlock({ constants }: Props) {
                 <LoadingBars className="fill-color-lowlight" />
             ) : (
                 <h1 className="noBlockFound">
-                    {status.message}<br /><br /><Link to={'/'}>Go Back</Link>
+                    {status.message}
+                    <br />
+                    <br />
+                    <Link to={'/'}>Go Back</Link>
                 </h1>
             )}
         </div>

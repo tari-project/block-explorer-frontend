@@ -1,17 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { fetchTokensInCirculation } from '../helpers/api';
+import { TokensInCirculation } from '../types/Data';
 import SimpleBarGraph from './Graphs/SimpleBarGraph';
 
 export default function CirculatingTokenGraph() {
-    const [totalTokens, setTotalTokens] = useState(([] as unknown) as any);
+    const [totalTokens, setTotalTokens] = useState<number[]>([]);
 
     const loadCirculationData = useCallback(async () => {
         const tokenData = await fetchTokensInCirculation();
         const totalsArr: number[] = [];
 
-        tokenData.map((token) => {
-            const { tokensInCirculation } = token;
-            return totalsArr.push(tokensInCirculation);
+        tokenData.map((token: TokensInCirculation) => {
+            const { totalTokensInCirculation } = token;
+            return totalsArr.push(totalTokensInCirculation);
         });
 
         setTotalTokens(totalsArr);

@@ -1,6 +1,7 @@
 import config from '../config';
 import { addBlock, addConstant, addMetadata } from '../store/actions';
 import { Blocks, BlocksEntity } from '../types/Blocks';
+import { TokensInCirculation } from '../types/Data';
 
 const { apiUrl, wsUrl } = config;
 export interface ChainMetadata {
@@ -14,7 +15,7 @@ export interface ChainMetadata {
     averageTxPerSecond: number;
 }
 
-async function fetchApi<T>(uri: String): Promise<T> {
+async function fetchApi<T>(uri: string): Promise<T> {
     const response = await fetch(`${apiUrl}${uri}`);
     const json = await response.json();
     if (!response.ok) {
@@ -28,18 +29,11 @@ export async function fetchChainMetadata(): Promise<ChainMetadata> {
 }
 
 export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Promise<Blocks> {
-    let blocks = await fetchApi<Blocks>(`/blocks?limit=${limit}&sort=${sort}&page=${page}`);
+    const blocks = await fetchApi<Blocks>(`/blocks?limit=${limit}&sort=${sort}&page=${page}`);
     if (sort === 'desc') {
         blocks.blocks.sort((a, b) => b.block.header.height - a.block.header.height);
     }
     return blocks;
-}
-
-interface TokensInCirculation {
-    height: number;
-    totalTokensInCirculation: number;
-
-    map(param: (token) => void): void;
 }
 
 export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Promise<TokensInCirculation> {
