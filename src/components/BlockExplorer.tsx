@@ -18,7 +18,7 @@ export default function BlockExplorer() {
                 <LatestBlocks />
             </Hero>
 
-            <article className="flex-group">
+            <article className="flex-group flex-center">
                 <EstimatedHashGraph />
                 <CirculatingTokenGraph />
                 <TargetDifficultyGraph />
