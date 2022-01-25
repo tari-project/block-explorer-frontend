@@ -1,8 +1,14 @@
 .graphWrapper {
-    max-width: 85vw;
-    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    padding: 25px;
 }
 
+@media (min-width: _breakpoint(step-five)) {
+  .graphWrapper {
+      max-width: 30%;
+  }
+}
 .networkDifficultyPaths,
 .circulateSimpleBars {
     overflow: overlay;
