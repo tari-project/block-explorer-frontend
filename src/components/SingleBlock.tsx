@@ -25,9 +25,7 @@ function BlockType(param) {
         case '0':
             return 'Monero';
         case '1':
-            return 'Blake';
-        case '2':
-            return 'Sha3';
+            return 'SHA-3';
         default:
             return 'Undefined';
     }
