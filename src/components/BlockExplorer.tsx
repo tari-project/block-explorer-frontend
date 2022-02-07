@@ -3,6 +3,8 @@ import './BlockExplorer.scss';
 import PlainGraphTitle from './GraphTitles/PlainGraphTitle';
 import EstimatedHashGraph from './EstimatedHashGraph';
 import TargetDifficultyGraph from './TargetDifficultyGraph';
+import DifficultyGraphSha3 from './DifficultyGraphSha3';
+import DifficultyGraphMonero from './DifficultyGraphMonero';
 import Hero from './Hero';
 import HeroGraph from './Graphs/HeroGraph';
 import LatestBlocks from './LatestBlocks';
@@ -22,6 +24,8 @@ export default function BlockExplorer() {
                 <EstimatedHashGraph />
                 <CirculatingTokenGraph />
                 <TargetDifficultyGraph />
+                <DifficultyGraphSha3 />
+                <DifficultyGraphMonero />
             </article>
         </section>
     );
