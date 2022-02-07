@@ -23,7 +23,7 @@ export default function MultiLinePlot({ width, height, yAxisTicks, data, xAxisLa
     //Todo: Data needs to be padded (last known value per algo copied where there are gaps) to prevent only line segments being rendered.
 
     const Sha3Difficulties = data.filter(function (item) {
-        return item.group === '2';
+        return item.group === '1';
     });
     const MoneroDifficulties = data.filter(function (item) {
         return item.group === '0';

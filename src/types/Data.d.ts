@@ -5,7 +5,5 @@ export interface MainData {
 
 export interface TokensInCirculation {
     height: number;
-    totalTokensInCirculation: number;
-
-    map(param: (token) => void): void;
+    tokensInCirculation: number;
 }
