@@ -1,12 +1,12 @@
 .graphWrapper {
     width: 90%;
-    max-width: 400px;
+    max-width: 450px;
     padding: 25px;
 }
 
 @media (min-width: _breakpoint(step-five)) {
   .graphWrapper {
-      max-width: 30%;
+      max-width: 35%;
   }
 }
 .networkDifficultyPaths,

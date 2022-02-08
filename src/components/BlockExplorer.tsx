@@ -23,7 +23,6 @@ export default function BlockExplorer() {
             <article className="flex-group flex-center">
                 <EstimatedHashGraph />
                 <CirculatingTokenGraph />
-                <TargetDifficultyGraph />
                 <DifficultyGraphSha3 />
                 <DifficultyGraphMonero />
             </article>
