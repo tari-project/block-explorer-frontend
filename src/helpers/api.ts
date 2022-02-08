@@ -36,7 +36,7 @@ export async function fetchBlocksData(limit = 30, sort = 'desc', page = 0): Prom
     return blocks;
 }
 
-export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Promise<TokensInCirculation> {
+export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Promise<[TokensInCirculation]> {
     return await fetchApi(`/tokens-in-circulation?from_tip=${fromTip}&step=${step}`);
 }
 

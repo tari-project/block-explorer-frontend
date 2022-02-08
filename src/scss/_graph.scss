@@ -5,13 +5,14 @@
 }
 
 @media (min-width: _breakpoint(step-five)) {
+
   .graphWrapper {
       max-width: 35%;
   }
+
 }
 .networkDifficultyPaths,
 .circulateSimpleBars {
-    overflow: overlay;
     margin: 2rem;
     width: calc(100% - 2rem);
     height: auto;
