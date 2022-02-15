@@ -22,7 +22,6 @@ export default function App() {
             <div className="App">
                 <TopBar />
                 <div className="App-content">
-                    <SideBar />
                     <div className="App-content-mainArea">
                         <Switch>
                             <Route exact path="/" component={BlockExplorer} />

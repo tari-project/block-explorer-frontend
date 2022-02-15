@@ -6,11 +6,11 @@
     display: flex;
     flex-direction: row;
     position: relative;
+    padding: 0 50px;
 }
 
 .TopBar-logoContainer {
     align-items: center;
-    border-right: 1px solid _color(border-primary);
     display: flex;
     justify-content: center;
     width: 90px;
