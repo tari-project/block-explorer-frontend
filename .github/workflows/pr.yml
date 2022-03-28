@@ -18,3 +18,10 @@ jobs:
       - name: lint
         run: |
           echo "${{github.event.pull_request.title}}" | commitlint
+  npm-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: run npm audit
+        run: npm audit
