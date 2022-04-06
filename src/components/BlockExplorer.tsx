@@ -20,7 +20,7 @@ export default function BlockExplorer() {
                 <LatestBlocks />
             </Hero>
 
-            <article className="flex-group flex-center">
+            <article className="flex-group flex-center graph-container">
                 <EstimatedHashGraph />
                 <CirculatingTokenGraph />
                 <DifficultyGraphSha3 />

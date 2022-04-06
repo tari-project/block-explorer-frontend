@@ -5,21 +5,21 @@
 .singleBlockViewHeader {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    padding: 40px 10px;
 }
 
 .colorMapping {
     display: flex;
-    width: 40%;
-    justify-content: space-evenly;
+    max-width: 450px;
+    justify-content: space-between;
+    margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 .colorMapping > div {
     display: flex;
-    margin: 1.5em;
-}
-
-.singleBlockViewHeader h1 {
-    width: 60%;
+    margin: 10px;
 }
 
 .colorTitle {

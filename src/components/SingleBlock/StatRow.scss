@@ -12,12 +12,18 @@
 }
 
 .StatBox-Row > div {
-    width: 50%;
-    padding: 1em;
+    padding: 1em 0;
     display: inline-block;
 }
 
 .StatBox-Row > div.Stat-value {
     text-align: right;
     font-size: 0.9em;
+}
+
+.Stat-label {
+    width: 30%;
+}
+.Stat-value {
+    width: 70%;
 }

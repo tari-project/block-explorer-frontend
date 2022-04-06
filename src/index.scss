@@ -6,12 +6,46 @@
 
 body {
     margin: 0;
+    background-color: #f5f5f7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Avenir, sans-serif;
+    font-weight: bold;
 }
 
 .favicon {
     fill: _color(primary);
 }
 
+.shadow-box {
+    background-color: #fff;
+    box-shadow: 10px 14px 28px rgba(35, 11, 73, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+}
+.max-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.max-container-head {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+@media (min-width: 769px) {
+    .max-container-head {
+        max-width: 1440px;
+    }
+}
 /*Mobile*/
 @media (max-width: 768px) {
     /*General Styles*/
@@ -28,66 +62,66 @@ body {
     /*General Styles end*/
 
     /*Top bar*/
-    .TopBar {
-        flex-direction: column;
-        align-items: center;
-    }
-    .TopBar-logoContainer {
-        width: 22em;
-        border: none;
-        position: relative;
-        justify-content: space-between;
-    }
-    .TopBar-searchContainer {
-        flex-direction: column;
-        width: 100vw;
-        padding: 0;
-        margin: 0 0 1em 0;
-    }
-    .TopBar-itemContainer {
-        margin: 1em 0 0 2em;
-        padding: 0 30px;
-        flex-wrap: wrap;
-    }
-    .TopBar-itemContainer div:first-child,
-    .TopBar-itemContainer div {
-        margin: 0;
-        align-items: flex-start;
-    }
-    .TopBar-searchContainer {
-        justify-content: center;
-    }
-    .TopBar-searchBar {
-        margin: 0;
-    }
+    // .TopBar {
+    //     flex-direction: column;
+    //     align-items: center;
+    // }
+    // .TopBar-logoContainer {
+    //     width: 22em;
+    //     border: none;
+    //     position: relative;
+    //     justify-content: space-between;
+    // }
+    // .TopBar-searchContainer {
+    //     flex-direction: column;
+    //     width: 100vw;
+    //     padding: 0;
+    //     margin: 0 0 1em 0;
+    // }
+    // .TopBar-itemContainer {
+    //     margin: 1em 0 0 2em;
+    //     padding: 0 30px;
+    //     flex-wrap: wrap;
+    // }
+    // .TopBar-itemContainer div:first-child,
+    // .TopBar-itemContainer div {
+    //     margin: 0;
+    //     align-items: flex-start;
+    // }
+    // .TopBar-searchContainer {
+    //     justify-content: center;
+    // }
+    // .TopBar-searchBar {
+    //     margin: 0;
+    // }
 
-    .TopBarItem {
-        width: 33%;
-    }
+    // .TopBarItem {
+    //     width: 33%;
+    // }
 
-    .TopBarItem > h3 {
-        font-size: 18.5px;
-    }
+    // .TopBarItem > h3 {
+    //     font-size: 18.5px;
+    // }
 
-    .TopBarItem > h4 {
-        font-size: 11px;
-    }
+    // .TopBarItem > h4 {
+    //     font-size: 11px;
+    // }
 
-    .TopBar .simpleBtn.mobile {
-        display: flex;
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translate(0, -50%);
-    }
+    // .TopBar .simpleBtn.mobile {
+    //     display: flex;
+    //     position: absolute;
+    //     right: 10px;
+    //     top: 50%;
+    //     transform: translate(0, -50%);
+    // }
 
-    .TopBar .simpleBtn.desktop {
-        display: none;
-    }
-    .TopBar-logoContainer svg {
-        align-self: center;
-        width: 60px;
-    }
+    // .TopBar .simpleBtn.desktop {
+    //     display: none;
+    // }
+    // .TopBar-logoContainer svg {
+    //     align-self: center;
+    //     width: 60px;
+    // }
     /*TopBar End*/
 
     /*Latest Blocks*/

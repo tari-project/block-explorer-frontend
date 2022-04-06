@@ -2,14 +2,21 @@
     width: 90%;
     max-width: 450px;
     padding: 25px;
+    background-color: #fff;
+    box-shadow: 10px 14px 28px rgba(35, 11, 73, 0.05);
+    border-radius: 10px;
+}
+
+.graph-container {
+    gap: 60px;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 @media (min-width: _breakpoint(step-five)) {
-
-  .graphWrapper {
-      max-width: 35%;
-  }
-
+    .graphWrapper {
+        max-width: 35%;
+    }
 }
 .networkDifficultyPaths,
 .circulateSimpleBars {
