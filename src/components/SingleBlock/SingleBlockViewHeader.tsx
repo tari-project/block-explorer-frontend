@@ -10,11 +10,11 @@ export default function SingleBlockViewHeader({ title }: Props) {
     return (
         <div className="singleBlockViewHeader">
             <h1>{title}</h1>
-            <div className="colorMapping">
+            {/* <div className="colorMapping">
                 <ColorMapItem title="Inputs" className="inputs" />
                 <ColorMapItem title="Outputs" className="outputs" />
                 <ColorMapItem title="Kernels" className="kernels" />
-            </div>
+            </div> */}
         </div>
     );
 }

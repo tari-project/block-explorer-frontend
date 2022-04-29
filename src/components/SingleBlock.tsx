@@ -11,6 +11,9 @@ import { Block, Body, Header, Pow } from '../types/Blocks';
 import { Link } from 'react-router-dom';
 import { ClusterPoint } from '../types/SingleBlockGraph';
 import { ReactComponent as LoadingBars } from '../assets/bars.svg';
+import ColorMapItem from './SingleBlock/ColorMapItem';
+import './SingleBlock/SingleBlockViewHeader.scss';
+
 interface Props {
     constants: Constants;
 }
@@ -122,24 +125,37 @@ function SingleBlock({ constants }: Props) {
     return (
         <div className="SingleBlock">
             {clusterData.length && status.status === 'complete' ? (
-                <div>
+                <div className="max-container">
                     <SingleBlockViewHeader title="Block Data" />
-                    <ClusterGraph data={clusterData} width={1280} height={500} />
-                    <ProgressBar weight={_weight} maxWeight={max_block_transaction_weight} />
-                    <h1>Mining Details</h1>
-                    <StatRow label="Timestamp" value={date} />
-                    <h1>Technical Details</h1>
-                    <StatRow label="Block Height" value={height} />
-                    <StatRow label="Block Algorithm" value={BlockType(pow_algo)} />
-                    <Link to={`/block/${prev_hash}`}>
-                        <StatRow label="Previous Hash" value={prev_hash} />
-                    </Link>
-                    <Link to={`/block/${hash}`}>
-                        <StatRow label="Hash" value={hash} />
-                    </Link>
-                    <StatRow label="Nonce" value={nonce} />
-                    <StatRow label="Total Kernel Offset" value={total_kernel_offset} />
-                    <StatRow label="Version" value={version} />
+                    <div className="block-data">
+                        <div className="shadow-box block1">
+                            <div className="colorMapping">
+                                <ColorMapItem title="Inputs" className="inputs" />
+                                <ColorMapItem title="Outputs" className="outputs" />
+                                <ColorMapItem title="Kernels" className="kernels" />
+                            </div>
+                            <div className="block-clustergraph">
+                                <ClusterGraph data={clusterData} width={1280} height={500} />
+                            </div>
+                        </div>
+                        <div className="shadow-box block2">
+                            <ProgressBar weight={_weight} maxWeight={max_block_transaction_weight} />
+                            <h3>Mining Details</h3>
+                            <StatRow label="Timestamp" value={date} />
+                            <h3>Technical Details</h3>
+                            <StatRow label="Block Height" value={height} />
+                            <StatRow label="Block Algorithm" value={BlockType(pow_algo)} />
+                            <Link to={`/block/${prev_hash}`}>
+                                <StatRow label="Previous Hash" value={prev_hash} />
+                            </Link>
+                            <Link to={`/block/${hash}`}>
+                                <StatRow label="Hash" value={hash} />
+                            </Link>
+                            <StatRow label="Nonce" value={nonce} />
+                            <StatRow label="Total Kernel Offset" value={total_kernel_offset} />
+                            <StatRow label="Version" value={version} />
+                        </div>
+                    </div>
                 </div>
             ) : status.status === 'loading' ? (
                 <LoadingBars className="fill-color-lowlight" />

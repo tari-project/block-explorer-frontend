@@ -2,23 +2,57 @@
 @import '../scss/lib/vars';
 
 .TopBar {
-    border-bottom: 1px solid _color(border-primary);
     display: flex;
-    flex-direction: row;
-    position: relative;
-    padding: 0 50px;
+    flex-direction: column;
+    background-color: #251961;
 }
-
+.TopBar-first {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+.TopBar-second {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    flex-direction: column;
+    gap: 10px;
+}
+.SearchBar-bg {
+    background-color: #1e1259;
+    box-shadow: 0px -1px 52px rgba(57, 19, 167, 0.5);
+}
+@media (min-width: 600px) {
+    .TopBar-second {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+}
+@media (min-width: 1220px) {
+    .TopBar-first {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+}
+@media (min-width: 1500px) {
+    .TopBar-first {
+        box-sizing: content-box;
+    }
+}
 .TopBar-logoContainer {
     align-items: center;
     display: flex;
     justify-content: center;
-    width: 90px;
+    width: 300px;
     padding: 10px 0;
 }
 
 .TopBar-logoContainer svg {
-    width: 100px;
+    width: 100%;
     fill: _color(primary);
 }
 
@@ -26,12 +60,7 @@
     flex: 1;
 }
 .TopBar-searchContainer {
-    width: calc(100% - 90px);
-    justify-content: space-between;
-}
-
-.TopBar-searchContainer {
-    padding: 10px 2em;
+    justify-content: center;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -39,25 +68,35 @@
 }
 .TopBar-itemContainer {
     width: auto;
-    justify-items: flex-start;
     display: flex;
+    justify-content: center;
     align-items: center;
     padding: 10px 0;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-grow: 6;
     flex-direction: row;
 }
 
-.TopBar-itemContainer div:first-child {
-    margin-left: 2em;
-}
-
 .TopBar-itemContainer > * {
-    margin-right: 2em;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
+    border-right: none;
+    padding: 10px 30px;
+}
+@media (min-width: 769px) {
+    .TopBar-itemContainer > * {
+        border-right: 1px solid #3a1597;
+        padding: 10px 30px;
+    }
+    .TopBar-itemContainer div:first-child {
+        padding-left: 0;
+    }
+    .TopBar-itemContainer div:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
 }
 
 .simpleBtn {

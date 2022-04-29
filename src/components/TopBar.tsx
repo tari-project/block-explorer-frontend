@@ -1,6 +1,6 @@
 import numeral from 'numeral';
 import React, { useEffect, useState } from 'react';
-import { ReactComponent as Logo } from '../assets/logo.svg';
+import { ReactComponent as Logo } from '../assets/tari-block-explorer.svg';
 import { connect } from 'react-redux';
 import './TopBar.scss';
 import TopBarItem from './TopBarItem';
@@ -38,28 +38,33 @@ function TopBar({ metadata }: { metadata: ChainMetadata }) {
 
     return (
         <div className="TopBar">
-            <div className="TopBar-logoContainer">
-                <Link to="/">
-                    <Logo />
-                </Link>
-                <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn mobile">
-                    <p>Visit Tari.com</p>
-                </a>
-            </div>
-
-            <div className="TopBar-searchContainer">
-                <TopBarSearch />
-                <div className="TopBar-itemContainer">
-                    <TopBarItem label="Total Txns" value={totalTransactions} />
-                    <TopBarItem label="Avg Txns / Sec" value={averageTxPerSecond} />
-                    <TopBarItem label="Hash Rate" value={hashRate} />
-                    <TopBarItem label="Avg Fee" value={averageFee} />
-                    <TopBarItem lowerCase={true} label="Avg Block Time" value={averageBlockTime} />
-                    <TopBarItem label="Block Height" value={blockHeight} />
+            <div className="TopBar-first max-container-head">
+                <div className="TopBar-logoContainer">
+                    <Link to="/">
+                        <Logo />
+                    </Link>
+                    <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn mobile">
+                        <p>Visit Tari.com</p>
+                    </a>
                 </div>
-                <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn desktop">
-                    <p>Visit Tari.com</p>
-                </a>
+                <div className="TopBar-searchContainer">
+                    <div className="TopBar-itemContainer">
+                        <TopBarItem label="Total Txns" value={totalTransactions} />
+                        <TopBarItem label="Avg Txns / Sec" value={averageTxPerSecond} />
+                        <TopBarItem label="Hash Rate" value={hashRate} />
+                        <TopBarItem label="Avg Fee" value={averageFee} />
+                        <TopBarItem lowerCase={true} label="Avg Block Time" value={averageBlockTime} />
+                        <TopBarItem label="Block Height" value={blockHeight} />
+                    </div>
+                </div>
+            </div>
+            <div className="SearchBar-bg">
+                <div className="TopBar-second max-container-head">
+                    <TopBarSearch />
+                    <a href="https://tari.com" target="_blank" rel="noopener noreferrer" className="simpleBtn desktop">
+                        <p>Visit Tari.com</p>
+                    </a>
+                </div>
             </div>
         </div>
     );

@@ -2,10 +2,12 @@
 @import '../scss/lib/vars';
 
 .hero {
-    background-color: _color(hero);
     color: _color(text-reverse);
     display: flex;
     padding: 50px 70px;
     flex-direction: column;
     /*max-height: 700px; will revisit*/
+}
+.hero-bg {
+    background-color: _color(hero);
 }

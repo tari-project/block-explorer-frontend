@@ -2,10 +2,10 @@
 @import '../scss/lib/vars';
 
 .TopBarItem > h3 {
-    color: #190f1f;
+    color: #ffffff;
     display: block;
     font-family: _font(family-regular);
-    font-size: 24.5px;
+    font-size: 20px;
     font-weight: 900;
     letter-spacing: -0.64px;
     margin: 0;
@@ -13,7 +13,7 @@
 }
 
 .TopBarItem > h4 {
-    color: #969aba;
+    color: #d7bdf8;
     display: block;
     font-family: _font(family-regular);
     font-size: 11.6px;
@@ -24,4 +24,10 @@
 
 .TopBarItem > h3.lowerCase {
     text-transform: lowercase;
+}
+
+@media (min-width: 1220px) {
+    .TopBarItem > h3 {
+        font-size: 24.5px;
+    }
 }
