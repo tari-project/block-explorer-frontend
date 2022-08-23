@@ -48,7 +48,7 @@
     display: flex;
     justify-content: center;
     width: 300px;
-    padding: 10px 0;
+    padding: 15px 0 5px 0;
 }
 
 .TopBar-logoContainer svg {
@@ -88,7 +88,7 @@
 @media (min-width: 769px) {
     .TopBar-itemContainer > * {
         border-right: 1px solid #3a1597;
-        padding: 10px 30px;
+        padding: 10px 25px;
     }
     .TopBar-itemContainer div:first-child {
         padding-left: 0;
