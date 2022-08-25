@@ -269,12 +269,23 @@ function Bar({
     const barPos1 = outputHeight + kernelHeight;
     const barPos2 = barPos1 + inputsHeight;
 
-    function getTooltipText(value, type) {
+    function getTooltipText(value: number, type: string): string {
         let text = '';
+        let factor = 0;
+        switch (type) {
+            case 'input':
+                factor = 1;
+                break;
+            case 'output':
+                factor = 13;
+                break;
+            case 'kernel':
+                factor = 3;
+        }
         if (value === 1) {
-            text = `${value} ${type}`;
+            text = `${value} ${type} (${value * factor}g)`;
         } else {
-            text = `${value} ${type}s`;
+            text = `${value} ${type}s (${value * factor}g)`;
         }
         return leftPad(text, 14, ' ');
     }
@@ -283,25 +294,25 @@ function Bar({
 
     return (
         <Link to={`/block/${hash}`} key={blockHeight} className={`overviewBars ${aniClass}`}>
-            <g className="tooltip total" transform={`translate(${offset - 70},${height - totalHeight - 50})`}>
+            <g className="tooltip total" transform={`translate(${offset - 80},${height - totalHeight - 50})`}>
                 <rect rx="3" />
-                <text x="60" y="10" xmlSpace="preserve" textAnchor="end">
-                    <tspan className="timeAgo" x="60" dy="0">
+                <text x="70" y="10" xmlSpace="preserve" textAnchor="end">
+                    <tspan className="timeAgo" x="70" dy="0">
                         {leftPad(timeAgo, 14, ' ')}
                     </tspan>
-                    <tspan className="blockHeight" x="60" dy="14">
+                    <tspan className="blockHeight" x="70" dy="14">
                         {leftPad(`${blockHeight}`, 14, ' ')}
                     </tspan>
-                    <tspan className="inputs" x="60" dy="12">
+                    <tspan className="inputs" x="70" dy="12">
                         {getTooltipText(inputsVal, 'input')}
                     </tspan>
-                    <tspan className="outputs" x="60" dy="10">
+                    <tspan className="outputs" x="70" dy="10">
                         {getTooltipText(outputsVal, 'output')}
                     </tspan>
-                    <tspan className="kernels" x="60" dy="10">
+                    <tspan className="kernels" x="70" dy="10">
                         {getTooltipText(kernelsVal, 'kernel')}
                     </tspan>
-                    <tspan className="timeAgo" x="60" dy="10">
+                    <tspan className="timeAgo" x="70" dy="10">
                         {leftPad(fmtMSS(miningTime), 14, ' ')}
                     </tspan>
                 </text>
