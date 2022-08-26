@@ -12,7 +12,6 @@ function DifficultyGraphMonero({ difficulties }: Props) {
         const { difficulty, height, pow_algo } = item;
         difficultyArray.push({ y: difficulty, x: +height, group: pow_algo });
     });
-    console.log(difficultyArray);
     const yAxisLabel = 'target difficulty';
     const xAxisLabel = 'block height';
 

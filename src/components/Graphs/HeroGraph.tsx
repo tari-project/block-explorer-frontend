@@ -260,6 +260,10 @@ function Bar({
     hash
 }: GraphicalElementProps) {
     const { height, elementSize } = dimensions;
+    const kernelWeight = 3;
+    const outputWeight = 13;
+    const inputWeight = 1;
+
     const kernelHeight = kernelsPercent * height;
     const outputHeight = outputsPercent * height;
     const inputsHeight = inputsPercent * height;
@@ -274,13 +278,13 @@ function Bar({
         let factor = 0;
         switch (type) {
             case 'input':
-                factor = 1;
+                factor = inputWeight;
                 break;
             case 'output':
-                factor = 13;
+                factor = outputWeight;
                 break;
             case 'kernel':
-                factor = 3;
+                factor = kernelWeight;
         }
         if (value === 1) {
             text = `${value} ${type} (${value * factor}g)`;
