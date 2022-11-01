@@ -1,3 +1,5 @@
+/*eslint @typescript-eslint/no-explicit-any: ["error", { "fixToUnknown": true, "ignoreRestArgs": false }]*/
+
 import config from '../config';
 import { addBlock, addConstant, addMetadata } from '../store/actions';
 import { Blocks, BlocksEntity } from '../types/Blocks';
@@ -43,7 +45,7 @@ export async function fetchTokensInCirculation(fromTip = 20160, step = 360): Pro
 export function setupWebsockets(store) {
     const ws = new WebSocket(wsUrl);
     ws.onmessage = function (event) {
-        const msg: any = JSON.parse(event.data);
+        const msg = JSON.parse(event.data);
         switch (msg.type) {
             case 'newBlock':
                 store.dispatch(addBlock([msg.data] as BlocksEntity[]));

@@ -5,8 +5,8 @@ interface Props {
 }
 export default function Hero({ children }: Props) {
     return (
-    <div className="hero-bg">
-        <article className="hero blocksOverview max-container">{children}</article>
-    </div>
-    )
+        <div className="hero-bg">
+            <article className="hero blocksOverview max-container">{children}</article>
+        </div>
+    );
 }
