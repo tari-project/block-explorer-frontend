@@ -10,18 +10,13 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          full-depth: 0
 
-      # ESLint and Prettier must be in `package.json`
-      - name: Install Node.js dependencies
-        run:  npm ci --no-audit --prefer-offline
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run linters
-        uses: tinovyatkin/action-eslint@a62d4ab3ea77b401bd40d1dfbd1ff053b3aa9307
-        with:
-          repo-token: ${{ secrets.github_token }}
-          check-name: eslint
