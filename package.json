@@ -17,7 +17,7 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
-    "@types/d3": "^5.7.2",
+    "@types/d3": "^7.4.0",
     "@types/numeral": "2.0.2",
     "@types/react": "16.9.34",
     "@types/react-dom": "16.9.7",
