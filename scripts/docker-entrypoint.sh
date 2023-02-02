@@ -8,12 +8,12 @@ if [[ -z "$SERVE" ]]; then
   cp -r /app/build/* /app/dist/
   while IFS= read -r line; do
     # Get the ENV key
-    KEY=$(echo $line | cut -d= -f1)
+    KEY=$(echo "$line" | cut -d= -f1)
     # Get the docker value that has been inserted temporarily
-    DOCKER_VAL=$(echo $line | cut -d= -f2)
+    DOCKER_VAL=$(echo "$line" | cut -d= -f2)
     # Replace the DOCKER_VAL with the supplied value in the ENV key set by ${!KEY}
     # ## ${!KEY} expands the value in $KEY and pulls the environment variable defined by the _value_ of $KEY
-    egrep -lRZ "${DOCKER_VAL}" /app/dist | xargs -0 sed -i -e "s~${DOCKER_VAL}~${!KEY}~g"
+    grep -ElRZ "${DOCKER_VAL}" /app/dist | xargs -0 sed -i -e "s~${DOCKER_VAL}~${!KEY}~g"
   done < .env
 
 else

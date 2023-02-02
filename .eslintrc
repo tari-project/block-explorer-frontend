@@ -15,7 +15,9 @@
     "rules": {
         "prettier/prettier": ["error", { "doubleQuote": true }],
         "no-console": 1,
-        "@typescript-eslint/explicit-function-return-type": "off"
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/camelcase": "off"
     },
     "settings": {
         "react": {

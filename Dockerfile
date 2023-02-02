@@ -1,4 +1,4 @@
-FROM node:14.3-alpine
+FROM node:18-alpine
 
 RUN apk add -U bash sed grep
 WORKDIR /app
