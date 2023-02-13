@@ -19,7 +19,7 @@
   "devDependencies": {
     "@types/d3": "^7.4.0",
     "@types/numeral": "2.0.2",
-    "@types/react": "18.0.27",
+    "@types/react": "18.0.28",
     "@types/react-dom": "16.9.7",
     "@types/webpack-env": "1.18.0",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
