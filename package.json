@@ -22,7 +22,7 @@
     "@types/react": "18.0.27",
     "@types/react-dom": "16.9.7",
     "@types/webpack-env": "1.18.0",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.51.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
