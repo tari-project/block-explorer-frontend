@@ -10,7 +10,7 @@
     "react-dom": "18.2.0",
     "react-indiana-drag-scroll": "^2.2.0",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^6.8.1",
+    "react-router-dom": "^6.10.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sass": "^1.58.3",
