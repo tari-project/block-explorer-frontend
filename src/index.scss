@@ -152,7 +152,7 @@ h6 {
         font-size: 8px;
     }
     .xAxisTimes {
-        margin: -2.5em 0 1em 0;
+        margin: 0.5em 0 1em 0;
     }
 
     .heroBars {
@@ -169,13 +169,18 @@ h6 {
     }
 
     .networkHashrateGraph .xAxisDate .tick {
-        font-size: 11px;
+        font-size: 9px;
     }
 
     .xAxisLabel {
         font-size: 9px;
     }
 
+    @media (min-width: _breakpoint(step-two)) {
+        .networkHashrateGraph .xAxisDate .tick {
+            font-size: 11px;
+        }
+    }
     /*Graphs end*/
 
     /*single block*/
@@ -186,6 +191,7 @@ h6 {
 
     .StatBox-Row {
         flex-direction: column;
+        overflow: hidden;
     }
 
     .StatBox-Row > div {
@@ -197,7 +203,7 @@ h6 {
     .StatBox-Row > div.Stat-value {
         text-align: left;
         color: _color(stat-value);
-        overflow-wrap: break-word;
+        overflow: scroll;
     }
 
     .colorMapping {

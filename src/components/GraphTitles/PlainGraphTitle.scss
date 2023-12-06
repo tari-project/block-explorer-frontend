@@ -1,6 +1,8 @@
 @import '../../scss/lib/functions';
 @import '../../scss/lib/vars';
 
+
+
 .graphTitleWithSub {
     margin-bottom: 20px;
 }
@@ -8,11 +10,18 @@
 .graphTitle {
     font-weight: bold;
     font-family: _font(family-regular);
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .graphSubtitle {
     font-family: _font(family-regular);
     font-size: 16px;
     color: _color(text-secondary);
+}
+
+
+@media (min-width: _breakpoint(step-two)) {
+    .graphTitle {
+    font-size: 30px;
+    }
 }
