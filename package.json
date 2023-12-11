@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "d3": "^7.8.0",
+    "d3": "^7.8.5",
     "d3-array": "^3.2.2",
     "numeral": "2.0.6",
     "react": "18.2.0",
@@ -17,7 +17,7 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
-    "@types/d3": "^7.4.0",
+    "@types/d3": "^7.4.3",
     "@types/numeral": "2.0.2",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
